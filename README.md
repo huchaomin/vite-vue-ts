@@ -35,3 +35,17 @@ parserOptions: {
 ```bash
 pnpm add vite-plugin-eslint@latest -D
 ```
+
+## 安装stylelint 和 vite-plugin-stylelint
+
+```json
+"devDependencies": {
+  "postcss-html": "^1.5.0",
+  "stylelint": "^15.9.0",
+  "stylelint-config-rational-order": "^0.1.2",
+  "stylelint-config-standard-scss": "^9.0.0",
+  "vite-plugin-stylelint": "^4.3.0",
+}
+```
+
+## 安装 sass

@@ -1,10 +1,10 @@
-**/*.min.js
+**/*.min.css
 
 .vscode/
 .idea/
 /node_modules
+/dist
 /build
 /public
-/dist
 /dist-ssr
 stats.html
