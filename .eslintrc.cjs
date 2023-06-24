@@ -8,7 +8,7 @@ module.exports = {
   },
   extends: [
     'standard-with-typescript',
-    'plugin:vue/vue3-essential'
+    'plugin:vue/vue3-recommended' // 更为严格一点，推荐用这个
   ],
   overrides: [
     {

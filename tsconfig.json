@@ -3,9 +3,12 @@
     "target": "ES2020", // 最新es6
     "useDefineForClassFields": true, // 使用 Object.defineProperty 定义 class 中的属性，而非使用 obj.key = value 的形式定义属性
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"], // 引入 ES 最新特性和 DOM 接口的类型定义
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ], // 引入 ES 最新特性和 DOM 接口的类型定义
     "skipLibCheck": true, // 跳过对 .d.ts 文件的类型检查
-
     /* Bundler mode */
     "moduleResolution": "bundler", // 模块解析策略
     "allowImportingTsExtensions": true, // 允许 TypeScript 文件使用特定于 TypeScript 的扩展名（如 .ts、.mts 或 .tsx）相互导入
@@ -13,7 +16,6 @@
     "isolatedModules": true, // 隔离模块解析时的上下文环境，即不允许在模块中导入其它非声明模块的内容
     "noEmit": true, // 不生成输出文件
     "jsx": "preserve", // 保留 JSX 语法
-
     /* Linting */
     "strict": true, // 启用所有严格类型检查选项
     "noUnusedLocals": true, // 不允许有未使用的局部变量
@@ -22,7 +24,15 @@
     "noImplicitAny": true, //不允许使用any
     // "strictNullChecks": true, //不允许使用null
     "noImplicitThis": true, //不允许往this上面挂属性
-    "types": ["vite/client"] // /// <reference types="vite/client" />
+    "types": [
+      "vite/client"
+    ], // /// <reference types="vite/client" />
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -32,6 +42,13 @@
     "types/**/*.d.ts",
     "types/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

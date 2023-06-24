@@ -22,7 +22,7 @@ pnpm add @typescript-eslint/parser -D
 ```js
 parserOptions: {
   project: './tsconfig.json',
-  extraFileExtensions: ['.vue']
+  extraFileExtensions: ['.vue'] // 这个与setting.json中的eslint.validate有关
 },
 ```
 
