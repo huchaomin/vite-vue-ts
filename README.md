@@ -49,3 +49,10 @@ pnpm add vite-plugin-eslint@latest -D
 ```
 
 ## 安装 sass
+
+## 安装 husky 和 lint-staged
+
+```bash
+pnpm add husky lint-staged -D
+pnpm dlx husky-init
+```

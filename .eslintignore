@@ -1,7 +1,7 @@
 **/*.min.js
 
-.vscode/
-.idea/
+/.vscode
+/.idea
 /node_modules
 /build
 /public
