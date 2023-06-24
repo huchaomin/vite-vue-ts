@@ -8,8 +8,7 @@
     "types/**/*.d.ts",
     "types/**/*.ts",
     ".eslintrc.cjs",
-    "vite.config.ts",
-    "stylelint.config.cjs"
+    "vite.config.ts"
   ],
   "exclude": []
 }
