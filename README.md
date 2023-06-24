@@ -56,3 +56,5 @@ pnpm add vite-plugin-eslint@latest -D
 pnpm add husky lint-staged -D
 pnpm dlx husky-init
 ```
+
+## only-allow 规范化包管理器和nodejs版本
