@@ -11,7 +11,8 @@
     "preinstall": "only-allow pnpm"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",

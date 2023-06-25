@@ -17,7 +17,7 @@
     "noEmit": true, // 不生成输出文件
     "jsx": "preserve", // 保留 JSX 语法
     /* Linting */
-    "strict": true, // 启用所有严格类型检查选项
+    "strict": true, // 启用所有严格类型检查选项(strictNullChecks)
     "noUnusedLocals": true, // 不允许有未使用的局部变量
     "noUnusedParameters": true, // 不允许有未使用的参数
     "noFallthroughCasesInSwitch": true, // 不允许 switch 语句的 case 子句贯穿
