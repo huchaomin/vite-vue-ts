@@ -1,4 +1,9 @@
-# vite + vue3 + ts + eslint
+# vite + vue3 + pinia + ts + eslint + stylelint + husky + only-allow
+
+## todo list
+
+- 升级包版本
+- autoimport store
 
 ## vite-plugin-checker
 
@@ -58,3 +63,9 @@ pnpm dlx husky-init
 ```
 
 ## only-allow 规范化包管理器和nodejs版本
+
+## 添加 vue-router
+
+## 添加 pinia
+
+- pinia-plugin-persistedstate // TODO 试试这个插件

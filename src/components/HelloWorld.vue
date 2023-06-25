@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import useCommonStore from '@/store/modules/common';
+
+const commonStore = useCommonStore();
 
 defineProps<{ msg: string }>();
 
-const count = ref(0);
 </script>
 
 <template>
   <h1 class="title">
     {{ msg }}
   </h1>
-
   <button
     type="button"
-    @click="count++"
+    @click="commonStore.increment"
   >
-    count is {{ count }}
+    count is {{ commonStore.count }}
   </button>
 </template>
 

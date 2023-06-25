@@ -56,6 +56,8 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': ['error', {
       allowNumber: false, // 不允许数字作为判断条件
       allowNullableString: true, // 允许string | null | undefined作为判断条件
-    }]
+    }],
+    'space-before-function-paren': ['error', 'never'],
+    '@typescript-eslint/space-before-function-paren': ['error', 'never']
   },
 };
