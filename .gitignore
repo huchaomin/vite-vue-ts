@@ -22,3 +22,5 @@ dist-ssr
 *.sw?
 .stylelintcache
 stats.html
+types/auto-imports.d.ts
+.eslintrc-auto-import.json

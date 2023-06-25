@@ -4,6 +4,10 @@
 
 - 升级包版本
 - autoimport store
+- 添加i8n 好像有一个更好的vscode插件
+- 添加axios 好像有个更好的插件
+- 引入ui插件
+- 引入css
 
 ## vite-plugin-checker
 
