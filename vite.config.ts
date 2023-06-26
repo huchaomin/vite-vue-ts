@@ -5,13 +5,10 @@ import checker from 'vite-plugin-checker';
 import eslint from 'vite-plugin-eslint';
 import stylelint from 'vite-plugin-stylelint';
 import AutoImport from 'unplugin-auto-import/vite';
-import { AutoGenerateImports } from 'vite-auto-import-resolvers';
 
 const resolvePath = (p: string): string => path.resolve(__dirname, p);
 
-export default defineConfig(({ command, mode }) => {
-  console.log(mode);
-
+export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
   return {
     resolve: {
@@ -38,7 +35,15 @@ export default defineConfig(({ command, mode }) => {
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template
         dts: 'types/auto-imports.d.ts',
-        imports: [...AutoGenerateImports()],
+        imports: [
+          'vue',
+          'vue-router',
+          'pinia',
+        ],
+        defaultExportByFilename: true,
+        dirs: [
+          './src/plugins/autoImport',
+        ],
         eslintrc: {
           enabled: isDev,
           globalsPropValue: 'readonly',

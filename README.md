@@ -5,9 +5,10 @@
 - 升级包版本
 - autoimport store
 - 添加i8n 好像有一个更好的vscode插件
-- 添加axios 好像有个更好的插件
+- 添加axios 好像有个更好的插件（自动引入）
 - 引入ui插件
 - 引入css
+- @vueuse（自动引入）
 
 ## vite-plugin-checker
 
@@ -73,3 +74,7 @@ pnpm dlx husky-init
 ## 添加 pinia
 
 - pinia-plugin-persistedstate // TODO 试试这个插件
+
+## 自动引入vue全家桶
+
+## 自动引入自己写的插件
