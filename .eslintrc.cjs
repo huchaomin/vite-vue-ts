@@ -58,7 +58,19 @@ module.exports = {
       allowNumber: false, // 不允许数字作为判断条件
       allowNullableString: true, // 允许string | null | undefined作为判断条件
     }],
-    'space-before-function-paren': ['error', 'never'], // function后面不要空格
-    '@typescript-eslint/space-before-function-paren': ['error', 'never']
+    'space-before-function-paren': ['error', {
+      anonymous: 'always',
+      named: 'never',
+      asyncArrow: 'always'
+    }], // function后面空格
+    '@typescript-eslint/space-before-function-paren': ['error', {
+      anonymous: 'always',
+      named: 'never',
+      asyncArrow: 'always'
+    }],
+    '@typescript-eslint/type-annotation-spacing': ['error', {
+      before: true,
+      after: false
+    }]
   },
 };

@@ -5,7 +5,7 @@ import {
 } from 'vue-router';
 import Index from '@/layout/Index.vue';
 
-const routes: RouteRecordRaw[] = [
+const routes :RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login',

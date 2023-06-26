@@ -4,7 +4,11 @@
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["vite.config.ts"] // 说明 tscnofig.node.json 是专门用于 vite.config.ts 这一文件的 TypeScript 配置文件
+  "include": [
+    "build/**/*.ts",
+    "vite.config.ts"
+  ] // 说明 tscnofig.node.json 是专门用于 vite.config.ts 这一文件的 TypeScript 配置文件
 }

@@ -1,14 +1,15 @@
-import path from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import checker from 'vite-plugin-checker';
 import eslint from 'vite-plugin-eslint';
 import stylelint from 'vite-plugin-stylelint';
 import AutoImport from 'unplugin-auto-import/vite';
+import autoImportStoreList from './build/autoImportStores.ts';
+import { resolvePath } from './build/utils.ts';
 
-const resolvePath = (p: string): string => path.resolve(__dirname, p);
+console.log(autoImportStoreList);
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   const isDev = mode === 'development';
   return {
     resolve: {
@@ -39,6 +40,7 @@ export default defineConfig(({ mode }) => {
           'vue',
           'vue-router',
           'pinia',
+          autoImportStoreList,
         ],
         defaultExportByFilename: true,
         dirs: [

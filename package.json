@@ -43,7 +43,7 @@
     "vue-tsc": "^1.8.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue}": [
+    "*.{js,jsx,ts,tsx,vue,cjs,cts,mjs,mts}": [
       "eslint"
     ],
     "*.{html,vue,css,scss,sass,less,styl,svelte}": [

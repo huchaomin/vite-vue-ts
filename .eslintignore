@@ -3,7 +3,6 @@
 /.vscode
 /.idea
 /node_modules
-/build
 /public
 /dist
 /dist-ssr

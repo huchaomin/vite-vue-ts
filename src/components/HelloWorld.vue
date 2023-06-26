@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import useCommonStore from '@/store/modules/common';
+import { firstUpperCase } from '@/utils/index.ts';
 
 const commonStore = useCommonStore();
 
-defineProps<{ msg: string }>();
+defineProps<{ msg :string }>();
 
 </script>
 
@@ -16,6 +16,7 @@ defineProps<{ msg: string }>();
     @click="commonStore.increment"
   >
     count is {{ commonStore.count }}
+    {{ firstUpperCase('hu') }}
   </button>
 </template>
 
