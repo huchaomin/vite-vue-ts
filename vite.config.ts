@@ -7,7 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import autoImportStoreList from './build/autoImportStores.ts';
 import { resolvePath } from './build/utils.ts';
 import Components from 'unplugin-vue-components/vite';
-import { vitePluginForArco } from '@arco-plugins/vite-vue';
+import { ArcoResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig(async ({ mode }) => {
   const isDev = mode === 'development';
@@ -50,14 +50,17 @@ export default defineConfig(async ({ mode }) => {
           enabled: isDev,
           globalsPropValue: 'readonly',
         },
+        resolvers: [ArcoResolver()], // 与下面配合自动引入 arco-vue 组件
+        // 这种方法并不会处理用户在 script 中手动导入的组件，比如 Message 组件，用户仍需要手动导入组件对应的样式文件，例如 @arco-design/web-vue/es/message/style/css.js
       }),
       Components({
         dts: 'types/components.d.ts',
+        resolvers: [
+          ArcoResolver({
+            sideEffect: true,
+          }),
+        ],
       }), // 自动引入 src/components
-      vitePluginForArco({
-        theme: '@arco-themes/vue-mulinzi',
-        style: 'css',
-      }),
     ],
   };
 });
