@@ -36,8 +36,23 @@ module.exports = {
     'vue',
   ],
   rules: {
-    'comma-dangle': ['error', 'only-multiline'], // 与下面一行配合，只在多行时才要求逗号
-    '@typescript-eslint/comma-dangle': ['error', 'only-multiline'],
+    'comma-dangle': ['error', {
+      arrays: 'always-multiline',
+      objects: 'always-multiline',
+      imports: 'always-multiline',
+      exports: 'always-multiline',
+      functions: 'always-multiline',
+    }], // 与下面一行配合，只在多行时才要求逗号
+    '@typescript-eslint/comma-dangle': ['error', {
+      arrays: 'always-multiline',
+      objects: 'always-multiline',
+      imports: 'always-multiline',
+      exports: 'always-multiline',
+      functions: 'always-multiline',
+      enums: 'always-multiline',
+      generics: 'always-multiline',
+      tuples: 'always-multiline',
+    }],
     semi: ['error', 'always'], // 与下面一行配合,要分号
     '@typescript-eslint/semi': ['error', 'always'],
     '@typescript-eslint/promise-function-async': 'off', // 返回为promise的函数不一定要async
@@ -61,16 +76,16 @@ module.exports = {
     'space-before-function-paren': ['error', {
       anonymous: 'always',
       named: 'never',
-      asyncArrow: 'always'
+      asyncArrow: 'always',
     }], // function后面空格
     '@typescript-eslint/space-before-function-paren': ['error', {
       anonymous: 'always',
       named: 'never',
-      asyncArrow: 'always'
+      asyncArrow: 'always',
     }],
     '@typescript-eslint/type-annotation-spacing': ['error', {
       before: true,
-      after: false
-    }]
+      after: false,
+    }],
   },
 };

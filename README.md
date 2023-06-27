@@ -6,9 +6,13 @@
 - autoimport store
 - 添加i8n 好像有一个更好的vscode插件
 - 添加axios 好像有个更好的插件（自动引入）
-- 引入ui插件
+- 引入ui插件(自动引入components)(按需加载)
 - 引入css
 - @vueuse（自动引入）
+- 引入图标
+- 压缩文件
+- 添加打包分析
+- 合理地切割包
 
 ## vite-plugin-checker
 
@@ -78,3 +82,7 @@ pnpm dlx husky-init
 ## 自动引入vue全家桶
 
 ## 自动引入自己写的插件
+
+## 自动引入stores
+
+## 自动引入 components 和 ui库 components

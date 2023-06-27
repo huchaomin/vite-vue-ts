@@ -3,5 +3,5 @@ function firstUpperCase(str :string) :string {
 }
 
 export {
-  firstUpperCase
+  firstUpperCase,
 };

@@ -6,30 +6,30 @@ import stylelint from 'vite-plugin-stylelint';
 import AutoImport from 'unplugin-auto-import/vite';
 import autoImportStoreList from './build/autoImportStores.ts';
 import { resolvePath } from './build/utils.ts';
-
-console.log(autoImportStoreList);
+import Components from 'unplugin-vue-components/vite';
+import { vitePluginForArco } from '@arco-plugins/vite-vue';
 
 export default defineConfig(async ({ mode }) => {
   const isDev = mode === 'development';
   return {
     resolve: {
       alias: {
-        '@': resolvePath('src'),
-        img: resolvePath('src/assets/images')
-      }
+        '@': resolvePath(__dirname, 'src'),
+        img: resolvePath(__dirname, 'src/assets/images'),
+      },
     },
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/css/_variable.scss" as *;'
-        }
-      }
+          additionalData: '@use "@/assets/css/_variable.scss" as *;',
+        },
+      },
     },
     plugins: [
       vue(),
       eslint({
         cache: true,
-        failOnWarning: true
+        failOnWarning: true,
       }),
       stylelint({ build: true }),
       checker({ vueTsc: true }),
@@ -50,7 +50,14 @@ export default defineConfig(async ({ mode }) => {
           enabled: isDev,
           globalsPropValue: 'readonly',
         },
-      })
-    ]
+      }),
+      Components({
+        dts: 'types/components.d.ts',
+      }), // 自动引入 src/components
+      vitePluginForArco({
+        theme: '@arco-themes/vue-mulinzi',
+        style: 'css',
+      }),
+    ],
   };
 });

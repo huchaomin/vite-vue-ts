@@ -1,7 +1,7 @@
 import {
   createRouter,
   createWebHashHistory,
-  type RouteRecordRaw
+  type RouteRecordRaw,
 } from 'vue-router';
 import Index from '@/layout/Index.vue';
 
@@ -24,7 +24,7 @@ const routes :RouteRecordRaw[] = [
         name: 'Test',
         component: () => import('@/views/Test.vue'),
       },
-    ]
+    ],
   },
   {
     path: '/:catchAll(.*)*',

@@ -21,7 +21,7 @@ function fileRecursion(filePath :string) :void {
   });
 }
 
-fileRecursion(resolvePath('../src/store/modules'));
+fileRecursion(resolvePath(__dirname, '../src/store/modules'));
 const customerImport = {};
 
 // 自动引入pinia的store
