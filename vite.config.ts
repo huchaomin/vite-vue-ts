@@ -20,8 +20,9 @@ export default defineConfig(async ({ mode }) => {
     },
     css: {
       preprocessorOptions: {
-        scss: {
-          additionalData: '@use "@/assets/css/_variable.scss" as *;',
+        less: {
+          additionalData: '@import "@/assets/css/variable.less";',
+          javascriptEnabled: true,
         },
       },
     },

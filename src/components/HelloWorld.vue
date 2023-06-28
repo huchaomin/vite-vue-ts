@@ -20,11 +20,11 @@ defineProps<{ msg :string }>();
   </button>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
   .title{
     position: relative;
     top: 50%;
-    color: $primary;
+    color: @primary;
     font-weight: bold;
     font-size: 24px;
     font-family: 'Courier New', Courier, monospace;
