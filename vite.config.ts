@@ -10,6 +10,7 @@ import Components from 'unplugin-vue-components/vite';
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig(async ({ command, mode }) => {
   const cArgv = process.argv.slice(4);
@@ -70,6 +71,7 @@ export default defineConfig(async ({ command, mode }) => {
         iconDirs: [resolvePath(__dirname, 'src/assets/svg')],
         symbolId: 'icon-[dir]-[name]',
       }),
+      viteCompression(),
       ...cArgv.includes('report')
         ? [visualizer({
             open: true,

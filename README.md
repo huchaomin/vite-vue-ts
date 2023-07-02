@@ -89,3 +89,7 @@ pnpm dlx husky-init
 ## 按需加载arco-vue,并支持自定义样式
 
 ## 添加打包分析工具
+
+## 添加svg-icon
+
+## 开启前端gzip压缩
