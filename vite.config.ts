@@ -9,6 +9,7 @@ import { resolvePath } from './build/utils.ts';
 import Components from 'unplugin-vue-components/vite';
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 export default defineConfig(async ({ command, mode }) => {
   const cArgv = process.argv.slice(4);
@@ -63,6 +64,11 @@ export default defineConfig(async ({ command, mode }) => {
       }), // 自动引入 src/components
       vitePluginForArco({
         theme: '@arco-themes/vue-mulinzi',
+        // iconBox https://arco.design/iconbox/libs
+      }),
+      createSvgIconsPlugin({
+        iconDirs: [resolvePath(__dirname, 'src/assets/svg')],
+        symbolId: 'icon-[dir]-[name]',
       }),
       ...cArgv.includes('report')
         ? [visualizer({

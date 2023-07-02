@@ -18,6 +18,24 @@ defineProps<{ msg :string }>();
     count is {{ commonStore.count }}
     {{ firstUpperCase('hu') }}
   </button>
+  <a-space size="large">
+    <icon-refresh
+      :style="{fontSize:'32px'}"
+      spin
+    ></icon-refresh>
+    <icon-sync
+      :style="{fontSize:'32px'}"
+      spin
+    ></icon-sync>
+    <icon-face-smile-fill
+      :style="{fontSize:'32px'}"
+      :rotate="180"
+    ></icon-face-smile-fill>
+    <svg-icon
+      name="setting"
+      style="font-size: 32px;"
+    ></svg-icon>
+  </a-space>
 </template>
 
 <style lang="less" scoped>

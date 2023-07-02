@@ -24,9 +24,3 @@
     </a-layout>
   </a-layout>
 </template>
-
-<style lang="less" scoped>
-  .arco-layout {
-    height: 100%;
-  }
-</style>
