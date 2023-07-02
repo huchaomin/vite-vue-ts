@@ -11,7 +11,6 @@
 - @vueuse（自动引入）
 - 引入图标
 - 压缩文件
-- 添加打包分析
 - 合理地切割包
 
 ## vite-plugin-checker
@@ -88,3 +87,5 @@ pnpm dlx husky-init
 ## 自动引入 components
 
 ## 按需加载arco-vue,并支持自定义样式
+
+## 添加打包分析工具

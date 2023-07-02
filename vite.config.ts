@@ -8,8 +8,10 @@ import autoImportStoreList from './build/autoImportStores.ts';
 import { resolvePath } from './build/utils.ts';
 import Components from 'unplugin-vue-components/vite';
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
+import { visualizer } from 'rollup-plugin-visualizer';
 
-export default defineConfig(async ({ mode }) => {
+export default defineConfig(async ({ command, mode }) => {
+  const cArgv = process.argv.slice(4);
   const isDev = mode === 'development';
   return {
     resolve: {
@@ -62,6 +64,11 @@ export default defineConfig(async ({ mode }) => {
       vitePluginForArco({
         theme: '@arco-themes/vue-mulinzi',
       }),
+      ...cArgv.includes('report')
+        ? [visualizer({
+            open: true,
+          })]
+        : [],
     ],
   };
 });
