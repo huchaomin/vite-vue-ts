@@ -3,15 +3,13 @@
 ## todo list
 
 - 升级包版本
-- autoimport store
 - 添加i8n 好像有一个更好的vscode插件
 - 添加axios 好像有个更好的插件（自动引入）
-- 引入ui插件(自动引入components)(按需加载)
 - 引入css
 - @vueuse（自动引入）
-- 引入图标
-- 压缩文件
 - 合理地切割包
+- vite-plugin-imagemin
+- vite-plugin-html-minifier-terser
 
 ## vite-plugin-checker
 

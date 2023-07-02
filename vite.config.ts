@@ -78,5 +78,18 @@ export default defineConfig(async ({ command, mode }) => {
           })]
         : [],
     ],
+    build: {
+      reportCompressedSize: false,
+      minify: 'terser', // 压缩的更小，但是速度会慢一点
+      terserOptions: {
+        compress: {
+          // https://terser.org/docs/options/#parse-options
+          drop_console: true,
+          keep_infinity: true, // 通过true以防止Infinity被压缩为1/0
+          keep_fargs: false, // 通过false以删除未使用的函数参数
+          toplevel: true, // 通过true以丢弃未引用的顶级变量名
+        },
+      },
+    },
   };
 });
