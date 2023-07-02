@@ -85,4 +85,6 @@ pnpm dlx husky-init
 
 ## 自动引入stores
 
-## 自动引入 components 和 ui库 components
+## 自动引入 components
+
+## 按需加载arco-vue,并支持自定义样式
