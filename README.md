@@ -5,18 +5,14 @@
 - 升级包版本
 - 添加i8n 好像有一个更好的vscode插件
 - 添加axios 好像有个更好的插件（自动引入）
-- 引入css
 - @vueuse（自动引入）
 - 合理地切割包
-- vite-plugin-imagemin
-- vite-plugin-html-minifier-terser
 - 重写autoImportStoreList
 
 ## vite-plugin-checker
 
 - add type checking and linting support for Vite
 - Prompt errors in an overlay UI and terminal
-- //TODO 不知道使用体验如何
 
 ## 安装eslint 和 parser
 
@@ -75,7 +71,7 @@ pnpm dlx husky-init
 
 ## 添加 pinia
 
-- pinia-plugin-persistedstate // TODO 试试这个插件
+- pinia-plugin-persistedstate 用于持久化存储
 
 ## 自动引入vue全家桶
 
