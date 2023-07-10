@@ -109,6 +109,9 @@ devDependencies:
   vite-plugin-html:
     specifier: ^3.2.0
     version: 3.2.0(vite@4.3.9)
+  vite-plugin-inspect:
+    specifier: ^0.7.32
+    version: 0.7.32(vite@4.3.9)
   vite-plugin-stylelint:
     specifier: ^4.3.0
     version: 4.3.0(postcss@5.2.18)(stylelint@15.9.0)(vite@4.3.9)

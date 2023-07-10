@@ -13,9 +13,11 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import viteCompression from 'vite-plugin-compression';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import Inspect from 'vite-plugin-inspect';
 
 export default defineConfig(async ({ mode }) => {
   const cArgv = process.argv.slice(4);
+
   const isDev = mode === 'development';
   return {
     resolve: {
@@ -36,20 +38,15 @@ export default defineConfig(async ({ mode }) => {
         },
       },
     },
-    plugins: [
-      VueDevTools(),
-      vue(),
-      createHtmlPlugin({
-        minify: true, // 是否压缩 html
-        // entry: 'src/main.ts', // 入口文件（默认值，不能省）[不能用，打包时报错]
-        template: 'public/index.html', // 模板的路径
-      }),
+    plugins: [ // 不要随便更改顺序否则会报错
       eslint({
         cache: true,
         failOnWarning: true,
       }),
       stylelint({ build: true }),
       checker({ vueTsc: true }),
+      VueDevTools(),
+      vue(), // 将会把SFC的代码转换成js代码
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template
         dts: 'types/auto-imports.d.ts',
@@ -78,6 +75,15 @@ export default defineConfig(async ({ mode }) => {
       createSvgIconsPlugin({
         iconDirs: [resolvePath(__dirname, 'src/assets/svg')],
         symbolId: 'icon-[dir]-[name]',
+      }),
+      createHtmlPlugin({
+        minify: true, // 是否压缩 html
+        // entry: 'src/main.ts', // 入口文件（默认值，不能省）[不能用，打包时报错]
+        template: 'public/index.html', // 模板的路径
+      }),
+      Inspect({
+        build: true,
+        outputDir: '.vite-inspect',
       }),
       viteCompression(),
       ...cArgv.includes('report')

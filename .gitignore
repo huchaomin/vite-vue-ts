@@ -25,3 +25,4 @@ stats.html
 types/auto-imports.d.ts
 types/components.d.ts
 .eslintrc-auto-import.json
+/.vite-inspect

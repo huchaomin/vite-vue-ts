@@ -114,3 +114,7 @@ pnpm dlx husky-init
 
 - 可以向html模板中插入自定义变量和标签
 - 支持多页面应用
+
+## 添加 vite-plugin-inspect
+
+- 用于在浏览器中查看vite插件的状态
