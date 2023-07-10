@@ -91,3 +91,20 @@ pnpm dlx husky-init
 ## 添加svg-icon
 
 ## 开启前端gzip压缩
+
+## 添加 vite-plugin-vue-devtools
+
+- 仅开发模式
+- 仅vue3.0
+- only supports single-instance Vue applications
+- Doesn't support SSR
+- 跟随如下hide属性
+
+  ```js
+  createApp({
+    render: () => h(App),
+    devtools: {
+      hide: true,
+    },
+  })
+  ```

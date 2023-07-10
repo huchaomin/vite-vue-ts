@@ -11,8 +11,9 @@ import { vitePluginForArco } from '@arco-plugins/vite-vue';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import viteCompression from 'vite-plugin-compression';
+import VueDevTools from 'vite-plugin-vue-devtools';
 
-export default defineConfig(async ({ command, mode }) => {
+export default defineConfig(async ({ mode }) => {
   const cArgv = process.argv.slice(4);
   const isDev = mode === 'development';
   return {
@@ -35,6 +36,7 @@ export default defineConfig(async ({ command, mode }) => {
       },
     },
     plugins: [
+      VueDevTools(),
       vue(),
       eslint({
         cache: true,
