@@ -12,6 +12,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import viteCompression from 'vite-plugin-compression';
 import VueDevTools from 'vite-plugin-vue-devtools';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig(async ({ mode }) => {
   const cArgv = process.argv.slice(4);
@@ -38,6 +39,11 @@ export default defineConfig(async ({ mode }) => {
     plugins: [
       VueDevTools(),
       vue(),
+      createHtmlPlugin({
+        minify: true, // 是否压缩 html
+        // entry: 'src/main.ts', // 入口文件（默认值，不能省）[不能用，打包时报错]
+        template: 'public/index.html', // 模板的路径
+      }),
       eslint({
         cache: true,
         failOnWarning: true,

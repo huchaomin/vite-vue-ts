@@ -10,6 +10,7 @@
 - 合理地切割包
 - vite-plugin-imagemin
 - vite-plugin-html-minifier-terser
+- 重写autoImportStoreList
 
 ## vite-plugin-checker
 
@@ -108,3 +109,8 @@ pnpm dlx husky-init
     },
   })
   ```
+
+## 添加 vite-plugin-html
+
+- 可以向html模板中插入自定义变量和标签
+- 支持多页面应用
