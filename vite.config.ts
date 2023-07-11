@@ -15,9 +15,10 @@ import VueDevTools from 'vite-plugin-vue-devtools';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import Inspect from 'vite-plugin-inspect';
 
-export default defineConfig(async ({ mode }) => {
-  const cArgv = process.argv.slice(4);
+const isReport = process.env.report === 'true';
+const isInspect = process.env.inspect === 'true';
 
+export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
   return {
     resolve: {
@@ -82,11 +83,11 @@ export default defineConfig(async ({ mode }) => {
         template: 'public/index.html', // 模板的路径
       }),
       Inspect({
-        build: true,
+        build: isInspect,
         outputDir: '.vite-inspect',
       }),
       viteCompression(),
-      ...cArgv.includes('report')
+      ...isReport
         ? [visualizer({
             open: true,
           })]

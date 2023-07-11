@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "report": "pnpm build -- report",
-    "preview": "vite preview",
-    "inspect": "vite preview --outDir .vite-inspect",
+    "report": "cross-env report=true pnpm build",
+    "preview": "pnpm build && vite preview",
+    "inspect": "cross-env inspect=true pnpm build && vite preview --outDir .vite-inspect",
     "prepare": "husky install",
     "preinstall": "only-allow pnpm"
   },
@@ -26,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "^8.43.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
     "eslint-plugin-import": "^2.27.5",
