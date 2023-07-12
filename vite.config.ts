@@ -49,7 +49,9 @@ export default defineConfig(({ mode }) => {
         cacheLocation: '.cache/.stylelintcache',
       }),
       checker({ vueTsc: true }),
-      VueDevTools(),
+      VueDevTools({
+        appendTo: 'src/main.ts', // 解决每第一次prebundle报错的问题
+      }),
       vue(), // 将会把SFC的代码转换成js代码
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template
