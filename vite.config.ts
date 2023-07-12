@@ -14,6 +14,7 @@ import viteCompression from 'vite-plugin-compression';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import Inspect from 'vite-plugin-inspect';
+import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts';
 
 const isReport = process.env.report === 'true';
 const isInspect = process.env.inspect === 'true';
@@ -110,6 +111,13 @@ export default defineConfig(({ mode }) => {
           keep_infinity: true, // 通过true以防止Infinity被压缩为1/0
           keep_fargs: false, // 通过false以删除未使用的函数参数
           toplevel: true, // 通过true以丢弃未引用的顶级变量名
+        },
+      },
+      rollupOptions: {
+        output: {
+          manualChunks,
+          chunkFileNames,
+          assetFileNames,
         },
       },
     },
