@@ -7,7 +7,6 @@
 - 添加axios 好像有个更好的插件（自动引入）
 - @vueuse（自动引入）
 - 合理地切割包
-- 重写autoImportStoreList
 
 ## vite-plugin-checker
 
