@@ -44,7 +44,10 @@ export default defineConfig(({ mode }) => {
         cache: true,
         failOnWarning: true,
       }),
-      stylelint({ build: true }),
+      stylelint({
+        build: true,
+        cacheLocation: '.cache/.stylelintcache',
+      }),
       checker({ vueTsc: true }),
       VueDevTools(),
       vue(), // 将会把SFC的代码转换成js代码
@@ -64,6 +67,7 @@ export default defineConfig(({ mode }) => {
         eslintrc: {
           enabled: isDev,
           globalsPropValue: 'readonly',
+          filepath: '.cache/.eslintrc-auto-import.json',
         },
       }),
       Components({
@@ -84,12 +88,13 @@ export default defineConfig(({ mode }) => {
       }),
       Inspect({
         build: isInspect,
-        outputDir: '.vite-inspect',
+        outputDir: '.cache/.vite-inspect',
       }),
       viteCompression(),
       ...isReport
         ? [visualizer({
             open: true,
+            filename: '.cache/report.html',
           })]
         : [],
     ],

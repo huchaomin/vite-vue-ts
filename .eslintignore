@@ -6,5 +6,4 @@
 /public
 /dist
 /dist-ssr
-stats.html
-/.vite-inspect
+/.cache

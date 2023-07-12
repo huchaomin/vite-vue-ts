@@ -9,7 +9,7 @@ module.exports = {
   extends: [
     'standard-with-typescript',
     'plugin:vue/vue3-recommended', // 更为严格一点，推荐用这个
-    './.eslintrc-auto-import.json',
+    '.cache/.eslintrc-auto-import.json',
   ],
   overrides: [
     {

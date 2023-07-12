@@ -8,7 +8,7 @@
     "build": "vue-tsc && vite build",
     "report": "cross-env report=true pnpm build",
     "preview": "pnpm build && vite preview",
-    "inspect": "cross-env inspect=true pnpm build && vite preview --outDir .vite-inspect",
+    "inspect": "cross-env inspect=true pnpm build && vite preview --outDir .cache/.vite-inspect",
     "prepare": "husky install",
     "preinstall": "only-allow pnpm"
   },
