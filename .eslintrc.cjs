@@ -87,5 +87,13 @@ module.exports = {
       before: true,
       after: false,
     }],
+    // '@typescript-eslint/restrict-plus-operands': ['error', { // TODO 等 standard-with-typescript 升级
+    //   allowAny: false,
+    //   allowBoolean: false,
+    //   allowNullish: false,
+    //   allowNumberAndString: false,
+    //   allowRegExp: false,
+    //   skipCompoundAssignments: false,
+    // }]
   },
 };
