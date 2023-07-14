@@ -2,7 +2,7 @@
 const arcoVueUtilsRe = /node_modules[\\/]resize-observer-polyfill[\\/](.*)\.js$/; // arcoVue 的一些依赖包
 const arcoVueOnDemandRE = /node_modules[\\/]@arco-design[\\/](.*)\.(m?js|css|scss|sass|json)$/;
 const vendorRE = [
-  /node_modules[\\/](@vue|vue-router|vue-i18n|axios|pinia|pinia-plugin-persistedstate)[\\/](.*)\.(m?js|css|scss|sass|json)$/,
+  /node_modules[\\/](@vue|vue-router|vue-i18n|pinia|pinia-plugin-persistedstate)[\\/](.*)\.(m?js|css|scss|sass|json)$/,
   /virtual:svg-icons-register/,
   /plugin-vue:export-helper/,
   /vite[\\/]preload-helper/,
