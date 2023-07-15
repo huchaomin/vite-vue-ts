@@ -3,6 +3,7 @@ import Router from '@/router';
 import Store from '@/store';
 import App from './App.vue';
 import SvgIcon from '@/plugins/svgIcon';
+import '@/plugins/$api';
 
 createApp(App)
   .use(Router)

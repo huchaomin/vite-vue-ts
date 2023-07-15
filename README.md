@@ -3,9 +3,9 @@
 ## todo list
 
 - 升级包版本
-- 添加i8n 好像有一个更好的vscode插件
-- 添加axios 好像有个更好的插件（自动引入）
-- @vueuse（自动引入）
+- 添加i8n 好像有一个更好的vscode插件 分割包
+- @vueuse（自动引入） 分割包
+- 添加 fetch 笔记
 
 ## vite-plugin-checker
 
