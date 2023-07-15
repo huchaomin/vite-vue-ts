@@ -3,7 +3,7 @@ import { firstUpperCase } from '@/utils/index.ts';
 
 const commonStore = useCommonStore();
 
-defineProps<{ msg :string }>();
+defineProps<{ msg: string }>();
 
 </script>
 

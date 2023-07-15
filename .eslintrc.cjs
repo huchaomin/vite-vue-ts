@@ -84,8 +84,8 @@ module.exports = {
       asyncArrow: 'always',
     }],
     '@typescript-eslint/type-annotation-spacing': ['error', {
-      before: true,
-      after: false,
+      before: false,
+      after: true,
     }],
     // '@typescript-eslint/restrict-plus-operands': ['error', { // TODO 等 standard-with-typescript 升级
     //   allowAny: false,

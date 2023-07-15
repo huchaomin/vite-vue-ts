@@ -18,10 +18,16 @@ import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
 
 const isReport = process.env.report === 'true';
 const isInspect = process.env.inspect === 'true';
+const proxyTarget = 'http://112.74.53.147:7090/'; // 测试环境地址
+const apiPrefix = 'basic';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
+
   return {
+    define: {
+      API_PREFIX: JSON.stringify(apiPrefix),
+    },
     resolve: {
       alias: {
         '@': resolvePath(__dirname, 'src'),
@@ -118,6 +124,25 @@ export default defineConfig(({ mode }) => {
           manualChunks,
           chunkFileNames,
           assetFileNames,
+        },
+      },
+    },
+    devServer: {
+      open: false,
+      proxy: {
+        [`/${apiPrefix}/token`]: {
+          target: proxyTarget,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(new RegExp(`/${apiPrefix}/`), ''),
+        },
+        [`/${apiPrefix}/pcmsmanager`]: {
+          target: proxyTarget,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(new RegExp(`/${apiPrefix}/`), ''),
+        },
+        [`/${apiPrefix}`]: {
+          target: proxyTarget,
+          changeOrigin: true,
         },
       },
     },
