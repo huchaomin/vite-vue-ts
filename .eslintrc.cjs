@@ -36,6 +36,10 @@ module.exports = {
     'vue',
   ],
   rules: {
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 生产环境禁止debugger
+    '@typescript-eslint/triple-slash-reference': 'off', // 开启三斜线引用
+    '@typescript-eslint/no-floating-promises': 'off', // 允许未处理的promise
+    '@typescript-eslint/no-dynamic-delete': 'off', // 允许删除动态属性
     'comma-dangle': ['error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',
