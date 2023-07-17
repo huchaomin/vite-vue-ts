@@ -48,6 +48,7 @@ export default function fetchWrapper(
     credentials = 'same-origin',
   } = config;
   const processedUrl = handleUrlAndData(url, data, method);
+  const userStore = useUserStore();
   const fetch = createFetch({
     options: {
       timeout,
@@ -55,11 +56,10 @@ export default function fetchWrapper(
         if (!whiteApis.find((item) => url.includes(item)) && isExpiration) {
           cancel();
         }
-        const commonStore = useCommonStore();
-        if (commonStore.token) {
+        if (userStore.token) {
           options.headers = {
             ...options.headers,
-            Authorization: commonStore.token,
+            Authorization: userStore.token,
           };
         }
         return { options };
@@ -72,12 +72,10 @@ export default function fetchWrapper(
             // TODO ElMessage.error('登录过期，请重新登录');
           }
           isExpiration = true;
+          userStore.token = '';
           // TODO 啥时候清除store缓存
-          router.replace({
+          router.push({
             name: 'login',
-            query: {
-              redirect: router.currentRoute.value.name as string,
-            },
           });
         }
         return ctx; // TODO 试试返回对象

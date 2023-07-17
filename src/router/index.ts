@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHashHistory,
+  createWebHistory,
   type RouteRecordRaw,
 } from 'vue-router';
 import Index from '@/layout/Index.vue';
@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     name: 'index',
     component: Index,
     redirect: {
-      name: 'Test',
+      name: 'test',
     },
     children: [
       {
@@ -40,16 +40,50 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
-  strict: true, // 是否应该禁止尾部斜杠。默认为假
-  scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-router.beforeEach((to) => {
-  const { meta } = to;
+router.beforeEach((to, _from, next) => {
+  if (to.name === 'login') {
+    next();
+    return;
+  }
+  const userStore = useUserStore();
+
+  if (userStore.token) {
+    next();
+    // TODO
+    // if (routerStore.allRouters.length > 0) {
+    //   next();
+    //   return;
+    // }
+    // userStore.getUserInfo().then(() => userStore.userInfoChange().then(() => {
+    //   const current = findRouterByPath(to.path);
+    //   if (current) {
+    //     let { name } = current;
+    //     if (from === START_LOCATION && menuBelong.has(name)) {
+    //       name = menuBelong.get(name);
+    //     }
+    //     next({ name });
+    //   } else {
+    //     next({ name: 'NotFound' });
+    //   }
+    // })).catch(() => {
+    //   next(false);
+    // });
+  } else {
+    next({ name: 'login' });
+  }
+});
+
+router.afterEach((to, from) => {
+  const { name, meta } = to;
   if (meta.title) {
     document.title = meta.title;
+  }
+  if (name === 'login') {
+    to.query = { redirect: from.name as string }; // START_LOCATION 时 from.name 为 undefined
   }
 });
 

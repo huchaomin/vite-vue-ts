@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -11,6 +11,9 @@ dependencies:
   '@arco-themes/vue-mulinzi':
     specifier: ^0.0.2
     version: 0.0.2(@arco-design/web-vue@2.48.0)
+  '@arco-themes/vue-qingcongkeji':
+    specifier: ^0.0.1
+    version: 0.0.1(@arco-design/web-vue@2.48.0)
   '@vueuse/core':
     specifier: ^10.2.1
     version: 10.2.1(vue@3.3.4)
@@ -295,6 +298,14 @@ packages:
     resolution: {integrity: sha512-WYtGzIYG43RmjdknI0v/MGWwapZSfprHwOPNUPCKl6x/C4WqtDlyb6mcbtfJILCTKR6NRPtXLnWwMa0ts3bGoA==}
     peerDependencies:
       '@arco-design/web-vue': ^2.47.1
+    dependencies:
+      '@arco-design/web-vue': 2.48.0(vue@3.3.4)
+    dev: false
+
+  /@arco-themes/vue-qingcongkeji@0.0.1(@arco-design/web-vue@2.48.0):
+    resolution: {integrity: sha512-MnKJSINBKQhKLrcJ2edlSd8IXX5MRnvT3+MyikTx1i4v8U5b0KDtn49F03N/pAJEXaR/iLaiI82gW0GHnu7UPA==}
+    peerDependencies:
+      '@arco-design/web-vue': ^2.48.1
     dependencies:
       '@arco-design/web-vue': 2.48.0(vue@3.3.4)
     dev: false

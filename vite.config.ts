@@ -83,7 +83,7 @@ export default defineConfig(({ mode }) => {
         dts: 'types/components.d.ts',
       }), // 自动引入 src/components
       vitePluginForArco({
-        theme: '@arco-themes/vue-mulinzi',
+        theme: '@arco-themes/vue-qingcongkeji',
         // iconBox https://arco.design/iconbox/libs
       }),
       createSvgIconsPlugin({

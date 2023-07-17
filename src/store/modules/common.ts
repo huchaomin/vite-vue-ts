@@ -1,5 +1,4 @@
 export default defineStore('common', () => {
-  const token = ref('');
   const count = ref(0);
 
   function increment(): void {
@@ -7,7 +6,6 @@ export default defineStore('common', () => {
   }
 
   return {
-    token,
     count,
     increment,
   };
