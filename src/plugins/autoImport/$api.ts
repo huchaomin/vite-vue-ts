@@ -1,11 +1,14 @@
-import { createFetch } from '@vueuse/core';
+import {
+  type UseFetchReturn,
+  createFetch,
+} from '@vueuse/core';
 import router from '@/router';
 import { setUrlPrefix } from '@/utils/url';
 
 let isExpiration = false; // 登陆是否已经过期
 const whiteApis = ['/login']; // 接口白名单
 
-function handleUrlAndData(url: string, data: Record<string, any> = {}, method: string): string {
+function handleUrlAndData(url: string, data: Record<string, string | number> = {}, method: string): string {
   let query = '?';
   Object.keys(data).forEach((key) => {
     const reg = new RegExp(`\\{${key}\\}`, 'g');
@@ -33,8 +36,8 @@ interface apiConfig {
 
 export default function fetchWrapper(
   defaultConfig: apiConfig,
-  data?: Record<string, any>,
-  CustomerConfig?: apiConfig,
+  data?: Record<string, string | number>,
+  CustomerConfig?: apiConfig, // TODO 没有url属性
 ): any {
   const config = {
     ...defaultConfig,
@@ -64,10 +67,11 @@ export default function fetchWrapper(
         }
         return { options };
       },
-      afterFetch(ctx) { // data response
+      // data response 40*,20* 只走了这里
+      // data.value 为 object
+      afterFetch(ctx) {
         const { data } = ctx;
         const status = data.code;
-        debugger;
         if (status === 401) {
           if (!isExpiration) {
             // TODO ElMessage.error('登录过期，请重新登录');
@@ -81,9 +85,9 @@ export default function fetchWrapper(
         }
         return ctx;
       },
-      // 请求错误
+      // 500、接口地址错误（net::ERR_CONNECTION_REFUSED） 只走了这里
+      // data.value 为 null
       onFetchError(ctx) {
-        console.error(ctx.error);
         return ctx;
       },
     },
@@ -93,9 +97,17 @@ export default function fetchWrapper(
     },
   });
   if (method === 'get') {
-    return fetch(processedUrl).json();
+    return fetch(processedUrl).json().then((res: UseFetchReturn<JSON>) => {
+      if (res.response.value?.ok === true) {
+        return Promise.resolve(res.data.value);
+      }
+    });
   } else if (method === 'post') {
-    return fetch(processedUrl).post(data).json();
+    return fetch(processedUrl).post(data).json().then((res: UseFetchReturn<JSON>) => {
+      if (res.response.value?.ok === true) {
+        return Promise.resolve(res.data.value);
+      }
+    }); // TODO
   }
 }
 

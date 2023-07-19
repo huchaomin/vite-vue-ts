@@ -8,17 +8,21 @@ const form = reactive({
 });
 const handleSubmit = () => {
 };
+const a = $api(getRandomImage, {
+  timestamp: new Date().getTime(),
+});
+console.log('a', a);
 
-function refreshRandomImage() {
-  $api(getRandomImage, {
-    timestamp: new Date().getTime(),
-  }).then((res: any) => {
-    console.log('res', res);
-  }).catch((err: any) => {
-    console.log('err', err);
-  });
-}
-refreshRandomImage();
+// function refreshRandomImage() {
+//   $api(getRandomImage, {
+//     timestamp: new Date().getTime(),
+//   }).then((res: any) => {
+//     console.log('res', res);
+//   }).catch((err: any) => {
+//     console.log('err', err);
+//   });
+// }
+// refreshRandomImage();
 
 </script>
 <template>
