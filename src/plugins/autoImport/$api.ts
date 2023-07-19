@@ -88,6 +88,7 @@ export default function fetchWrapper(
       // 500、接口地址错误（net::ERR_CONNECTION_REFUSED） 只走了这里
       // data.value 为 null
       onFetchError(ctx) {
+        $notify.error('网络错误');
         return ctx;
       },
     },
