@@ -6,6 +6,7 @@
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
 - less 对齐没有格式化
+- 添加pritter
 
 ## vite-plugin-checker
 

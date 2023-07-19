@@ -8,7 +8,7 @@ const whiteApis = ['/login']; // 接口白名单
 function handleUrlAndData(url: string, data: Record<string, any> = {}, method: string): string {
   let query = '?';
   Object.keys(data).forEach((key) => {
-    const reg = new RegExp(`\\$\\{${key}\\}`, 'g');
+    const reg = new RegExp(`\\{${key}\\}`, 'g');
     if (reg.test(url)) {
       url = url.replace(reg, encodeURIComponent(data[key]));
       delete data[key];
@@ -58,15 +58,16 @@ export default function fetchWrapper(
         }
         if (userStore.token) {
           options.headers = {
-            ...options.headers,
-            Authorization: userStore.token,
+            ...options.headers ?? {},
+            'X-Access-Token': userStore.token,
           };
         }
         return { options };
       },
-      afterFetch(ctx) {
+      afterFetch(ctx) { // data response
         const { data } = ctx;
         const status = data.code;
+        debugger;
         if (status === 401) {
           if (!isExpiration) {
             // TODO ElMessage.error('登录过期，请重新登录');
@@ -78,7 +79,7 @@ export default function fetchWrapper(
             name: 'login',
           });
         }
-        return ctx; // TODO 试试返回对象
+        return ctx;
       },
       // 请求错误
       onFetchError(ctx) {

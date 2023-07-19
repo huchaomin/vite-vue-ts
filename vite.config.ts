@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite';
+import { type ProxyOptions, defineConfig } from 'vite';
+import type * as http from 'node:http';
 import vue from '@vitejs/plugin-vue';
 import checker from 'vite-plugin-checker';
 import eslint from 'vite-plugin-eslint';
@@ -18,8 +19,14 @@ import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
 
 const isReport = process.env.report === 'true';
 const isInspect = process.env.inspect === 'true';
-const proxyTarget = 'http://112.74.53.147:7090/'; // 测试环境地址
-const apiPrefix = 'basic';
+// const proxyTarget = 'http://192.168.2.60:9998/'; // 测试环境地址
+const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
+const apiPrefix = 'qczn-work';
+
+function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
+  const proxyUrl = new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || '';
+  res.setHeader('X-Res-Proxyurl', proxyUrl); // 查看真实的请求地址
+}
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -127,22 +134,18 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    devServer: {
+    server: {
       open: false,
       proxy: {
-        [`/${apiPrefix}/token`]: {
-          target: proxyTarget,
-          changeOrigin: true,
-          rewrite: (p) => p.replace(new RegExp(`/${apiPrefix}/`), ''),
-        },
-        [`/${apiPrefix}/pcmsmanager`]: {
-          target: proxyTarget,
-          changeOrigin: true,
-          rewrite: (p) => p.replace(new RegExp(`/${apiPrefix}/`), ''),
-        },
+        // [`/${apiPrefix}/token`]: {
+        //   target: proxyTarget,
+        //   changeOrigin: true,
+        //   rewrite: (p) => p.replace(new RegExp(`/${apiPrefix}/`), ''),
+        // },
         [`/${apiPrefix}`]: {
           target: proxyTarget,
           changeOrigin: true,
+          bypass,
         },
       },
     },

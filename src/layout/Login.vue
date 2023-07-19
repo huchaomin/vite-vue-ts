@@ -1,57 +1,5 @@
-<template>
-  <div class="login-wrapper">
-    <div class="header">
-      <svg-icon
-        name="logo"
-      ></svg-icon>
-      <span>资产评估管理系统</span>
-    </div>
-    <a-form
-      :model="form"
-      :style="{ width: '400px' }"
-      layout="vertical"
-      @submit="handleSubmit"
-    >
-      <a-form-item
-        field="name"
-        tooltip="Please enter username"
-        label="Username"
-      >
-        <a-input
-          v-model="form.name"
-          size="large"
-          placeholder="please enter your username..."
-        ></a-input>
-      </a-form-item>
-      <a-form-item
-        field="post"
-        label="Post"
-      >
-        <a-input
-          v-model="form.post"
-          size="large"
-          placeholder="please enter your post..."
-        ></a-input>
-      </a-form-item>
-      <a-form-item field="isRead">
-        <a-checkbox v-model="form.isRead">
-          I have read the manual
-        </a-checkbox>
-      </a-form-item>
-      <a-form-item>
-        <a-button html-type="submit">
-          Submit
-        </a-button>
-      </a-form-item>
-    </a-form>
-    {{ form }}
-    <div class="footer">
-      Copyright &copy; 2023 擎聪科技 出品
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
+import { getRandomImage } from '@/api/sys';
 
 const form = reactive({
   name: '',
@@ -61,7 +9,94 @@ const form = reactive({
 const handleSubmit = () => {
 };
 
+function refreshRandomImage() {
+  $api(getRandomImage, {
+    timestamp: new Date().getTime(),
+  }).then((res: any) => {
+    console.log('res', res);
+  }).catch((err: any) => {
+    console.log('err', err);
+  });
+}
+refreshRandomImage();
+
 </script>
+<template>
+  <div class="login-wrapper">
+    <div class="header">
+      <svg-icon name="logo"></svg-icon>
+      <span>资产评估管理系统</span>
+    </div>
+    <a-form
+      :model="form"
+      :style="{ width: '400px' }"
+      layout="vertical"
+      @submit="handleSubmit"
+    >
+      <a-form-item field="name">
+        <a-input
+          v-model="form.name"
+          size="large"
+          placeholder="请输入帐户名 / admin"
+        >
+          <template #prefix>
+            <icon-user></icon-user>
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-form-item
+        field="post"
+      >
+        <a-input
+          v-model="form.post"
+          size="large"
+          placeholder="密码 / 123456"
+        >
+          <template #prefix>
+            <icon-lock></icon-lock>
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-row>
+        <a-col :span="16">
+          <a-form-item>
+            <a-input
+              size="large"
+              placeholder="请输入验证码"
+            >
+              <template #prefix>
+                <icon-face-smile-fill></icon-face-smile-fill>
+              </template>
+            </a-input>
+          </a-form-item>
+        </a-col>
+        <a-col
+          :span="8"
+          style="text-align: right"
+        >
+          <a
+            href="#"
+            @click.prevent="refreshRandomImage"
+          >
+            <img
+              v-if="requestCodeSuccess"
+              :src="randCodeImage"
+            />
+            <img
+              v-else
+              src="~img/checkcode.png"
+            />
+          </a>
+        </a-col>
+      </a-row>
+    </a-form>
+    {{ form }}
+    <div class="footer">
+      Copyright &copy; 2023 擎聪科技 出品
+    </div>
+  </div>
+</template>
+
 <style lang="less" scoped>
   .header{
     display: flex;
