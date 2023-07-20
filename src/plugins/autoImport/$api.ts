@@ -1,5 +1,4 @@
 import {
-  type UseFetchReturn,
   createFetch,
 } from '@vueuse/core';
 import router from '@/router';
@@ -7,8 +6,9 @@ import { setUrlPrefix } from '@/utils/url';
 
 let isExpiration = false; // 登陆是否已经过期
 const whiteApis = ['/login']; // 接口白名单
+type dataType = Record<string, any> | undefined;
 
-function handleUrlAndData(url: string, data: Record<string, string | number> = {}, method: string): string {
+function handleUrlAndData(url: string, data: dataType = {}, method: string): string {
   let query = '?';
   Object.keys(data).forEach((key) => {
     const reg = new RegExp(`\\{${key}\\}`, 'g');
@@ -32,12 +32,14 @@ interface apiConfig {
   readonly timeout?: number
   readonly mode?: string // 请求模式,允许跨域请求
   readonly credentials?: string // 是否携带cookie
+  readonly immediate?: boolean // 是否立即执行
+  readonly loading?: boolean // 是否显示loading
 }
 
 export default function fetchWrapper(
   defaultConfig: apiConfig,
-  data?: Record<string, string | number>,
-  CustomerConfig?: apiConfig, // TODO 没有url属性
+  data?: dataType,
+  CustomerConfig?: Omit<apiConfig, 'url' | 'method'>,
 ): any {
   const config = {
     ...defaultConfig,
@@ -49,13 +51,19 @@ export default function fetchWrapper(
     timeout = 10000,
     mode = 'cors',
     credentials = 'same-origin',
+    immediate = true,
+    loading = true,
   } = config;
-  const processedUrl = handleUrlAndData(url, data, method);
+  const processedUrl = handleUrlAndData(url, data, method); // data 也改变了
   const userStore = useUserStore();
   const fetch = createFetch({
     options: {
       timeout,
+      immediate,
       async beforeFetch({ url, options, cancel }) {
+        if (loading) {
+          $loading.show();
+        }
         if (!whiteApis.find((item) => url.includes(item)) && isExpiration) {
           cancel();
         }
@@ -70,67 +78,57 @@ export default function fetchWrapper(
       // data response 40*,20* 只走了这里
       // data.value 为 object
       afterFetch(ctx) {
-        const { data } = ctx;
-        const status = data.code;
-        if (status === 401) {
-          if (!isExpiration) {
-            // TODO ElMessage.error('登录过期，请重新登录');
-          }
-          isExpiration = true;
-          userStore.token = '';
-          // TODO 啥时候清除store缓存
-          router.push({
-            name: 'login',
-          });
+        if (loading) {
+          $loading.hide();
         }
-        return ctx;
+        const { data, response } = ctx;
+        if (response.ok && Boolean(data?.success)) { // 该项目要data.success，其他项目可能不需要
+          return ctx;
+        }
+
+        switch (data.code) {
+          case 403:
+            $notify.error('拒绝访问', { title: '系统提示' });
+            break;
+          case 404:
+            $notify.error('很抱歉，资源未找到!', { title: '系统提示' });
+            break;
+          case 401:
+            if (!isExpiration) {
+              $notify.error('很抱歉，登录已过期，请重新登录', { title: '系统提示' });
+            }
+            isExpiration = true;
+            userStore.token = '';
+            // TODO 啥时候清除store缓存
+            router.push({
+              name: 'login',
+            });
+            break;
+          default:
+            $notify.error(data.message, { title: '系统提示' });
+            break;
+        }
+        return { data: null, response };
       },
       // 500、接口地址错误（net::ERR_CONNECTION_REFUSED） 只走了这里
       // data.value 为 null
       onFetchError(ctx) {
+        if (loading) {
+          $loading.hide();
+        }
         $notify.error('网络错误');
         return ctx;
       },
     },
     fetchOptions: {
+      method,
       mode: mode as RequestMode,
       credentials: credentials as RequestCredentials,
     },
   });
   if (method === 'get') {
-    return fetch(processedUrl).json().then((res: UseFetchReturn<JSON>) => {
-      if (res.response.value?.ok === true) {
-        return Promise.resolve(res.data.value);
-      }
-    });
+    return fetch(processedUrl).json();
   } else if (method === 'post') {
-    return fetch(processedUrl).post(data).json().then((res: UseFetchReturn<JSON>) => {
-      if (res.response.value?.ok === true) {
-        return Promise.resolve(res.data.value);
-      }
-    }); // TODO
+    return fetch(processedUrl).post(data).json(); // TODO 看看怎么传参 method 已经在上面定义
   }
 }
-
-// 使用示例
-// const { onFetchResponse } = fetchWrapper({
-//   url: 'https://httpbin.org/get',
-// });
-
-// onFetchResponse((res: any) => { // 只有Response这一个参数
-//   console.log(res);
-//   // body: ReadableStream
-//   // bodyUsed: true
-//   // headers: Headers {}
-//   // ok: true
-//   // redirected: false
-//   // status: 200
-//   // statusText: ""
-//   // type: "cors"
-//   // url: "https://httpbin.org/get"
-//   // [[Prototype]]: Response
-// });
-
-// onFetchError((error) => { // 只有error这一个参数
-//   console.log(error);
-// });

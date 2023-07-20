@@ -8,21 +8,10 @@ const form = reactive({
 });
 const handleSubmit = () => {
 };
-const a = $api(getRandomImage, {
+const { execute: getCaptcha, data: captcha } = $api(getRandomImage, {
   timestamp: new Date().getTime(),
 });
-console.log('a', a);
-
-// function refreshRandomImage() {
-//   $api(getRandomImage, {
-//     timestamp: new Date().getTime(),
-//   }).then((res: any) => {
-//     console.log('res', res);
-//   }).catch((err: any) => {
-//     console.log('err', err);
-//   });
-// }
-// refreshRandomImage();
+getCaptcha();
 
 </script>
 <template>
@@ -80,11 +69,11 @@ console.log('a', a);
         >
           <a
             href="#"
-            @click.prevent="refreshRandomImage"
+            @click.prevent="getCaptcha"
           >
             <img
-              v-if="requestCodeSuccess"
-              :src="randCodeImage"
+              v-if="captcha"
+              :src="captcha.result"
             />
             <img
               v-else
