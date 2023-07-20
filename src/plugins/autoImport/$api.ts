@@ -5,7 +5,7 @@ import router from '@/router';
 import { setUrlPrefix } from '@/utils/url';
 
 let isExpiration = false; // 登陆是否已经过期
-const whiteApis = ['/login']; // 接口白名单
+const whiteApis = ['/login', '/sys/randomImage']; // TODO 接口白名单
 type dataType = Record<string, any> | undefined;
 
 function handleUrlAndData(url: string, data: dataType = {}, method: string): string {

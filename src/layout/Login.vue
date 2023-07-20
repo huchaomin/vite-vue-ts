@@ -1,17 +1,39 @@
 <script lang="ts" setup>
-import { getRandomImage } from '@/api/sys';
+import { getRandomImage, login } from '@/api/sys';
+import type Form from '@arco-design/web-vue/es/Form';
 
-const form = reactive({
-  name: '',
-  post: '',
-  isRead: false,
+const formData = reactive({
+  username: '',
+  password: '',
+  captcha: '',
 });
-const handleSubmit = () => {
-};
+
+const captchaTime = ref(0);
+function getCaptchaTime(): number {
+  const time = new Date().getTime();
+  captchaTime.value = time;
+  return time;
+}
+
 const { execute: getCaptcha, data: captcha } = $api(getRandomImage, {
-  timestamp: new Date().getTime(),
+  timestamp: getCaptchaTime(),
 });
 getCaptcha();
+
+const form: Ref<InstanceType<typeof Form> | null> = ref(null);
+function handleSubmit(): void {
+  form.value?.validate((err) => {
+    if (err === undefined) {
+      $api(login, {
+        ...formData,
+        checkKey: captchaTime.value,
+      }).then((res: any) => {
+        console.log(res);
+        $notify('登录成功！');
+      });
+    }
+  });
+}
 
 </script>
 <template>
@@ -21,69 +43,82 @@ getCaptcha();
       <span>资产评估管理系统</span>
     </div>
     <a-form
-      :model="form"
+      ref="form"
+      :model="formData"
       :style="{ width: '400px' }"
       layout="vertical"
       @submit="handleSubmit"
     >
-      <a-form-item field="name">
-        <a-input
-          v-model="form.name"
+      <a-form-item
+        hide-asterisk
+        :rules="[{ required:true,message:'请输入用户名!' },{ minLength:5,message:'用户名过短' }]"
+        field="username"
+      >
+        <c-input
+          v-model="formData.username"
           size="large"
           placeholder="请输入帐户名 / admin"
         >
           <template #prefix>
             <icon-user></icon-user>
           </template>
-        </a-input>
+        </c-input>
       </a-form-item>
       <a-form-item
-        field="post"
+        hide-asterisk
+        field="password"
+        :rules="[{ required:true,message:'请输入密码!' },{ minLength:5,message:'密码过短' }]"
       >
-        <a-input
-          v-model="form.post"
+        <c-input-pwd
+          v-model="formData.password"
           size="large"
           placeholder="密码 / 123456"
         >
           <template #prefix>
             <icon-lock></icon-lock>
           </template>
-        </a-input>
+        </c-input-pwd>
       </a-form-item>
       <a-row>
         <a-col :span="16">
-          <a-form-item>
-            <a-input
+          <a-form-item
+            hide-asterisk
+            :rules="[{ required:true,message:'请输入验证码!' },{ length:4,message:'验证码必须为4位' }]"
+            field="captcha"
+          >
+            <c-input
+              v-model="formData.captcha"
               size="large"
               placeholder="请输入验证码"
             >
               <template #prefix>
                 <icon-face-smile-fill></icon-face-smile-fill>
               </template>
-            </a-input>
+            </c-input>
           </a-form-item>
         </a-col>
-        <a-col
-          :span="8"
-          style="text-align: right"
-        >
+        <a-col :span="8">
           <a
             href="#"
+            class="captcha-wrapper"
             @click.prevent="getCaptcha"
           >
-            <img
-              v-if="captcha"
-              :src="captcha.result"
-            />
-            <img
-              v-else
-              src="~img/checkcode.png"
-            />
+            <img v-if="captcha" :src="captcha.result" />
+            <img v-else src="~img/checkcode.png" />
           </a>
         </a-col>
       </a-row>
+      <a-form-item>
+        <c-btn
+          html-type="submit"
+          long
+          size="large"
+          @click.prevent="handleSubmit"
+        >
+          登 录
+        </c-btn>
+      </a-form-item>
     </a-form>
-    {{ form }}
     <div class="footer">
       Copyright &copy; 2023 擎聪科技 出品
     </div>
@@ -114,6 +149,12 @@ getCaptcha();
     height: 100%;
     background: #f0f2f5 url("img/background.svg") no-repeat 50%;
     background-size: 100%;
+  }
+
+  .captcha-wrapper{
+    display: block;
+    margin-top: 8px;
+    text-align: right;
   }
 
   .footer{

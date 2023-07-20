@@ -24,7 +24,6 @@ const create: createFn = (content, options = {}) => {
   delete options.type;
   return Notification[type]({
     content,
-    duration: 0,
     ...options,
   });
 };

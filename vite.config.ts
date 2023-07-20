@@ -20,8 +20,9 @@ import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
 const isReport = process.env.report === 'true';
 const isInspect = process.env.inspect === 'true';
 // const proxyTarget = 'http://192.168.2.60:9998/'; // 测试环境地址
-const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
-const apiPrefix = 'qczn-work';
+// const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
+const proxyTarget = 'http://192.168.2.211:8080/'; // 测试环境地址（Robin）
+const apiPrefix = 'jeecg-boot';
 
 function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
   const proxyUrl = new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || '';

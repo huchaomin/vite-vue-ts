@@ -5,3 +5,8 @@ export const getRandomImage = {
   loading: false,
   immediate: false,
 };
+
+export const login = {
+  url: `${prefix}/login`,
+  method: 'post',
+};

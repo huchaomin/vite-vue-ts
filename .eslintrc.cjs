@@ -36,6 +36,14 @@ module.exports = {
     'vue',
   ],
   rules: {
+    'vue/max-attributes-per-line': ['error', {
+      singleline: {
+        max: 2,
+      },
+      multiline: {
+        max: 1,
+      },
+    }],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 生产环境禁止debugger
     '@typescript-eslint/triple-slash-reference': 'off', // 开启三斜线引用
     '@typescript-eslint/no-floating-promises': 'off', // 允许未处理的promise
@@ -91,13 +99,13 @@ module.exports = {
       before: false,
       after: true,
     }],
-    // '@typescript-eslint/restrict-plus-operands': ['error', { // TODO 等 standard-with-typescript 升级
+    // '@typescript-eslint/restrict-plus-operands': ['error', { // @typescript-eslint/eslint-plugin 升级到可能6.1以上
     //   allowAny: false,
     //   allowBoolean: false,
     //   allowNullish: false,
     //   allowNumberAndString: false,
     //   allowRegExp: false,
-    //   skipCompoundAssignments: false,
+    //   skipCompoundAssignments: true,
     // }]
   },
 };
