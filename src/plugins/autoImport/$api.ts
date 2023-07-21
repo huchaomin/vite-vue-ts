@@ -5,7 +5,6 @@ import router from '@/router';
 import { setUrlPrefix } from '@/utils/url';
 
 let isExpiration = false; // 登陆是否已经过期
-const whiteApis = ['/login', '/sys/randomImage']; // TODO 接口白名单
 type dataType = Record<string, any> | undefined;
 
 function handleUrlAndData(url: string, data: dataType = {}, method: string): string {
@@ -34,12 +33,13 @@ interface apiConfig {
   readonly credentials?: string // 是否携带cookie
   readonly immediate?: boolean // 是否立即执行
   readonly loading?: boolean // 是否显示loading
+  readonly isWhiteApi?: boolean // 是否是白名单接口（不需要登陆）
 }
 
 export default function fetchWrapper(
   defaultConfig: apiConfig,
   data?: dataType,
-  CustomerConfig?: Omit<apiConfig, 'url' | 'method'>,
+  CustomerConfig?: Omit<apiConfig, 'url' | 'method' | 'isWhiteApi'>,
 ): any {
   const config = {
     ...defaultConfig,
@@ -48,7 +48,8 @@ export default function fetchWrapper(
   const {
     url,
     method = 'get',
-    timeout = 10000,
+    isWhiteApi = false,
+    timeout = 15000,
     mode = 'cors',
     credentials = 'same-origin',
     immediate = true,
@@ -60,11 +61,11 @@ export default function fetchWrapper(
     options: {
       timeout,
       immediate,
-      async beforeFetch({ url, options, cancel }) {
+      async beforeFetch({ options, cancel }) {
         if (loading) {
           $loading.show();
         }
-        if (!whiteApis.find((item) => url.includes(item)) && isExpiration) {
+        if (!isWhiteApi && isExpiration) {
           cancel();
         }
         if (userStore.token) {

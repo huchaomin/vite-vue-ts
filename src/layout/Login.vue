@@ -22,15 +22,15 @@ getCaptcha();
 
 const form: Ref<InstanceType<typeof Form> | null> = ref(null);
 function handleSubmit(): void {
-  form.value?.validate((err) => {
+  form.value?.validate(async (err) => {
     if (err === undefined) {
-      $api(login, {
+      const { data } = await $api(login, {
         ...formData,
         checkKey: captchaTime.value,
-      }).then((res: any) => {
-        console.log(res);
-        $notify('登录成功！');
       });
+      if (data.value !== null) {
+        $notify('登录成功！');
+      }
     }
   });
 }
@@ -147,7 +147,7 @@ function handleSubmit(): void {
     align-items: center;
     justify-content: space-around;
     height: 100%;
-    background: #f0f2f5 url("img/background.svg") no-repeat 50%;
+    background: url("img/background.svg") no-repeat 50%;
     background-size: 100%;
   }
 

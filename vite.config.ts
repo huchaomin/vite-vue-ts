@@ -19,9 +19,9 @@ import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
 
 const isReport = process.env.report === 'true';
 const isInspect = process.env.inspect === 'true';
-// const proxyTarget = 'http://192.168.2.60:9998/'; // 测试环境地址
+const proxyTarget = 'http://192.168.2.206:9089/'; // 测试环境地址
 // const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
-const proxyTarget = 'http://192.168.2.211:8080/'; // 测试环境地址（Robin）
+// const proxyTarget = 'http://192.168.2.211:8080/'; // 测试环境地址（Robin）
 const apiPrefix = 'jeecg-boot';
 
 function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
@@ -29,9 +29,7 @@ function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: Pr
   res.setHeader('X-Res-Proxyurl', proxyUrl); // 查看真实的请求地址
 }
 
-export default defineConfig(({ mode }) => {
-  const isDev = mode === 'development';
-
+export default defineConfig(() => {
   return {
     define: {
       API_PREFIX: JSON.stringify(apiPrefix),
@@ -82,9 +80,9 @@ export default defineConfig(({ mode }) => {
           'src/plugins/autoImport',
         ],
         eslintrc: {
-          enabled: isDev,
+          enabled: true,
           globalsPropValue: 'readonly',
-          filepath: '.cache/.eslintrc-auto-import.json',
+          filepath: 'eslintrc-auto-import.json',
         },
       }),
       Components({

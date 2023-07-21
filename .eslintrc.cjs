@@ -1,4 +1,5 @@
 const path = require('path');
+
 module.exports = {
   root: true,
   env: {
@@ -9,7 +10,7 @@ module.exports = {
   extends: [
     'standard-with-typescript',
     'plugin:vue/vue3-recommended', // 更为严格一点，推荐用这个
-    '.cache/.eslintrc-auto-import.json',
+    './eslintrc-auto-import.json',
   ],
   overrides: [
     {
@@ -18,9 +19,13 @@ module.exports = {
       },
       files: [
         '.eslintrc.{js,cjs}',
+        'stylelint.config.{js,cjs}',
       ],
       parserOptions: {
         sourceType: 'script',
+      },
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],
@@ -45,6 +50,7 @@ module.exports = {
       },
     }],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 生产环境禁止debugger
+    '@typescript-eslint/no-misused-promises': 'off', // 允许promise返回值不被使用
     '@typescript-eslint/triple-slash-reference': 'off', // 开启三斜线引用
     '@typescript-eslint/no-floating-promises': 'off', // 允许未处理的promise
     '@typescript-eslint/no-dynamic-delete': 'off', // 允许删除动态属性

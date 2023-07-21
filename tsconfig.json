@@ -27,6 +27,7 @@
     "forceConsistentCasingInFileNames": true, //要求所有文件名均使用同一种风格：只有大写字母、小写字母、数字和下划线
     "incremental": true, //增量编译
     "esModuleInterop": true, //允许使用es6的模块化语法,引入非ES模块
+    "tsBuildInfoFile": ".cache/tsBuildInfo",
     "types": [
       "vite/client"
     ], // /// <reference types="vite/client" />
