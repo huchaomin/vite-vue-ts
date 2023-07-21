@@ -7,6 +7,7 @@
 - @vueuse（自动引入） 分割包
 - less 对齐没有格式化
 - 添加pritter
+- NProgress
 
 ## vite-plugin-checker
 

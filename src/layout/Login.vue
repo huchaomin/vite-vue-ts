@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getRandomImage, login } from '@/api/sys';
+import { randomImage, login } from '@/api/sys';
 import type Form from '@arco-design/web-vue/es/Form';
 
 const formData = reactive({
@@ -15,7 +15,7 @@ function getCaptchaTime(): number {
   return time;
 }
 
-const { execute: getCaptcha, data: captcha } = $api(getRandomImage, {
+const { execute: getCaptcha, data: captchaUrl } = $api(randomImage, {
   timestamp: getCaptchaTime(),
 });
 getCaptcha();
@@ -30,6 +30,8 @@ function handleSubmit(): void {
       });
       if (data.value !== null) {
         $notify('登录成功！');
+      } else {
+        getCaptcha();
       }
     }
   });
@@ -101,9 +103,9 @@ function handleSubmit(): void {
           <a
             href="#"
             class="captcha-wrapper"
-            @click.prevent="getCaptcha"
+            @click.prevent="() => getCaptcha()"
           >
-            <img v-if="captcha" :src="captcha.result" />
+            <img v-if="captchaUrl" :src="captchaUrl.result" />
             <img v-else src="~img/checkcode.png" />
           </a>
         </a-col>

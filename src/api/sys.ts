@@ -1,6 +1,6 @@
 const prefix = '/sys';
 
-export const getRandomImage = {
+export const randomImage = {
   url: `${prefix}/randomImage/{timestamp}`,
   loading: false,
   immediate: false,
@@ -10,5 +10,10 @@ export const getRandomImage = {
 export const login = {
   url: `${prefix}/login`,
   method: 'post',
+  isWhiteApi: true,
+};
+
+export const user = {
+  url: `${prefix}/permission/getUserPermissionByToken`,
   isWhiteApi: true,
 };

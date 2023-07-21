@@ -1,4 +1,5 @@
 import {
+  type UseFetchReturn,
   createFetch,
 } from '@vueuse/core';
 import router from '@/router';
@@ -36,11 +37,11 @@ interface apiConfig {
   readonly isWhiteApi?: boolean // 是否是白名单接口（不需要登陆）
 }
 
-export default function fetchWrapper(
+export default function fetchWrapper<T = any>(
   defaultConfig: apiConfig,
   data?: dataType,
   CustomerConfig?: Omit<apiConfig, 'url' | 'method' | 'isWhiteApi'>,
-): any {
+): UseFetchReturn<T> & PromiseLike<UseFetchReturn<T>> {
   const config = {
     ...defaultConfig,
     ...CustomerConfig,
@@ -129,7 +130,7 @@ export default function fetchWrapper(
   });
   if (method === 'get') {
     return fetch(processedUrl).json();
-  } else if (method === 'post') {
+  } else { // 暂时只有这两个请求方法
     return fetch(processedUrl).post(data).json(); // TODO 看看怎么传参 method 已经在上面定义
   }
 }
