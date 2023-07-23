@@ -9,6 +9,7 @@ import autoImportStoreList from './build/autoImportStores.ts';
 import { resolvePath } from './build/utils.ts';
 import Components from 'unplugin-vue-components/vite';
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
+import vuetify from 'vite-plugin-vuetify';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import viteCompression from 'vite-plugin-compression';
@@ -29,7 +30,8 @@ function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: Pr
   res.setHeader('X-Res-Proxyurl', proxyUrl); // 查看真实的请求地址
 }
 
-export default defineConfig(() => {
+export default defineConfig((...arg) => {
+  console.log('vite.config.ts', arg); // {mode: 'development', command: 'serve', ssrBuild: false }
   return {
     define: {
       API_PREFIX: JSON.stringify(apiPrefix),
@@ -42,14 +44,18 @@ export default defineConfig(() => {
     },
     css: {
       preprocessorOptions: {
-        less: {
-          additionalData: '@import "@/assets/css/variable.less";',
-          javascriptEnabled: true,
-          // importStyle: 'less', 配合使用
-          // modifyVars: {
-          //   'arcoblue-6': '#000000',
-          // },
+        scss: {
+          additionalData: '@use "@/assets/css/_variable.scss" as *;' +
+          '@use "@/assets/css/_mixin.scss" as *;',
         },
+        // less: {
+        //   // additionalData: '@import "@/assets/css/variable.less";',
+        //   javascriptEnabled: true,
+        //   // importStyle: 'less', 配合使用
+        //   // modifyVars: {
+        //   //   'arcoblue-6': '#000000',
+        //   // },
+        // },
       },
     },
     plugins: [ // 不要随便更改顺序否则会报错
@@ -66,6 +72,11 @@ export default defineConfig(() => {
         appendTo: 'src/main.ts', // 解决每第一次prebundle报错的问题
       }),
       vue(), // 将会把SFC的代码转换成js代码
+      vuetify({
+        styles: {
+          configFile: 'src/assets/css/settings.scss', // TODO 这个是啥意思
+        },
+      }),
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template
         dts: 'types/auto-imports.d.ts',

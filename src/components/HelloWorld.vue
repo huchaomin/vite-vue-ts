@@ -38,13 +38,13 @@ defineProps<{ msg: string }>();
   </a-space>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   .title{
     position: relative;
     top: 50%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 24px;
     font-weight: bold;
-    color: @primary;
+    color: $primary;
   }
 </style>

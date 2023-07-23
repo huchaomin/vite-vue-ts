@@ -1,0 +1,5 @@
+// can be used in your own components to access vuetify's variables.
+@use 'vuetify/settings' with (
+  $color-pack: false,
+  $utilities: false,
+);

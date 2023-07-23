@@ -44,38 +44,38 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, _from, next) => {
-  if (to.name === 'login') {
-    next();
-    return;
-  }
-  const userStore = useUserStore();
+// router.beforeEach((to, _from, next) => {
+// if (to.name === 'login') {
+//   next();
+//   return;
+// }
+// const userStore = useUserStore();
 
-  if (userStore.token) {
-    next();
-    // TODO
-    // if (routerStore.allRouters.length > 0) {
-    //   next();
-    //   return;
-    // }
-    // userStore.getUserInfo().then(() => userStore.userInfoChange().then(() => {
-    //   const current = findRouterByPath(to.path);
-    //   if (current) {
-    //     let { name } = current;
-    //     if (from === START_LOCATION && menuBelong.has(name)) {
-    //       name = menuBelong.get(name);
-    //     }
-    //     next({ name });
-    //   } else {
-    //     next({ name: 'NotFound' });
-    //   }
-    // })).catch(() => {
-    //   next(false);
-    // });
-  } else {
-    next({ name: 'login' });
-  }
-});
+// TODO
+// if (userStore.token) {
+//   next();
+// if (routerStore.allRouters.length > 0) {
+//   next();
+//   return;
+// }
+// userStore.getUserInfo().then(() => userStore.userInfoChange().then(() => {
+//   const current = findRouterByPath(to.path);
+//   if (current) {
+//     let { name } = current;
+//     if (from === START_LOCATION && menuBelong.has(name)) {
+//       name = menuBelong.get(name);
+//     }
+//     next({ name });
+//   } else {
+//     next({ name: 'NotFound' });
+//   }
+// })).catch(() => {
+//   next(false);
+// });
+// } else {
+//   next({ name: 'login' });
+// }
+// });
 
 router.afterEach((to, from) => {
   const { name, meta } = to;

@@ -8,6 +8,7 @@
 - less 对齐没有格式化
 - 添加pritter
 - NProgress
+- 分割包
 
 ## vite-plugin-checker
 
