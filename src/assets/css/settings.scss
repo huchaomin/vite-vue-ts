@@ -1,5 +1,5 @@
 // can be used in your own components to access vuetify's variables.
+// TODO 怎么用
 @use 'vuetify/settings' with (
-  $color-pack: false,
-  $utilities: false,
+  $color-pack: true,
 );

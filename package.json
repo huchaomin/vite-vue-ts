@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@arco-plugins/vite-vue": "^1.4.5",
+    "@mdi/font": "^7.2.96",
     "@types/node": "^20.4.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",

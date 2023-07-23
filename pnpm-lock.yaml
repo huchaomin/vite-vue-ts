@@ -34,6 +34,9 @@ devDependencies:
   '@arco-plugins/vite-vue':
     specifier: ^1.4.5
     version: 1.4.5
+  '@mdi/font':
+    specifier: ^7.2.96
+    version: 7.2.96
   '@types/node':
     specifier: ^20.4.2
     version: 20.4.2
@@ -1126,6 +1129,10 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /@mdi/font@7.2.96:
+    resolution: {integrity: sha512-e//lmkmpFUMZKhmCY9zdjRe4zNXfbOIJnn6xveHbaV2kSw5aJ5dLXUxcRt1Gxfi7ZYpFLUWlkG2MGSFAiqAu7w==}
+    dev: true
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

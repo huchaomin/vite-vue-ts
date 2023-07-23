@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<!-- <script lang="ts" setup>
 import { randomImage, login } from '@/api/sys';
 import type Form from '@arco-design/web-vue/es/Form';
 
@@ -164,4 +164,139 @@ function handleSubmit(): void {
     font-size: 14px;
     color: rgb(0 0 0 / 45%);
   }
+</style> -->
+
+<script setup lang="ts">
+
+const form = ref({
+  email: '',
+  password: '',
+  remember: false,
+});
+
+const isPasswordVisible = ref(false);
+</script>
+
+<template>
+  <div class="auth-wrapper d-flex align-center justify-center pa-4">
+    <VCard
+      class="auth-card pa-4 pt-7"
+      max-width="448"
+    >
+      <VCardItem class="justify-center">
+        <template #prepend>
+          <div class="d-flex">
+            <div
+              class="d-flex text-primary"
+            ></div>
+          </div>
+        </template>
+
+        <VCardTitle class="text-2xl font-weight-bold">
+          sneat
+        </VCardTitle>
+      </VCardItem>
+
+      <VCardText class="pt-2">
+        <h5 class="text-h5 mb-1">
+          Welcome to sneat! 👋🏻
+        </h5>
+        <p class="mb-0">
+          Please sign-in to your account and start the adventure
+        </p>
+      </VCardText>
+
+      <VCardText>
+        <VForm @submit.prevent="$router.push('/')">
+          <VRow>
+            <!-- email -->
+            <VCol cols="12">
+              <VTextField
+                v-model="form.email"
+                autofocus
+                placeholder="johndoe@email.com"
+                label="Email"
+                type="email"
+              ></VTextField>
+            </VCol>
+
+            <!-- password -->
+            <VCol cols="12">
+              <VTextField
+                v-model="form.password"
+                label="Password"
+                placeholder="············"
+                :type="isPasswordVisible ? 'text' : 'password'"
+                :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+                @click:append-inner="isPasswordVisible = !isPasswordVisible"
+              ></VTextField>
+
+              <!-- remember me checkbox -->
+              <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4">
+                <VCheckbox
+                  v-model="form.remember"
+                  label="Remember me"
+                ></VCheckbox>
+              </div>
+              <!-- login button -->
+              <VBtn
+                block
+                type="submit"
+              >
+                Login
+              </VBtn>
+            </VCol>
+          </VRow>
+        </VForm>
+      </VCardText>
+    </VCard>
+  </div>
+</template>
+
+<style lang="scss">
+.layout-blank {
+  .auth-wrapper {
+    min-block-size: calc(var(--vh, 1vh) * 100);
+  }
+
+  .auth-card {
+    z-index: 1 !important;
+  }
+}
+
+.auth-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.auth-v1-top-shape,
+.auth-v1-bottom-shape {
+  position: absolute;
+}
+
+.auth-v1-top-shape {
+  block-size: 148px;
+  inline-size: 148px;
+  inset-block-start: -2.5rem;
+  inset-inline-end: -2.5rem;
+}
+
+.auth-v1-bottom-shape {
+  block-size: 240px;
+  inline-size: 240px;
+  inset-block-end: -4.5rem;
+  inset-inline-start: -3rem;
+}
+
+.auth-illustration {
+  z-index: 1;
+}
+
+@media (min-width: 960px) {
+  .skin--bordered {
+    .auth-card-v2 {
+      border-inline-start: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+    }
+  }
+}
 </style>

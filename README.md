@@ -9,6 +9,7 @@
 - 添加pritter
 - NProgress
 - 分割包
+- 研究sass怎么用
 
 ## vite-plugin-checker
 
