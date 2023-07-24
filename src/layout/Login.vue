@@ -3,6 +3,8 @@ import rules from '@/constant/rules';
 import { randomImage, login } from '@/api/sys';
 import { type VForm } from 'vuetify/components';
 
+const userStore = useUserStore();
+
 const formData = reactive({
   username: '',
   password: '',
@@ -25,7 +27,6 @@ getCaptcha();
 
 const form: Ref<InstanceType<typeof VForm> | null> = ref(null);
 async function handleSubmit(): Promise<void> {
-  debugger;
   const { valid } = await form.value?.validate() as { valid: boolean };
   if (valid) {
     const { data } = await $api(login, {
@@ -33,8 +34,10 @@ async function handleSubmit(): Promise<void> {
       checkKey: captchaTime.value,
     });
     if (data.value !== null) {
+      userStore.token = data.value.result.token;
       $notify('登录成功！');
     } else {
+      formData.captcha = '';
       getCaptcha();
     }
   }
@@ -65,7 +68,6 @@ async function handleSubmit(): Promise<void> {
             v-model="formData.username"
             :rules="rules.username"
             autofocus
-            clearable
             placeholder="admin"
             label="请输入帐户名"
           ></v-text-field>

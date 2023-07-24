@@ -14,31 +14,33 @@ export default createVuetify({
     VCheckbox: {
       // set v-checkbox default color to primary
       color: 'primary',
-      density: 'comfortable',
+      density: 'compact',
       hideDetails: 'auto',
     },
     VRadioGroup: {
       color: 'primary',
-      density: 'comfortable',
+      density: 'compact',
       hideDetails: 'auto',
     },
     VRadio: {
-      density: 'comfortable',
+      density: 'compact',
       hideDetails: 'auto',
     },
     VSelect: {
       variant: 'outlined',
       color: 'primary',
       hideDetails: 'auto',
+      density: 'compact',
+      itemTitle: 'label',
     },
     VBtn: {
-      // set v-btn default color to primary
       color: 'primary',
     },
     VTextField: {
       variant: 'outlined',
       color: 'primary',
       hideDetails: 'auto',
+      density: 'compact',
     },
     VAutocomplete: {
       variant: 'outlined',
@@ -60,7 +62,7 @@ export default createVuetify({
     },
     VTextarea: {
       variant: 'outlined',
-      density: 'comfortable',
+      density: 'compact',
       color: 'primary',
       hideDetails: 'auto',
     },
@@ -77,4 +79,5 @@ export default createVuetify({
       mdi,
     },
   },
+
 });

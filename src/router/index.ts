@@ -16,13 +16,13 @@ const routes: RouteRecordRaw[] = [
     name: 'index',
     component: Index,
     redirect: {
-      name: 'test',
+      name: 'assetPkgManagement',
     },
     children: [
       {
-        path: 'test',
-        name: 'test',
-        component: () => import('@/views/Test.vue'),
+        path: 'assetPkgManagement',
+        name: 'assetPkgManagement',
+        component: () => import('@/views/assetPkgManagement/Index.vue'),
       },
     ],
   },

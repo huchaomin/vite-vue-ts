@@ -4,6 +4,7 @@ import {
 } from '@vueuse/core';
 import router from '@/router';
 import { setUrlPrefix } from '@/utils/url';
+import signMd5Utils from '@/utils/signMd5Utils.js';
 
 let isExpiration = false; // 登陆是否已经过期
 type dataType = Record<string, any> | undefined;
@@ -69,12 +70,17 @@ export default function fetchWrapper<T = any>(
         if (!isWhiteApi && isExpiration) {
           cancel();
         }
+        const signHeader: Record<string, string> = {
+          'X-Sign': signMd5Utils.getSign(url, data),
+          'X-TIMESTAMP': signMd5Utils.getDateTimeToString(),
+        };
         if (userStore.token) {
-          options.headers = {
-            ...options.headers ?? {},
-            'X-Access-Token': userStore.token,
-          };
+          signHeader['X-Access-Token'] = userStore.token;
         }
+        options.headers = {
+          ...options.headers ?? {},
+          ...signHeader,
+        };
         return { options };
       },
       // data response 40*,20* 只走了这里

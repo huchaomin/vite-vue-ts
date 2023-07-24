@@ -17,3 +17,7 @@ export const user = {
   url: `${prefix}/permission/getUserPermissionByToken`,
   isWhiteApi: true,
 };
+
+export const dict = {
+  url: `${prefix}/dict/getDictItems/{code}`,
+};
