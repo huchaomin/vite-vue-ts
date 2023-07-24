@@ -10,6 +10,7 @@
 - NProgress
 - 分割包
 - 研究sass怎么用
+- 第一次vuetify 样式加载错误
 
 ## vite-plugin-checker
 

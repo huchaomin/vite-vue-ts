@@ -36,13 +36,14 @@ interface apiConfig {
   readonly immediate?: boolean // 是否立即执行
   readonly loading?: boolean // 是否显示loading
   readonly isWhiteApi?: boolean // 是否是白名单接口（不需要登陆）
+  readonly responseType?: string // 返回数据类型
 }
 
-export default function fetchWrapper<T = any>(
+export default function fetchWrapper(
   defaultConfig: apiConfig,
   data?: dataType,
   CustomerConfig?: Omit<apiConfig, 'url' | 'method' | 'isWhiteApi'>,
-): UseFetchReturn<T> & PromiseLike<UseFetchReturn<T>> {
+): UseFetchReturn<any> & PromiseLike<UseFetchReturn<any>> {
   const config = {
     ...defaultConfig,
     ...CustomerConfig,
@@ -56,6 +57,7 @@ export default function fetchWrapper<T = any>(
     credentials = 'same-origin',
     immediate = true,
     loading = true,
+    responseType = 'json',
   } = config;
   const processedUrl = handleUrlAndData(url, data, method); // data 也改变了
   const userStore = useUserStore();
@@ -90,8 +92,13 @@ export default function fetchWrapper<T = any>(
           $loading.hide();
         }
         const { data, response } = ctx;
-        if (response.ok && Boolean(data?.success)) { // 该项目要data.success，其他项目可能不需要
-          return ctx;
+        if (response.ok) {
+          if (responseType === 'json' && Boolean(data?.success)) { // 该项目要data.success，其他项目可能不需要
+            return ctx;
+          }
+          if (responseType === 'blob' && data?.size > 0) {
+            return ctx;
+          }
         }
 
         switch (data.code) {
@@ -134,9 +141,10 @@ export default function fetchWrapper<T = any>(
       credentials: credentials as RequestCredentials,
     },
   });
-  if (method === 'get') {
-    return fetch(processedUrl).json();
-  } else { // 暂时只有这两个请求方法
-    return fetch(processedUrl).post(data).json(); // TODO 看看怎么传参 method 已经在上面定义
+  const res = method === 'get' ? fetch(processedUrl) : fetch(processedUrl).post(data); // 暂时只有这两个请求方法 // TODO 看看怎么传参 method 已经在上面定义
+  if (responseType === 'json') {
+    return res.json();
+  } else {
+    return res.blob();
   }
 }

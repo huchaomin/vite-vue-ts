@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { qcAssetList } from '@/api/qcasset';
+import { qcAssetList, qcAssetListExport } from '@/api/qcasset';
+import { downloadBlob } from '@/utils/index';
 
 const form = ref(null);
-const initialFormData = {
+const initialFormData: Record<string, any> = {
   assetPkgName: '',
   assetSeller: null,
   assetPkgStatus: null,
 };
-const formData = reactive({ ...initialFormData });
+const formData: Record<string, any> = reactive({ ...initialFormData });
 const assetSeller = $dicStore('qcpg_asset_company,company_name,id');
 const assetPkgStatus = $dicStore('asset_pkg_status');
 
@@ -57,7 +58,6 @@ const columns = [
     dataIndex: 'action',
     fixed: 'right',
     width: 147,
-    scopedSlots: { customRender: 'action' },
   },
 ];
 const tableData = ref([]);
@@ -67,20 +67,22 @@ const pagination = reactive({
   total: 0,
   showTotal: true,
 });
-function query(): void {
-  const obj = {};
+function getQueryParams(): Record<string, any> {
+  const obj: Record<string, any> = {
+    column: 'createTime',
+    order: 'desc',
+    pageNo: pagination.current,
+    pageSize: pagination.pageSize,
+  };
   for (const key in formData) {
     if (formData[key] !== null && formData[key] !== '') {
       obj[key] = formData[key];
     }
   }
-  $api(qcAssetList, {
-    column: 'createTime',
-    order: 'desc',
-    pageNo: pagination.current,
-    pageSize: pagination.pageSize,
-    ...obj,
-  }).then(res => {
+  return obj;
+}
+function query(): void {
+  $api(qcAssetList, getQueryParams()).then(res => {
     console.log(res);
     if (res.data.value !== null) {
       const { result } = res.data.value;
@@ -95,6 +97,11 @@ function reset(): void {
     formData[key] = initialFormData[key];
   }
   query();
+}
+function exportExcel(): void {
+  $api(qcAssetListExport, getQueryParams()).then(res => {
+    downloadBlob(res.data.value, '资产包列表.xlsx');
+  });
 }
 </script>
 <template>
@@ -138,12 +145,25 @@ function reset(): void {
       </v-col>
     </v-row>
   </v-form>
+  <div class="py-3">
+    <v-btn>
+      新增
+    </v-btn>
+    <v-btn
+      variant="tonal"
+      class="ml-6"
+      @click="exportExcel"
+    >
+      导出excel
+    </v-btn>
+  </div>
   <v-card>
     <v-card-text class="pa-0">
       <a-table
         :columns="columns"
         :data="tableData"
         :pagination="pagination"
+        :stripe="true"
       >
       </a-table>
     </v-card-text>
