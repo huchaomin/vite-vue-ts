@@ -1,26 +1,15 @@
 <template>
-  <a-layout>
-    <a-layout-header>Header</a-layout-header>
-    <a-layout>
-      <a-layout-sider
-        collapsible
-        :width="250"
-      >
-        Sider
-        <template #trigger>
-          <a-button type="primary">
-            <template #icon>
-              <icon-plus></icon-plus>
-            </template>
-          </a-button>
-        </template>
-      </a-layout-sider>
-      <a-layout>
-        <a-layout-content>
-          <router-view></router-view>
-        </a-layout-content>
-        <a-layout-footer>Footer</a-layout-footer>
-      </a-layout>
-    </a-layout>
-  </a-layout>
+  <v-layout class="rounded rounded-md">
+    <v-app-bar title="资产评估管理系统"></v-app-bar>
+
+    <v-navigation-drawer>
+      <v-list>
+        <v-list-item title="Navigation drawer"></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      <router-view></router-view>
+    </v-main>
+  </v-layout>
 </template>
