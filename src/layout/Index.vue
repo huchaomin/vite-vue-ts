@@ -6,7 +6,7 @@ import LeftDrawer from './LeftDrawer.vue';
     <v-app-bar title="资产评估管理系统"></v-app-bar>
     <left-drawer></left-drawer>
     <v-main>
-      <div class="ma-4">
+      <div class="pa-4 overflow-y-auto" style="height: calc((100vh - 64px));">
         <router-view></router-view>
       </div>
     </v-main>

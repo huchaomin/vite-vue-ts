@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AddOrEditModal from './AddOrEditModal.vue';
 import { qcAssetList, qcAssetListExport } from '@/api/qcasset';
 import { downloadBlob } from '@/utils/index';
 
@@ -103,6 +104,12 @@ function exportExcel(): void {
     downloadBlob(res.data.value, '资产包列表.xlsx');
   });
 }
+const addOrEditModal: Ref<InstanceType<typeof AddOrEditModal> | null> = ref(null);
+function add(): void {
+  if (addOrEditModal.value !== null) {
+    addOrEditModal.value.visible = true;
+  }
+}
 </script>
 <template>
   <v-form ref="form" @submit.prevent="query">
@@ -146,7 +153,7 @@ function exportExcel(): void {
     </v-row>
   </v-form>
   <div class="py-3">
-    <v-btn>
+    <v-btn @click="add">
       新增
     </v-btn>
     <v-btn
@@ -168,4 +175,5 @@ function exportExcel(): void {
       </a-table>
     </v-card-text>
   </v-card>
+  <AddOrEditModal ref="addOrEditModal"></AddOrEditModal>
 </template>

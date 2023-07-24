@@ -11,6 +11,7 @@
 - 分割包
 - 研究sass怎么用
 - 第一次vuetify 样式加载错误
+- 改变 组件的大小写
 
 ## vite-plugin-checker
 

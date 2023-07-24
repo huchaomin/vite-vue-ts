@@ -42,6 +42,10 @@ export default createVuetify({
     },
   },
   defaults: {
+    VDialog: {
+      persistent: true,
+      noClickAnimation: true,
+    },
     VTooltip: {
       // set v-tooltip default location to top
       location: 'top',
