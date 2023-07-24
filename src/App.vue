@@ -5,12 +5,12 @@ const commonStore = useCommonStore();
   <router-view></router-view>
   <v-overlay
     :model-value="commonStore.loading"
-    class="align-center justify-center"
+    class="align-start justify-center"
   >
-    <v-progress-circular
+    <v-progress-linear
       color="primary"
       indeterminate
-      size="64"
-    ></v-progress-circular>
+      style="width: 100vw"
+    ></v-progress-linear>
   </v-overlay>
 </template>

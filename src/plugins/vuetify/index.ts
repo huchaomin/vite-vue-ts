@@ -42,6 +42,10 @@ export default createVuetify({
     },
   },
   defaults: {
+    VOverlay: {
+      persistent: true,
+      noClickAnimation: true,
+    },
     VDialog: {
       persistent: true,
       noClickAnimation: true,
