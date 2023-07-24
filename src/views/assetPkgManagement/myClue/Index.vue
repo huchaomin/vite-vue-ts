@@ -113,7 +113,7 @@ function add(): void {
 </script>
 <template>
   <v-form ref="form" @submit.prevent="query">
-    <v-row class="py-3">
+    <v-row class="pt-3">
       <v-col cols="2">
         <v-text-field
           v-model="formData.assetPkgName"
@@ -152,7 +152,7 @@ function add(): void {
       </v-col>
     </v-row>
   </v-form>
-  <div class="py-3">
+  <div class="pb-3">
     <v-btn @click="add">
       新增
     </v-btn>
