@@ -7,7 +7,9 @@ html{
   flex-direction: column;
   height: 100vh;
 
-  .v-label{
-    font-size: 14px;
+  .v-input__details{
+    align-items: flex-start;
+    min-height: 30px;
+    padding: 4px 0 0;
   }
 }

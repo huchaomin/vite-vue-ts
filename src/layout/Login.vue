@@ -4,6 +4,7 @@ import { randomImage, login } from '@/api/sys';
 import { type VForm } from 'vuetify/components';
 
 const userStore = useUserStore();
+const router = useRouter();
 
 const formData = reactive({
   username: '',
@@ -36,6 +37,7 @@ async function handleSubmit(): Promise<void> {
     if (data.value !== null) {
       userStore.token = data.value.result.token;
       $notify('登录成功！');
+      router.push({ name: 'index' });
     } else {
       formData.captcha = '';
       getCaptcha();
@@ -47,7 +49,7 @@ async function handleSubmit(): Promise<void> {
 <template>
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard
-      class="auth-card pa-4 pt-7"
+      class="pa-4"
       width="448"
     >
       <VCardItem class="justify-center">
@@ -63,49 +65,53 @@ async function handleSubmit(): Promise<void> {
       </VCardText>
 
       <VCardText>
-        <VForm ref="form" @submit.prevent="handleSubmit">
+        <VForm
+          ref="form"
+          validate-on="submit lazy"
+          @submit.prevent="handleSubmit"
+        >
           <v-text-field
             v-model="formData.username"
             :rules="rules.username"
             autofocus
             placeholder="admin"
-            label="请输入帐户名"
+            label="帐户名"
           ></v-text-field>
-
           <v-text-field
             v-model="formData.password"
             :rules="rules.password"
-            label="请输入密码"
+            label="密码"
             placeholder="123456"
             :type="isPasswordVisible ? 'text' : 'password'"
             :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append-inner="isPasswordVisible = !isPasswordVisible"
           ></v-text-field>
-
-          <v-row align="center">
-            <v-col :cols="16">
+          <VRow>
+            <VCol :cols="8">
               <v-text-field
                 v-model="formData.captcha"
                 :rules="rules.captcha"
-                label="请输入验证码"
+                label="验证码"
                 placeholder="请输入验证码"
               >
               </v-text-field>
-            </v-col>
-            <a-col :cols="8">
+            </VCol>
+            <VCol :cols="4">
               <a
                 href="#"
-                class="captcha-wrapper"
+                class="d-flex align-stretch justify-end"
+                style="height: 44px;"
                 @click.prevent="() => getCaptcha()"
               >
                 <img v-if="captchaUrl" :src="captchaUrl.result" />
                 <img v-else src="~img/checkcode.png" />
               </a>
-            </a-col>
-          </v-row>
+            </VCol>
+          </VRow>
           <VBtn
             block
             type="submit"
+            size="large"
           >
             登录
           </VBtn>
