@@ -50,6 +50,10 @@ export default createVuetify({
       persistent: true,
       noClickAnimation: true,
     },
+    VSnackbar: {
+      location: 'top right',
+      timeout: 3000,
+    },
     VTooltip: {
       // set v-tooltip default location to top
       location: 'top',

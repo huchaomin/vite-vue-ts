@@ -15,5 +15,9 @@ html{
 }
 
 .v-overlay__scrim{
-  opacity: 0.05;
+  opacity: 0.05 !important;
+}
+
+.v-snackbar__content{
+  padding: 0 !important;
 }
