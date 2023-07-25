@@ -2,10 +2,8 @@
 const props = withDefaults(defineProps<{
   modelValue: boolean
   title?: string
-  width?: string
 }>(), {
   title: '提示',
-  width: '700',
 });
 const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
 
@@ -18,22 +16,23 @@ const visible = computed({
 <template>
   <v-dialog
     v-model="visible"
-    :width="width"
+    width="700"
   >
     <v-card :title="title">
       <v-card-text>
         <slot></slot>
       </v-card-text>
-      <v-card-actions class="justify-end">
+      <div class="v-card-actions justify-end">
         <v-btn
+          variant="tonal"
           @click="visible = false"
         >
           取消
         </v-btn>
-        <v-btn variant="outlined">
+        <v-btn>
           确认
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>

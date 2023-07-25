@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BasicData from './BasicData.vue';
 const visible = ref(false);
 defineExpose({
   visible,
@@ -6,9 +7,10 @@ defineExpose({
 </script>
 
 <template>
-  <c-dialog
+  <CDialog
     v-model="visible"
+    width="884"
   >
-    hahahh
-  </c-dialog>
+    <BasicData></BasicData>
+  </CDialog>
 </template>

@@ -112,45 +112,41 @@ function add(): void {
 }
 </script>
 <template>
-  <v-form ref="form" @submit.prevent="query">
-    <v-row class="pt-3">
-      <v-col cols="2">
-        <v-text-field
-          v-model="formData.assetPkgName"
-          label="资产包名称"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="2">
-        <v-select
-          v-model="formData.assetSeller"
-          :items="assetSeller"
-          label="出包方"
-        ></v-select>
-      </v-col>
-      <v-col cols="2">
-        <v-select
-          v-model="formData.assetPkgStatus"
-          :items="assetPkgStatus"
-          label="资产包状态"
-        ></v-select>
-      </v-col>
-      <v-col cols="2">
-        <v-btn
-          type="submit"
-          size="large"
-        >
-          查询
-        </v-btn>
-        <v-btn
-          size="large"
-          variant="outlined"
-          class="ml-6"
-          @click="reset"
-        >
-          重置
-        </v-btn>
-      </v-col>
-    </v-row>
+  <v-form
+    ref="form"
+    class="pt-3 c-grid"
+    @submit.prevent="query"
+  >
+    <v-text-field
+      v-model="formData.assetPkgName"
+      label="资产包名称"
+    ></v-text-field>
+    <v-select
+      v-model="formData.assetSeller"
+      :items="assetSeller"
+      label="出包方"
+    ></v-select>
+    <v-select
+      v-model="formData.assetPkgStatus"
+      :items="assetPkgStatus"
+      label="资产包状态"
+    ></v-select>
+    <div>
+      <v-btn
+        type="submit"
+        size="large"
+      >
+        查询
+      </v-btn>
+      <v-btn
+        size="large"
+        variant="tonal"
+        class="ml-2"
+        @click="reset"
+      >
+        重置
+      </v-btn>
+    </div>
   </v-form>
   <div class="pb-3">
     <v-btn @click="add">
@@ -158,7 +154,7 @@ function add(): void {
     </v-btn>
     <v-btn
       variant="tonal"
-      class="ml-6"
+      class="ml-2"
       @click="exportExcel"
     >
       导出excel

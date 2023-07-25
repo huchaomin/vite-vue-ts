@@ -20,4 +20,5 @@ export const user = {
 
 export const dict = {
   url: `${prefix}/dict/getDictItems/{code}`,
+  loading: false,
 };

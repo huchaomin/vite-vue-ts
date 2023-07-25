@@ -12,6 +12,9 @@
 - 研究sass怎么用
 - 第一次vuetify 样式加载错误
 - 改变 组件的大小写
+- VMain 高度不写死
+- notify
+- you should use the "customSyntax" option when linting something other than CSS
 
 ## vite-plugin-checker
 

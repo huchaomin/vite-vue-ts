@@ -6,7 +6,7 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi';
 const customLightTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    primary: '#9155FD',
+    primary: '#4F7DFF',
     secondary: '#8A8D93',
     'on-secondary': '#fff',
     success: '#56CA00',
@@ -82,7 +82,7 @@ export default createVuetify({
     VBtn: {
       color: 'primary',
       // style: 'text-transform: none;',
-      class: 'text-none',
+      class: 'text-none elevation-0',
     },
     VTextField: {
       variant: 'outlined',
