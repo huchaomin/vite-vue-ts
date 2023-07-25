@@ -144,6 +144,12 @@ export default defineConfig((...arg) => {
         },
       },
     },
+    optimizeDeps: {
+      exclude: ['vuetify'],
+      entries: [
+        './src/**/*.vue',
+      ],
+    },
     server: {
       open: false,
       proxy: {

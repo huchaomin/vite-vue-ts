@@ -1,6 +1,6 @@
 import { user } from '@/api/sys';
 
-export default defineStore('common', () => {
+export default defineStore('user', () => {
   const token = ref('');
   const menu = ref([]);
 

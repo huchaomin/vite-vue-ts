@@ -2,7 +2,7 @@ import path from 'path';
 import fg from 'fast-glob';
 import { firstUpperCase } from './utils.ts';
 
-const piniaStoreKeys :string[] = [];
+const piniaStoreKeys: string[] = [];
 // function fileRecursion(filePath :string) :void {
 //   const files = readdirSync(filePath);
 //   files.forEach((fileName) => {

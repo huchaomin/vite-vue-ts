@@ -15,6 +15,7 @@
 - VMain 高度不写死
 - notify
 - you should use the "customSyntax" option when linting something other than CSS
+- optimizeDeps
 
 ## vite-plugin-checker
 
