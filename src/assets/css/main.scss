@@ -17,15 +17,5 @@ html{
 body{
   .v-input__details{
     align-items: flex-start;
-    min-height: 24px;
-    padding: 2px 0 0 !important;
-  }
-
-  .v-overlay__scrim{
-    opacity: 0.05;
-  }
-
-  .v-snackbar__content{
-    padding: 0;
   }
 }

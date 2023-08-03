@@ -7,31 +7,10 @@ const customLightTheme: ThemeDefinition = {
   dark: false,
   colors: {
     primary: '#4F7DFF',
-    secondary: '#8A8D93',
-    'on-secondary': '#fff',
     success: '#56CA00',
     info: '#16B1FF',
     warning: '#FFB400',
     error: '#FF4C51',
-    'on-primary': '#FFFFFF',
-    'on-success': '#FFFFFF',
-    'on-warning': '#FFFFFF',
-    background: '#F4F5FA',
-    'on-background': '#3A3541',
-    'on-surface': '#3A3541',
-    'grey-50': '#FAFAFA',
-    'grey-100': '#F0F2F8',
-    'grey-200': '#EEEEEE',
-    'grey-300': '#E0E0E0',
-    'grey-400': '#BDBDBD',
-    'grey-500': '#9E9E9E',
-    'grey-600': '#757575',
-    'grey-700': '#616161',
-    'grey-800': '#424242',
-    'grey-900': '#212121',
-    'perfect-scrollbar-thumb': '#DBDADE',
-    'skin-bordered-background': '#fff',
-    'skin-bordered-surface': '#fff',
   },
 };
 export default createVuetify({
@@ -55,14 +34,19 @@ export default createVuetify({
       timeout: 3000,
     },
     VTooltip: {
-      // set v-tooltip default location to top
       location: 'top',
+    },
+    VList: {
+      lines: false,
+      density: 'compact',
+    },
+    VForm: {
+      validateOn: 'input lazy',
     },
     VCheckboxBtn: {
       color: 'primary',
     },
     VCheckbox: {
-      // set v-checkbox default color to primary
       color: 'primary',
       density: 'compact',
     },

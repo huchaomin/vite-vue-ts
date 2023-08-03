@@ -9,7 +9,7 @@ defineExpose({
 <template>
   <CDialog
     v-model="visible"
-    width="884"
+    width="630"
   >
     <BasicData></BasicData>
   </CDialog>

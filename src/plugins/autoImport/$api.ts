@@ -31,12 +31,46 @@ interface apiConfig {
   readonly url: string
   readonly method?: string
   readonly timeout?: number
-  readonly mode?: string // 请求模式,允许跨域请求
-  readonly credentials?: string // 是否携带cookie
+  readonly mode?: RequestMode // 请求模式,允许跨域请求
+  readonly credentials?: RequestCredentials // 是否携带cookie
   readonly immediate?: boolean // 是否立即执行
   readonly loading?: boolean // 是否显示loading
   readonly isWhiteApi?: boolean // 是否是白名单接口（不需要登陆）
   readonly responseType?: string // 返回数据类型
+}
+
+interface ctxType<T = any> {
+  response: Response | null
+  error?: any
+  data: T | null
+}
+
+// 有的公司比较奇葩 200 的相应，data.code 为40*
+function errHandler(ctx: ctxType): void {
+  const userStore = useUserStore();
+  const { data } = ctx;
+  switch (data.code) {
+    case 403:
+      $notify.error('拒绝访问', { title: '系统提示' });
+      break;
+    case 404:
+      $notify.error('很抱歉，资源未找到!', { title: '系统提示' });
+      break;
+    case 401:
+      if (!isExpiration) {
+        $notify.error('很抱歉，登录已过期，请重新登录', { title: '系统提示' });
+      }
+      isExpiration = true;
+      userStore.token = '';
+      // TODO 啥时候清除store缓存
+      router.push({
+        name: 'login',
+      });
+      break;
+    default:
+      $notify.error(data.message ?? '网络错误', { title: '系统提示' });
+      break;
+  }
 }
 
 export default function fetchWrapper(
@@ -85,63 +119,35 @@ export default function fetchWrapper(
         };
         return { options };
       },
-      // data response 40*,20* 只走了这里
-      // data.value 为 object
+      // response.ok 为 true
       afterFetch(ctx) {
         if (loading) {
           $loading.hide();
         }
         const { data, response } = ctx;
-        if (response.ok) {
-          if (responseType === 'json' && Boolean(data?.success)) { // 该项目要data.success，其他项目可能不需要
-            return ctx;
-          }
-          if (responseType === 'blob' && data?.size > 0) {
-            return ctx;
-          }
+        if (responseType === 'json' && Boolean(data?.success)) { // 该项目要data.success，其他项目可能不需要
+          return ctx;
         }
-
-        switch (data.code) {
-          case 403:
-            $notify.error('拒绝访问', { title: '系统提示' });
-            break;
-          case 404:
-            $notify.error('很抱歉，资源未找到!', { title: '系统提示' });
-            break;
-          case 401:
-            if (!isExpiration) {
-              $notify.error('很抱歉，登录已过期，请重新登录', { title: '系统提示' });
-            }
-            isExpiration = true;
-            userStore.token = '';
-            // TODO 啥时候清除store缓存
-            router.push({
-              name: 'login',
-            });
-            break;
-          default:
-            $notify.error(data.message, { title: '系统提示' });
-            break;
+        if (responseType === 'blob' && data?.size > 0) {
+          return ctx;
         }
+        errHandler(ctx);
         return { data: null, response };
       },
-      // 500、接口地址错误（net::ERR_CONNECTION_REFUSED） 只走了这里
-      // data.value 为 null
       onFetchError(ctx) {
         if (loading) {
           $loading.hide();
         }
-        $notify.error('网络错误');
-        return ctx;
+        errHandler(ctx);
+        return { data: null, response: ctx.response };
       },
     },
     fetchOptions: {
-      method,
-      mode: mode as RequestMode,
-      credentials: credentials as RequestCredentials,
+      mode,
+      credentials,
     },
   });
-  const res = method === 'get' ? fetch(processedUrl) : fetch(processedUrl).post(data); // 暂时只有这两个请求方法 // TODO 看看怎么传参 method 已经在上面定义
+  const res = method === 'get' ? fetch(processedUrl) : fetch(processedUrl).post(data); // 暂时只有这两个请求方法
   if (responseType === 'json') {
     return res.json();
   } else {
