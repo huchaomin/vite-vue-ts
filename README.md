@@ -14,8 +14,7 @@
 - notify
 - you should use the "customSyntax" option when linting something other than CSS
 - optimizeDeps(第一次vuetify 样式加载错误)
-- usefetch 错误到底怎么走
-- 从写dicstore
+- 写一个c-select 组件支持 diccode
 
 ## vite-plugin-checker
 

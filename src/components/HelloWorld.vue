@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { firstUpperCase } from '@/utils/index.ts';
-
-const commonStore = useCommonStore();
 
 defineProps<{ msg: string }>();
 
@@ -11,13 +8,6 @@ defineProps<{ msg: string }>();
   <h1 class="title">
     {{ msg }}
   </h1>
-  <button
-    type="button"
-    @click="commonStore.increment"
-  >
-    count is {{ commonStore.count }}
-    {{ firstUpperCase('hu') }}
-  </button>
   <a-space size="large">
     <icon-refresh
       :style="{fontSize:'32px'}"

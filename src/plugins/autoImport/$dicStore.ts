@@ -1,4 +1,3 @@
-import { uniqueArray } from '@/utils';
 import { dict } from '@/api/sys';
 
 interface DictionaryItem {
@@ -7,55 +6,28 @@ interface DictionaryItem {
 }
 
 const codeTypesMap = new Map();
-let codeQueueArr: string[] = [];
 
-function getResultFromMap(arr: string[]): Promise<any> {
-  const promiseArr = arr.map((code) => codeTypesMap.get(code));
-  return Promise.all(promiseArr).then((res) => {
-    const obj: Record<string, any> = {};
-    res.forEach((result, index) => {
-      const code = arr[index];
-      obj[code] = result.data.value?.result ?? [];
-    });
-    return Promise.resolve(obj);
+function get(code: string): PromiseLike<DictionaryItem[]> {
+  if (codeTypesMap.has(code)) {
+    return codeTypesMap.get(code);
+  }
+  const promise = $api(dict, {
+    code,
+  }).then(res => {
+    const result = res.data.value?.result ?? [];
+    return Promise.resolve(result);
   });
-}
-
-function query(typeCodes: string[]): void {
-  typeCodes.forEach((code) => {
-    const promise = $api(dict, {
-      code,
-    });
-    codeTypesMap.set(code, promise);
-  });
-}
-
-function get(code: string | string[]): Promise<DictionaryItem[]> {
-  const codes = Array.isArray(code) ? code : [code];
-  codeQueueArr.push(...codes);
-  codeQueueArr = uniqueArray(codeQueueArr);
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const copies = codeQueueArr.slice(0);
-      codeQueueArr.length = 0;
-      const notYet = copies.filter((code) => !codeTypesMap.has(code));
-      if (notYet.length !== 0) {
-        query(notYet);
-      }
-      getResultFromMap(codes).then((obj) => {
-        resolve(obj);
-      });
-    });
-  });
+  codeTypesMap.set(code, promise);
+  return promise;
 }
 
 function getDic(code: string, filterArr: string[] = []): Ref<DictionaryItem[]> {
   const arr: Ref<DictionaryItem[]> = ref([]);
-  get(code).then((res: Record<string, any>) => {
+  get(code).then((res) => {
     if (filterArr.length > 0) {
-      arr.value = res[code].filter((item: any) => filterArr.includes(item.value));
+      arr.value = res.filter(item => filterArr.includes(item.value));
     } else {
-      arr.value = res[code];
+      arr.value = res;
     }
   });
   return arr;
