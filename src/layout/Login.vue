@@ -67,7 +67,6 @@ async function handleSubmit(): Promise<void> {
       <VCardText>
         <VForm
           ref="form"
-          validate-on="submit lazy"
           @submit.prevent="handleSubmit"
         >
           <v-text-field
@@ -75,6 +74,7 @@ async function handleSubmit(): Promise<void> {
             :rules="rules.username"
             autofocus
             placeholder="admin"
+            density="comfortable"
             label="帐户名"
           ></v-text-field>
           <v-text-field
@@ -82,6 +82,7 @@ async function handleSubmit(): Promise<void> {
             :rules="rules.password"
             label="密码"
             placeholder="123456"
+            density="comfortable"
             :type="isPasswordVisible ? 'text' : 'password'"
             :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append-inner="isPasswordVisible = !isPasswordVisible"
@@ -92,6 +93,7 @@ async function handleSubmit(): Promise<void> {
                 v-model="formData.captcha"
                 :rules="rules.captcha"
                 label="验证码"
+                density="comfortable"
                 placeholder="请输入验证码"
               >
               </v-text-field>

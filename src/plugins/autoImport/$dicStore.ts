@@ -15,7 +15,7 @@ function getResultFromMap(arr: string[]): Promise<any> {
     const obj: Record<string, any> = {};
     res.forEach((result, index) => {
       const code = arr[index];
-      obj[code] = result.data.value.result ?? [];
+      obj[code] = result.data.value?.result ?? [];
     });
     return Promise.resolve(obj);
   });

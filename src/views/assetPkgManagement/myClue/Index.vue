@@ -134,12 +134,10 @@ function add(): void {
     <div>
       <v-btn
         type="submit"
-        size="large"
       >
         查询
       </v-btn>
       <v-btn
-        size="large"
         variant="tonal"
         class="ml-2"
         @click="reset"

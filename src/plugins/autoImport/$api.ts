@@ -85,7 +85,7 @@ export default function fetchWrapper(
         };
         return { options };
       },
-      // data response 40*,20* 只走了这里
+      // data response 20* 只走了这里
       // data.value 为 object
       afterFetch(ctx) {
         if (loading) {
@@ -100,7 +100,16 @@ export default function fetchWrapper(
             return ctx;
           }
         }
-
+        $notify.error('网络错误');
+        return { data: null, response };
+      },
+      // 401,500、接口地址错误（net::ERR_CONNECTION_REFUSED） 只走了这里
+      // data.value 为 null
+      onFetchError(ctx) {
+        if (loading) {
+          $loading.hide();
+        }
+        const { data } = ctx;
         switch (data.code) {
           case 403:
             $notify.error('拒绝访问', { title: '系统提示' });
@@ -123,15 +132,6 @@ export default function fetchWrapper(
             $notify.error(data.message, { title: '系统提示' });
             break;
         }
-        return { data: null, response };
-      },
-      // 500、接口地址错误（net::ERR_CONNECTION_REFUSED） 只走了这里
-      // data.value 为 null
-      onFetchError(ctx) {
-        if (loading) {
-          $loading.hide();
-        }
-        $notify.error('网络错误');
         return ctx;
       },
     },

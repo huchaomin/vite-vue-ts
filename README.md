@@ -7,15 +7,15 @@
 - @vueuse（自动引入） 分割包
 - less 对齐没有格式化
 - 添加pritter
-- NProgress
 - 分割包
 - 研究sass怎么用
-- 第一次vuetify 样式加载错误
 - 改变 组件的大小写
 - VMain 高度不写死
 - notify
 - you should use the "customSyntax" option when linting something other than CSS
-- optimizeDeps
+- optimizeDeps(第一次vuetify 样式加载错误)
+- usefetch 错误到底怎么走
+- 从写dicstore
 
 ## vite-plugin-checker
 
