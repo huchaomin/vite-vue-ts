@@ -11,6 +11,7 @@ const visibility = ref(true);
     <v-progress-linear
       color="primary"
       indeterminate
+      height="2"
       style="width: 100vw"
     ></v-progress-linear>
   </v-overlay>
