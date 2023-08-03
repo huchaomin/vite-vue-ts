@@ -1,5 +1,6 @@
 import {
   type UseFetchReturn,
+  type UseFetchOptions,
   createFetch,
 } from '@vueuse/core';
 import router from '@/router';
@@ -39,11 +40,7 @@ interface apiConfig {
   readonly responseType?: string // 返回数据类型
 }
 
-interface ctxType<T = any> {
-  response: Response | null
-  error?: any
-  data: T | null
-}
+type ctxType = Parameters<NonNullable<UseFetchOptions['afterFetch']>>[0] | Parameters<NonNullable<UseFetchOptions['onFetchError']>>[0];
 
 // 有的公司比较奇葩 200 的相应，data.code 为40*
 function errHandler(ctx: ctxType): void {

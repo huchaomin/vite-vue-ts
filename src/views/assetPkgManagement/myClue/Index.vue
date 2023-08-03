@@ -57,7 +57,7 @@ const columns = [
   {
     title: '操作',
     dataIndex: 'action',
-    fixed: 'right',
+    // fixed: 'right',
     width: 147,
   },
 ];

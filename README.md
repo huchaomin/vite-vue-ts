@@ -13,7 +13,6 @@
 - VMain 高度不写死
 - notify
 - you should use the "customSyntax" option when linting something other than CSS
-- optimizeDeps(第一次vuetify 样式加载错误)
 - 写一个c-select 组件支持 diccode
 
 ## vite-plugin-checker

@@ -74,7 +74,7 @@ export default defineConfig((...arg) => {
       vue(), // 将会把SFC的代码转换成js代码
       vuetify({
         styles: {
-          configFile: 'src/assets/css/settings.scss',
+          configFile: 'src/assets/css/_settings.scss',
         },
       }),
       AutoImport({
