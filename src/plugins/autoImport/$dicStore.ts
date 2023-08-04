@@ -14,7 +14,11 @@ function get(code: string): PromiseLike<DictionaryItem[]> {
   const promise = $api(dict, {
     code,
   }).then(res => {
-    const result = res.data.value?.result ?? [];
+    const result = res.data.value?.result;
+    if (result === undefined || result.length === 0) {
+      codeTypesMap.delete(code);
+      return Promise.resolve([]);
+    }
     return Promise.resolve(result);
   });
   codeTypesMap.set(code, promise);
