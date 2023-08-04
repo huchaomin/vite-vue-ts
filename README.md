@@ -9,7 +9,6 @@
 - 添加pritter
 - 分割包
 - 研究sass怎么用
-- 改变 组件的大小写
 - VMain 高度不写死
 - notify
 - you should use the "customSyntax" option when linting something other than CSS
