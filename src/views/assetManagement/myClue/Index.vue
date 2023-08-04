@@ -112,62 +112,62 @@ function add(): void {
 }
 </script>
 <template>
-  <v-form
+  <VForm
     ref="form"
     class="pt-3 c-grid"
     @submit.prevent="query"
   >
-    <v-text-field
+    <VTextField
       v-model="formData.assetPkgName"
       label="资产包名称"
-    ></v-text-field>
-    <v-select
+    ></VTextField>
+    <VSelect
       v-model="formData.assetSeller"
       :items="assetSeller"
       label="出包方"
-    ></v-select>
-    <v-select
+    ></VSelect>
+    <VSelect
       v-model="formData.assetPkgStatus"
       :items="assetPkgStatus"
       label="资产包状态"
-    ></v-select>
+    ></VSelect>
     <div>
-      <v-btn
+      <VBtn
         type="submit"
       >
         查询
-      </v-btn>
-      <v-btn
+      </VBtn>
+      <VBtn
         variant="tonal"
         class="ml-2"
         @click="reset"
       >
         重置
-      </v-btn>
+      </VBtn>
     </div>
-  </v-form>
+  </VForm>
   <div class="pb-3">
-    <v-btn @click="add">
+    <VBtn @click="add">
       新增
-    </v-btn>
-    <v-btn
+    </VBtn>
+    <VBtn
       variant="tonal"
       class="ml-2"
       @click="exportExcel"
     >
       导出excel
-    </v-btn>
+    </VBtn>
   </div>
-  <v-card>
-    <v-card-text class="pa-0">
-      <a-table
+  <VCard>
+    <VCardText class="pa-0">
+      <ATable
         :columns="columns"
         :data="tableData"
         :pagination="pagination"
         :stripe="true"
       >
-      </a-table>
-    </v-card-text>
-  </v-card>
+      </ATable>
+    </VCardText>
+  </VCard>
   <AddOrEditModal ref="addOrEditModal"></AddOrEditModal>
 </template>

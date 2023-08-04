@@ -2,16 +2,16 @@
 const commonStore = useCommonStore();
 </script>
 <template>
-  <router-view></router-view>
-  <v-overlay
+  <RouterView></RouterView>
+  <VOverlay
     :model-value="commonStore.loading"
     class="align-start justify-center"
   >
-    <v-progress-linear
+    <VProgressLinear
       color="primary"
       indeterminate
       height="2"
       style="width: 100vw"
-    ></v-progress-linear>
-  </v-overlay>
+    ></VProgressLinear>
+  </VOverlay>
 </template>

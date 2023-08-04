@@ -69,15 +69,15 @@ async function handleSubmit(): Promise<void> {
           ref="form"
           @submit.prevent="handleSubmit"
         >
-          <v-text-field
+          <VTextField
             v-model="formData.username"
             :rules="rules.username"
             autofocus
             placeholder="admin"
             density="comfortable"
             label="帐户名"
-          ></v-text-field>
-          <v-text-field
+          ></VTextField>
+          <VTextField
             v-model="formData.password"
             :rules="rules.password"
             label="密码"
@@ -86,17 +86,17 @@ async function handleSubmit(): Promise<void> {
             :type="isPasswordVisible ? 'text' : 'password'"
             :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append-inner="isPasswordVisible = !isPasswordVisible"
-          ></v-text-field>
+          ></VTextField>
           <VRow>
             <VCol :cols="8">
-              <v-text-field
+              <VTextField
                 v-model="formData.captcha"
                 :rules="rules.captcha"
                 label="验证码"
                 density="comfortable"
                 placeholder="请输入验证码"
               >
-              </v-text-field>
+              </VTextField>
             </VCol>
             <VCol :cols="4">
               <a

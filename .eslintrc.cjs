@@ -50,6 +50,9 @@ module.exports = {
       },
     }],
     'prefer-promise-reject-errors': ['error', { allowEmptyReject: true }], // 允许promise reject时不传值
+    'vue/component-name-in-template-casing': ['error', 'PascalCase', {
+      registeredComponentsOnly: false,
+    }], // 组件名必须为PascalCase
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 生产环境禁止debugger
     '@typescript-eslint/no-misused-promises': 'off', // 允许promise返回值不被使用
     '@typescript-eslint/triple-slash-reference': 'off', // 开启三斜线引用

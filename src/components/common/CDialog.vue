@@ -14,25 +14,25 @@ const visible = computed({
 </script>
 
 <template>
-  <v-dialog
+  <VDialog
     v-model="visible"
     width="700"
   >
-    <v-card :title="title">
-      <v-card-text>
+    <VCard :title="title">
+      <VCardText>
         <slot></slot>
-      </v-card-text>
+      </VCardText>
       <div class="v-card-actions justify-end">
-        <v-btn
+        <VBtn
           variant="tonal"
           @click="visible = false"
         >
           取消
-        </v-btn>
-        <v-btn>
+        </VBtn>
+        <VBtn>
           确认
-        </v-btn>
+        </VBtn>
       </div>
-    </v-card>
-  </v-dialog>
+    </VCard>
+  </VDialog>
 </template>

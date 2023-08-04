@@ -8,24 +8,24 @@ defineProps<{ msg: string }>();
   <h1 class="title">
     {{ msg }}
   </h1>
-  <a-space size="large">
-    <icon-refresh
+  <ASpace size="large">
+    <IconRefresh
       :style="{fontSize:'32px'}"
       spin
-    ></icon-refresh>
-    <icon-sync
+    ></IconRefresh>
+    <IconSync
       :style="{fontSize:'32px'}"
       spin
-    ></icon-sync>
-    <icon-face-smile-fill
+    ></IconSync>
+    <IconFaceSmileFill
       :style="{fontSize:'32px'}"
       :rotate="180"
-    ></icon-face-smile-fill>
-    <svg-icon
+    ></IconFaceSmileFill>
+    <SvgIcon
       name="setting"
       style="font-size: 32px;"
-    ></svg-icon>
-  </a-space>
+    ></SvgIcon>
+  </ASpace>
 </template>
 
 <style lang="scss" scoped>
