@@ -2,10 +2,34 @@ import {
   createRouter,
   createWebHistory,
 } from 'vue-router';
+import Index from '@/layout/Index.vue';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/layout/Login.vue'),
+      meta: {
+        title: '登录',
+      },
+    },
+    {
+      path: '/:catchAll(.*)*',
+      component: Index,
+      children: [
+        {
+          path: '',
+          name: 'notFound',
+          component: () => import('@/layout/NotFound.vue'),
+          meta: {
+            title: '404',
+          },
+        },
+      ],
+    },
+  ],
 });
 
 router.beforeEach((to, _from, next) => {
@@ -17,11 +41,11 @@ router.beforeEach((to, _from, next) => {
 
   if (userStore.token) {
     next();
-    if (userStore.menu.length > 0) {
+    if (userStore.routersRaw.length > 0) {
       next();
       return;
     }
-    userStore.getMenuAndAuth().then(() => {
+    userStore.getRoutersAndAuth().then(() => {
       next();
       // const current = findRouterByPath(to.path);
       // if (current) {

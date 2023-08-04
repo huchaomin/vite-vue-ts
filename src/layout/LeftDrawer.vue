@@ -3,7 +3,7 @@
     <v-list>
       <v-list-item
         title="资产包管理"
-        :to="{ name: 'assetPkgManagement' }"
+        :to="{ name: 'login' }"
         exact
       ></v-list-item>
     </v-list>

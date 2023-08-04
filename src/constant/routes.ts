@@ -3,14 +3,6 @@ import Index from '@/layout/Index.vue';
 
 export default [
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/layout/Login.vue'),
-    meta: {
-      title: '登录',
-    },
-  },
-  {
     path: '/',
     name: 'index',
     component: Index,
@@ -47,20 +39,6 @@ export default [
             },
           },
         ],
-      },
-    ],
-  },
-  {
-    path: '/:catchAll(.*)*',
-    component: Index,
-    children: [
-      {
-        path: '',
-        name: 'notFound',
-        component: () => import('@/layout/NotFound.vue'),
-        meta: {
-          title: '404',
-        },
       },
     ],
   },
