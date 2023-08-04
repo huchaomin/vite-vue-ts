@@ -28,7 +28,7 @@ getCaptcha();
 
 const form: Ref<InstanceType<typeof VForm> | null> = ref(null);
 async function handleSubmit(): Promise<void> {
-  const { valid } = await form.value?.validate() as { valid: boolean };
+  const { valid } = (await form.value?.validate()) as { valid: boolean };
   if (valid) {
     const { data } = await $api(login, {
       ...formData,
@@ -48,10 +48,7 @@ async function handleSubmit(): Promise<void> {
 
 <template>
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
-    <VCard
-      class="pa-4"
-      width="448"
-    >
+    <VCard class="pa-4" width="448">
       <VCardItem class="justify-center">
         <VCardTitle class="text-2xl font-weight-bold">
           资产评估管理系统
@@ -59,16 +56,11 @@ async function handleSubmit(): Promise<void> {
       </VCardItem>
 
       <VCardText class="pt-2">
-        <p class="mb-0 text-center">
-          擎聪科技
-        </p>
+        <p class="mb-0 text-center">擎聪科技</p>
       </VCardText>
 
       <VCardText>
-        <VForm
-          ref="form"
-          @submit.prevent="handleSubmit"
-        >
+        <VForm ref="form" @submit.prevent="handleSubmit">
           <VTextField
             v-model="formData.username"
             :rules="rules.username"
@@ -96,14 +88,13 @@ async function handleSubmit(): Promise<void> {
                 label="验证码"
                 density="comfortable"
                 placeholder="请输入验证码"
-              >
-              </VTextField>
+              ></VTextField>
             </VCol>
             <VCol :cols="4">
               <a
                 href="#"
                 class="d-flex align-stretch justify-end"
-                style="height: 44px;"
+                style="height: 44px"
                 @click.prevent="() => getCaptcha()"
               >
                 <img v-if="captchaUrl" :src="captchaUrl.result" />
@@ -112,21 +103,20 @@ async function handleSubmit(): Promise<void> {
             </VCol>
           </VRow>
           <VBtn
-            block
-            type="submit"
-            size="large"
-          >
-            登录
-          </VBtn>
+block
+type="submit" size="large"
+>
+登录
+</VBtn>
         </VForm>
       </VCardText>
     </VCard>
   </div>
 </template>
 <style lang="scss" scoped>
-  .auth-wrapper{
-    height: 100%;
-    background: url("img/background.svg") no-repeat 50%;
-    background-size: 100%;
-  }
+.auth-wrapper {
+  height: 100%;
+  background: url('img/background.svg') no-repeat 50%;
+  background-size: 100%;
+}
 </style>

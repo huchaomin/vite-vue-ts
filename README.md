@@ -8,10 +8,10 @@
 - less 对齐没有格式化
 - 添加pritter
 - 分割包
-- 研究sass怎么用
+- 研究sass怎么用，
 - VMain 高度不写死
 - notify
-- you should use the "customSyntax" option when linting something other than CSS
+- you should use the "customSyntax" option when linting something other than CSS 爆红
 - 写一个c-select 组件支持 diccode
 
 ## vite-plugin-checker

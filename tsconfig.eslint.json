@@ -10,7 +10,8 @@
     "types/**/*.ts",
     ".eslintrc.cjs",
     "vite.config.ts",
-    "stylelint.config.cjs"
+    "stylelint.config.cjs",
+    ".prettierrc.cjs"
   ],
   "exclude": []
 }
