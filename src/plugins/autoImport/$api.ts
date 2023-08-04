@@ -45,8 +45,8 @@ type ctxType = Parameters<NonNullable<UseFetchOptions['afterFetch']>>[0] | Param
 // 有的公司比较奇葩 200 的相应，data.code 为40*
 function errHandler(ctx: ctxType): void {
   const userStore = useUserStore();
-  const { data } = ctx;
-  switch (data.code) {
+  const { data } = ctx; // data 可能为null
+  switch (data?.code) {
     case 403:
       $notify.error('拒绝访问', { title: '系统提示' });
       break;
@@ -65,7 +65,7 @@ function errHandler(ctx: ctxType): void {
       });
       break;
     default:
-      $notify.error(data.message ?? '网络错误', { title: '系统提示' });
+      $notify.error(data?.message ?? '网络错误', { title: '系统提示' });
       break;
   }
 }

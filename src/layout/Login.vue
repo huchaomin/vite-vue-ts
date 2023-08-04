@@ -82,6 +82,7 @@ async function handleSubmit(): Promise<void> {
             :rules="rules.password"
             label="密码"
             placeholder="123456"
+            autocomplete
             density="comfortable"
             :type="isPasswordVisible ? 'text' : 'password'"
             :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"

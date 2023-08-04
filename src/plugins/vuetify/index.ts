@@ -65,6 +65,7 @@ export default createVuetify({
     },
     VBtn: {
       color: 'primary',
+      size: 'small',
       // style: 'text-transform: none;',
       class: 'text-none elevation-0',
     },
