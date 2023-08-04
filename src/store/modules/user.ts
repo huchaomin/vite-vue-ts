@@ -3,27 +3,36 @@ import { user } from '@/api/sys';
 export default defineStore('user', () => {
   const token = ref('');
   const menu = ref([]);
+  const auth = ref([]);
+  const allAuth = ref([]);
 
-  function getUserInfo(): PromiseLike<any> {
-    return $api(user).then(({ data }) => {
-      if (data.value !== null) {
-        // return Promise.resolve(data.value);
-      } else {
-        // return Promise.reject();
-      }
+  function getMenuAndAuth(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      $api(user).then(({ data }) => {
+        const result = data.value;
+        if (result === null) {
+          reject();
+        } else {
+          menu.value = result.menu;
+          auth.value = result.auth;
+          allAuth.value = result.allAuth;
+          resolve(result);
+        }
+      });
     });
   }
 
   return {
     token,
     menu,
-    getUserInfo,
+    auth,
+    allAuth,
+    getMenuAndAuth,
   };
 }, {
   persist: {
     paths: [
       'token',
-      'menu',
     ],
   },
 });
