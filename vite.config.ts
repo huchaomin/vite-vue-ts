@@ -52,7 +52,8 @@ export default defineConfig((...arg) => {
         scss: {
           additionalData:
             '@use "@/assets/css/_variable.scss" as *;' +
-            '@use "@/assets/css/_mixin.scss" as *;',
+            '@use "@/assets/css/_mixin.scss" as *;' +
+            '@use "@/assets/css/_settings.scss" as *;',
         },
         // less: {
         //   // additionalData: '@import "@/assets/css/variable.less";',
