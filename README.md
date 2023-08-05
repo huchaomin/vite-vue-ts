@@ -5,13 +5,10 @@
 - 升级包版本
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
-- less 对齐没有格式化
-- 添加pritter
 - 分割包
 - 研究sass怎么用，
 - VMain 高度不写死
 - notify
-- you should use the "customSyntax" option when linting something other than CSS 爆红
 - 写一个c-select 组件支持 diccode
 
 ## vite-plugin-checker
