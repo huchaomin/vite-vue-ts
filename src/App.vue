@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const commonStore = useCommonStore();
+const commonStore = useCommonStore()
 </script>
 <template>
   <RouterView></RouterView>

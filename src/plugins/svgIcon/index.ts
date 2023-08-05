@@ -1,4 +1,4 @@
-import 'virtual:svg-icons-register';
-import SvgIcon from './Icon.vue';
+import 'virtual:svg-icons-register'
+import SvgIcon from './Icon.vue'
 
-export default SvgIcon;
+export default SvgIcon

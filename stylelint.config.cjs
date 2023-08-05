@@ -12,7 +12,5 @@ module.exports = {
       customSyntax: 'postcss-less',
     },
   ],
-  rules: {
-    'selector-class-pattern': null,
-  },
-};
+  rules: { 'selector-class-pattern': null },
+}

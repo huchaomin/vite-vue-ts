@@ -1,41 +1,46 @@
-import { type ProxyOptions, defineConfig } from 'vite';
-import type * as http from 'node:http';
-import vue from '@vitejs/plugin-vue';
+import { type ProxyOptions, defineConfig } from 'vite'
+import type * as http from 'node:http'
+import vue from '@vitejs/plugin-vue'
 // import checker from 'vite-plugin-checker';
-import eslint from 'vite-plugin-eslint';
-import stylelint from 'vite-plugin-stylelint';
-import AutoImport from 'unplugin-auto-import/vite';
-import autoImportStoreList from './build/autoImportStores.ts';
-import { resolvePath } from './build/utils.ts';
-import Components from 'unplugin-vue-components/vite';
-import { vitePluginForArco } from '@arco-plugins/vite-vue';
-import vuetify from 'vite-plugin-vuetify';
-import { visualizer } from 'rollup-plugin-visualizer';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import viteCompression from 'vite-plugin-compression';
+import eslint from 'vite-plugin-eslint'
+import stylelint from 'vite-plugin-stylelint'
+import AutoImport from 'unplugin-auto-import/vite'
+import autoImportStoreList from './build/autoImportStores.ts'
+import { resolvePath } from './build/utils.ts'
+import Components from 'unplugin-vue-components/vite'
+import { vitePluginForArco } from '@arco-plugins/vite-vue'
+import vuetify from 'vite-plugin-vuetify'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import viteCompression from 'vite-plugin-compression'
 // import VueDevTools from 'vite-plugin-vue-devtools';
-import { createHtmlPlugin } from 'vite-plugin-html';
-import Inspect from 'vite-plugin-inspect';
-import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts';
+import { createHtmlPlugin } from 'vite-plugin-html'
 
-const isReport = process.env.report === 'true';
-const isInspect = process.env.inspect === 'true';
-const proxyTarget = 'http://192.168.2.206:9089/'; // 测试环境地址
+import Inspect from 'vite-plugin-inspect'
+import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
+
+const isReport = process.env.report === 'true'
+const isInspect = process.env.inspect === 'true'
+const proxyTarget = 'http://192.168.2.206:9089/' // 测试环境地址
 // const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
 // const proxyTarget = 'http://192.168.2.211:8080/'; // 测试环境地址（Robin）
-const apiPrefix = 'jeecg-boot';
+const apiPrefix = 'jeecg-boot'
 
-function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
-  const proxyUrl = new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || '';
-  res.setHeader('X-Res-Proxyurl', proxyUrl); // 查看真实的请求地址
+function bypass(
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  options: ProxyOptions,
+): void {
+  const proxyUrl =
+    new URL(options.rewrite?.(req.url) ?? req.url, options.target as string)
+      .href || ''
+  res.setHeader('X-Res-Proxyurl', proxyUrl) // 查看真实的请求地址
 }
 
 export default defineConfig((...arg) => {
-  console.log('vite.config.ts', arg); // {mode: 'development', command: 'serve', ssrBuild: false }
+  console.log('vite.config.ts', arg) // {mode: 'development', command: 'serve', ssrBuild: false }
   return {
-    define: {
-      API_PREFIX: JSON.stringify(apiPrefix),
-    },
+    define: { API_PREFIX: JSON.stringify(apiPrefix) },
     resolve: {
       alias: {
         '@': resolvePath(__dirname, 'src'),
@@ -45,8 +50,9 @@ export default defineConfig((...arg) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/css/_variable.scss" as *;' +
-          '@use "@/assets/css/_mixin.scss" as *;',
+          additionalData:
+            '@use "@/assets/css/_variable.scss" as *;' +
+            '@use "@/assets/css/_mixin.scss" as *;',
         },
         // less: {
         //   // additionalData: '@import "@/assets/css/variable.less";',
@@ -58,7 +64,8 @@ export default defineConfig((...arg) => {
         // },
       },
     },
-    plugins: [ // 不要随便更改顺序否则会报错
+    plugins: [
+      // 不要随便更改顺序否则会报错
       eslint({
         cache: true,
         failOnWarning: true,
@@ -72,33 +79,20 @@ export default defineConfig((...arg) => {
       //   appendTo: 'src/main.ts', // 解决每第一次prebundle报错的问题
       // }),
       vue(), // 将会把SFC的代码转换成js代码
-      vuetify({
-        styles: {
-          configFile: 'src/assets/css/_settings.scss',
-        },
-      }),
+      vuetify({ styles: { configFile: 'src/assets/css/_settings.scss' } }),
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template
         dts: 'types/auto-imports.d.ts',
-        imports: [
-          'vue',
-          'vue-router',
-          'pinia',
-          autoImportStoreList,
-        ],
+        imports: ['vue', 'vue-router', 'pinia', autoImportStoreList],
         defaultExportByFilename: true,
-        dirs: [
-          'src/plugins/autoImport',
-        ],
+        dirs: ['src/plugins/autoImport'],
         eslintrc: {
           enabled: true,
           globalsPropValue: 'readonly',
           filepath: 'eslintrc-auto-import.json',
         },
       }),
-      Components({
-        dts: 'types/components.d.ts',
-      }), // 自动引入 src/components
+      Components({ dts: 'types/components.d.ts' }), // 自动引入 src/components
       vitePluginForArco({
         theme: '@arco-themes/vue-qingcongkeji',
         // iconBox https://arco.design/iconbox/libs
@@ -117,12 +111,14 @@ export default defineConfig((...arg) => {
         outputDir: '.cache/.vite-inspect',
       }),
       viteCompression(),
-      ...isReport
-        ? [visualizer({
-            open: true,
-            filename: '.cache/report.html',
-          })]
-        : [],
+      ...(isReport
+        ? [
+            visualizer({
+              open: true,
+              filename: '.cache/report.html',
+            }),
+          ]
+        : []),
     ],
     build: {
       reportCompressedSize: false,
@@ -147,9 +143,7 @@ export default defineConfig((...arg) => {
     optimizeDeps: {
       include: ['.src/assets/css/_settings.scss'],
       exclude: ['vuetify'],
-      entries: [
-        './src/**/*.vue',
-      ],
+      entries: ['./src/**/*.vue'],
     },
     server: {
       open: false,
@@ -166,5 +160,5 @@ export default defineConfig((...arg) => {
         },
       },
     },
-  };
-});
+  }
+})

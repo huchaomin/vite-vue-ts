@@ -1,7 +1,7 @@
-import 'vuetify/styles';
-import '@mdi/font/css/materialdesignicons.css';
-import { createVuetify, type ThemeDefinition } from 'vuetify';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
+import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css'
+import { createVuetify, type ThemeDefinition } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 const customLightTheme: ThemeDefinition = {
   dark: false,
@@ -12,7 +12,7 @@ const customLightTheme: ThemeDefinition = {
     warning: '#FFB400',
     error: '#FF4C51',
   },
-};
+}
 export default createVuetify({
   theme: {
     defaultTheme: 'customLightTheme',
@@ -106,5 +106,4 @@ export default createVuetify({
       mdi,
     },
   },
-
-});
+})

@@ -1,46 +1,46 @@
 <script lang="ts" setup>
-import rules from '@/constant/rules';
-import { randomImage, login } from '@/api/sys';
-import { type VForm } from 'vuetify/components';
+import rules from '@/constant/rules'
+import { randomImage, login } from '@/api/sys'
+import { type VForm } from 'vuetify/components'
 
-const userStore = useUserStore();
-const router = useRouter();
+const userStore = useUserStore()
+const router = useRouter()
 
 const formData = reactive({
   username: '',
   password: '',
   captcha: '',
-});
+})
 
-const isPasswordVisible = ref(false);
+const isPasswordVisible = ref(false)
 
-const captchaTime = ref(0);
+const captchaTime = ref(0)
 function getCaptchaTime(): number {
-  const time = new Date().getTime();
-  captchaTime.value = time;
-  return time;
+  const time = new Date().getTime()
+  captchaTime.value = time
+  return time
 }
 
 const { execute: getCaptcha, data: captchaUrl } = $api(randomImage, {
   timestamp: getCaptchaTime(),
-});
-getCaptcha();
+})
+getCaptcha()
 
-const form: Ref<InstanceType<typeof VForm> | null> = ref(null);
+const form: Ref<InstanceType<typeof VForm> | null> = ref(null)
 async function handleSubmit(): Promise<void> {
-  const { valid } = (await form.value?.validate()) as { valid: boolean };
+  const { valid } = (await form.value?.validate()) as { valid: boolean }
   if (valid) {
     const { data } = await $api(login, {
       ...formData,
       checkKey: captchaTime.value,
-    });
+    })
     if (data.value !== null) {
-      userStore.token = data.value.result.token;
-      $notify('登录成功！');
-      router.push({ name: 'index' });
+      userStore.token = data.value.result.token
+      $notify('登录成功！')
+      router.push({ name: 'index' })
     } else {
-      formData.captcha = '';
-      getCaptcha();
+      formData.captcha = ''
+      getCaptcha()
     }
   }
 }
@@ -102,12 +102,7 @@ async function handleSubmit(): Promise<void> {
               </a>
             </VCol>
           </VRow>
-          <VBtn
-block
-type="submit" size="large"
->
-登录
-</VBtn>
+          <VBtn block type="submit" size="large">登录</VBtn>
         </VForm>
       </VCardText>
     </VCard>

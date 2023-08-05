@@ -1,5 +1,5 @@
-import { type RouteRecordRaw } from 'vue-router';
-import Index from '@/layout/Index.vue';
+import { type RouteRecordRaw } from 'vue-router'
+import Index from '@/layout/Index.vue'
 
 export default [
   {
@@ -23,7 +23,8 @@ export default [
           {
             path: 'myResearch',
             name: 'myResearch',
-            component: () => import('@/views/assetManagement/myResearch/Index.vue'),
+            component: () =>
+              import('@/views/assetManagement/myResearch/Index.vue'),
             meta: {
               title: '我的尽调',
               id: '1686993445465776129',
@@ -32,7 +33,8 @@ export default [
           {
             path: 'approvedProject',
             name: 'approvedProject',
-            component: () => import('@/views/assetManagement/approvedProject/Index.vue'),
+            component: () =>
+              import('@/views/assetManagement/approvedProject/Index.vue'),
             meta: {
               title: '已立项',
               id: '1686993599841329154',
@@ -42,4 +44,4 @@ export default [
       },
     ],
   },
-] as RouteRecordRaw[];
+] as RouteRecordRaw[]

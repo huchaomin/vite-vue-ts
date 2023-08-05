@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import AddOrEditModal from './AddOrEditModal.vue';
-import { qcAssetList, qcAssetListExport } from '@/api/qcasset';
-import { downloadBlob } from '@/utils/index';
+import AddOrEditModal from './AddOrEditModal.vue'
+import { qcAssetList, qcAssetListExport } from '@/api/qcasset'
+import { downloadBlob } from '@/utils/index'
 
-const form = ref(null);
+const form = ref(null)
 const initialFormData: Record<string, any> = {
   assetPkgName: '',
   assetSeller: null,
   assetPkgStatus: null,
-};
-const formData: Record<string, any> = reactive({ ...initialFormData });
-const assetSeller = $dicStore('qcpg_asset_company,company_name,id');
-const assetPkgStatus = $dicStore('asset_pkg_status');
+}
+const formData: Record<string, any> = reactive({ ...initialFormData })
+const assetSeller = $dicStore('qcpg_asset_company,company_name,id')
+const assetPkgStatus = $dicStore('asset_pkg_status')
 
 const columns = [
   {
@@ -60,67 +60,61 @@ const columns = [
     // fixed: 'right',
     width: 147,
   },
-];
-const tableData = ref([]);
+]
+const tableData = ref([])
 const pagination = reactive({
   current: 1,
   pageSize: 10,
   total: 0,
   showTotal: true,
-});
+})
 function getQueryParams(): Record<string, any> {
   const obj: Record<string, any> = {
     column: 'createTime',
     order: 'desc',
     pageNo: pagination.current,
     pageSize: pagination.pageSize,
-  };
+  }
   for (const key in formData) {
     if (formData[key] !== null && formData[key] !== '') {
-      obj[key] = formData[key];
+      obj[key] = formData[key]
     }
   }
-  return obj;
+  return obj
 }
 function query(): void {
-  $api(qcAssetList, getQueryParams()).then(res => {
-    console.log(res);
+  $api(qcAssetList, getQueryParams()).then((res) => {
+    console.log(res)
     if (res.data.value !== null) {
-      const { result } = res.data.value;
-      tableData.value = result.records;
-      pagination.total = result.total;
+      const { result } = res.data.value
+      tableData.value = result.records
+      pagination.total = result.total
     }
-  });
+  })
 }
-query();
+query()
 function reset(): void {
   for (const key in initialFormData) {
-    formData[key] = initialFormData[key];
+    formData[key] = initialFormData[key]
   }
-  query();
+  query()
 }
 function exportExcel(): void {
-  $api(qcAssetListExport, getQueryParams()).then(res => {
-    downloadBlob(res.data.value, '资产包列表.xlsx');
-  });
+  $api(qcAssetListExport, getQueryParams()).then((res) => {
+    downloadBlob(res.data.value, '资产包列表.xlsx')
+  })
 }
-const addOrEditModal: Ref<InstanceType<typeof AddOrEditModal> | null> = ref(null);
+const addOrEditModal: Ref<InstanceType<typeof AddOrEditModal> | null> =
+  ref(null)
 function add(): void {
   if (addOrEditModal.value !== null) {
-    addOrEditModal.value.visible = true;
+    addOrEditModal.value.visible = true
   }
 }
 </script>
 <template>
-  <VForm
-    ref="form"
-    class="pt-3 c-grid"
-    @submit.prevent="query"
-  >
-    <VTextField
-      v-model="formData.assetPkgName"
-      label="资产包名称"
-    ></VTextField>
+  <VForm ref="form" class="pt-3 c-grid" @submit.prevent="query">
+    <VTextField v-model="formData.assetPkgName" label="资产包名称"></VTextField>
     <VSelect
       v-model="formData.assetSeller"
       :items="assetSeller"
@@ -132,31 +126,13 @@ function add(): void {
       label="资产包状态"
     ></VSelect>
     <div>
-      <VBtn
-        type="submit"
-      >
-        查询
-      </VBtn>
-      <VBtn
-        variant="tonal"
-        class="ml-2"
-        @click="reset"
-      >
-        重置
-      </VBtn>
+      <VBtn type="submit">查询</VBtn>
+      <VBtn variant="tonal" class="ml-2" @click="reset">重置</VBtn>
     </div>
   </VForm>
   <div class="pb-3">
-    <VBtn @click="add">
-      新增
-    </VBtn>
-    <VBtn
-      variant="tonal"
-      class="ml-2"
-      @click="exportExcel"
-    >
-      导出excel
-    </VBtn>
+    <VBtn @click="add">新增</VBtn>
+    <VBtn variant="tonal" class="ml-2" @click="exportExcel">导出excel</VBtn>
   </div>
   <VCard>
     <VCardText class="pa-0">
@@ -165,8 +141,7 @@ function add(): void {
         :data="tableData"
         :pagination="pagination"
         :stripe="true"
-      >
-      </ATable>
+      ></ATable>
     </VCardText>
   </VCard>
   <AddOrEditModal ref="addOrEditModal"></AddOrEditModal>

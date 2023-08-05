@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   root: true,
@@ -15,10 +15,12 @@ module.exports = {
   ],
   overrides: [
     {
-      env: {
-        node: true,
-      },
-      files: ['.eslintrc.{js,cjs}', 'stylelint.config.{js,cjs}'],
+      env: { node: true },
+      files: [
+        '.eslintrc.{js,cjs}',
+        'stylelint.config.{js,cjs}',
+        '.prettierrc.cjs',
+      ],
       parserOptions: {
         sourceType: 'script',
       },
@@ -35,22 +37,18 @@ module.exports = {
     project: path.resolve(__dirname, 'tsconfig.eslint.json'),
     extraFileExtensions: ['.vue'],
   },
-  plugins: ['vue', 'prettier'],
+  plugins: ['prettier', 'vue'],
   rules: {
     'prettier/prettier': 'error', // prettier报错
     'arrow-body-style': 'off', // 箭头函数体样式
     'prefer-arrow-callback': 'off', // 回调优先使用箭头函数
-    'vue/max-attributes-per-line': [
-      'error',
-      {
-        singleline: {
-          max: 2,
-        },
-        multiline: {
-          max: 1,
-        },
-      },
-    ],
+    'vue/max-attributes-per-line': 'off', // 每行最大属性数
+    'object-curly-newline': 'off', // 大括号内换行符
+    semi: 'off',
+    '@typescript-eslint/semi': 'error', // 不要分号，prettier会给ts的interface加分号
+    indent: 'off',
+    '@typescript-eslint/indent': 'off', // 缩进
+    // 上面都是为了防止与prettier冲突
     'prefer-promise-reject-errors': ['error', { allowEmptyReject: true }], // 允许promise reject时不传值
     'vue/component-name-in-template-casing': [
       'error',
@@ -87,8 +85,6 @@ module.exports = {
         tuples: 'always-multiline',
       },
     ],
-    semi: ['error', 'always'], // 与下面一行配合,要分号
-    '@typescript-eslint/semi': ['error', 'always'],
     '@typescript-eslint/promise-function-async': 'off', // 返回为promise的函数不一定要async
     'vue/multi-word-component-names': 'off', // 组件名不一定必须驼峰
     'vue/html-self-closing': [
@@ -131,6 +127,11 @@ module.exports = {
       {
         before: false,
         after: true,
+        overrides: {
+          arrow: {
+            before: true,
+          },
+        },
       },
     ],
     'vue/singleline-html-element-content-newline': 'off', // 单行html元素内容不要换行
@@ -143,4 +144,4 @@ module.exports = {
     //   skipCompoundAssignments: true,
     // }]
   },
-};
+}
