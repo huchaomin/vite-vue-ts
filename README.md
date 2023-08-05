@@ -10,7 +10,6 @@
 - VMain 高度不写死
 - notify
 - 写一个c-select 组件支持 diccode
-- WARN  Failed to resolve dependency: .src/assets/css/_settings.scss, present in 'optimizeDeps.include'
 
 ## vite-plugin-checker
 

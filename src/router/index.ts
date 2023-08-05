@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, START_LOCATION } from 'vue-router'
 import Index from '@/layout/Index.vue'
 
 const router = createRouter({
@@ -15,10 +15,11 @@ const router = createRouter({
     {
       path: '/:catchAll(.*)*',
       component: Index,
+      name: 'notFound',
       children: [
         {
           path: '',
-          name: 'notFound',
+          name: '404',
           component: () => import('@/layout/NotFound.vue'),
           meta: {
             title: '404',
@@ -29,15 +30,13 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, _from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.name === 'login') {
     next()
     return
   }
   const userStore = useUserStore()
-
   if (userStore.token) {
-    next()
     if (userStore.routersRaw.length > 0) {
       next()
       return
@@ -45,17 +44,16 @@ router.beforeEach((to, _from, next) => {
     userStore
       .getRoutersAndAuth()
       .then(() => {
-        next()
-        // const current = findRouterByPath(to.path);
-        // if (current) {
-        //   let { name } = current;
-        //   if (from === START_LOCATION && menuBelong.has(name)) {
-        //     name = menuBelong.get(name);
-        //   }
-        //   next({ name });
-        // } else {
-        //   next({ name: 'NotFound' });
-        // }
+        const name = to.name
+        if (name !== null && name !== undefined && router.hasRoute(name)) {
+          if (from === START_LOCATION && to.meta.customerRouter === true) {
+            next({ name: to.meta.parentName as string })
+          } else {
+            next()
+          }
+        } else {
+          next({ name: 'notFound' })
+        }
       })
       .catch(() => {
         next(false)

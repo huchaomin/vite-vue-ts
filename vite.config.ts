@@ -141,7 +141,6 @@ export default defineConfig((...arg) => {
       },
     },
     optimizeDeps: {
-      include: ['.src/assets/css/_settings.scss'],
       exclude: ['vuetify'],
       entries: ['./src/**/*.vue'],
     },

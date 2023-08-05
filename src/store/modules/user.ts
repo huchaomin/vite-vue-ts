@@ -1,6 +1,7 @@
 import { user } from '@/api/sys'
 import { type RouteRecordRaw } from 'vue-router'
 import allRoutes from '@/constant/routes'
+import router from '@/router'
 
 function getRouterIdsFromBack(menu: []): string[] {
   const arr: string[] = []
@@ -9,7 +10,7 @@ function getRouterIdsFromBack(menu: []): string[] {
       if (item.id !== undefined) {
         arr.push(item.id)
       }
-      if (Array.isArray(item.children) && item.children.length > 0) {
+      if (Array.isArray(item.children)) {
         fn(item.children)
       }
     })
@@ -28,9 +29,16 @@ function filterRouters(menu: []): RouteRecordRaw[] {
       if (item.children !== undefined) {
         item.children = fn(item.children, item)
       }
+      if (parent !== null) {
+        item.meta = {
+          ...(item.meta ?? {}),
+          parentName: parent.name as string,
+        }
+      }
       const boolean =
-        (item.children === undefined || item.children.length > 0) &&
-        (item.meta?.id === undefined || ids.includes(item.meta?.id))
+        item.meta?.customerRouter === true ||
+        ((item.children === undefined || item.children.length > 0) &&
+          (item.meta?.id === undefined || ids.includes(item.meta?.id)))
       if (boolean && parent !== null && item.children !== undefined) {
         parent.redirect = { name: item.children[0].name }
       }
@@ -56,7 +64,10 @@ export default defineStore(
             reject()
           } else {
             routersRaw.value = filterRouters(result.menu)
-            debugger
+            console.log(routersRaw.value)
+            routersRaw.value.forEach((item) => {
+              router.addRoute(item)
+            })
             auth.value = result.auth
             allAuth.value = result.allAuth
             resolve(result)
