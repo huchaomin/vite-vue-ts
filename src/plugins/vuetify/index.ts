@@ -12,6 +12,12 @@ const customLightTheme: ThemeDefinition = {
     warning: '#FFB400',
     error: '#FF4C51',
   },
+  variables: {
+    // Shadows
+    'shadow-key-umbra-opacity': 'rgba(var(--v-theme-on-surface), 0.08)',
+    'shadow-key-penumbra-opacity': 'rgba(var(--v-theme-on-surface), 0.12)',
+    'shadow-key-ambient-opacity': 'rgba(var(--v-theme-on-surface), 0.04)',
+  },
 }
 export default createVuetify({
   theme: {
@@ -47,6 +53,9 @@ export default createVuetify({
       elevation: 2,
       minWidth: 300,
       prominent: true, // icon变的更大
+    },
+    VCard: {
+      variant: 'elevation',
     },
     VForm: {
       validateOn: 'input lazy',
