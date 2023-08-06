@@ -40,6 +40,14 @@ export default createVuetify({
       lines: false,
       density: 'compact',
     },
+    VAlert: {
+      variant: 'tonal',
+      border: 'start',
+      density: 'compact',
+      elevation: 2,
+      minWidth: 300,
+      prominent: true, // icon变的更大
+    },
     VForm: {
       validateOn: 'input lazy',
     },

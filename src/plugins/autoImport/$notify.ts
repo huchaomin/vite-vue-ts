@@ -1,9 +1,3 @@
-import {
-  type NotificationConfig,
-  type NotificationReturn,
-  Notification,
-} from '@arco-design/web-vue'
-
 enum NotificationTypes {
   success = 'success',
   info = 'info',
@@ -11,32 +5,47 @@ enum NotificationTypes {
   error = 'error',
 }
 
-type optionsConfig = Omit<
-  NotificationConfig & { type?: NotificationTypes },
-  'content'
->
+interface optionsConfig {
+  title?: string
+  text?: string
+  type?: NotificationTypes
+  timeout?: number
+}
 
-type createFn = (content: string, options?: optionsConfig) => NotificationReturn
+type createFn = (text: string, options?: optionsConfig) => void
 
 type createMap = {
   // 映射类型和函数类型不能写在一起
   [key in NotificationTypes]: createFn
 }
 
-const create: createFn = (content, options = {}) => {
-  const type = options.type ?? 'success'
-  delete options.type
-  return Notification[type]({
-    content,
+const create: createFn = (
+  text,
+  {
+    type = NotificationTypes.success,
+    title = '提示',
+    timeout = 2500,
+    ...options
+  } = {},
+) => {
+  const notifyStore = useNotifyStore()
+  notifyStore.addNotification({
+    text,
+    type,
+    title,
+    timeout,
     ...options,
   })
 }
 
 Object.values(NotificationTypes).forEach((type) => {
-  ;(create as unknown as createMap)[type] = (content, options = {}) =>
-    create(content, {
+  ;(create as unknown as createMap)[type] = (text, options = {}) => {
+    create(text, {
       type,
       ...options,
     })
+  }
 })
 export default create as createFn & createMap
+
+export type { optionsConfig }

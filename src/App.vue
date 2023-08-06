@@ -1,21 +1,6 @@
 <script setup lang="ts">
 const commonStore = useCommonStore()
-
-const notifications = ref<Map<string, string>>(new Map())
-
-function addNotification(): void {
-  const notificationId = self.crypto.randomUUID()
-  const notificationMessage = new Date().toString()
-
-  notifications.value.set(notificationId, notificationMessage)
-  setTimeout(() => {
-    removeNotification(notificationId)
-  }, 2000)
-}
-
-function removeNotification(notificationId: string): void {
-  notifications.value.delete(notificationId)
-}
+const notifyStore = useNotifyStore()
 </script>
 <template>
   <RouterView></RouterView>
@@ -32,12 +17,13 @@ function removeNotification(notificationId: string): void {
   </VOverlay>
   <div class="notificationContainer">
     <VSlideYTransition group>
-      <VAlert v-for="notification in notifications" :key="notification[0]">
-        {{ notification[1] }}
-      </VAlert>
+      <VAlert
+        v-for="notification in notifyStore.notifications"
+        :key="notification[0]"
+        v-bind="notification[1]"
+      ></VAlert>
     </VSlideYTransition>
   </div>
-  <VBtn @click="addNotification">New notification</VBtn>
 </template>
 <style lang="scss" scoped>
 .notificationContainer {

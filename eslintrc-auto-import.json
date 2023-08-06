@@ -82,6 +82,7 @@
     "watchEffect": "readonly",
     "watchPostEffect": "readonly",
     "watchSyncEffect": "readonly",
-    "$dicStore": "readonly"
+    "$dicStore": "readonly",
+    "useNotifyStore": "readonly"
   }
 }
