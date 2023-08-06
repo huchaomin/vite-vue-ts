@@ -18,4 +18,10 @@ body{
   .v-input__details{
     align-items: flex-start;
   }
+
+  .v-overlay__scrim{
+    background-color: rgb(255 255 255 / 72%);
+    backdrop-filter: blur(1px) saturate(167%);
+    opacity: 1;
+  }
 }
