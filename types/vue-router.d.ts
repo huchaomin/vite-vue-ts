@@ -7,6 +7,4 @@ declare module 'vue-router' {
     customerRouter?: boolean // 是否是自定义路由
     hideInMenu?: boolean // 是否在菜单中隐藏
   }
-
-  type MyRouteRecordRaw = RequirePartialKeys<RouteRecordRaw, 'name'>
 }

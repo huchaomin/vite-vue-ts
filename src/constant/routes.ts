@@ -1,4 +1,4 @@
-import { type MyRouteRecordRaw, type RouteRecordRaw } from 'vue-router'
+import { type RouteRecordRaw } from 'vue-router'
 import Index from '@/layout/Index.vue'
 
 export default [
@@ -44,4 +44,4 @@ export default [
       },
     ],
   },
-] as MyRouteRecordRaw[] as RouteRecordRaw[]
+] as RouteRecordRaw[]

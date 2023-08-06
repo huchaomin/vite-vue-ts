@@ -25,7 +25,7 @@ function filterRouters(menu: []): RouteRecordRaw[] {
     arr: RouteRecordRaw[],
     parent: RouteRecordRaw | null,
   ) => RouteRecordRaw[] = (arr, parent) => {
-    return arr.filter((item) => {
+    return arr.filter((item, index) => {
       if (item.children !== undefined) {
         item.children = fn(item.children, item)
       }
@@ -35,15 +35,15 @@ function filterRouters(menu: []): RouteRecordRaw[] {
           parentName: parent.name as string,
         }
       }
-      const realChildrenLength = (item.children ?? []).filter(
+      const realChildren = (item.children ?? []).filter(
         (c: RouteRecordRaw) => c.meta?.customerRouter !== true,
-      ).length
+      )
       const boolean =
         item.meta?.customerRouter === true || // 自定义路由不会有子路由
-        ((item.children === undefined || realChildrenLength > 0) &&
+        ((item.children === undefined || realChildren.length > 0) &&
           (item.meta?.id === undefined || ids.includes(item.meta?.id)))
-      if (boolean && parent !== null && item.children !== undefined) {
-        parent.redirect = { name: item.children[0].name }
+      if (boolean && parent !== null && index === 0) {
+        parent.redirect = { name: item.name } // TODO 看看parent是否一定要 component
       }
       return boolean
     })
