@@ -10,6 +10,8 @@
 - VMain 高度不写死
 - 写一个c-select 组件支持 diccode
 - self.crypto.randomUUID
+- webfontloader
+- box-shadow 还没搞定
 
 ## vite-plugin-checker
 

@@ -11,6 +11,8 @@ const customLightTheme: ThemeDefinition = {
     info: '#16B1FF',
     warning: '#FFB400',
     error: '#FF4C51',
+    background: '#F4F5FA',
+    'on-background': '#3A3541',
   },
   variables: {
     // Shadows
@@ -52,10 +54,9 @@ export default createVuetify({
       density: 'compact',
       elevation: 2,
       minWidth: 300,
-      prominent: true, // icon变的更大
     },
     VCard: {
-      variant: 'elevation',
+      variant: 'elevated',
     },
     VForm: {
       validateOn: 'input lazy',
