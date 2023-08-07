@@ -7,7 +7,6 @@
 - @vueuse（自动引入） 分割包
 - 分割包
 - 研究sass怎么用，
-- VMain 高度不写死
 - 写一个c-select 组件支持 diccode
 - self.crypto.randomUUID
 - webfontloader

@@ -2,12 +2,6 @@ html{
   overflow-y:auto;
 }
 
-#app{
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
 .c-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, auto));

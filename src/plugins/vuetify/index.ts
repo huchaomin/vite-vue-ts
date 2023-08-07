@@ -51,9 +51,8 @@ export default createVuetify({
     },
     VAlert: {
       variant: 'tonal',
-      border: 'start',
       density: 'compact',
-      elevation: 2,
+      elevation: 6,
       minWidth: 300,
     },
     VCard: {
