@@ -13,6 +13,7 @@ const customLightTheme: ThemeDefinition = {
     error: '#FF4C51',
     background: '#F4F5FA',
     'on-background': '#3A3541',
+    'on-surface': '#3A3541',
   },
   variables: {
     // Shadows
