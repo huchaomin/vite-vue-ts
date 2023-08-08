@@ -5,6 +5,7 @@ import { type VForm } from 'vuetify/components'
 
 const userStore = useUserStore()
 const router = useRouter()
+const route = useRoute()
 
 const formData = reactive({
   username: '',
@@ -37,7 +38,8 @@ async function handleSubmit(): Promise<void> {
     if (data.value !== null) {
       userStore.token = data.value.result.token
       $notify('登录成功！')
-      router.push({ name: 'index' })
+      // TODO 这里要去获取路由
+      router.push({ name: (route.query.redirect ?? 'index') as string })
     } else {
       formData.captcha = ''
       getCaptcha()
