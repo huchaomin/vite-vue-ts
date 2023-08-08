@@ -62,6 +62,7 @@ module.exports = {
     '@typescript-eslint/triple-slash-reference': 'off', // 开启三斜线引用
     '@typescript-eslint/no-floating-promises': 'off', // 允许未处理的promise
     '@typescript-eslint/no-dynamic-delete': 'off', // 允许删除动态属性
+    '@typescript-eslint/no-non-null-assertion': 'off', // 允许使用!断言
     'comma-dangle': [
       'error',
       {

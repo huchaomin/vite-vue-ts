@@ -28,7 +28,7 @@ getCaptcha()
 
 const form: Ref<InstanceType<typeof VForm> | null> = ref(null)
 async function handleSubmit(): Promise<void> {
-  const { valid } = (await form.value?.validate()) as { valid: boolean }
+  const { valid } = await form.value!.validate()
   if (valid) {
     const { data } = await $api(login, {
       ...formData,

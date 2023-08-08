@@ -107,9 +107,8 @@ function exportExcel(): void {
 const addOrEditModal: Ref<InstanceType<typeof AddOrEditModal> | null> =
   ref(null)
 function add(): void {
-  if (addOrEditModal.value !== null) {
-    addOrEditModal.value.visible = true
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  addOrEditModal.value!.visible = true
 }
 </script>
 <template>

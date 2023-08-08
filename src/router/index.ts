@@ -44,8 +44,8 @@ router.beforeEach((to, from, next) => {
     userStore
       .getRoutersAndAuth()
       .then(() => {
-        const name = to.name
-        if (name !== null && name !== undefined && router.hasRoute(name)) {
+        const name = to.name!
+        if (router.hasRoute(name)) {
           if (from === START_LOCATION && to.meta.customerRouter === true) {
             next({ name: to.meta.parentName as string })
           } else {
