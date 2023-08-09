@@ -44,15 +44,11 @@ router.beforeEach((to, from, next) => {
     userStore
       .getRoutersAndAuth()
       .then(() => {
-        const name = to.name!
-        if (router.hasRoute(name)) {
-          if (from === START_LOCATION && to.meta.customerRouter === true) {
-            next({ name: to.meta.parentName as string })
-          } else {
-            next()
-          }
+        const { name, meta } = router.resolve({ path: to.path }) // 此时路由还没注册，to.name 为 undefined
+        if (from === START_LOCATION && meta.customerRouter === true) {
+          next({ name: meta.parentName as string })
         } else {
-          next({ name: 'notFound' })
+          next({ name: name as string })
         }
       })
       .catch(() => {
@@ -70,7 +66,7 @@ router.afterEach((to, from) => {
   }
   if (name === 'login') {
     // START_LOCATION 时 from.name 为 undefined
-    if (from.name !== null && from.name !== undefined) {
+    if (![null, undefined, '404'].includes(from.name as string)) {
       to.query = { redirect: from.name as string }
     }
   }

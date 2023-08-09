@@ -43,7 +43,7 @@ function filterRouters(menu: []): RouteRecordRaw[] {
         ((item.children === undefined || realChildren.length > 0) &&
           (item.meta?.id === undefined || ids.includes(item.meta?.id)))
       if (boolean && parent !== null && index === 0) {
-        parent.redirect = { name: item.name } // TODO 看看parent是否一定要 component
+        parent.redirect = { name: item.name }
       }
       return boolean
     })
@@ -66,7 +66,7 @@ export default defineStore(
           if (result === undefined) {
             reject()
           } else {
-            routersRaw.value = filterRouters(result.menu)
+            routersRaw.value = markRaw(filterRouters(result.menu))
             console.log(routersRaw.value)
             routersRaw.value.forEach((item) => {
               router.addRoute(item)

@@ -38,8 +38,11 @@ async function handleSubmit(): Promise<void> {
     if (data.value !== null) {
       userStore.token = data.value.result.token
       $notify('登录成功！')
-      // TODO 这里要去获取路由
-      router.push({ name: (route.query.redirect ?? 'index') as string })
+      userStore.getRoutersAndAuth().then(() => {
+        const redirect = route.query.redirect as string
+        const name = router.hasRoute(redirect) ? redirect : 'index'
+        router.replace({ name })
+      })
     } else {
       formData.captcha = ''
       getCaptcha()
