@@ -10,6 +10,7 @@
 - 写一个c-select 组件支持 diccode
 - self.crypto.randomUUID
 - webfontloader
+- login时设置 router query失败
 
 ## vite-plugin-checker
 

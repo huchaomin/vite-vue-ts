@@ -67,7 +67,7 @@ router.afterEach((to, from) => {
   if (name === 'login') {
     // START_LOCATION 时 from.name 为 undefined
     if (![null, undefined, '404'].includes(from.name as string)) {
-      to.query = { redirect: from.name as string }
+      to.query.redirect = from.name as string
     }
   }
 })
