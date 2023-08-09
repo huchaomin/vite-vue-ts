@@ -1,7 +1,7 @@
 import { type ProxyOptions, defineConfig } from 'vite'
 import type * as http from 'node:http'
 import vue from '@vitejs/plugin-vue'
-// import checker from 'vite-plugin-checker';
+import checker from 'vite-plugin-checker'
 import eslint from 'vite-plugin-eslint'
 import stylelint from 'vite-plugin-stylelint'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -13,7 +13,7 @@ import vuetify from 'vite-plugin-vuetify'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import viteCompression from 'vite-plugin-compression'
-// import VueDevTools from 'vite-plugin-vue-devtools';
+import VueDevTools from 'vite-plugin-vue-devtools'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
 import Inspect from 'vite-plugin-inspect'
@@ -75,10 +75,10 @@ export default defineConfig((...arg) => {
         build: true,
         cacheLocation: '.cache/.stylelintcache',
       }),
-      // checker({ vueTsc: true }),
-      // VueDevTools({
-      //   appendTo: 'src/main.ts', // 解决每第一次prebundle报错的问题
-      // }),
+      checker({ vueTsc: true }),
+      VueDevTools({
+        appendTo: 'src/router/index.ts', // 解决每第一次prebundle报错的问题 好像要在createApp前面加载
+      }),
       vue(), // 将会把SFC的代码转换成js代码
       vuetify({ styles: { configFile: 'src/assets/css/_settings.scss' } }),
       AutoImport({
