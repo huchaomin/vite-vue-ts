@@ -1,9 +1,20 @@
 <script setup lang="ts">
 import LeftDrawer from './LeftDrawer.vue'
+const commonStore = useCommonStore()
 </script>
 <template>
   <VLayout>
-    <VAppBar title="资产评估管理系统" :elevation="0" :border="true"></VAppBar>
+    <VAppBar flat :border="true" density="compact">
+      <template #prepend>
+        <VAppBarNavIcon
+          @click="commonStore.drawerOpen = !commonStore.drawerOpen"
+        ></VAppBarNavIcon>
+      </template>
+      <VAppBarTitle>资产评估管理系统</VAppBarTitle>
+      <template #append>
+        <VBtn icon="mdi-dots-vertical"></VBtn>
+      </template>
+    </VAppBar>
     <LeftDrawer></LeftDrawer>
     <VMain>
       <div
