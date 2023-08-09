@@ -1,15 +1,18 @@
 import { type RouteRecordRaw } from 'vue-router'
-import Index from '@/layout/Index.vue'
 
 export default [
   {
     path: '/',
     name: 'index',
-    component: Index,
+    component: () => import('@/layout/Index.vue'),
     children: [
       {
         path: 'assetManagement',
         name: 'assetManagement',
+        meta: {
+          title: '资产管理',
+          id: '1669646990771863553',
+        },
         children: [
           {
             path: 'myClue',

@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, START_LOCATION } from 'vue-router'
-import Index from '@/layout/Index.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,7 +13,7 @@ const router = createRouter({
     },
     {
       path: '/:catchAll(.*)*',
-      component: Index,
+      component: () => import('@/layout/Index.vue'),
       name: 'notFound',
       children: [
         {

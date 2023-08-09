@@ -1,7 +1,9 @@
+<script setup lang="ts">
+import MenuNode from './MenuNode.vue'
+const userStore = useUserStore()
+</script>
 <template>
   <VNavigationDrawer>
-    <VList>
-      <VListItem title="资产包管理" :to="{ name: 'login' }" exact></VListItem>
-    </VList>
+    <MenuNode :model="userStore.routersRaw[0].children!"></MenuNode>
   </VNavigationDrawer>
 </template>
