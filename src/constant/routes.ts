@@ -12,6 +12,7 @@ export default [
         meta: {
           title: '资产管理',
           id: '1669646990771863553',
+          icon: 'folder-cog',
         },
         children: [
           {

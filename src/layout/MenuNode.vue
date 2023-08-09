@@ -50,10 +50,14 @@ export default {
         <VListItem
           v-bind="props"
           :style="{
-            paddingLeft: `${level * 30 + 16}px !important`,
+            paddingLeft: `${level * 37 + 16}px !important`,
           }"
           :title="item.meta?.title"
-        ></VListItem>
+        >
+          <template v-if="item.meta?.icon" #prepend>
+            <VIcon :icon="`mdi-${item.meta.icon}`"></VIcon>
+          </template>
+        </VListItem>
       </template>
       <MenuNode :model="item.children" :level="level + 1"></MenuNode>
     </VListGroup>
@@ -65,7 +69,7 @@ export default {
       active-class="text-primary"
       :title="item.meta?.title"
       :style="{
-        paddingLeft: `${(level + 1) * 30 + 16}px !important`,
+        paddingLeft: `${level * 37 + 16}px !important`,
       }"
     ></VListItem>
   </VList>

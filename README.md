@@ -11,7 +11,6 @@
 - self.crypto.randomUUID
 - webfontloader
 - login时设置 router query没有出现在路由当中
-- 给菜单添加图标
 
 ## vite-plugin-checker
 
