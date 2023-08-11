@@ -16,7 +16,7 @@ const notifyStore = useNotifyStore()
         style="width: 100vw"
       ></VProgressLinear>
     </VOverlay>
-    <div class="notificationContainer">
+    <div class="notification__container">
       <VSlideYTransition group>
         <VAlert
           v-for="notification in notifyStore.notifications"
@@ -28,7 +28,7 @@ const notifyStore = useNotifyStore()
   </VApp>
 </template>
 <style lang="scss" scoped>
-.notificationContainer {
+.notification__container {
   position: fixed;
   top: 12px;
   right: 12px;

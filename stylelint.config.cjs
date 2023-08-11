@@ -15,5 +15,8 @@ module.exports = {
   //     customSyntax: 'postcss-less',
   //   },
   // ],
-  rules: { 'selector-class-pattern': null },
+  rules: {
+    'selector-class-pattern':
+      '^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\\\[.+\\\\])?$', // BEM style https://github.com/humanmade/coding-standards/pull/199
+  },
 }
