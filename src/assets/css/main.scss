@@ -1,19 +1,19 @@
-html{
-  overflow-y:auto;
+html {
+  overflow-y: auto;
 }
 
-.c-grid{
+.c-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, auto));
   grid-gap: 0 12px;
 }
 
-body{
-  .v-input__details{
+body {
+  .v-input__details {
     align-items: flex-start;
   }
 
-  .v-overlay__scrim{
+  .v-overlay__scrim {
     background-color: rgb(255 255 255 / 72%);
     backdrop-filter: blur(1px) saturate(167%);
     opacity: 1;

@@ -1,8 +1,8 @@
 /* eslint-disable */
 
-import md5 from 'md5';
+import md5 from 'md5'
 // 签名密钥串(前后端要一致，正式发布请自行修改)
-const signatureSecret = 'dd05f1c54d63749eda95f9fa6d49v442a';
+const signatureSecret = 'dd05f1c54d63749eda95f9fa6d49v442a'
 
 export default class signMd5Utils {
   /**
@@ -11,18 +11,18 @@ export default class signMd5Utils {
    */
 
   static sortAsc(jsonObj) {
-    const arr = [];
-    let num = 0;
+    const arr = []
+    let num = 0
     for (const i in jsonObj) {
-      arr[num] = i;
-      num++;
+      arr[num] = i
+      num++
     }
-    const sortArr = arr.sort();
-    const sortObj = {};
+    const sortArr = arr.sort()
+    const sortObj = {}
     for (const i in sortArr) {
-      sortObj[sortArr[i]] = jsonObj[sortArr[i]];
+      sortObj[sortArr[i]] = jsonObj[sortArr[i]]
     }
-    return sortObj;
+    return sortObj
   }
 
   /**
@@ -31,10 +31,10 @@ export default class signMd5Utils {
    * @returns {string} 获取签名
    */
   static getSign(url, requestParams) {
-    const urlParams = this.parseQueryString(url);
-    const jsonObj = this.mergeObject(urlParams, requestParams);
-    const requestBody = this.sortAsc(jsonObj);
-    return md5(JSON.stringify(requestBody) + signatureSecret).toUpperCase();
+    const urlParams = this.parseQueryString(url)
+    const jsonObj = this.mergeObject(urlParams, requestParams)
+    const requestBody = this.sortAsc(jsonObj)
+    return md5(JSON.stringify(requestBody) + signatureSecret).toUpperCase()
   }
 
   /**
@@ -42,32 +42,36 @@ export default class signMd5Utils {
    * @returns {{}} 将url中请求参数组装成json对象(url的?后面的参数)
    */
   static parseQueryString(url) {
-    const urlReg = /^[^\?]+\?([\w\W]+)$/;
-    const paramReg = /([^&=]+)=([\w\W]*?)(&|$|#)/g;
-    const urlArray = urlReg.exec(url);
-    const result = {};
+    const urlReg = /^[^\?]+\?([\w\W]+)$/
+    const paramReg = /([^&=]+)=([\w\W]*?)(&|$|#)/g
+    const urlArray = urlReg.exec(url)
+    const result = {}
 
     // 获取URL上最后带逗号的参数变量 sys/dict/getDictItems/sys_user,realname,username
     // 【这边条件没有encode】带条件参数例子：/sys/dict/getDictItems/sys_user,realname,id,username!='admin'%20order%20by%20create_time
-    let lastpathVariable = url.substring(url.lastIndexOf('/') + 1);
+    let lastpathVariable = url.substring(url.lastIndexOf('/') + 1)
     if (lastpathVariable.includes(',')) {
       if (lastpathVariable.includes('?')) {
-        lastpathVariable = lastpathVariable.substring(0, lastpathVariable.indexOf('?'));
+        lastpathVariable = lastpathVariable.substring(
+          0,
+          lastpathVariable.indexOf('?'),
+        )
       }
       // 解决Sign 签名校验失败 #2728
-      result['x-path-variable'] = decodeURIComponent(lastpathVariable);
+      result['x-path-variable'] = decodeURIComponent(lastpathVariable)
     }
     if (urlArray && urlArray[1]) {
-      const paramString = urlArray[1]; let paramResult;
+      const paramString = urlArray[1]
+      let paramResult
       while ((paramResult = paramReg.exec(paramString)) != null) {
         // 数字值转为string类型，前后端加密规则保持一致
         if (this.myIsNaN(paramResult[2])) {
-          paramResult[2] = paramResult[2].toString();
+          paramResult[2] = paramResult[2].toString()
         }
-        result[paramResult[1]] = paramResult[2];
+        result[paramResult[1]] = paramResult[2]
       }
     }
-    return result;
+    return result
   }
 
   /**
@@ -79,50 +83,57 @@ export default class signMd5Utils {
         if (objectTwo.hasOwnProperty(key) === true) {
           // 数字值转为string类型，前后端加密规则保持一致
           if (this.myIsNaN(objectTwo[key])) {
-            objectTwo[key] = objectTwo[key].toString();
+            objectTwo[key] = objectTwo[key].toString()
           }
-          objectOne[key] = objectTwo[key];
+          objectOne[key] = objectTwo[key]
         }
       }
     }
-    return objectOne;
+    return objectOne
   }
 
   static urlEncode(param, key, encode) {
-    if (param == null) return '';
-    let paramStr = '';
-    const t = typeof (param);
+    if (param == null) return ''
+    let paramStr = ''
+    const t = typeof param
     if (t == 'string' || t == 'number' || t == 'boolean') {
-      paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
+      paramStr +=
+        '&' +
+        key +
+        '=' +
+        (encode == null || encode ? encodeURIComponent(param) : param)
     } else {
       for (const i in param) {
-        const k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
-        paramStr += this.urlEncode(param[i], k, encode);
+        const k =
+          key == null
+            ? i
+            : key + (param instanceof Array ? '[' + i + ']' : '.' + i)
+        paramStr += this.urlEncode(param[i], k, encode)
       }
     }
-    return paramStr;
-  };
+    return paramStr
+  }
 
   static getDateTimeToString() {
-    const date_ = new Date();
-    const year = date_.getFullYear();
-    let month = date_.getMonth() + 1;
-    let day = date_.getDate();
-    if (month < 10) month = '0' + month;
-    if (day < 10) day = '0' + day;
-    let hours = date_.getHours();
-    let mins = date_.getMinutes();
-    let secs = date_.getSeconds();
-    const msecs = date_.getMilliseconds();
-    if (hours < 10) hours = '0' + hours;
-    if (mins < 10) mins = '0' + mins;
-    if (secs < 10) secs = '0' + secs;
-    if (msecs < 10) secs = '0' + msecs;
-    return year + '' + month + '' + day + '' + hours + '' + mins + '' + secs;
+    const date_ = new Date()
+    const year = date_.getFullYear()
+    let month = date_.getMonth() + 1
+    let day = date_.getDate()
+    if (month < 10) month = '0' + month
+    if (day < 10) day = '0' + day
+    let hours = date_.getHours()
+    let mins = date_.getMinutes()
+    let secs = date_.getSeconds()
+    const msecs = date_.getMilliseconds()
+    if (hours < 10) hours = '0' + hours
+    if (mins < 10) mins = '0' + mins
+    if (secs < 10) secs = '0' + secs
+    if (msecs < 10) secs = '0' + msecs
+    return year + '' + month + '' + day + '' + hours + '' + mins + '' + secs
   }
 
   // true:数值型的，false：非数值型
   static myIsNaN(value) {
-    return typeof value === 'number' && !isNaN(value);
+    return typeof value === 'number' && !isNaN(value)
   }
 }

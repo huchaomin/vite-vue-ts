@@ -30,10 +30,10 @@ const notifyStore = useNotifyStore()
 <style lang="scss" scoped>
 .notificationContainer {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   z-index: $snackbar-z-index;
   display: grid;
-  grid-gap: 0.5em;
+  grid-gap: 12px;
 }
 </style>
