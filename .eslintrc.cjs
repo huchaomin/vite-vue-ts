@@ -87,7 +87,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/promise-function-async': 'off', // 返回为promise的函数不一定要async
-    'vue/multi-word-component-names': 'off', // 组件名不一定必须驼峰
+    'vue/multi-word-component-names': 'off', // 组件名不是必须多个单词
     'vue/html-self-closing': [
       'error',
       {

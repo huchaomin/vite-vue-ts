@@ -2,17 +2,19 @@ html {
   overflow-y: auto;
 }
 
-.c-grid {
+.c_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, auto));
   grid-gap: 0 12px;
 }
 
 body {
+  /* stylelint-disable-next-line selector-class-pattern */
   .v-input__details {
     align-items: flex-start;
   }
 
+  /* stylelint-disable-next-line selector-class-pattern */
   .v-overlay__scrim {
     background-color: rgb(255 255 255 / 72%);
     backdrop-filter: blur(1px) saturate(167%);

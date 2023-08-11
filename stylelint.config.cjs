@@ -16,7 +16,6 @@ module.exports = {
   //   },
   // ],
   rules: {
-    'selector-class-pattern':
-      '^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\\\[.+\\\\])?$', // BEM style https://github.com/humanmade/coding-standards/pull/199
+    'selector-class-pattern': '^([a-z][a-z0-9]*)(_[a-z0-9]+)*$', // 类名命名规则：下划线
   },
 }

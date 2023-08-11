@@ -112,7 +112,7 @@ function add(): void {
 }
 </script>
 <template>
-  <VForm ref="form" class="pt-3 c-grid" @submit.prevent="query">
+  <VForm ref="form" class="pt-3 c_grid" @submit.prevent="query">
     <VTextField v-model="formData.assetPkgName" label="资产包名称"></VTextField>
     <VSelect
       v-model="formData.assetSeller"
