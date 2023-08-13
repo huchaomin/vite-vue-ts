@@ -67,6 +67,8 @@ const gridOptions = reactive<VxeGridProps<UserVO>>({
   },
   columns: [
     { type: 'seq', width: 50 },
+    { type: 'radio', width: 50 },
+    { type: 'checkbox', width: 50 },
     { field: 'name', title: 'Name', slots: { default: 'name' } },
     { field: 'sex', title: 'Sex', showHeaderOverflow: true },
     { field: 'address', title: 'Address', showOverflow: true },
