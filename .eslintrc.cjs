@@ -8,10 +8,10 @@ module.exports = {
     node: true,
   },
   extends: [
-    'prettier',
     'standard-with-typescript',
     'plugin:vue/vue3-recommended', // 更为严格一点，推荐用这个
     './eslintrc-auto-import.json',
+    'prettier', // 一定要是最后一个，才能确保覆盖 https://www.kancloud.cn/cyyspring/webpack/2015917
   ],
   overrides: [
     {
