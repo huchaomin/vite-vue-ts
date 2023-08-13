@@ -15,6 +15,10 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import viteCompression from 'vite-plugin-compression'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import {
+  createStyleImportPlugin,
+  VxeTableResolve,
+} from 'vite-plugin-style-import'
 
 import Inspect from 'vite-plugin-inspect'
 import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
@@ -97,6 +101,9 @@ export default defineConfig((...arg) => {
       vitePluginForArco({
         theme: '@arco-themes/vue-qingcongkeji',
         // iconBox https://arco.design/iconbox/libs
+      }),
+      createStyleImportPlugin({
+        resolves: [VxeTableResolve()],
       }),
       createSvgIconsPlugin({
         iconDirs: [resolvePath(__dirname, 'src/assets/svg')],

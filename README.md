@@ -16,6 +16,7 @@
 - vxe-table
 - Dialog 命令式调用
 - 日期选择器 使用 vuetify包装
+- 按需加载xe-utils
 
 ## vite-plugin-checker
 
