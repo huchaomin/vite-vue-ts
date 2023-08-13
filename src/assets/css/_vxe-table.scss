@@ -1,9 +1,9 @@
-$vxe-font-size: 14px;
-$vxe-font-color: #666;
-$vxe-primary-color: #409eff;
-$vxe-table-font-color: $vxe-font-color;
-$vxe-table-border-color: #e8eaec;
-$vxe-table-border-radius: 4px;
+@use "./variable" as *;
+@use "./settings" as *;
+
+$vxe-font-size: $font-size-root;
+$vxe-primary-color: $primary;
+$vxe-table-border-radius: $border-radius-root;
 
 
 @import 'vxe-table/styles/index';

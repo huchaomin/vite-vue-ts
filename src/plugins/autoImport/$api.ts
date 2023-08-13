@@ -122,7 +122,7 @@ export default function fetchWrapper(
         }
         return { options }
       },
-      // response.ok 为 true
+      // response.ok 为 true 求的状态码 200 到 299
       afterFetch(ctx) {
         if (loading) {
           $loading.hide()

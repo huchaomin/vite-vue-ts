@@ -61,6 +61,10 @@ interface UserVO {
 }
 const gridOptions = reactive<VxeGridProps<UserVO>>({
   border: true,
+  tooltipConfig: {
+    showAll: true,
+    enterable: true,
+  },
   columns: [
     { type: 'seq', width: 50 },
     { field: 'name', title: 'Name', slots: { default: 'name' } },

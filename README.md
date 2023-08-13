@@ -19,6 +19,9 @@
 - 按需加载xe-utils
 - 更换vxe-table icon
 - 修改vxe-table的样式
+- column min-width/单元格提示
+- 滚动条样式
+- table min-height
 
 ## vite-plugin-checker
 
