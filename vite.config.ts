@@ -97,7 +97,10 @@ export default defineConfig((...arg) => {
           filepath: 'eslintrc-auto-import.json',
         },
       }),
-      Components({ dts: 'types/components.d.ts' }), // 自动引入 src/components
+      Components({
+        dirs: ['src/components/global'],
+        dts: 'types/components.d.ts',
+      }), // 自动引入 src/components
       vitePluginForArco({
         theme: '@arco-themes/vue-qingcongkeji',
         // iconBox https://arco.design/iconbox/libs

@@ -7,34 +7,35 @@ setup({
   // version: 0, // 版本号，对于某些带数据缓存的功能有用到，上升版本号可以用于重置数据
   // loadingText: '加载中...', // 全局loading提示内容，如果为null则不显示文本
   table: {
+    // keepSource: false, // 保持原始数据
+    // emptyText: '暂无数据',
     showOverflow: 'tooltip',
     showHeaderOverflow: 'tooltip',
     showFooterOverflow: 'tooltip',
-    autoResize: false, // 与 height: 'auto' 配合自动监听父元素响应式调整表格宽高
+    autoResize: false, // TODO 与 height: 'auto' 配合自动监听父元素响应式调整表格宽高
     height: 'auto',
     stripe: true,
     border: 'full',
-    //   emptyText: '暂无数据',
     columnConfig: {
       minWidth: 100,
       maxWidth: 200, // TODO 好像没起到作用
       resizable: true,
     },
-    //   resizeConfig: {
-    //     refreshDelay: 250
-    //   },
     rowConfig: {
       isHover: true,
     },
-    radioConfig: {
-      highlight: true,
-      trigger: 'row',
-    },
     checkboxConfig: {
       highlight: true,
-      range: true,
       trigger: 'row',
     },
+    //   radioConfig: {
+    //     trigger: 'default'
+    //   },
+    tooltipConfig: {
+      showAll: true,
+      enterable: true,
+    },
+
     //   sortConfig: {
     //     remote: false,
     //     trigger: 'default',
@@ -58,11 +59,7 @@ setup({
     //     indent: 20,
     //     showIcon: true
     //   },
-    tooltipConfig: {
-      // TODO 好像没起到作用
-      showAll: true,
-      enterable: true,
-    },
+
     //   menuConfig: {
     //     visibleMethod () {}
     //   },
