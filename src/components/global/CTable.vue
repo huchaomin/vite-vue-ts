@@ -9,13 +9,14 @@ import {
 const props = withDefaults(
   defineProps<{
     columns: VxeGridPropTypes.Columns
-    data: VxeTableDataRow[]
     checkboxConfig?: VxeTablePropTypes.CheckboxConfig // 不能写在全局配置，全局配置只能传空对象
     radioConfig?: VxeTablePropTypes.RadioConfig
+    syncParentHeight?: boolean // 是否和外层容器高度同步
   }>(),
   {
     checkboxConfig: () => ({}),
     radioConfig: () => ({}),
+    syncParentHeight: false,
   },
 )
 
@@ -43,21 +44,35 @@ const processedRadioConfig = computed(() => {
 })
 const processedColumns = computed(() => {
   return props.columns.map((column) => {
-    if (column.type === 'checkbox') {
+    if (['seq', 'checkbox', 'radio'].includes(column.type as string)) {
       column.width = 58 // vxe-cell 会减2px
+    }
+    if (column.type === 'checkbox') {
       column.slots = {
         header: 'checkbox_header',
         checkbox: 'checkbox_default',
       }
     }
     if (column.type === 'radio') {
-      column.width = 58
       column.slots = {
         radio: 'radio',
       }
     }
     return column
   })
+})
+
+const otherProps = computed(() => {
+  const { syncParentHeight } = props
+  const obj: {
+    height?: VxeTablePropTypes.Height
+    'auto-resize'?: VxeTablePropTypes.AutoResize
+  } = {}
+  if (syncParentHeight) {
+    obj.height = 'auto'
+    obj['auto-resize'] = true
+  }
+  return obj
 })
 
 const toggleAllCheckboxEvent: () => void = () => {
@@ -76,9 +91,9 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
   <VxeGrid
     ref="xTable"
     :columns="processedColumns"
-    :data="data"
     :checkbox-config="processedCheckboxConfig"
     :radio-config="processedRadioConfig"
+    v-bind="otherProps"
   >
     <template v-for="k in Object.keys($slots)" :key="k" #[k]="slotScope">
       <slot :name="k" v-bind="slotScope"></slot>
@@ -108,5 +123,22 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
         @update:model-value="setSelectRow(row)"
       ></VRadio>
     </template>
+    <template #loading>
+      <VProgressLinear
+        color="primary"
+        indeterminate
+        height="2"
+      ></VProgressLinear>
+    </template>
+    <template #empty>
+      <SvgIcon name="empty" style="font-size: 50px"></SvgIcon>
+    </template>
   </VxeGrid>
 </template>
+<style lang="scss" scoped>
+/* stylelint-disable-next-line selector-class-pattern */
+::v-deep .vxe-loading--warpper {
+  top: 0;
+  transform: none;
+}
+</style>

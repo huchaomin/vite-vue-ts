@@ -9,11 +9,10 @@ setup({
   table: {
     // keepSource: false, // 保持原始数据
     // emptyText: '暂无数据',
+    minHeight: 200,
     showOverflow: 'tooltip',
     showHeaderOverflow: 'tooltip',
     showFooterOverflow: 'tooltip',
-    autoResize: false, // TODO 与 height: 'auto' 配合自动监听父元素响应式调整表格宽高
-    height: 'auto',
     stripe: true,
     border: 'full',
     columnConfig: {

@@ -21,10 +21,9 @@
 - 修改vxe-table的样式
 - column min-width/单元格提示
 - 滚动条样式
-- table min-height
-- 渲染器实现 table 空数据/加载中
 - 自定义一个formatter, 远程formatter
 - cmd ' 使用熟练
+- tooltip 没起作用
 
 ## vite-plugin-checker
 
