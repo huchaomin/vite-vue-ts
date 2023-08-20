@@ -18,7 +18,7 @@ const xTable = ref<VxeTableInstance<VxeTableDataRow> | null>(null)
 const processedColumns = computed(() => {
   return props.columns.map((column) => {
     if (column.type === 'checkbox') {
-      column.width = 48
+      column.width = 58
       column.slots = {
         header: 'checkbox_header',
         checkbox: 'checkbox_default',
@@ -37,7 +37,7 @@ const toggleCheckboxEvent: (row: VxeTableDataRow) => void = (row) => {
 }
 </script>
 <template>
-  <VxeGrid ref="xTable" :columns="processedColumns">
+  <VxeGrid ref="xTable" :columns="processedColumns" :data="data">
     <template v-for="k in Object.keys($slots)" :key="k" #[k]="slotScope">
       <slot :name="k" v-bind="slotScope"></slot>
     </template>
@@ -61,11 +61,3 @@ const toggleCheckboxEvent: (row: VxeTableDataRow) => void = (row) => {
     </template>
   </VxeGrid>
 </template>
-<style lang="scss" scoped>
-::v-deep {
-  /* stylelint-disable-next-line selector-class-pattern */
-  .v-checkbox {
-    margin: 0 -10px;
-  }
-}
-</style>

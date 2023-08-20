@@ -2,6 +2,7 @@
 import rules from '@/constant/rules'
 import { randomImage, login } from '@/api/sys'
 import { type VForm } from 'vuetify/components'
+import { type VxeGridPropTypes } from 'vxe-table'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -50,12 +51,12 @@ async function handleSubmit(): Promise<void> {
   }
 }
 
-const columns = [
+const columns: VxeGridPropTypes.Columns = [
   { type: 'seq' },
-  // { type: 'checkbox' },
-  // { field: 'name', title: 'Name', slots: { default: 'name' } },
-  // { field: 'sex', title: 'Sex', showHeaderOverflow: true },
-  // { field: 'address', title: 'Address', showOverflow: true },
+  { type: 'checkbox' },
+  { field: 'name', title: 'Name', slots: { default: 'name' } },
+  { field: 'sex', title: 'Sex', showHeaderOverflow: true },
+  { field: 'address', title: 'Address', showOverflow: true },
 ]
 const data = [
   {
