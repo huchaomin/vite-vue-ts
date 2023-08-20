@@ -1,9 +1,8 @@
-@use "./variable" as *;
-@use "./settings" as *;
+@use './variable' as *;
+@use './settings' as *;
 
 $vxe-font-size: $font-size-root;
 $vxe-primary-color: $primary;
 $vxe-table-border-radius: $border-radius-root;
-
 
 @import 'vxe-table/styles/index';
