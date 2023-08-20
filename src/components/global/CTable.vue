@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  type VxeTablePropTypes,
   type VxeGridPropTypes,
   type VxeTableDataRow,
   type VxeTableInstance,
@@ -9,12 +10,37 @@ const props = withDefaults(
   defineProps<{
     columns: VxeGridPropTypes.Columns
     data: VxeTableDataRow[]
+    checkboxConfig?: VxeTablePropTypes.CheckboxConfig // 不能写在全局配置，全局配置只能传空对象
+    radioConfig?: VxeTablePropTypes.RadioConfig
   }>(),
-  {},
+  {
+    checkboxConfig: () => ({}),
+    radioConfig: () => ({}),
+  },
 )
 
 const xTable = ref<VxeTableInstance<VxeTableDataRow> | null>(null)
 
+const processedCheckboxConfig = computed(() => {
+  const has = props.columns.some((column) => column.type === 'checkbox')
+  return has
+    ? {
+        highlight: true,
+        trigger: 'row',
+        ...props.checkboxConfig,
+      }
+    : {}
+})
+const processedRadioConfig = computed(() => {
+  const has = props.columns.some((column) => column.type === 'radio')
+  return has
+    ? {
+        highlight: true,
+        trigger: 'row',
+        ...props.radioConfig,
+      }
+    : {}
+})
 const processedColumns = computed(() => {
   return props.columns.map((column) => {
     if (column.type === 'checkbox') {
@@ -47,7 +73,13 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
 }
 </script>
 <template>
-  <VxeGrid ref="xTable" :columns="processedColumns" :data="data">
+  <VxeGrid
+    ref="xTable"
+    :columns="processedColumns"
+    :data="data"
+    :checkbox-config="processedCheckboxConfig"
+    :radio-config="processedRadioConfig"
+  >
     <template v-for="k in Object.keys($slots)" :key="k" #[k]="slotScope">
       <slot :name="k" v-bind="slotScope"></slot>
     </template>

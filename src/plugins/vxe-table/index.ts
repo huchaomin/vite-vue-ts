@@ -23,14 +23,6 @@ setup({
     rowConfig: {
       isHover: true,
     },
-    checkboxConfig: {
-      highlight: true,
-      trigger: 'row',
-    },
-    radioConfig: {
-      trigger: 'row',
-      highlight: true,
-    },
     tooltipConfig: {
       showAll: true,
       enterable: true,
