@@ -139,8 +139,8 @@ setup({
     // TABLE_CHECKBOX_CHECKED: 'vxe-icon-checkbox-checked',
     // TABLE_CHECKBOX_UNCHECKED: 'vxe-icon-checkbox-unchecked',
     // TABLE_CHECKBOX_INDETERMINATE: 'vxe-icon-checkbox-indeterminate',
-    TABLE_RADIO_CHECKED: 'vxe-icon-radio-checked',
-    TABLE_RADIO_UNCHECKED: 'vxe-icon-radio-unchecked',
+    // TABLE_RADIO_CHECKED: 'vxe-icon-radio-checked',
+    // TABLE_RADIO_UNCHECKED: 'vxe-icon-radio-unchecked',
   },
 })
 

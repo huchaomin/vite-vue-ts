@@ -15,11 +15,6 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import viteCompression from 'vite-plugin-compression'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import {
-  createStyleImportPlugin,
-  VxeTableResolve,
-} from 'vite-plugin-style-import'
-
 import Inspect from 'vite-plugin-inspect'
 import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
 
@@ -88,7 +83,14 @@ export default defineConfig((...arg) => {
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template
         dts: 'types/auto-imports.d.ts',
-        imports: ['vue', 'vue-router', 'pinia', autoImportStoreList],
+        imports: [
+          // https://github.com/antfu/unplugin-auto-import/tree/main/src/presets
+          'vue',
+          'vue-router',
+          'pinia',
+          '@vueuse/core',
+          autoImportStoreList,
+        ],
         defaultExportByFilename: true,
         dirs: ['src/plugins/autoImport'],
         eslintrc: {
@@ -104,9 +106,6 @@ export default defineConfig((...arg) => {
       vitePluginForArco({
         theme: '@arco-themes/vue-qingcongkeji',
         // iconBox https://arco.design/iconbox/libs
-      }),
-      createStyleImportPlugin({
-        resolves: [VxeTableResolve()],
       }),
       createSvgIconsPlugin({
         iconDirs: [resolvePath(__dirname, 'src/assets/svg')],

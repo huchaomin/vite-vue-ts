@@ -19,10 +19,10 @@ function handleUrlAndData(
   Object.keys(data).forEach((key) => {
     const reg = new RegExp(`\\{${key}\\}`, 'g')
     if (reg.test(url)) {
-      url = url.replace(reg, encodeURIComponent(data[key]))
+      url = url.replace(reg, data[key])
       delete data[key]
     } else if (method === 'get') {
-      query += `${key}=${encodeURIComponent(data[key])}&`
+      query += `${key}=${data[key] as string}&`
     }
   })
   if (query !== '?') {
