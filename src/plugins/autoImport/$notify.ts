@@ -24,7 +24,7 @@ const create: createFn = (
   {
     type = NotificationTypes.success,
     title = '提示',
-    timeout = 2500,
+    timeout = 3000,
     ...options
   } = {},
 ) => {
