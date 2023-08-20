@@ -24,7 +24,6 @@
 - table min-height
 - 渲染器实现 table 空数据/加载中
 - 自定义一个formatter, 远程formatter
-- 自定义单选框
 - cmd ' 使用熟练
 
 ## vite-plugin-checker

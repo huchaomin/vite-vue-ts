@@ -53,6 +53,7 @@ async function handleSubmit(): Promise<void> {
 
 const columns: VxeGridPropTypes.Columns = [
   { type: 'seq' },
+  { type: 'radio' },
   { type: 'checkbox' },
   { field: 'name', title: 'Name', slots: { default: 'name' } },
   { field: 'sex', title: 'Sex', showHeaderOverflow: true },

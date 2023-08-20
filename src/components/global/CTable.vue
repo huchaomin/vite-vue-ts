@@ -18,10 +18,16 @@ const xTable = ref<VxeTableInstance<VxeTableDataRow> | null>(null)
 const processedColumns = computed(() => {
   return props.columns.map((column) => {
     if (column.type === 'checkbox') {
-      column.width = 58
+      column.width = 58 // vxe-cell 会减2px
       column.slots = {
         header: 'checkbox_header',
         checkbox: 'checkbox_default',
+      }
+    }
+    if (column.type === 'radio') {
+      column.width = 58
+      column.slots = {
+        radio: 'radio',
       }
     }
     return column
@@ -34,6 +40,10 @@ const toggleAllCheckboxEvent: () => void = () => {
 
 const toggleCheckboxEvent: (row: VxeTableDataRow) => void = (row) => {
   xTable.value!.toggleCheckboxRow(row)
+}
+
+const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
+  xTable.value!.setRadioRow(row)
 }
 </script>
 <template>
@@ -58,6 +68,13 @@ const toggleCheckboxEvent: (row: VxeTableDataRow) => void = (row) => {
         density="comfortable"
         @update:model-value="toggleCheckboxEvent(row)"
       ></VCheckbox>
+    </template>
+    <template #radio="{ row, checked }">
+      <VRadio
+        density="comfortable"
+        :model-value="checked"
+        @update:model-value="setSelectRow(row)"
+      ></VRadio>
     </template>
   </VxeGrid>
 </template>

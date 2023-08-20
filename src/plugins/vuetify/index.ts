@@ -74,6 +74,7 @@ export default createVuetify({
     },
     VRadio: {
       density: 'compact',
+      color: 'primary',
     },
     VSelect: {
       variant: 'outlined',

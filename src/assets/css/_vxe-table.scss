@@ -1,8 +1,13 @@
+@use "sass:color";
 @use './variable' as *;
 @use './settings' as *;
 
 $vxe-font-size: $font-size-root;
 $vxe-primary-color: $primary;
 $vxe-table-border-radius: $border-radius-root;
+$vxe-table-row-checkbox-checked-background-color: color.adjust($vxe-primary-color, $lightness:32%);
+$vxe-table-row-radio-checked-background-color: color.adjust($vxe-primary-color, $lightness:32%);
+$vxe-table-row-hover-checkbox-checked-background-color: color.adjust($vxe-primary-color, $lightness:30%);
+$vxe-table-row-hover-radio-checked-background-color: color.adjust($vxe-primary-color, $lightness:30%);
 
 @import 'vxe-table/styles/index';

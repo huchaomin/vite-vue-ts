@@ -18,7 +18,6 @@ setup({
     border: 'full',
     columnConfig: {
       minWidth: 100,
-      maxWidth: 200, // TODO 好像没起到作用
       resizable: true,
     },
     rowConfig: {
@@ -28,9 +27,10 @@ setup({
       highlight: true,
       trigger: 'row',
     },
-    //   radioConfig: {
-    //     trigger: 'default'
-    //   },
+    radioConfig: {
+      trigger: 'row',
+      highlight: true,
+    },
     tooltipConfig: {
       showAll: true,
       enterable: true,
@@ -136,9 +136,9 @@ setup({
     TABLE_EXPAND_LOADED: 'vxe-icon-spinner roll',
     TABLE_EXPAND_OPEN: 'vxe-icon-arrow-right rotate90',
     TABLE_EXPAND_CLOSE: 'vxe-icon-arrow-right',
-    TABLE_CHECKBOX_CHECKED: 'vxe-icon-checkbox-checked',
-    TABLE_CHECKBOX_UNCHECKED: 'vxe-icon-checkbox-unchecked',
-    TABLE_CHECKBOX_INDETERMINATE: 'vxe-icon-checkbox-indeterminate',
+    // TABLE_CHECKBOX_CHECKED: 'vxe-icon-checkbox-checked',
+    // TABLE_CHECKBOX_UNCHECKED: 'vxe-icon-checkbox-unchecked',
+    // TABLE_CHECKBOX_INDETERMINATE: 'vxe-icon-checkbox-indeterminate',
     TABLE_RADIO_CHECKED: 'vxe-icon-radio-checked',
     TABLE_RADIO_UNCHECKED: 'vxe-icon-radio-unchecked',
   },
