@@ -18,7 +18,6 @@
 - 日期选择器 使用 vuetify包装
 - 按需加载xe-utils
 - column min-width/单元格提示
-- 滚动条样式
 - 自定义一个formatter, 远程formatter, 字典
 - cmd ' 使用熟练
 - smart clicks
