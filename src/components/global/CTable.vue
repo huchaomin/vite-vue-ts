@@ -46,6 +46,7 @@ const processedColumns = computed(() => {
   return props.columns.map((column) => {
     if (['seq', 'checkbox', 'radio'].includes(column.type as string)) {
       column.width = 58 // vxe-cell 会减2px
+      column.resizable = false
     }
     if (column.type === 'checkbox') {
       column.slots = {

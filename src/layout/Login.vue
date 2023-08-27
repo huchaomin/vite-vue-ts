@@ -74,7 +74,8 @@ const data = [
     role: 'Test',
     sex: 'Women',
     age: 22,
-    address: 'GuangzhouGuangzhouGuangzhouGuangzhou',
+    address:
+      'GuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhou',
   },
   {
     id: 10003,

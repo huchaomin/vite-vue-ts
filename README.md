@@ -13,7 +13,6 @@
 - login时设置 router query没有出现在路由当中
 - 退出登录
 - 最近的tab签
-- vxe-table
 - Dialog 命令式调用
 - 日期选择器 使用 vuetify包装
 - 按需加载xe-utils
