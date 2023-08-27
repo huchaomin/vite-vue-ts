@@ -138,7 +138,7 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
 </template>
 <style lang="scss" scoped>
 /* stylelint-disable-next-line selector-class-pattern */
-::v-deep .vxe-loading--warpper {
+:deep(.vxe-loading--warpper) {
   top: 0;
   transform: none;
 }

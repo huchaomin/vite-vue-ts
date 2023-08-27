@@ -16,7 +16,7 @@ setup({
     stripe: true,
     border: 'full',
     columnConfig: {
-      minWidth: 100,
+      minWidth: 100, // width 生效时该属性不生效
       resizable: true,
     },
     rowConfig: {

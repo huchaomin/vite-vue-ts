@@ -16,14 +16,11 @@
 - 最近的tab签
 - Dialog 命令式调用
 - 日期选择器 使用 vuetify包装
-- 按需加载xe-utils
-- column min-width/单元格提示
 - 自定义一个formatter, 远程formatter, 字典
 - cmd ' 使用熟练
-- smart clicks
-- ::v-deep usage as a combinator has been deprecated. Use :deep(<inner-selector>) instead.
+- smart clicks 点击大括号
 - ts 5.2.2 版本打包报错
-- vxe-table 暂时不能按需加载
+- vxe-table xe-utils 暂时不能按需加载
 - v-defaults-provider login页面可能可以用到
 
 ## 安装eslint 和 parser
