@@ -10,29 +10,22 @@
 - 研究sass怎么用，
 - 写一个c-select 组件支持 diccode
 - self.crypto.randomUUID
-- webfontloader
+- webfontloader vuetify 模板
 - login时设置 router query没有出现在路由当中
 - 退出登录
 - 最近的tab签
 - Dialog 命令式调用
 - 日期选择器 使用 vuetify包装
 - 按需加载xe-utils
-- 更换vxe-table icon
-- 修改vxe-table的样式
 - column min-width/单元格提示
 - 滚动条样式
-- 自定义一个formatter, 远程formatter
+- 自定义一个formatter, 远程formatter, 字典
 - cmd ' 使用熟练
 - smart clicks
-- tooltip 没起作用
 - ::v-deep usage as a combinator has been deprecated. Use :deep(<inner-selector>) instead.
 - ts 5.2.2 版本打包报错
 - vxe-table 暂时不能按需加载
-
-## vite-plugin-checker
-
-- add type checking and linting support for Vite
-- Prompt errors in an overlay UI and terminal
+- v-defaults-provider login页面可能可以用到
 
 ## 安装eslint 和 parser
 
