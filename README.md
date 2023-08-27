@@ -24,6 +24,8 @@
 - cmd ' 使用熟练
 - smart clicks
 - tooltip 没起作用
+- ::v-deep usage as a combinator has been deprecated. Use :deep(<inner-selector>) instead.
+- ts 5.2.2 版本报错
 
 ## vite-plugin-checker
 

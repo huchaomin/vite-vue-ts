@@ -112,7 +112,7 @@ setup({
   },
   icon: {
     // loading
-    LOADING: 'vxe-icon-spinner roll vxe-loading--default-icon',
+    // LOADING: 'vxe-icon-spinner roll vxe-loading--default-icon',
 
     // table
     TABLE_SORT_ASC: 'vxe-icon-caret-up',
