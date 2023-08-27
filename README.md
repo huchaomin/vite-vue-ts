@@ -3,6 +3,7 @@
 ## todo list
 
 - 升级包版本
+- vite-plugin-icons 研究icon的使用 iconify <https://juejin.cn/post/6998059092497399845>
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
 - 分割包
@@ -25,7 +26,8 @@
 - smart clicks
 - tooltip 没起作用
 - ::v-deep usage as a combinator has been deprecated. Use :deep(<inner-selector>) instead.
-- ts 5.2.2 版本报错
+- ts 5.2.2 版本打包报错
+- vxe-table 暂时不能按需加载
 
 ## vite-plugin-checker
 
