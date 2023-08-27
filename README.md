@@ -23,6 +23,7 @@
 - 滚动条样式
 - 自定义一个formatter, 远程formatter
 - cmd ' 使用熟练
+- smart clicks
 - tooltip 没起作用
 
 ## vite-plugin-checker
