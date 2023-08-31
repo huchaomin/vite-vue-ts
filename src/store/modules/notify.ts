@@ -2,7 +2,7 @@ import { type optionsConfig } from '@/plugins/autoImport/$notify.ts'
 export default defineStore('notify', () => {
   const notifications = ref<Map<string, optionsConfig>>(new Map())
   function addNotification(options: optionsConfig): void {
-    const notificationId = self.crypto.randomUUID()
+    const notificationId = _.uniqueId('notification_')
     const timeout = options.timeout
     delete options.timeout
     notifications.value.set(notificationId, options)

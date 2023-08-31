@@ -9,7 +9,6 @@
 - 分割包
 - 研究sass怎么用，
 - 写一个c-select 组件支持 diccode
-- self.crypto.randomUUID
 - webfontloader vuetify 模板
 - login时设置 router query没有出现在路由当中
 - 退出登录
