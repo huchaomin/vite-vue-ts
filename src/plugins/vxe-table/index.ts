@@ -1,9 +1,9 @@
 import { type App } from 'vue'
-import { setup, Grid, Table } from 'vxe-table'
+import { setup, Grid, Table, Tooltip } from 'vxe-table'
 import '@/assets/css/_vxe-table.scss'
 
 setup({
-  // zIndex: 999, // 全局 zIndex 起始值，如果项目的的 z-index 样式值过大时就需要跟随设置更大，避免被遮挡
+  zIndex: 9999, // 全局 zIndex 起始值，如果项目的的 z-index 样式值过大时就需要跟随设置更大，避免被遮挡
   // version: 0, // 版本号，对于某些带数据缓存的功能有用到，上升版本号可以用于重置数据
   // loadingText: '加载中...', // 全局loading提示内容，如果为null则不显示文本
   table: {
@@ -16,14 +16,13 @@ setup({
     stripe: true,
     border: 'full',
     columnConfig: {
-      minWidth: 100,
+      minWidth: 100, // width 生效时该属性不生效
       resizable: true,
     },
     rowConfig: {
       isHover: true,
     },
     tooltipConfig: {
-      showAll: true,
       enterable: true,
     },
 
@@ -76,10 +75,6 @@ setup({
     //   scrollY: {
     //     gt: 100
     //   },
-    //   loading: {
-    //     icon: 'vxe-icon-spinner roll',
-    //     text: '加载中...'
-    //   }
   },
   grid: {
     //   size: null,
@@ -112,7 +107,7 @@ setup({
   },
   icon: {
     // loading
-    LOADING: 'vxe-icon-spinner roll vxe-loading--default-icon',
+    // LOADING: 'vxe-icon-spinner roll vxe-loading--default-icon',
 
     // table
     TABLE_SORT_ASC: 'vxe-icon-caret-up',
@@ -137,6 +132,6 @@ setup({
 
 export default {
   install: (app: App): void => {
-    app.use(Grid).use(Table)
+    app.use(Grid).use(Table).use(Tooltip)
   },
 }

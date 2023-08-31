@@ -46,6 +46,7 @@ const processedColumns = computed(() => {
   return props.columns.map((column) => {
     if (['seq', 'checkbox', 'radio'].includes(column.type as string)) {
       column.width = 58 // vxe-cell 会减2px
+      column.resizable = false
     }
     if (column.type === 'checkbox') {
       column.slots = {
@@ -137,7 +138,7 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
 </template>
 <style lang="scss" scoped>
 /* stylelint-disable-next-line selector-class-pattern */
-::v-deep .vxe-loading--warpper {
+:deep(.vxe-loading--warpper) {
   top: 0;
   transform: none;
 }

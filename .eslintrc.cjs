@@ -136,13 +136,13 @@ module.exports = {
       },
     ],
     'vue/singleline-html-element-content-newline': 'off', // 单行html元素内容不要换行
-    // '@typescript-eslint/restrict-plus-operands': ['error', { // @typescript-eslint/eslint-plugin 升级到可能6.1以上
-    //   allowAny: false,
-    //   allowBoolean: false,
-    //   allowNullish: false,
-    //   allowNumberAndString: false,
-    //   allowRegExp: false,
-    //   skipCompoundAssignments: true,
-    // }]
+    '@typescript-eslint/restrict-plus-operands': ['error', { // @typescript-eslint/eslint-plugin 升级到可能6.1以上
+      allowAny: false,
+      allowBoolean: false,
+      allowNullish: false,
+      allowNumberAndString: false,
+      allowRegExp: false,
+      skipCompoundAssignments: true,
+    }]
   },
 }
