@@ -44,6 +44,7 @@ export default defineConfig((...arg) => {
       alias: {
         '@': resolvePath(__dirname, 'src'),
         img: resolvePath(__dirname, 'src/assets/images'),
+        video: resolvePath(__dirname, 'src/assets/video'),
       },
     },
     css: {
@@ -154,9 +155,8 @@ export default defineConfig((...arg) => {
       entries: ['./src/**/*.vue'],
     },
     server: {
-      host: true, // 可以用ip访问
-      port: '9001',
-      strictPort: true,
+      host: '0.0.0.0', // 可以用ip访问
+      port: 9001,
       open: false,
       proxy: {
         // [`/${apiPrefix}/token`]: {

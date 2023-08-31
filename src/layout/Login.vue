@@ -97,25 +97,25 @@ const data = [
 </script>
 
 <template>
-  <div class="auth_wrapper d-flex align-center justify-center pa-4">
+  <div
+    class="auth_wrapper d-flex align-center justify-end overflow-hidden pa-4"
+  >
+    <video class="video" src="~video/login.mp4" autoplay loop muted></video>
+    <img class="logo" src="~img/logo.png" />
     <VCard class="pa-4" width="448">
-      <VCardItem class="justify-center">
-        <VCardTitle class="text-2xl font-weight-bold">
-          资产评估管理系统
-        </VCardTitle>
-      </VCardItem>
-
-      <VCardText class="pt-2">
-        <p class="mb-0 text-center">擎聪科技</p>
-      </VCardText>
-
+      <template #title>
+        <div class="d-flex align-center">
+          <img style="width: 86px" src="~img/robot.png" />
+          <span class="text-h5 pl-6">擎聪资产定价平台</span>
+        </div>
+      </template>
       <VCardText>
         <VForm ref="form" @submit.prevent="handleSubmit">
           <VTextField
             v-model="formData.username"
             :rules="rules.username"
             autofocus
-            placeholder="admin"
+            placeholder="请输入用户名"
             density="comfortable"
             label="帐户名"
           ></VTextField>
@@ -165,8 +165,28 @@ const data = [
 </template>
 <style lang="scss" scoped>
 .auth_wrapper {
-  height: 100%;
-  background: url('img/background.svg') no-repeat 50%;
-  background-size: 100%;
+  position: relative;
+  min-height: 100%;
+
+  .logo {
+    position: absolute;
+    top: 18px;
+    left: 25px;
+    width: 200px;
+  }
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.v-card {
+  margin-right: 7%;
+  border-radius: 15px;
+  opacity: 0.95;
 }
 </style>
