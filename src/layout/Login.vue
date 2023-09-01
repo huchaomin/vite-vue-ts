@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import rules from '@/constant/rules'
-import { randomImage, login } from '@/api/sys'
+import { randomImage } from '@/api/sys'
 import { type VForm } from 'vuetify/components'
 import { type VxeGridPropTypes } from 'vxe-table'
 
@@ -31,23 +31,19 @@ getCaptcha()
 const form: Ref<InstanceType<typeof VForm> | null> = ref(null)
 async function handleSubmit(): Promise<void> {
   const { valid } = await form.value!.validate()
-  if (valid) {
-    const { data } = await $api(login, {
-      ...formData,
-      checkKey: captchaTime.value,
-    })
-    if (data.value !== null) {
-      userStore.token = data.value.result.token
-      $notify('登录成功！')
-      userStore.getRoutersAndAuth().then(() => {
-        const redirect = route.query.redirect as string
-        const name = router.hasRoute(redirect) ? redirect : 'index'
-        router.replace({ name })
-      })
-    } else {
-      formData.captcha = ''
-      getCaptcha()
-    }
+  if (!valid) return
+  const loginResult = await userStore.login({
+    ...formData,
+    checkKey: captchaTime.value,
+  })
+  if (loginResult === null) {
+    formData.captcha = ''
+    getCaptcha()
+  } else {
+    $notify('登录成功！')
+    const redirect = route.query.redirect as string
+    const name = router.hasRoute(redirect) ? redirect : 'index'
+    router.replace({ name })
   }
 }
 
@@ -123,7 +119,7 @@ const data = [
             v-model="formData.password"
             :rules="rules.password"
             label="密码"
-            placeholder="123456"
+            placeholder="请输入密码"
             autocomplete
             density="comfortable"
             :type="isPasswordVisible ? 'text' : 'password'"
@@ -187,6 +183,7 @@ const data = [
 .v-card {
   margin-right: 7%;
   border-radius: 15px;
+  box-shadow: 0 10px 60px 1px rgb(46 61 98 / 10%);
   opacity: 0.95;
 }
 </style>

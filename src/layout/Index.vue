@@ -1,21 +1,11 @@
 <script setup lang="ts">
 import LeftDrawer from './LeftDrawer.vue'
-const commonStore = useCommonStore()
+import TopHeader from './TopHeader.vue'
 </script>
 <template>
   <VLayout>
-    <VAppBar flat :border="true" density="compact">
-      <template #prepend>
-        <VAppBarNavIcon
-          @click="commonStore.drawerOpen = !commonStore.drawerOpen"
-        ></VAppBarNavIcon>
-      </template>
-      <VAppBarTitle>资产评估管理系统</VAppBarTitle>
-      <template #append>
-        <VBtn icon="mdi-dots-vertical"></VBtn>
-      </template>
-    </VAppBar>
     <LeftDrawer></LeftDrawer>
+    <TopHeader></TopHeader>
     <VMain>
       <div
         class="pa-4 overflow-y-auto"

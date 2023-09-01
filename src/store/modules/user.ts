@@ -1,4 +1,4 @@
-import { user } from '@/api/sys'
+import { user, login } from '@/api/sys'
 import { type RouteRecordRaw } from 'vue-router'
 import allRoutes from '@/constant/routes'
 import router from '@/router'
@@ -55,41 +55,51 @@ export default defineStore(
   'user',
   () => {
     const token = ref('')
+    const userInfo: Ref<{
+      realname?: string
+    }> = ref({})
     const routersRaw: Ref<RouteRecordRaw[]> = ref([])
     const auth = ref([])
     const allAuth = ref([])
 
-    function getRoutersAndAuth(): Promise<any> {
-      return new Promise((resolve, reject) => {
-        $api(user).then(({ data }) => {
-          const result = data.value?.result
-          if (result === undefined) {
-            reject()
-          } else {
-            routersRaw.value = markRaw(filterRouters(result.menu))
-            console.log(routersRaw.value)
-            routersRaw.value.forEach((item) => {
-              router.addRoute(item)
-            })
-            auth.value = result.auth
-            allAuth.value = result.allAuth
-            resolve(result)
-          }
-        })
+    async function loginStart(loginData: any): Promise<null | undefined> {
+      const { data } = await $api(login, loginData)
+      if (data.value === null) return null
+      token.value = data.value.result.token
+      userInfo.value = data.value.result.userInfo
+      return await getRoutersAndAuth()
+    }
+
+    function logout(): void {
+      console.log('logout')
+    }
+
+    async function getRoutersAndAuth(): Promise<null | undefined> {
+      const { data } = await $api(user)
+      if (data.value === null) return null
+      const result = data.value.result
+      routersRaw.value = markRaw(filterRouters(result.menu))
+      routersRaw.value.forEach((item) => {
+        router.addRoute(item)
       })
+      auth.value = result.auth
+      allAuth.value = result.allAuth
     }
 
     return {
       token,
+      userInfo,
       routersRaw,
       auth,
       allAuth,
+      login: loginStart,
+      logout,
       getRoutersAndAuth,
     }
   },
   {
     persist: {
-      paths: ['token'],
+      paths: ['token', 'userInfo'],
     },
   },
 )

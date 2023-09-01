@@ -49,6 +49,10 @@ export default createVuetify({
       lines: false,
       density: 'compact',
     },
+    VMenu: {
+      openDelay: 100,
+      transition: 'slide-y-transition',
+    },
     VAlert: {
       variant: 'tonal',
       density: 'compact',
