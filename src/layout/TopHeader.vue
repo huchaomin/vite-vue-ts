@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const commonStore = useCommonStore()
 const userStore = useUserStore()
+
+function logout(): void {}
 </script>
 <template>
   <VAppBar flat :border="true" density="comfortable">
@@ -20,7 +22,7 @@ const userStore = useUserStore()
         {{ userStore.userInfo.realname }}
         <VMenu open-on-hover activator="parent">
           <VList>
-            <VListItem title="退出登录" @click="userStore.logout"></VListItem>
+            <VListItem title="退出登录" @click="logout"></VListItem>
           </VList>
         </VMenu>
       </VBtn>
