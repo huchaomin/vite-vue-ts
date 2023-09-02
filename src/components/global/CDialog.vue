@@ -1,6 +1,7 @@
 <script setup lang="ts">
 export interface PropsType {
   modelValue: boolean
+  prependIcon?: string | undefined
   title?: string
   width?: string | number
   showClose?: boolean
@@ -11,6 +12,7 @@ export interface PropsType {
 }
 
 const props = withDefaults(defineProps<PropsType>(), {
+  prependIcon: undefined,
   title: '提示',
   width: 680,
   showClose: true,
@@ -49,7 +51,18 @@ function confirm(): void {
 
 <template>
   <VDialog v-model="visible" width="700">
-    <VCard :title="title">
+    <VCard :prepend-icon="prependIcon">
+      <template #title>
+        <span>{{ title }}</span>
+        <VBtn
+          v-if="showClose"
+          icon="mdi-close"
+          size="small"
+          variant="text"
+          class="icon_close"
+          @click="cancel"
+        ></VBtn>
+      </template>
       <VCardText>
         <slot></slot>
       </VCardText>
@@ -60,3 +73,16 @@ function confirm(): void {
     </VCard>
   </VDialog>
 </template>
+<style lang="scss" scoped>
+/* stylelint-disable-next-line selector-class-pattern */
+:deep(.v-card-title) {
+  height: 44px;
+  font-size: 1.43rem;
+  line-height: 44px !important;
+}
+
+.icon_close {
+  position: absolute;
+  right: 14px;
+}
+</style>

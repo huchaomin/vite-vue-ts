@@ -11,7 +11,7 @@ $confirm(content, content)
     <RouterView></RouterView>
     <VOverlay
       :model-value="commonStore.loading"
-      class="align-start justify-center"
+      class="align-start justify-center b_filter"
     >
       <VProgressLinear
         color="primary"

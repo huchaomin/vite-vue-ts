@@ -36,7 +36,7 @@ body {
   }
 
   /* stylelint-disable-next-line selector-class-pattern */
-  .v-overlay__scrim, .vxe-grid.is--loading::before {
+  .b_filter, .vxe-grid.is--loading::before {
     background-color: rgb(255 255 255 / 72%);
     backdrop-filter: blur(1px) saturate(167%);
     opacity: 1;
