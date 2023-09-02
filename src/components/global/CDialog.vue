@@ -50,7 +50,7 @@ function confirm(): void {
 </script>
 
 <template>
-  <VDialog v-model="visible" width="700">
+  <VDialog v-model="visible" :width="width">
     <VCard :prepend-icon="prependIcon">
       <template #title>
         <span>{{ title }}</span>

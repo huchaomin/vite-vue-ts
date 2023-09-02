@@ -9,4 +9,7 @@ declare global {
   type RequirePartialKeys<T, K extends keyof T> = {
     [P in K]-?: T[P]
   } & Pick<T, Exclude<keyof T, K>>
+  type AllowRefValue<T> = {
+    [P in keyof T]: T[P] | Ref<T[P]>
+  }
 }

@@ -2,9 +2,6 @@
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()
-const content = ref('123123')
-window.content = content
-$confirm(content, content)
 </script>
 <template>
   <VApp>
