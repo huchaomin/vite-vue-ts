@@ -303,6 +303,8 @@
     "watchTriggerable": "readonly",
     "watchWithFilter": "readonly",
     "whenever": "readonly",
-    "_": "readonly"
+    "_": "readonly",
+    "useDialogStore": "readonly",
+    "$confirm": "readonly"
   }
 }

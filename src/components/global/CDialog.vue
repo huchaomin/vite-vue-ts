@@ -1,12 +1,29 @@
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    modelValue: boolean
-    title?: string
-  }>(),
-  { title: '提示' },
-)
-const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
+export interface PropsType {
+  modelValue: boolean
+  title?: string
+  width?: string | number
+  showClose?: boolean
+  showCancel?: boolean
+  showConfirm?: boolean
+  hideAfterCancel?: boolean
+  hideAfterConfirm?: boolean
+}
+
+const props = withDefaults(defineProps<PropsType>(), {
+  title: '提示',
+  width: 680,
+  showClose: true,
+  showCancel: true,
+  showConfirm: true,
+  hideAfterCancel: true,
+  hideAfterConfirm: true,
+})
+const emit = defineEmits<{
+  (event: 'update:modelValue', payload: boolean): void
+  (event: 'confirm'): void
+  (event: 'cancel'): void
+}>()
 
 const visible = computed({
   get: () => props.modelValue,
@@ -14,6 +31,20 @@ const visible = computed({
     emit('update:modelValue', val)
   },
 })
+
+function cancel(): void {
+  if (props.hideAfterCancel) {
+    emit('update:modelValue', false)
+  }
+  emit('cancel')
+}
+
+function confirm(): void {
+  if (props.hideAfterConfirm) {
+    emit('update:modelValue', false)
+  }
+  emit('confirm')
+}
 </script>
 
 <template>
@@ -22,9 +53,9 @@ const visible = computed({
       <VCardText>
         <slot></slot>
       </VCardText>
-      <div class="v-card-actions justify-end">
-        <VBtn variant="tonal" @click="visible = false">取消</VBtn>
-        <VBtn>确认</VBtn>
+      <div v-if="showCancel || showConfirm" class="v-card-actions justify-end">
+        <VBtn v-if="showCancel" variant="tonal" @click="cancel">取消</VBtn>
+        <VBtn v-if="showConfirm" @click="confirm">确认</VBtn>
       </div>
     </VCard>
   </VDialog>

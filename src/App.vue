@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
+const dialogStore = useDialogStore()
+const content = ref('123123')
+window.content = content
+$confirm(content, content)
 </script>
 <template>
   <VApp>
@@ -19,12 +23,23 @@ const notifyStore = useNotifyStore()
     <div class="notification_container">
       <VSlideYTransition group>
         <VAlert
-          v-for="notification in notifyStore.notifications"
+          v-for="notification in notifyStore.collection"
           :key="notification[0]"
           v-bind="notification[1]"
         ></VAlert>
       </VSlideYTransition>
     </div>
+    <CDialog
+      v-for="dialog in dialogStore.collection"
+      :key="dialog[0]"
+      v-bind="dialog[1].dialogProps"
+      @update:model-value="(val) => dialogStore.update(val, dialog[0])"
+    >
+      <Component
+        :is="dialog[1].component"
+        v-bind="dialog[1].componentProps"
+      ></Component>
+    </CDialog>
   </VApp>
 </template>
 <style lang="scss" scoped>

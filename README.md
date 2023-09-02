@@ -23,6 +23,17 @@
 - v-defaults-provider login页面可能可以用到
 - 添加进场loading
 - input 高度问题
+- 命令式调用dialog content-props close 传响应式数据 何时销毁 抛出传进去的组件实例
+- defineOptions
+
+  ```ts
+  defineOptions({
+    inheritAttrs: false,
+    customOptions: {
+      /* ... */
+    }
+  })
+  ```
 
 ## 安装eslint 和 parser
 

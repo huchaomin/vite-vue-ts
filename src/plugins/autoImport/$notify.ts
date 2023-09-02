@@ -29,7 +29,7 @@ const create: createFn = (
   } = {},
 ) => {
   const notifyStore = useNotifyStore()
-  notifyStore.addNotification({
+  notifyStore.add({
     text,
     type,
     title,
