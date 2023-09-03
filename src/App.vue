@@ -2,6 +2,8 @@
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()
+
+$confirm('title', 'text')
 </script>
 <template>
   <VApp>
@@ -35,6 +37,10 @@ const dialogStore = useDialogStore()
       <Component
         :is="dialog[1].component"
         v-bind="dialog[1].componentProps"
+        @vue:mounted="
+          (vnode: VNode) => dialogStore.setComponentRef(dialog[0], vnode)
+        "
+        @vue:unmounted="() => dialogStore.deleteComponentRef(dialog[0])"
       ></Component>
     </CDialog>
   </VApp>
