@@ -1,16 +1,40 @@
 import { type UnwrapNestedRefs, type Raw } from 'vue'
-import { type PropsType as DialogPropsType } from '@/components/global/CDialog.vue'
+import type CDialog from '@/components/global/CDialog.vue'
 
-interface AllowRefPropsType<T extends new () => ComponentPublicInstance> {
-  dialogProps: AllowRefValue<DialogPropsType>
+interface BasePropsEmitsType<T extends new () => ComponentPublicInstance> {
+  dialogProps: AllowRefValue<InstanceType<typeof CDialog>['$props']>
+  dialogEmits: Partial<InstanceType<typeof CDialog>['$emit']>
   componentProps: AllowRefValue<InstanceType<T>['$props']>
+  componentEmits: Partial<InstanceType<T>['$emit']>
 }
 
+type exposedRefType = NonNullable<VNode['component']>['exposed'] | null
+
 interface MapValueType<T extends new () => ComponentPublicInstance> {
-  dialogProps: UnwrapNestedRefs<AllowRefPropsType<T>['dialogProps']>
+  dialogPE: UnwrapNestedRefs<
+    Omit<BasePropsEmitsType<T>['dialogProps'], 'modelValue'> &
+      BasePropsEmitsType<T>['dialogEmits'] & {
+        modelValue: boolean
+      }
+  >
   component: Raw<T>
-  componentProps: UnwrapNestedRefs<AllowRefPropsType<T>['componentProps']>
-  componentRef: NonNullable<VNode['component']>['exposed'] | null
+  componentPE: UnwrapNestedRefs<
+    BasePropsEmitsType<T>['componentProps'] &
+      BasePropsEmitsType<T>['componentEmits']
+  > | null
+  componentRef: exposedRefType
+  dialogRef: exposedRefType
+}
+
+export type addType<T extends new () => ComponentPublicInstance> = (
+  dialogPE: Omit<BasePropsEmitsType<T>['dialogProps'], 'modelValue'> &
+    BasePropsEmitsType<T>['dialogEmits'],
+  component: T,
+  componentPE?: BasePropsEmitsType<T>['componentProps'] &
+    BasePropsEmitsType<T>['componentEmits'],
+) => {
+  componentRef: MapValueType<T>['componentRef']
+  dialogRef: MapValueType<T>['dialogRef']
 }
 
 export default defineStore('dialog', <
@@ -18,28 +42,28 @@ export default defineStore('dialog', <
 >() => {
   const collection = reactive<Map<string, MapValueType<T>>>(new Map())
 
-  function add(
-    dialogProps: Omit<AllowRefPropsType<T>['dialogProps'], 'modelValue'>,
-    component: T,
-    componentProps: AllowRefPropsType<T>['componentProps'],
-  ): MapValueType<T>['componentRef'] {
+  const add: addType<T> = (dialogPE, component, componentPE) => {
     const dialogId = _.uniqueId('dialog_')
     const componentRef = ref(null)
+    const dialogRef = ref(null)
     collection.set(dialogId, {
-      dialogProps: reactive({
-        ...dialogProps,
+      dialogPE: reactive({
         modelValue: true,
+        ...dialogPE,
       }),
       component: markRaw(component),
-      componentProps: reactive(componentProps),
+      componentPE: componentPE === undefined ? null : reactive(componentPE),
       componentRef,
+      dialogRef,
     })
-    return componentRef
+    return { componentRef, dialogRef }
   }
 
   function update(value: boolean, id: string): void {
-    collection.get(id)!.dialogProps.modelValue = value
+    collection.get(id)!.dialogPE.modelValue = value
     if (!value) {
+      collection.get(id)!.componentRef = null
+      collection.get(id)!.dialogRef = null
       setTimeout(() => {
         collection.delete(id)
       }, 2000) // 等待动画结束
@@ -50,8 +74,8 @@ export default defineStore('dialog', <
     collection.get(id)!.componentRef = vnode.component?.exposed ?? null
   }
 
-  function deleteComponentRef(id: string): void {
-    collection.get(id)!.componentRef = null
+  function setDialogRef(id: string, vnode: VNode): void {
+    collection.get(id)!.dialogRef = vnode.component?.exposed ?? null
   }
 
   return {
@@ -59,6 +83,6 @@ export default defineStore('dialog', <
     add,
     update,
     setComponentRef,
-    deleteComponentRef,
+    setDialogRef,
   }
 })

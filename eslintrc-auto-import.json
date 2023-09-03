@@ -305,6 +305,7 @@
     "whenever": "readonly",
     "_": "readonly",
     "useDialogStore": "readonly",
-    "$confirm": "readonly"
+    "$confirm": "readonly",
+    "$dialog": "readonly"
   }
 }

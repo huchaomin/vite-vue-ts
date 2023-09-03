@@ -3,16 +3,24 @@ import ConfirmContent from './modules/ConfirmContent.vue'
 export default function (
   title: string | Ref<string>,
   content: string | Ref<string>,
-): void {
+): Promise<void> {
   const dialogStore = useDialogStore()
-  dialogStore.add(
-    {
-      title,
-      width: 400,
-    },
-    ConfirmContent,
-    {
-      content,
-    },
-  )
+  return new Promise((resolve, reject) => {
+    dialogStore.add(
+      {
+        title,
+        width: 400,
+        onConfirm: () => {
+          resolve()
+        },
+        onCancel: () => {
+          reject()
+        },
+      },
+      ConfirmContent,
+      {
+        content,
+      },
+    )
+  })
 }

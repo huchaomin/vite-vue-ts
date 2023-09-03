@@ -23,7 +23,6 @@
 - v-defaults-provider login页面可能可以用到
 - 添加进场loading
 - input 高度问题
-- 命令式调用dialog 抛出传进去的组件实例 回调
 - defineOptions
 
   ```ts

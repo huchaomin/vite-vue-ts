@@ -36,6 +36,7 @@ export default createVuetify({
     },
     VDialog: {
       persistent: true,
+      retainFocus: false,
     },
     VSnackbar: {
       location: 'top right',
