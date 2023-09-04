@@ -122,6 +122,7 @@ function add(): void {
     <VSelect
       v-model="formData.assetPkgStatus"
       :items="assetPkgStatus"
+      chips
       label="资产包状态"
     ></VSelect>
     <div>

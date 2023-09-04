@@ -1,5 +1,6 @@
 import { type RouteRecordRaw } from 'vue-router'
 
+// 路由name必填，方便remove
 export default [
   {
     path: '/',

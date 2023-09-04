@@ -94,6 +94,9 @@ export default defineStore(
       userInfo.value = {}
       auth.value = []
       allAuth.value = []
+      routersRaw.value.forEach((item) => {
+        router.removeRoute(item.name as string)
+      })
       routersRaw.value = []
       router.push({ name: 'login' })
     }

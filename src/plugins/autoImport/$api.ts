@@ -7,7 +7,7 @@ import { setUrlPrefix } from '@/utils/url'
 import signMd5Utils from '@/utils/signMd5Utils.js'
 
 let isExpiration = false // 登陆是否已经过期
-type dataType = Record<string, any> | undefined
+type dataType = Record<string, string> | undefined
 
 function handleUrlAndData(
   url: string,
@@ -18,10 +18,10 @@ function handleUrlAndData(
   Object.keys(data).forEach((key) => {
     const reg = new RegExp(`\\{${key}\\}`, 'g')
     if (reg.test(url)) {
-      url = url.replace(reg, data[key])
+      url = url.replace(reg, data[key]) // 这里就不需要编码了，这里不属于参数，请后端同学规范接口传参
       delete data[key]
     } else if (method === 'get') {
-      query += `${key}=${data[key] as string}&`
+      query += `${key}=${encodeURIComponent(data[key])}&`
     }
   })
   if (query !== '?') {

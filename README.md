@@ -6,22 +6,19 @@
 - vite-plugin-icons 研究icon的使用 iconify <https://juejin.cn/post/6998059092497399845>
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
-- 分割包
 - 研究sass怎么用，
 - 写一个c-select 组件支持 diccode
 - webfontloader vuetify 模板
 - login时设置 router query没有出现在路由当中
 - 最近的tab签
-- Dialog 命令式调用
 - 日期选择器 使用 vuetify包装
-- 自定义一个formatter, 远程formatter, 字典
+- 自定义一个formatter, 远程formatter(能不能和渲染器一起使用), 字典
 - cmd ' 使用熟练
 - smart clicks 点击大括号
 - ts 5.2.2 版本打包报错
 - vxe-table xe-utils 暂时不能按需加载
 - v-defaults-provider login页面可能可以用到
 - 添加进场loading
-- 请求url编码问题
 - input 高度问题
 - defineOptions
 
