@@ -9,13 +9,12 @@ function logout(): void {
 }
 </script>
 <template>
-  <VAppBar flat :border="true" density="comfortable">
+  <VAppBar flat density="comfortable">
     <template #prepend>
       <VAppBarNavIcon
         @click="commonStore.drawerOpen = !commonStore.drawerOpen"
       ></VAppBarNavIcon>
     </template>
-    <VAppBarTitle>资产评估管理系统</VAppBarTitle>
     <template #append>
       <VBtn
         prepend-icon="mdi-account-circle-outline"

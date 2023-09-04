@@ -7,7 +7,7 @@ import { setUrlPrefix } from '@/utils/url'
 import signMd5Utils from '@/utils/signMd5Utils.js'
 
 let isExpiration = false // 登陆是否已经过期
-type dataType = Record<string, string> | undefined
+type dataType = Record<string, any> | undefined
 
 function handleUrlAndData(
   url: string,
