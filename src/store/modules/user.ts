@@ -1,4 +1,4 @@
-import { user, login } from '@/api/sys'
+import { user, login, logout } from '@/api/sys'
 import { type RouteRecordRaw } from 'vue-router'
 import allRoutes from '@/constant/routes'
 import router from '@/router'
@@ -70,8 +70,11 @@ export default defineStore(
       return await getRoutersAndAuth()
     }
 
-    function logout(): void {
-      console.log('logout')
+    async function logoutStart(): Promise<null | undefined> {
+      const { data } = await $api(logout)
+      if (data.value === null) return null
+      clearSession()
+      $notify('退出登录成功！')
     }
 
     async function getRoutersAndAuth(): Promise<null | undefined> {
@@ -86,6 +89,15 @@ export default defineStore(
       allAuth.value = result.allAuth
     }
 
+    function clearSession(): void {
+      token.value = ''
+      userInfo.value = {}
+      auth.value = []
+      allAuth.value = []
+      routersRaw.value = []
+      router.push({ name: 'login' })
+    }
+
     return {
       token,
       userInfo,
@@ -93,8 +105,9 @@ export default defineStore(
       auth,
       allAuth,
       login: loginStart,
-      logout,
+      logout: logoutStart,
       getRoutersAndAuth,
+      clearSession,
     }
   },
   {

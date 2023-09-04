@@ -2,7 +2,11 @@
 const commonStore = useCommonStore()
 const userStore = useUserStore()
 
-function logout(): void {}
+function logout(): void {
+  $confirm('确定要退出登录吗？').then(() => {
+    userStore.logout()
+  })
+}
 </script>
 <template>
   <VAppBar flat :border="true" density="comfortable">

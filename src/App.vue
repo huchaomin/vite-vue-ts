@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import Login from '@/layout/Login.vue'
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()
-
-$dialog({}, Login)
 </script>
 <template>
   <VApp>

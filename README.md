@@ -11,7 +11,6 @@
 - 写一个c-select 组件支持 diccode
 - webfontloader vuetify 模板
 - login时设置 router query没有出现在路由当中
-- 退出登录
 - 最近的tab签
 - Dialog 命令式调用
 - 日期选择器 使用 vuetify包装
@@ -22,6 +21,7 @@
 - vxe-table xe-utils 暂时不能按需加载
 - v-defaults-provider login页面可能可以用到
 - 添加进场loading
+- 请求url编码问题
 - input 高度问题
 - defineOptions
 

@@ -1,8 +1,8 @@
 import ConfirmContent from './modules/ConfirmContent.vue'
 
 export default function (
-  title: string | Ref<string>,
   content: string | Ref<string>,
+  title: string | Ref<string> = '提示', // ts默认值和可选参数不能一起使用
 ): Promise<void> {
   const dialogStore = useDialogStore()
   return new Promise((resolve, reject) => {

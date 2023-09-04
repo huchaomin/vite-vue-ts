@@ -3,7 +3,6 @@ import {
   type UseFetchOptions,
   createFetch,
 } from '@vueuse/core'
-import router from '@/router'
 import { setUrlPrefix } from '@/utils/url'
 import signMd5Utils from '@/utils/signMd5Utils.js'
 
@@ -42,6 +41,7 @@ interface apiConfig {
   readonly loading?: boolean // 是否显示loading
   readonly isWhiteApi?: boolean // 是否是白名单接口（不需要登陆）
   readonly responseType?: string // 返回数据类型
+  readonly headers?: Record<string, string> // 请求头
 }
 
 type ctxType =
@@ -64,11 +64,7 @@ function errHandler(ctx: ctxType): void {
         $notify.error('很抱歉，登录已过期，请重新登录', { title: '系统提示' })
       }
       isExpiration = true
-      userStore.token = ''
-      // TODO 啥时候清除store缓存
-      router.push({
-        name: 'login',
-      })
+      userStore.clearSession()
       break
     default:
       $notify.error(data?.message ?? '网络错误', { title: '系统提示' })
@@ -95,6 +91,7 @@ export default function fetchWrapper(
     immediate = true,
     loading = true,
     responseType = 'json',
+    headers = {},
   } = config
   const processedUrl = handleUrlAndData(url, data, method) // data 也改变了
   const userStore = useUserStore()
@@ -106,19 +103,22 @@ export default function fetchWrapper(
         if (loading) {
           $loading.show()
         }
-        if (!isWhiteApi && isExpiration) {
-          cancel()
-        }
         const signHeader: Record<string, string> = {
           'X-Sign': signMd5Utils.getSign(url, data),
           'X-TIMESTAMP': signMd5Utils.getDateTimeToString(),
         }
         if (userStore.token) {
+          isExpiration = false
           signHeader['X-Access-Token'] = userStore.token
         }
         options.headers = {
           ...(options.headers ?? {}),
           ...signHeader,
+          ...headers,
+        }
+        // 非白名单接口，且登陆已过期直接取消请求
+        if (!isWhiteApi && isExpiration) {
+          cancel()
         }
         return { options }
       },

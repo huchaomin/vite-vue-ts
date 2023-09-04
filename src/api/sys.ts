@@ -13,9 +13,13 @@ export const login = {
   isWhiteApi: true,
 }
 
+export const logout = {
+  url: `${prefix}/logout`,
+  method: 'post',
+}
+
 export const user = {
   url: `${prefix}/permission/getUserPermissionByToken`,
-  isWhiteApi: true,
 }
 
 export const dict = {
