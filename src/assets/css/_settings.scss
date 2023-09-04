@@ -1,7 +1,7 @@
 // can be used in your own components to access vuetify's variables.
 @forward 'vuetify/settings' with (
   $font-size-root: 14px,
-  $border-radius-root: 2px,
+  // $border-radius-root: 2px,
   $button-height: 40px,
   $button-line-height: inherit,
   $button-font-size: 1rem,
@@ -26,6 +26,7 @@
   $toolbar-prepend-btn-margin-start: 0,
 
   $card-elevation: 6,
+  $button-card-actions-margin: 12px,
   $shadow-key-umbra: (
     0: (
       0 0 0 0 var(--v-shadow-key-umbra-opacity),

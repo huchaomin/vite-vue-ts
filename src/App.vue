@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import Login from '@/layout/Login.vue'
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
+const dialogStore = useDialogStore()
+
+$dialog({}, Login)
 </script>
 <template>
   <VApp>
     <RouterView></RouterView>
     <VOverlay
       :model-value="commonStore.loading"
-      class="align-start justify-center"
+      class="align-start justify-center b_filter"
     >
       <VProgressLinear
         color="primary"
@@ -19,12 +23,29 @@ const notifyStore = useNotifyStore()
     <div class="notification_container">
       <VSlideYTransition group>
         <VAlert
-          v-for="notification in notifyStore.notifications"
+          v-for="notification in notifyStore.collection"
           :key="notification[0]"
           v-bind="notification[1]"
         ></VAlert>
       </VSlideYTransition>
     </div>
+    <CDialog
+      v-for="dialog in dialogStore.collection"
+      :key="dialog[0]"
+      v-bind="dialog[1].dialogPE"
+      @update:model-value="(val) => dialogStore.update(val, dialog[0])"
+      @vue:mounted="
+        (vnode: VNode) => dialogStore.setDialogRef(dialog[0], vnode)
+      "
+    >
+      <Component
+        :is="dialog[1].component"
+        v-bind="dialog[1].componentPE"
+        @vue:mounted="
+          (vnode: VNode) => dialogStore.setComponentRef(dialog[0], vnode)
+        "
+      ></Component>
+    </CDialog>
   </VApp>
 </template>
 <style lang="scss" scoped>

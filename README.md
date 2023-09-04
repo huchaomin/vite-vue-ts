@@ -23,6 +23,18 @@
 - v-defaults-provider login页面可能可以用到
 - 添加进场loading
 - input 高度问题
+- defineOptions
+
+  ```ts
+  defineOptions({
+    inheritAttrs: false,
+    customOptions: {
+      /* ... */
+    }
+  })
+  ```
+
+- @vnode-*hooks in templates are deprecated. Use the vue: prefix instead. For example, @vnode-mounted should be changed to @vue:mounted. @vnode-* hooks support will be removed in 3.4
 
 ## 安装eslint 和 parser
 

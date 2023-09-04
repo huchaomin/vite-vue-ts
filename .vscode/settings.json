@@ -13,6 +13,7 @@
     "stylelintcache",
     "tscnofig",
     "unplugin",
+    "vnode",
     "vuetify",
     "vueuse"
   ]

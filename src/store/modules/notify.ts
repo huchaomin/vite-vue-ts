@@ -1,21 +1,21 @@
 import { type optionsConfig } from '@/plugins/autoImport/$notify.ts'
 export default defineStore('notify', () => {
-  const notifications = ref<Map<string, optionsConfig>>(new Map())
-  function addNotification(options: optionsConfig): void {
+  const collection = ref<Map<string, optionsConfig>>(new Map())
+  function add(options: optionsConfig): void {
     const notificationId = _.uniqueId('notification_')
     const timeout = options.timeout
     delete options.timeout
-    notifications.value.set(notificationId, options)
+    collection.value.set(notificationId, options)
     setTimeout(() => {
-      removeNotification(notificationId)
+      remove(notificationId)
     }, timeout)
   }
 
-  function removeNotification(notificationId: string): void {
-    notifications.value.delete(notificationId)
+  function remove(notificationId: string): void {
+    collection.value.delete(notificationId)
   }
   return {
-    notifications,
-    addNotification,
+    collection,
+    add,
   }
 })
