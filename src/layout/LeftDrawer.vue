@@ -4,6 +4,7 @@ import MenuNode from './MenuNode.vue'
 const userStore = useUserStore()
 const commonStore = useCommonStore()
 const { mainStyles } = useLayout()
+const appName = APP_NAME
 const headerHeight = computed(() => {
   return mainStyles.value['--v-layout-top']
 })
@@ -11,11 +12,11 @@ const headerHeight = computed(() => {
 <template>
   <VNavigationDrawer v-model="commonStore.drawerOpen">
     <div
-      class="logo_wrapper d-flex align-center pa-2"
+      class="logo_wrapper d-flex align-center px-4 py-2"
       :style="{ height: headerHeight }"
     >
       <img class="logo" src="~img/logo.png" />
-      <span class="text-h6 pl-6">资产定价平台</span>
+      <span class="text-h6 pl-6">{{ appName }}</span>
     </div>
     <div
       :style="{ height: `calc(100% - ${headerHeight})` }"

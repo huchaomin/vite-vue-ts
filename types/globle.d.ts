@@ -6,6 +6,7 @@ export {} // 为了让这个声明文件变成模块声明文件，而不是一�
 // https://www.tslang.cn/docs/handbook/declaration-merging.html 局部声明文件拓展全局变量
 declare global {
   const API_PREFIX: string
+  const APP_NAME: string
   type RequiredPartialKeys<T, K extends keyof T> = {
     [P in K]-?: T[P]
   } & Pick<T, Exclude<keyof T, K>>

@@ -16,6 +16,7 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import Inspect from 'vite-plugin-inspect'
 import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
+import packageJson from './package.json'
 
 const isReport = process.env.report === 'true'
 const isInspect = process.env.inspect === 'true'
@@ -39,7 +40,10 @@ function bypass(
 export default defineConfig((...arg) => {
   console.log('vite.config.ts', arg) // {mode: 'development', command: 'serve', ssrBuild: false }
   return {
-    define: { API_PREFIX: JSON.stringify(apiPrefix) },
+    define: {
+      API_PREFIX: JSON.stringify(apiPrefix),
+      APP_NAME: JSON.stringify(packageJson.description),
+    },
     resolve: {
       alias: {
         '@': resolvePath(__dirname, 'src'),

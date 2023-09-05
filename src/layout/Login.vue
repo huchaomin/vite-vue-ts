@@ -7,6 +7,7 @@ import { type VxeGridPropTypes } from 'vxe-table'
 const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
+const appName = APP_NAME
 
 const formData = reactive({
   username: '',
@@ -97,12 +98,12 @@ const data = [
     class="auth_wrapper d-flex align-center justify-end overflow-hidden pa-4"
   >
     <video class="video" src="~video/login.mp4" autoplay loop muted></video>
-    <img class="logo" src="~img/logo.png" />
+    <img class="logo" src="~img/logo_login.png" />
     <VCard class="pa-4" width="448">
       <template #title>
         <div class="d-flex align-center">
           <img style="width: 86px" src="~img/robot.png" />
-          <span class="text-h5 pl-6">擎聪资产定价平台</span>
+          <span class="text-h5 pl-6">{{ appName }}</span>
         </div>
       </template>
       <VCardText>
