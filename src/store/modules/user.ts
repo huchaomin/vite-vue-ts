@@ -73,8 +73,8 @@ export default defineStore(
     async function logoutStart(): Promise<null | undefined> {
       const { data } = await $api(logout)
       if (data.value === null) return null
-      clearSession()
       $notify('退出登录成功！')
+      await clearSession()
     }
 
     async function getRoutersAndAuth(): Promise<null | undefined> {
@@ -89,16 +89,16 @@ export default defineStore(
       allAuth.value = result.allAuth
     }
 
-    function clearSession(): void {
+    async function clearSession(): Promise<void> {
       token.value = ''
       userInfo.value = {}
       auth.value = []
       allAuth.value = []
+      await router.push({ name: 'login' })
       routersRaw.value.forEach((item) => {
         router.removeRoute(item.name as string)
       })
       routersRaw.value = []
-      router.push({ name: 'login' })
     }
 
     return {
