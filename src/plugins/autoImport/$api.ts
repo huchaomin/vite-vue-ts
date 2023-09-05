@@ -52,22 +52,23 @@ type ctxType =
 function errHandler(ctx: ctxType): void {
   const userStore = useUserStore()
   const { data } = ctx // data 可能为null
+  const title = '系统提示'
   switch (data?.code) {
     case 403:
-      $notify.error('拒绝访问', { title: '系统提示' })
+      $notify.error('拒绝访问', { title })
       break
     case 404:
-      $notify.error('很抱歉，资源未找到!', { title: '系统提示' })
+      $notify.error('很抱歉，资源未找到!', { title })
       break
     case 401:
       if (!isExpiration) {
-        $notify.error('很抱歉，登录已过期，请重新登录', { title: '系统提示' })
+        $notify.error('很抱歉，登录已过期，请重新登录', { title })
       }
       isExpiration = true
       userStore.clearSession()
       break
     default:
-      $notify.error(data?.message ?? '网络错误', { title: '系统提示' })
+      $notify.error(data?.message ?? '网络错误', { title })
       break
   }
 }
@@ -124,19 +125,18 @@ export default function fetchWrapper(
       },
       // response.ok 为 true 求的状态码 200 到 299
       afterFetch(ctx) {
-        if (loading) {
-          $loading.hide()
-        }
-        const { data, response } = ctx
-        if (responseType === 'json' && Boolean(data?.success)) {
+        const { data } = ctx
+        if (
+          (responseType === 'json' && Boolean(data?.success)) ||
+          (responseType === 'blob' && data?.size > 0)
+        ) {
           // 该项目要data.success，其他项目可能不需要
+          if (loading) {
+            $loading.hide()
+          }
           return ctx
         }
-        if (responseType === 'blob' && data?.size > 0) {
-          return ctx
-        }
-        errHandler(ctx)
-        return { data: null, response }
+        throw new Error() // 这里抛出错误，会被 onFetchError 捕获
       },
       onFetchError(ctx) {
         if (loading) {

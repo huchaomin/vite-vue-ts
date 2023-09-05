@@ -14,6 +14,6 @@ declare global {
     [P in K]?: T[P]
   } & Pick<T, Exclude<keyof T, K>>
   type AllowRefValue<T> = {
-    [P in keyof T]: T[P] | Ref<T[P]>
+    [P in keyof T]: MaybeRef<T[P]>
   }
 }

@@ -32,6 +32,15 @@
   })
   ```
 
+- useOffsetPagination
+- useToggle
+- useToNumber
+- useToString
+- useVModel
+- useCurrentElement
+- computedInject 不能provide响应式的值吗
+- useFileDialog
+- useResizeObserver
 - @vnode-*hooks in templates are deprecated. Use the vue: prefix instead. For example, @vnode-mounted should be changed to @vue:mounted. @vnode-* hooks support will be removed in 3.4
 
 ## 安装eslint 和 parser
