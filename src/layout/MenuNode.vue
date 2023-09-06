@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type RouteRecordRaw } from 'vue-router'
+const route = useRoute()
 
 withDefaults(
   defineProps<{
@@ -10,24 +11,6 @@ withDefaults(
     level: 0,
   },
 )
-const route = useRoute()
-function defaultOpened(children: RouteRecordRaw[]): boolean {
-  const find: (arr: RouteRecordRaw[]) => boolean = (arr) => {
-    for (let i = 0; i < arr.length; i++) {
-      const item = arr[i]
-      if (item.name === route.name) {
-        return true
-      }
-      if (item.children && item.children?.length > 0) {
-        if (find(item.children)) {
-          return true
-        }
-      }
-    }
-    return false
-  }
-  return find(children)
-}
 </script>
 <script lang="ts">
 export default {
@@ -35,25 +18,13 @@ export default {
 }
 </script>
 <template>
-  <VList
-    v-for="item in model"
-    :key="item.name"
-    :opened="defaultOpened(item.children ?? []) ? [item.name] : undefined"
-    density="default"
-    class="pa-0"
-  >
+  <template v-for="item in model" :key="item.name">
     <VListGroup
       v-if="item.children && item.children.length > 0"
       :value="item.name"
     >
       <template #activator="{ props }">
-        <VListItem
-          v-bind="props"
-          :style="{
-            paddingLeft: `${level * 37 + 16}px !important`,
-          }"
-          :title="item.meta?.title"
-        >
+        <VListItem v-bind="props" :title="item.meta?.title">
           <template v-if="item.meta?.icon" #prepend>
             <VIcon :icon="`mdi-${item.meta.icon}`"></VIcon>
           </template>
@@ -68,9 +39,6 @@ export default {
       :active="route.name === item.name"
       active-class="text-primary"
       :title="item.meta?.title"
-      :style="{
-        paddingLeft: `${level * 37 + 16}px !important`,
-      }"
     ></VListItem>
-  </VList>
+  </template>
 </template>

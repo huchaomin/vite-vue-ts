@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { useLayout } from 'vuetify'
 import MenuNode from './MenuNode.vue'
+const route = useRoute()
 const userStore = useUserStore()
 const commonStore = useCommonStore()
 const { mainStyles } = useLayout()
 const appName = APP_NAME
 const headerHeight = computed(() => {
   return mainStyles.value['--v-layout-top']
+})
+
+const defaultOpened = computed(() => {
+  return route.matched.map((item) => item.name)
 })
 </script>
 <template>
@@ -18,12 +23,14 @@ const headerHeight = computed(() => {
       <img class="logo" src="~img/logo.png" />
       <span class="text-h6 pl-6">{{ appName }}</span>
     </div>
-    <div
+    <VList
+      :opened="defaultOpened"
       :style="{ height: `calc(100% - ${headerHeight})` }"
-      class="overflow-y-auto"
+      class="overflow-y-auto pa-0"
+      density="default"
     >
       <MenuNode :model="userStore.routersRaw[0].children!"></MenuNode>
-    </div>
+    </VList>
   </VNavigationDrawer>
 </template>
 <style lang="scss" scoped>
