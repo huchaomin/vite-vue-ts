@@ -30,6 +30,9 @@ export default createVuetify({
     },
   },
   defaults: {
+    global: {
+      // density: 'compact',
+    },
     VOverlay: {
       persistent: true,
       noClickAnimation: true,
@@ -54,10 +57,12 @@ export default createVuetify({
       transition: 'slide-y-transition',
     },
     VAlert: {
-      variant: 'tonal',
       density: 'compact',
       elevation: 6,
       minWidth: 300,
+      border: 'start',
+      variant: 'tonal',
+      class: 'bg-white',
     },
     VCard: {
       variant: 'elevated',
@@ -100,9 +105,8 @@ export default createVuetify({
     VAutocomplete: {
       variant: 'outlined',
       color: 'primary',
-      VChip: {
-        density: 'default',
-      },
+      // VChip: {
+      // },
     },
     VCombobox: {
       variant: 'outlined',

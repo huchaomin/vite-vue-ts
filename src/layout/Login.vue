@@ -107,50 +107,55 @@ const data = [
         </div>
       </template>
       <VCardText>
-        <VForm ref="form" @submit.prevent="handleSubmit">
-          <VTextField
-            v-model="formData.username"
-            :rules="rules.username"
-            autofocus
-            placeholder="请输入用户名"
-            density="comfortable"
-            label="帐户名"
-          ></VTextField>
-          <VTextField
-            v-model="formData.password"
-            :rules="rules.password"
-            label="密码"
-            placeholder="请输入密码"
-            autocomplete
-            density="comfortable"
-            :type="isPasswordVisible ? 'text' : 'password'"
-            :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
-            @click:append-inner="isPasswordVisible = !isPasswordVisible"
-          ></VTextField>
-          <VRow>
-            <VCol :cols="8">
-              <VTextField
-                v-model="formData.captcha"
-                :rules="rules.captcha"
-                label="验证码"
-                density="comfortable"
-                placeholder="请输入验证码"
-              ></VTextField>
-            </VCol>
-            <VCol :cols="4">
-              <a
-                href="#"
-                class="d-flex align-stretch justify-end"
-                style="height: 44px"
-                @click.prevent="() => getCaptcha()"
-              >
-                <img v-if="captchaUrl" :src="captchaUrl.result" />
-                <img v-else src="~img/checkcode.png" />
-              </a>
-            </VCol>
-          </VRow>
-          <VBtn block type="submit" size="large">登录</VBtn>
-        </VForm>
+        <VDefaultsProvider
+          :defaults="{
+            VTextField: {
+              density: 'comfortable',
+            },
+          }"
+        >
+          <VForm ref="form" @submit.prevent="handleSubmit">
+            <VTextField
+              v-model="formData.username"
+              :rules="rules.username"
+              autofocus
+              placeholder="请输入用户名"
+              label="帐户名"
+            ></VTextField>
+            <VTextField
+              v-model="formData.password"
+              :rules="rules.password"
+              label="密码"
+              placeholder="请输入密码"
+              autocomplete
+              :type="isPasswordVisible ? 'text' : 'password'"
+              :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+              @click:append-inner="isPasswordVisible = !isPasswordVisible"
+            ></VTextField>
+            <VRow>
+              <VCol :cols="8">
+                <VTextField
+                  v-model="formData.captcha"
+                  :rules="rules.captcha"
+                  label="验证码"
+                  placeholder="请输入验证码"
+                ></VTextField>
+              </VCol>
+              <VCol :cols="4">
+                <a
+                  href="#"
+                  class="d-flex align-stretch justify-end"
+                  style="height: 44px"
+                  @click.prevent="() => getCaptcha()"
+                >
+                  <img v-if="captchaUrl" :src="captchaUrl.result" />
+                  <img v-else src="~img/code_error.png" />
+                </a>
+              </VCol>
+            </VRow>
+            <VBtn block type="submit" size="large">登录</VBtn>
+          </VForm>
+        </VDefaultsProvider>
       </VCardText>
     </VCard>
   </div>
@@ -184,7 +189,6 @@ const data = [
 .v-card {
   margin-right: 7%;
   border-radius: 15px;
-  box-shadow: 0 10px 60px 1px rgb(46 61 98 / 10%);
   opacity: 0.95;
 }
 </style>
