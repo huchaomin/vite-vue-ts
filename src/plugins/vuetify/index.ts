@@ -12,8 +12,8 @@ const customLightTheme: ThemeDefinition = {
     warning: '#FFB400',
     error: '#FF4C51',
     background: '#F4F5FA',
-    'on-background': '#3A3541',
-    'on-surface': '#3A3541',
+    'on-background': '#3A3541', // .v-application 的 color
+    'on-surface': '#3A3541', // 普通组件的color
   },
   variables: {
     // Shadows
@@ -90,6 +90,7 @@ export default createVuetify({
       color: 'primary',
       density: 'compact',
       itemTitle: 'label',
+      placeholder: '请选择',
     },
     VBtn: {
       color: 'primary',
@@ -101,12 +102,11 @@ export default createVuetify({
       variant: 'outlined',
       color: 'primary',
       density: 'compact',
+      placeholder: '请输入',
     },
     VAutocomplete: {
       variant: 'outlined',
       color: 'primary',
-      // VChip: {
-      // },
     },
     VCombobox: {
       variant: 'outlined',

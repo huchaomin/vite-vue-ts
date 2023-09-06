@@ -3,6 +3,7 @@
 @use './settings' as *;
 
 $vxe-font-size: $font-size-root;
+$vxe-font-color: $font-color;
 $vxe-primary-color: $primary;
 $vxe-table-border-radius: $border-radius-root;
 $vxe-table-row-checkbox-checked-background-color: color.adjust($vxe-primary-color, $lightness:32%);
