@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ModifyPwd from './modules/ModifyPwd.vue'
 const commonStore = useCommonStore()
 const userStore = useUserStore()
 
@@ -7,11 +8,26 @@ function logout(): void {
     userStore.logout()
   })
 }
+
+function modifyPwd(): void {
+  const { componentRef, dialogRef } = $dialog(
+    {
+      title: '修改密码',
+      hideAfterConfirm: false,
+      onConfirm: async () => {
+        await componentRef!.value.handleSubmit()
+        dialogRef!.value.hide()
+      },
+    },
+    ModifyPwd,
+  )
+}
 </script>
 <template>
   <VAppBar flat density="comfortable">
     <template #prepend>
       <VAppBarNavIcon
+        color="inherit"
         @click="commonStore.drawerOpen = !commonStore.drawerOpen"
       ></VAppBarNavIcon>
     </template>
@@ -26,6 +42,7 @@ function logout(): void {
         <VMenu open-on-hover activator="parent">
           <VList>
             <VListItem title="退出登录" @click="logout"></VListItem>
+            <VListItem title="修改密码" @click="modifyPwd"></VListItem>
           </VList>
         </VMenu>
       </VBtn>

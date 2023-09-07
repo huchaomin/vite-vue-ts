@@ -20,6 +20,8 @@
 - 添加进场loading
 - input 高度问题
 - dayjs
+- 自定义指令 添加校验规则
+- 修改密码 校验
 - defineOptions
 
   ```ts

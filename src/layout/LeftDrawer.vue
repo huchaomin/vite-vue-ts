@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLayout } from 'vuetify'
-import MenuNode from './MenuNode.vue'
+import MenuNode from './modules/MenuNode.vue'
 const route = useRoute()
 const userStore = useUserStore()
 const commonStore = useCommonStore()

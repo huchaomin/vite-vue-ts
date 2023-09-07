@@ -7,12 +7,13 @@ import { setUrlPrefix } from '@/utils/url'
 import signMd5Utils from '@/utils/signMd5Utils.js'
 
 let isExpiration = false // 登陆是否已经过期
-type dataType = Record<string, any> | undefined
+type DataType = Record<string, any> | undefined
+type MethodType = 'get' | 'post' | 'put' | 'delete'
 
 function handleUrlAndData(
   url: string,
-  data: dataType = {},
-  method: string,
+  data: DataType = {},
+  method: MethodType,
 ): string {
   let query = '?'
   Object.keys(data).forEach((key) => {
@@ -31,9 +32,9 @@ function handleUrlAndData(
   return setUrlPrefix(url)
 }
 
-interface apiConfig {
+export interface apiConfig {
   readonly url: string
-  readonly method?: string
+  readonly method?: MethodType
   readonly timeout?: number
   readonly mode?: RequestMode // 请求模式,允许跨域请求
   readonly credentials?: RequestCredentials // 是否携带cookie
@@ -75,7 +76,7 @@ function errHandler(ctx: ctxType): void {
 
 export default function fetchWrapper(
   defaultConfig: apiConfig,
-  data?: dataType,
+  data?: DataType,
   CustomerConfig?: Omit<apiConfig, 'url' | 'method' | 'isWhiteApi'>,
 ): UseFetchReturn<any> & PromiseLike<UseFetchReturn<any>> {
   const config = {
@@ -151,8 +152,7 @@ export default function fetchWrapper(
       credentials,
     },
   })
-  const res =
-    method === 'get' ? fetch(processedUrl) : fetch(processedUrl).post(data) // 暂时只有这两个请求方法
+  const res = fetch(processedUrl)[method](method === 'get' ? undefined : data)
   if (responseType === 'json') {
     return res.json()
   } else {

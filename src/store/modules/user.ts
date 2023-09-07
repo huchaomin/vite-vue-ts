@@ -57,6 +57,7 @@ export default defineStore(
     const token = ref('')
     const userInfo: Ref<{
       realname?: string
+      username?: string
     }> = ref({})
     const routersRaw: Ref<RouteRecordRaw[]> = ref([])
     const auth = ref([])
