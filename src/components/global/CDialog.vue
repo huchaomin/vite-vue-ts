@@ -49,16 +49,11 @@ function confirm(): void {
   emit('confirm')
 }
 
-function show(): void {
-  emit('update:modelValue', true)
-}
-
 function hide(): void {
   emit('update:modelValue', false)
 }
 
 defineExpose({
-  show,
   hide,
 })
 </script>
