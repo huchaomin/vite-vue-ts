@@ -32,6 +32,7 @@ export default createVuetify({
   defaults: {
     global: {
       // density: 'compact',
+      noDataText: '暂无数据',
     },
     VOverlay: {
       persistent: true,
@@ -90,11 +91,10 @@ export default createVuetify({
       color: 'primary',
       density: 'compact',
       itemTitle: 'label',
-      placeholder: '请选择',
+      closableChips: true,
     },
     VBtn: {
       color: 'primary',
-      size: 'small',
       // style: 'text-transform: none;',
       class: 'text-none elevation-0',
     },
@@ -102,7 +102,6 @@ export default createVuetify({
       variant: 'outlined',
       color: 'primary',
       density: 'compact',
-      placeholder: '请输入',
     },
     VAutocomplete: {
       variant: 'outlined',

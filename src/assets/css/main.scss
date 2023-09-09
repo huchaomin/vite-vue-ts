@@ -36,6 +36,16 @@ body {
   }
 
   /* stylelint-disable-next-line selector-class-pattern */
+  .v-field__input{
+    gap: 4px;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .v-field--variant-outlined .v-label.v-field-label--floating{
+    transform: translateY(-60%);
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
   .b_filter .v-overlay__scrim, .vxe-grid.is--loading::before {
     background-color: rgb(255 255 255 / 72%);
     backdrop-filter: blur(1px) saturate(167%);

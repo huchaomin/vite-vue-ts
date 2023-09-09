@@ -125,6 +125,19 @@ function add(): void {
       chips
       label="资产包状态"
     ></VSelect>
+    <VSelect
+      label="Select"
+      chips
+      :items="[
+        'California',
+        'Colorado',
+        'Florida',
+        'Georgia',
+        'Texas',
+        'Wyoming',
+      ]"
+      multiple
+    ></VSelect>
     <div>
       <VBtn type="submit">查询</VBtn>
       <VBtn variant="tonal" class="ml-2" @click="reset">重置</VBtn>

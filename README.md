@@ -8,6 +8,8 @@
 - @vueuse（自动引入） 分割包
 - 研究sass怎么用，
 - 写一个c-select 组件支持 diccode
+- select chip collapse-tag
+- select 自定义多选（全选）
 - webfontloader vuetify 模板
 - login时设置 router query没有出现在路由当中
 - 最近的tab签
