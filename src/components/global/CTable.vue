@@ -96,8 +96,9 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
     :radio-config="processedRadioConfig"
     v-bind="otherProps"
   >
+    <!-- 越前，权重越高 -->
     <template v-for="k in Object.keys($slots)" :key="k" #[k]="slotScope">
-      <slot :name="k" v-bind="slotScope"></slot>
+      <slot :name="k" v-bind="slotScope || {}"></slot>
     </template>
     <template #checkbox_header="{ checked, indeterminate }">
       <VCheckbox

@@ -110,6 +110,33 @@ function add(): void {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   addOrEditModal.value!.visible = true
 }
+const aaa = ref([])
+const items = reactive([
+  {
+    label: 'California',
+    value: 'CA',
+  },
+  {
+    label: 'Colorado',
+    value: 'CO',
+  },
+  {
+    label: 'Florida',
+    value: 'FL',
+  },
+  {
+    label: 'Georgia',
+    value: 'GA',
+  },
+  {
+    label: 'Texas',
+    value: 'TX',
+  },
+  {
+    label: 'Wyoming',
+    value: 'WY',
+  },
+])
 </script>
 <template>
   <VForm ref="form" class="pt-3 c_grid" @submit.prevent="query">
@@ -125,19 +152,15 @@ function add(): void {
       chips
       label="资产包状态"
     ></VSelect>
-    <VSelect
+    <CSelect
+      v-model="aaa"
       label="Select"
       chips
-      :items="[
-        'California',
-        'Colorado',
-        'Florida',
-        'Georgia',
-        'Texas',
-        'Wyoming',
-      ]"
-      multiple
-    ></VSelect>
+      :prepend-select-all="true"
+      :items="items"
+      :return-object="true"
+      :multiple="true"
+    ></CSelect>
     <div>
       <VBtn type="submit">查询</VBtn>
       <VBtn variant="tonal" class="ml-2" @click="reset">重置</VBtn>

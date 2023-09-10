@@ -9,9 +9,8 @@
 - 研究sass怎么用，
 - 写一个c-select 组件支持 diccode
 - select chip collapse-tag
-- select 自定义多选（全选）
 - webfontloader vuetify 模板
-- login时设置 router query没有出现在路由当中
+- login时设置 router query没有出现在url当中
 - 最近的tab签
 - 日期选择器 使用 vuetify包装
 - 自定义一个formatter, 远程formatter(能不能和渲染器一起使用), 字典
