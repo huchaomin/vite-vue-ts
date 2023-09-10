@@ -27,8 +27,6 @@ html {
   overflow-y: auto;
 }
 
-
-
 body {
   /* stylelint-disable-next-line selector-class-pattern */
   .v-input__details {
@@ -38,6 +36,14 @@ body {
   /* stylelint-disable-next-line selector-class-pattern */
   .v-field__input{
     gap: 4px;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .v-list-item__prepend {
+    /* stylelint-disable-next-line selector-class-pattern */
+    .v-checkbox-btn {
+      margin-inline-start: -12px
+    }
   }
 
   /* stylelint-disable-next-line selector-class-pattern */
