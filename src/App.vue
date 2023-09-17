@@ -4,7 +4,12 @@ const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()
 
-$dialog({}, test)
+$dialog(
+  {
+    width: 1200,
+  },
+  test,
+)
 </script>
 <template>
   <VApp>

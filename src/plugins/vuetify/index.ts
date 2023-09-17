@@ -51,7 +51,7 @@ export default createVuetify({
     },
     VList: {
       lines: false,
-      density: 'compact',
+      density: 'comfortable',
     },
     VMenu: {
       openDelay: 100,

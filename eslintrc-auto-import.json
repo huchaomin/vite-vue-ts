@@ -1,9 +1,10 @@
 {
   "globals": {
     "$api": "readonly",
+    "$confirm": "readonly",
+    "$dialog": "readonly",
     "$dicStore": "readonly",
     "$loading": "readonly",
-    "$log": "readonly",
     "$notify": "readonly",
     "Component": "readonly",
     "ComponentPublicInstance": "readonly",
@@ -14,6 +15,7 @@
     "Ref": "readonly",
     "VNode": "readonly",
     "WritableComputedRef": "readonly",
+    "_": "readonly",
     "acceptHMRUpdate": "readonly",
     "asyncComputed": "readonly",
     "autoResetRef": "readonly",
@@ -168,6 +170,7 @@
     "useDeviceOrientation": "readonly",
     "useDevicePixelRatio": "readonly",
     "useDevicesList": "readonly",
+    "useDialogStore": "readonly",
     "useDisplayMedia": "readonly",
     "useDocumentVisibility": "readonly",
     "useDraggable": "readonly",
@@ -302,10 +305,6 @@
     "watchThrottled": "readonly",
     "watchTriggerable": "readonly",
     "watchWithFilter": "readonly",
-    "whenever": "readonly",
-    "_": "readonly",
-    "useDialogStore": "readonly",
-    "$confirm": "readonly",
-    "$dialog": "readonly"
+    "whenever": "readonly"
   }
 }

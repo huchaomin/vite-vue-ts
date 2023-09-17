@@ -22,6 +22,7 @@ const isReport = process.env.report === 'true'
 const isInspect = process.env.inspect === 'true'
 const proxyTarget = 'http://192.168.2.208:9089/' // 开发环境地址
 // const proxyTarget = 'http://192.168.2.206:9089/' // 测试环境地址
+// const proxyTarget = 'http://218.17.157.16:9089/' // 生产环境地址
 // const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
 // const proxyTarget = 'http://192.168.2.211:8080/'; // 测试环境地址（Robin）
 const apiPrefix = 'jeecg-boot'

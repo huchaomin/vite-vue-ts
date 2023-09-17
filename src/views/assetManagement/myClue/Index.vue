@@ -111,32 +111,11 @@ function add(): void {
   addOrEditModal.value!.visible = true
 }
 const aaa = ref([])
-const items = reactive([
-  {
-    label: 'California',
-    value: 'CA',
-  },
-  {
-    label: 'Colorado',
-    value: 'CO',
-  },
-  {
-    label: 'Florida',
-    value: 'FL',
-  },
-  {
-    label: 'Georgia',
-    value: 'GA',
-  },
-  {
-    label: 'Texas',
-    value: 'TX',
-  },
-  {
-    label: 'Wyoming',
-    value: 'WY',
-  },
-])
+const gather = []
+for (let i = 0; i < 50; i++) {
+  gather.push(`选项${i}`)
+}
+const items = reactive(gather)
 </script>
 <template>
   <VForm ref="form" class="pt-3 c_grid" @submit.prevent="query">
@@ -156,10 +135,8 @@ const items = reactive([
       v-model="aaa"
       label="Select"
       chips
-      :prepend-select-all="true"
       :items="items"
-      :return-object="true"
-      :multiple="true"
+      multiple
     ></CSelect>
     <div>
       <VBtn type="submit">查询</VBtn>
