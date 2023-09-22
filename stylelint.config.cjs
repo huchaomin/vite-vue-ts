@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-14 13:58:40
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-22 17:25:51
+ * @Description  :
+ */
 module.exports = {
   extends: [
     // 'stylelint-config-standard-less',
@@ -16,6 +23,6 @@ module.exports = {
   //   },
   // ],
   rules: {
-    'selector-class-pattern': '^([a-z][a-z0-9]*)(_[a-z0-9]+)*$', // 类名命名规则：下划线
+    'selector-class-pattern': '^(v-|[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9])$', // 类名命名规则：以v-开头 或 只包括数字字母下划线, 以字母开头, 以字母数字结尾
   },
 }

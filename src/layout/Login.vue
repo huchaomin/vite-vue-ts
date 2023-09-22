@@ -185,7 +185,6 @@ const data = [
   width: 100%;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .v-card {
   margin-right: 7%;
   border-radius: 15px;

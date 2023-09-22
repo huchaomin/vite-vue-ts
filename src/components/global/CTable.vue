@@ -138,7 +138,6 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
   </VxeGrid>
 </template>
 <style lang="scss" scoped>
-/* stylelint-disable-next-line selector-class-pattern */
 :deep(.vxe-loading--warpper) {
   top: 0;
   transform: none;
