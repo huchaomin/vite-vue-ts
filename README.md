@@ -33,6 +33,9 @@
   })
   ```
 
+- vnode.component?.exposed 是不是准确的判断组件是否有exposed
+- pinia 替代方案
+- useAsyncState 怎么优雅地阻止代码运行
 - useOffsetPagination
 - useToggle
 - useToNumber
@@ -43,6 +46,7 @@
 - useFileDialog
 - useResizeObserver
 - @vnode-*hooks in templates are deprecated. Use the vue: prefix instead. For example, @vnode-mounted should be changed to @vue:mounted. @vnode-* hooks support will be removed in 3.4
+- 添加后台管理器笔记
 
 ## 安装eslint 和 parser
 
