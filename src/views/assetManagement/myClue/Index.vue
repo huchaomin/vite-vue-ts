@@ -110,6 +110,12 @@ function add(): void {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   addOrEditModal.value!.visible = true
 }
+const aaa = ref([])
+const gather = []
+for (let i = 0; i < 50; i++) {
+  gather.push(`选项${i}`)
+}
+const items = reactive(gather)
 </script>
 <template>
   <VForm ref="form" class="pt-3 c_grid" @submit.prevent="query">
@@ -125,6 +131,13 @@ function add(): void {
       chips
       label="资产包状态"
     ></VSelect>
+    <CSelect
+      v-model="aaa"
+      label="Select"
+      chips
+      :items="items"
+      multiple
+    ></CSelect>
     <div>
       <VBtn type="submit">查询</VBtn>
       <VBtn variant="tonal" class="ml-2" @click="reset">重置</VBtn>

@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -6,14 +6,14 @@ settings:
 
 dependencies:
   '@arco-design/web-vue':
-    specifier: ^2.50.2
-    version: 2.50.2(vue@3.3.4)
+    specifier: ^2.51.2
+    version: 2.51.2(vue@3.3.4)
   '@arco-themes/vue-qingcongkeji':
     specifier: ^0.0.2
-    version: 0.0.2(@arco-design/web-vue@2.50.2)
+    version: 0.0.2(@arco-design/web-vue@2.51.2)
   '@vueuse/core':
-    specifier: ^10.4.0
-    version: 10.4.0(vue@3.3.4)
+    specifier: ^10.4.1
+    version: 10.4.1(vue@3.3.4)
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -33,14 +33,14 @@ dependencies:
     specifier: ^4.2.4
     version: 4.2.4(vue@3.3.4)
   vuetify:
-    specifier: ^3.3.14
-    version: 3.3.14(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
+    specifier: ^3.3.16
+    version: 3.3.16(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
   vxe-table:
-    specifier: ^4.5.6
-    version: 4.5.6(vue@3.3.4)(xe-utils@3.5.12)
+    specifier: ^4.5.10
+    version: 4.5.10(vue@3.3.4)(xe-utils@3.5.13)
   xe-utils:
-    specifier: ^3.5.12
-    version: 3.5.12
+    specifier: ^3.5.13
+    version: 3.5.13
 
 devDependencies:
   '@arco-plugins/vite-vue':
@@ -138,7 +138,7 @@ devDependencies:
     version: 5.0.2
   unplugin-auto-import:
     specifier: ^0.16.6
-    version: 0.16.6(@vueuse/core@10.4.0)
+    version: 0.16.6(@vueuse/core@10.4.1)
   unplugin-vue-components:
     specifier: ^0.25.1
     version: 0.25.1(vue@3.3.4)
@@ -168,7 +168,7 @@ devDependencies:
     version: 1.0.0-rc.2(pug@3.0.2)(vite@4.4.9)
   vite-plugin-vuetify:
     specifier: ^1.0.2
-    version: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.14)
+    version: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.16)
   vue-tsc:
     specifier: ^1.8.8
     version: 1.8.8(typescript@5.0.2)
@@ -198,8 +198,8 @@ packages:
       color: 3.2.1
     dev: false
 
-  /@arco-design/web-vue@2.50.2(vue@3.3.4):
-    resolution: {integrity: sha512-cTHBKaKYLJqNbLsT64RWm5rcwwkGEU8wFAzlAsWIEl7Gsxt9FmwoxYaXV5+eSr//+LmUMdhqWPFf9G07LJ/99w==}
+  /@arco-design/web-vue@2.51.2(vue@3.3.4):
+    resolution: {integrity: sha512-EG1X+PCraINq2541p8E0lEueGwvfr3PjjlKiPT2j+maw/tnEmGpq/qDHG5h9eBPDbWahi5pqPSpqi969EWXyoA==}
     peerDependencies:
       vue: ^3.1.0
     dependencies:
@@ -227,12 +227,12 @@ packages:
       - supports-color
     dev: true
 
-  /@arco-themes/vue-qingcongkeji@0.0.2(@arco-design/web-vue@2.50.2):
+  /@arco-themes/vue-qingcongkeji@0.0.2(@arco-design/web-vue@2.51.2):
     resolution: {integrity: sha512-HbPQ6C+APjSNbBTXZfjsMe5DHcsHI2XbzYjx2iZ6w9FQtF3IUICc3ep7bZBZIbD+n21ccCFPHY1j7sPSJHeNXg==}
     peerDependencies:
       '@arco-design/web-vue': ^2.48.1
     dependencies:
-      '@arco-design/web-vue': 2.50.2(vue@3.3.4)
+      '@arco-design/web-vue': 2.51.2(vue@3.3.4)
     dev: false
 
   /@babel/code-frame@7.22.10:
@@ -1470,7 +1470,7 @@ packages:
       - typescript
     dev: true
 
-  /@vuetify/loader-shared@1.7.1(vue@3.3.4)(vuetify@3.3.14):
+  /@vuetify/loader-shared@1.7.1(vue@3.3.4)(vuetify@3.3.16):
     resolution: {integrity: sha512-kLUvuAed6RCvkeeTNJzuy14pqnkur8lTuner7v7pNE/kVhPR97TuyXwBSBMR1cJeiLiOfu6SF5XlCYbXByEx1g==}
     peerDependencies:
       vue: ^3.0.0
@@ -1479,24 +1479,24 @@ packages:
       find-cache-dir: 3.3.2
       upath: 2.0.1
       vue: 3.3.4
-      vuetify: 3.3.14(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
+      vuetify: 3.3.16(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
 
-  /@vueuse/core@10.4.0(vue@3.3.4):
-    resolution: {integrity: sha512-8JnnTwiuzUqfiYIW8H4FKG/g5ZMKSE+9auoFUwUAkzhqUjy24VbMkNlDBWetQCimiptx7RAO6u1IS55H6+p1Tg==}
+  /@vueuse/core@10.4.1(vue@3.3.4):
+    resolution: {integrity: sha512-DkHIfMIoSIBjMgRRvdIvxsyboRZQmImofLyOHADqiVbQVilP8VVHDhBX2ZqoItOgu7dWa8oXiNnScOdPLhdEXg==}
     dependencies:
       '@types/web-bluetooth': 0.0.17
-      '@vueuse/metadata': 10.4.0
-      '@vueuse/shared': 10.4.0(vue@3.3.4)
+      '@vueuse/metadata': 10.4.1
+      '@vueuse/shared': 10.4.1(vue@3.3.4)
       vue-demi: 0.14.5(vue@3.3.4)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
 
-  /@vueuse/metadata@10.4.0:
-    resolution: {integrity: sha512-JNf9IR7ZBTDxWPfQlHhqBOv1VLO6ReTZi9HGY7RABjYHVpaEpjlHU7HpZDVOJGDa0gKITAbA2zMkNSBjKMcdaw==}
+  /@vueuse/metadata@10.4.1:
+    resolution: {integrity: sha512-2Sc8X+iVzeuMGHr6O2j4gv/zxvQGGOYETYXEc41h0iZXIRnRbJZGmY/QP8dvzqUelf8vg0p/yEA5VpCEu+WpZg==}
 
-  /@vueuse/shared@10.4.0(vue@3.3.4):
-    resolution: {integrity: sha512-52asvLf5cbAS/h6xWjqoY4MgjxmFjnVNf/nA8BP7RbeIrIGcf+BZbeOcVo+92byqArXEJiBxptXpufQvbwJL/w==}
+  /@vueuse/shared@10.4.1(vue@3.3.4):
+    resolution: {integrity: sha512-vz5hbAM4qA0lDKmcr2y3pPdU+2EVw/yzfRsBdu+6+USGa4PxqSQRYIUC9/NcT06y+ZgaTsyURw2I9qOFaaXHAg==}
     dependencies:
       vue-demi: 0.14.5(vue@3.3.4)
     transitivePeerDependencies:
@@ -2437,8 +2437,8 @@ packages:
       entities: 4.5.0
     dev: true
 
-  /dom-zindex@0.5.0:
-    resolution: {integrity: sha512-Zfu5ama2GA4qU79xtATagAaA1OoRwEVgCBW0AdQHUszyE/69FMj3jauaPWkjv4A50K3dbGi0oVMoupWbjEri6g==}
+  /dom-zindex@1.0.0:
+    resolution: {integrity: sha512-pBKBPSfInArD3L+NPnGny/9l3g6NmFbbOEacpc0nB28PGXdcphZdnr794KFnPglNm2Wdt2hYOdUkYYej8CbvsQ==}
     dev: false
 
   /domelementtype@1.3.1:
@@ -6132,7 +6132,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unplugin-auto-import@0.16.6(@vueuse/core@10.4.0):
+  /unplugin-auto-import@0.16.6(@vueuse/core@10.4.1):
     resolution: {integrity: sha512-M+YIITkx3C/Hg38hp8HmswP5mShUUyJOzpifv7RTlAbeFlO2Tyw0pwrogSSxnipHDPTtI8VHFBpkYkNKzYSuyA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -6146,7 +6146,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.7.6
       '@rollup/pluginutils': 5.0.4
-      '@vueuse/core': 10.4.0(vue@3.3.4)
+      '@vueuse/core': 10.4.1(vue@3.3.4)
       fast-glob: 3.3.1
       local-pkg: 0.4.3
       magic-string: 0.30.3
@@ -6418,18 +6418,18 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-vuetify@1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.14):
+  /vite-plugin-vuetify@1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.16):
     resolution: {integrity: sha512-MubIcKD33O8wtgQXlbEXE7ccTEpHZ8nPpe77y9Wy3my2MWw/PgehP9VqTp92BLqr0R1dSL970Lynvisx3UxBFw==}
     engines: {node: '>=12'}
     peerDependencies:
       vite: ^2.7.0 || ^3.0.0 || ^4.0.0
       vuetify: ^3.0.0-beta.4
     dependencies:
-      '@vuetify/loader-shared': 1.7.1(vue@3.3.4)(vuetify@3.3.14)
+      '@vuetify/loader-shared': 1.7.1(vue@3.3.4)(vuetify@3.3.16)
       debug: 4.3.4
       upath: 2.0.1
       vite: 4.4.9(@types/node@20.5.6)(less@4.2.0)(sass@1.66.1)(terser@5.19.2)
-      vuetify: 3.3.14(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
+      vuetify: 3.3.16(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
     transitivePeerDependencies:
       - supports-color
       - vue
@@ -6546,8 +6546,8 @@ packages:
       '@vue/server-renderer': 3.3.4(vue@3.3.4)
       '@vue/shared': 3.3.4
 
-  /vuetify@3.3.14(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4):
-    resolution: {integrity: sha512-5kGnahj/cX5989bV9XM432k/BJ11fRdJ3CCdISjo1auCz+rLEeLJdjMeqyCJVd0FZsWcE1Z8799s9sLdLM3Deg==}
+  /vuetify@3.3.16(typescript@5.0.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4):
+    resolution: {integrity: sha512-vVfUroT5lSU+yOZAf7JlGm2j3dCR4BQml8Al27+/Uh0YW+97/CyUqOzo6IzMCt/bXLvnRerJ5fCAJtQYWnwfLA==}
     engines: {node: ^12.20 || >=14.13}
     peerDependencies:
       typescript: '>=4.7'
@@ -6566,18 +6566,18 @@ packages:
         optional: true
     dependencies:
       typescript: 5.0.2
-      vite-plugin-vuetify: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.14)
+      vite-plugin-vuetify: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.16)
       vue: 3.3.4
 
-  /vxe-table@4.5.6(vue@3.3.4)(xe-utils@3.5.12):
-    resolution: {integrity: sha512-dcC42ORBCu99c64u46I6I2RpXl4KEbbwm0upG8HYDUZOAkyTOTurUkDJN9SEx/c/v0hisxTScgxwXMEA3jdyfw==}
+  /vxe-table@4.5.10(vue@3.3.4)(xe-utils@3.5.13):
+    resolution: {integrity: sha512-hg/95zqmeP3yT6zQ1sg4QzZKTTHFE81hIzTc64i5i2udZdvKJ38Mm1XI0S5y11HBU26uFwFlkPvG6yWrw1wzoQ==}
     peerDependencies:
       vue: ^3.2.28
       xe-utils: ^3.5.0
     dependencies:
-      dom-zindex: 0.5.0
+      dom-zindex: 1.0.0
       vue: 3.3.4
-      xe-utils: 3.5.12
+      xe-utils: 3.5.13
     dev: false
 
   /webpack-sources@3.2.3:
@@ -6677,8 +6677,8 @@ packages:
       signal-exit: 4.1.0
     dev: true
 
-  /xe-utils@3.5.12:
-    resolution: {integrity: sha512-g+KntGC41vYJ+GzDngy28LIGAu3kSfhQxiprYxv1P6jP3DRVLNnTruBFD4WIVmMF2AUm1o23IMyAcQ10m2XSyQ==}
+  /xe-utils@3.5.13:
+    resolution: {integrity: sha512-ORT6ghCRk0mUVavMBxetcPzUPskS6NGfntzpWazJ86e+XU0uK4HwHfDhN/jKATiyInrOH5RwQo9SO/+DB8XeBw==}
     dev: false
 
   /xml-name-validator@4.0.0:

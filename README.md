@@ -8,8 +8,9 @@
 - @vueuse（自动引入） 分割包
 - 研究sass怎么用，
 - 写一个c-select 组件支持 diccode
+- select chip collapse-tag
 - webfontloader vuetify 模板
-- login时设置 router query没有出现在路由当中
+- login时设置 router query没有出现在url当中
 - 最近的tab签
 - 日期选择器 使用 vuetify包装
 - 自定义一个formatter, 远程formatter(能不能和渲染器一起使用), 字典
@@ -18,9 +19,7 @@
 - ts 5.2.2 版本打包报错
 - vxe-table xe-utils 暂时不能按需加载
 - 添加进场loading
-- input 高度问题
 - dayjs
-- 自定义指令 添加校验规则
 - 修改密码 校验
 - defineOptions
 

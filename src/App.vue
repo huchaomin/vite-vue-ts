@@ -1,7 +1,15 @@
 <script setup lang="ts">
+import test from '@/views/assetManagement/myClue/Index.vue'
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()
+
+$dialog(
+  {
+    width: 1200,
+  },
+  test,
+)
 </script>
 <template>
   <VApp>

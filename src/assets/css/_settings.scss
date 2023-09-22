@@ -1,29 +1,31 @@
-// can be used in your own components to access vuetify's variables.
+/* stylelint-disable length-zero-no-unit */
+@use './variable' as *;
 @forward 'vuetify/settings' with (
   $font-size-root: 14px,
-  // $border-radius-root: 2px,
-  $button-height: 40px,
-  $button-line-height: inherit,
-  $button-font-size: 1rem,
+  $border-radius-root: $border-radius,
   $field-font-size: 12px,
+  $label-font-size: 12px,
   $field-label-floating-scale: 1,
-  $input-details-min-height: 24px,
+  $input-details-min-height: 26px,
   $input-details-padding-above: 2px,
   $text-field-details-padding-inline: 0,
+  $field-control-padding-start: 14px,
+  $field-control-padding-end: 14px,
+  // 左侧菜单icon和缩进
   $list-item-icon-margin-start: 19px,
   $list-item-prepend-size: 24px,
+  $list-item-icon-margin-end: 16px,
+  $list-padding: 0,
   $input-density: (
     'default': 0,
     'comfortable': -2,
-    'compact': -6,
+    'compact': -5,
   ),
-  $input-chips-margin-bottom: (
-    'default': 0,
-    'comfortable': 1,
-    'compact': 1.5,
-  ),
-  $label-font-size: 12px,
-  $list-item-icon-margin-end: 16px,
+
+  // select chips 间隔
+  $input-chips-margin-top: 0px, // 不能省px
+  $input-chips-margin-bottom: ('default': 0, 'comfortable': 0, 'compact': 0),
+  $chip-border-radius: $border-radius,
   $toolbar-prepend-btn-margin-start: 0,
 
   $card-elevation: 6,
