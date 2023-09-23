@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-22 16:36:40
+ * @LastEditTime : 2023-09-22 17:35:26
  * @Description  :
  */
 @use "sass:color";
@@ -53,6 +53,7 @@ body {
     transform: translateY(-60%);
   }
 
+  /* stylelint-disable-next-line selector-class-pattern */
   .b_filter .v-overlay__scrim, .vxe-grid.is--loading::before {
     background-color: rgb(255 255 255 / 72%);
     backdrop-filter: blur(1px) saturate(167%);

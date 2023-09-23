@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-22 16:36:49
+ * @LastEditTime : 2023-09-22 17:40:34
  * @Description  :
 -->
 <script setup lang="ts">
@@ -10,6 +10,7 @@ import { type VDialog } from 'vuetify/lib/components/VDialog/index.mjs'
 import { type VCard } from 'vuetify/lib/components/VCard/index.mjs'
 declare type DialogPropsType = VDialog['$props']
 declare type CardPropsType = VCard['$props']
+
 const props = withDefaults(
   defineProps<{
     modelValue: boolean

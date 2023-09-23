@@ -7,18 +7,15 @@
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
 - 研究sass怎么用，
-- 写一个c-select 组件支持 diccode
-- select chip collapse-tag
 - webfontloader vuetify 模板
 - login时设置 router query没有出现在url当中
 - 最近的tab签
-- 日期选择器 使用 vuetify包装
 - 自定义一个formatter, 远程formatter(能不能和渲染器一起使用), 字典
 - cmd ' 使用熟练
 - smart clicks 点击大括号
 - ts 5.2.2 版本打包报错
 - vxe-table xe-utils 暂时不能按需加载
-- 添加进场loading
+- 添加进场loading <https://loading.io/animation/icon/>
 - dayjs
 - 修改密码 校验
 - defineOptions
