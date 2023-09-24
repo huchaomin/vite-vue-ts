@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 15:25:03
+ * @LastEditTime : 2023-09-24 22:08:58
  * @Description  :
 -->
 <script lang="ts" setup>
@@ -196,6 +196,7 @@ const data = [
   top: 50%;
   left: 0;
   width: 100%;
+  min-height: 100%;
   transform: translateY(-50%);
 }
 
