@@ -11,21 +11,6 @@ const router = createRouter({
         title: '登录',
       },
     },
-    {
-      path: '/:catchAll(.*)*',
-      component: () => import('@/layout/Index.vue'),
-      name: 'notFound',
-      children: [
-        {
-          path: '',
-          name: '404',
-          component: () => import('@/layout/NotFound.vue'),
-          meta: {
-            title: '404',
-          },
-        },
-      ],
-    },
   ],
 })
 
@@ -65,7 +50,7 @@ router.afterEach((to, from) => {
   }
   if (name === 'login') {
     // START_LOCATION 时 from.name 为 undefined
-    if (![null, undefined, '404'].includes(from.name as string)) {
+    if (![null, undefined, 'notFound'].includes(from.name as string)) {
       to.query.redirect = from.name as string
     }
   }

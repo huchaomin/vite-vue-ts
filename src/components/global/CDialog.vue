@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-23 19:07:50
+ * @LastEditTime : 2023-09-24 13:51:40
  * @Description  :
 -->
 <script setup lang="ts">
@@ -69,7 +69,7 @@ defineExpose({
 </script>
 
 <template>
-  <VDialog v-model="visible" :width="width" scrollable>
+  <VDialog v-model="visible" :width="width" scrollable attach="#app">
     <VCard :prepend-icon="prependIcon">
       <template #title>
         <span>{{ title }}</span>

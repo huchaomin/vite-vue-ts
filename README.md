@@ -19,6 +19,7 @@
 - dayjs
 - 修改密码 校验
 - defineOptions
+- 测试404准不准
 
   ```ts
   defineOptions({

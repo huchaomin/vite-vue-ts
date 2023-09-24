@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import test from '@/views/assetManagement/myClue/Index.vue'
+import { useEventBus } from '@vueuse/core'
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()
+
+const bus = useEventBus<string>('routeMounted')
+bus.on(() => {
+  document.getElementById('waiting')?.remove()
+  setTimeout(() => {
+    document.getElementById('app')!.style.opacity = '1'
+  }, 100)
+})
 
 $dialog(
   {
@@ -17,9 +26,11 @@ $dialog(
     <VOverlay
       :model-value="commonStore.loading"
       class="align-start justify-center b_filter"
+      attach="#app"
     >
       <VProgressLinear
         color="primary"
+        bg-color="transparent"
         indeterminate
         height="2"
         style="width: 100vw"

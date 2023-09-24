@@ -11,8 +11,17 @@
       padding: 0;
     }
 
-    #app {
+    #waiting {
       position: relative;
+    }
+
+    #waiting + #app {
+      display: none;
+    }
+
+    #app {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
     }
 
     .waiting_bg_wrapper {
@@ -67,7 +76,7 @@
   </style>
 
   <body>
-    <div id="app">
+    <div id="waiting">
       <div class="waiting_bg_wrapper">
         <img
           class="waiting_bg"
@@ -85,6 +94,7 @@
         />
       </div>
     </div>
+    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin iisa_peter@163.com
+ * @Date         : 2023-08-06 09:42:59
+ * @LastEditors  : huchaomin iisa_peter@163.com
+ * @LastEditTime : 2023-09-24 15:28:43
+ * @Description  :
+ */
 import { type RouteRecordRaw } from 'vue-router'
 
 // 路由name必填，方便remove
@@ -46,6 +53,14 @@ export default [
             },
           },
         ],
+      },
+      {
+        path: ':catchAll(.*)*',
+        component: () => import('@/layout/NotFound.vue'),
+        meta: {
+          title: '404',
+        },
+        name: 'notFound',
       },
     ],
   },

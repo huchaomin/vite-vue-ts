@@ -1,3 +1,10 @@
+<!--
+ * @Author       : huchaomin iisa_peter@163.com
+ * @Date         : 2023-08-20 10:01:45
+ * @LastEditors  : huchaomin iisa_peter@163.com
+ * @LastEditTime : 2023-09-24 14:54:32
+ * @Description  :
+-->
 <script setup lang="ts">
 import {
   type VxeTablePropTypes,
@@ -47,6 +54,7 @@ const processedColumns = computed(() => {
     if (['seq', 'checkbox', 'radio'].includes(column.type as string)) {
       column.width = 58 // vxe-cell 会减2px
       column.resizable = false
+      column.align = 'center'
     }
     if (column.type === 'checkbox') {
       column.slots = {

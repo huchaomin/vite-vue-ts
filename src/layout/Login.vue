@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 12:39:08
+ * @LastEditTime : 2023-09-24 15:25:03
  * @Description  :
 -->
 <script lang="ts" setup>
@@ -10,11 +10,16 @@ import rules from '@/constant/rules'
 import { randomImage } from '@/api/sys'
 import { type VForm } from 'vuetify/components'
 import { type VxeGridPropTypes } from 'vxe-table'
+import { useEventBus } from '@vueuse/core'
 
 const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
 const appName = APP_NAME
+const bus = useEventBus<string>('routeMounted')
+onMounted(() => {
+  bus.emit('routeMounted')
+})
 
 const formData = reactive({
   username: '',
