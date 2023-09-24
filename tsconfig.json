@@ -38,9 +38,6 @@
       ],
       "img/*": [
         "src/assets/images/*"
-      ],
-      "video/*": [
-        "src/assets/video/*"
       ]
     }
   },

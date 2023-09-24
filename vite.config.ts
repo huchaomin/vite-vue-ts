@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin iisa_peter@163.com
+ * @Date         : 2023-08-06 09:42:59
+ * @LastEditors  : huchaomin iisa_peter@163.com
+ * @LastEditTime : 2023-09-24 19:52:28
+ * @Description  :
+ */
 import { type ProxyOptions, defineConfig } from 'vite'
 import type * as http from 'node:http'
 import vue from '@vitejs/plugin-vue'
@@ -49,7 +56,6 @@ export default defineConfig((...arg) => {
       alias: {
         '@': resolvePath(__dirname, 'src'),
         img: resolvePath(__dirname, 'src/assets/images'),
-        video: resolvePath(__dirname, 'src/assets/video'),
       },
     },
     css: {
