@@ -10,7 +10,7 @@ bus.on(() => {
   document.getElementById('waiting')?.remove()
   setTimeout(() => {
     document.getElementById('app')!.style.opacity = '1'
-  }, 100)
+  })
 })
 
 $dialog(
