@@ -106,7 +106,7 @@ const data = [
   >
     <!-- <video class="video" src="~video/login.mp4" autoplay loop muted></video> -->
     <img class="login_bg" src="~/img/login_bg.svg" alt="login_bg" />
-    <img class="logo" src="~img/logo_text.png" />
+    <img class="logo" src="~img/logo.svg" />
     <VCard class="pa-4" width="448">
       <template #title>
         <div class="d-flex align-center">
