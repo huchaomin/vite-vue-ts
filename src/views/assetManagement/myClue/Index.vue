@@ -1,3 +1,10 @@
+<!--
+ * @Author       : huchaomin iisa_peter@163.com
+ * @Date         : 2023-08-04 22:13:27
+ * @LastEditors  : huchaomin iisa_peter@163.com
+ * @LastEditTime : 2023-09-23 18:58:53
+ * @Description  :
+-->
 <script setup lang="ts">
 import AddOrEditModal from './AddOrEditModal.vue'
 import { qcAssetList, qcAssetListExport } from '@/api/qcasset'
@@ -107,15 +114,10 @@ function exportExcel(): void {
 const addOrEditModal: Ref<InstanceType<typeof AddOrEditModal> | null> =
   ref(null)
 function add(): void {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  addOrEditModal.value!.visible = true
+  if (addOrEditModal.value !== null) {
+    addOrEditModal.value.visible = true
+  }
 }
-const aaa = ref([])
-const gather = []
-for (let i = 0; i < 50; i++) {
-  gather.push(`选项${i}`)
-}
-const items = reactive(gather)
 </script>
 <template>
   <VForm ref="form" class="pt-3 c_grid" @submit.prevent="query">
@@ -131,13 +133,6 @@ const items = reactive(gather)
       chips
       label="资产包状态"
     ></VSelect>
-    <CSelect
-      v-model="aaa"
-      label="Select"
-      chips
-      :items="items"
-      multiple
-    ></CSelect>
     <div>
       <VBtn type="submit">查询</VBtn>
       <VBtn variant="tonal" class="ml-2" @click="reset">重置</VBtn>
