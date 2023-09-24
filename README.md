@@ -15,7 +15,6 @@
 - smart clicks 点击大括号
 - ts 5.2.2 版本打包报错
 - vxe-table xe-utils 暂时不能按需加载
-- 添加进场loading <https://loading.io/animation/icon/>
 - dayjs
 - 修改密码 校验
 - defineOptions
