@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 00:49:32
+ * @LastEditTime : 2023-09-24 12:39:08
  * @Description  :
 -->
 <script lang="ts" setup>
@@ -176,7 +176,7 @@ const data = [
 <style lang="scss" scoped>
 .auth_wrapper {
   position: relative;
-  min-height: 100%;
+  min-height: inherit;
 
   .logo {
     position: absolute;

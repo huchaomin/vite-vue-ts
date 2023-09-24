@@ -1,8 +1,8 @@
 /*
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
- * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-22 17:35:26
+ * @LastEditors  : huchaomin iisa_peter@163.com
+ * @LastEditTime : 2023-09-24 12:47:58
  * @Description  :
  */
 @use "sass:color";
@@ -58,6 +58,11 @@ body {
     background-color: rgb(255 255 255 / 72%);
     backdrop-filter: blur(1px) saturate(167%);
     opacity: 1;
+  }
+
+  .v-card--variant-elevated{
+    background-color: rgb(255 255 255 / 85%);
+    backdrop-filter: blur(4px) saturate(180%);
   }
 }
 
