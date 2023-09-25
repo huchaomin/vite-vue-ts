@@ -1,8 +1,8 @@
 <!--
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
- * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 22:08:58
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-25 15:29:34
  * @Description  :
 -->
 <script lang="ts" setup>
@@ -109,8 +109,7 @@ const data = [
   <div
     class="auth_wrapper d-flex align-center justify-end overflow-hidden pa-4 bg-white"
   >
-    <!-- <video class="video" src="~video/login.mp4" autoplay loop muted></video> -->
-    <img class="login_bg" src="~/img/login_bg.svg" alt="login_bg" />
+    <!-- <img class="login_bg" src="~/img/login_bg.svg" alt="login_bg" /> -->
     <img class="logo" src="~img/logo.svg" />
     <VCard class="pa-4" width="448">
       <template #title>

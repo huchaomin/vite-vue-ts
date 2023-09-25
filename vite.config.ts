@@ -1,8 +1,8 @@
 /*
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
- * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 19:52:28
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-25 16:12:44
  * @Description  :
  */
 import { type ProxyOptions, defineConfig } from 'vite'
@@ -23,16 +23,12 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import Inspect from 'vite-plugin-inspect'
 import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
-import packageJson from './package.json'
+import config from './build/config.ts'
 
 const isReport = process.env.report === 'true'
 const isInspect = process.env.inspect === 'true'
-const proxyTarget = 'http://192.168.2.208:9089/' // 开发环境地址
-// const proxyTarget = 'http://192.168.2.206:9089/' // 测试环境地址
-// const proxyTarget = 'http://218.17.157.16:9089/' // 生产环境地址
-// const proxyTarget = 'http://192.168.2.87:7899/'; // 测试环境地址（晓蕾）
-// const proxyTarget = 'http://192.168.2.211:8080/'; // 测试环境地址（Robin）
-const apiPrefix = 'jeecg-boot'
+
+const { appName, apiPrefix, proxyTarget } = config.zg
 
 function bypass(
   req: http.IncomingMessage,
@@ -50,7 +46,7 @@ export default defineConfig((...arg) => {
   return {
     define: {
       API_PREFIX: JSON.stringify(apiPrefix),
-      APP_NAME: JSON.stringify(packageJson.description),
+      APP_NAME: JSON.stringify(appName),
     },
     resolve: {
       alias: {

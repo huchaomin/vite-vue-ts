@@ -1,6 +1,5 @@
 {
   "name": "saas-boot-vue",
-  "description": "擎峰资产处置平台",
   "private": true,
   "version": "0.0.0",
   "type": "module",
