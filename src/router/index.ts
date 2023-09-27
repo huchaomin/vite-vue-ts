@@ -1,8 +1,33 @@
-import { createRouter, createWebHistory, START_LOCATION } from 'vue-router'
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-14 13:58:40
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-26 18:05:16
+ * @Description  :
+ */
+import { createRouter, createWebHistory, START_LOCATION, type RouteRecordRaw } from 'vue-router'
+import Index from '@/layout/Index.vue'
 
+const parentRoute: RouteRecordRaw = {
+  path: '/',
+  name: 'index',
+  component: Index,
+  children: [
+    {
+      path: ':catchAll(.*)*',
+      component: () => import('@/layout/NotFound.vue'),
+      name: 'notFound',
+      meta: {
+        title: '404',
+        hideInMenu: true,
+      },
+    },
+  ],
+}
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    parentRoute,
     {
       path: '/login',
       name: 'login',
@@ -29,13 +54,14 @@ router.beforeEach((to, from, next) => {
       .getRoutersAndAuth()
       .then(() => {
         const { name, meta } = router.resolve({ path: to.path }) // 此时路由还没注册，to.name 为 undefined
-        if (from === START_LOCATION && meta.customerRouter === true) {
+        if (from === START_LOCATION && meta.id === undefined && name !== 'notFound') {
           next({ name: meta.parentName as string })
         } else {
           next({ name: name as string })
         }
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e)
         next(false)
       })
   } else {
@@ -55,5 +81,7 @@ router.afterEach((to, from) => {
     }
   }
 })
+
+export { parentRoute }
 
 export default router

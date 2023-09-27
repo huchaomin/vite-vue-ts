@@ -16,10 +16,7 @@ const defaultOpened = computed(() => {
 </script>
 <template>
   <VNavigationDrawer v-model="commonStore.drawerOpen">
-    <div
-      class="logo_wrapper d-flex align-center px-4 py-2"
-      :style="{ height: headerHeight }"
-    >
+    <div class="logo_wrapper d-flex align-center px-4 py-2" :style="{ height: headerHeight }">
       <img class="logo" src="~img/logo.png" />
       <span class="text-h6 pl-6">{{ appName }}</span>
     </div>

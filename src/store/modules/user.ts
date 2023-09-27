@@ -1,7 +1,14 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-17 09:54:59
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-26 18:08:35
+ * @Description  :
+ */
 import { user, login, logout } from '@/api/sys'
 import { type RouteRecordRaw } from 'vue-router'
 import allRoutes from '@/constant/routes'
-import router from '@/router'
+import router, { parentRoute } from '@/router'
 
 function getRouterIdsFromBack(menu: []): string[] {
   const arr: string[] = []
@@ -21,13 +28,13 @@ function getRouterIdsFromBack(menu: []): string[] {
 
 function filterRouters(menu: []): RouteRecordRaw[] {
   const ids = getRouterIdsFromBack(menu)
-  const fn: (
-    arr: RouteRecordRaw[],
-    parent: RouteRecordRaw | null,
-  ) => RouteRecordRaw[] = (arr, parent) => {
-    return arr.filter((item, index) => {
+  const fn: (arr: RouteRecordRaw[], parent: RouteRecordRaw | null) => RouteRecordRaw[] = (arr, parent) => {
+    return arr.filter((item) => {
       if (item.children !== undefined) {
         item.children = fn(item.children, item)
+        if (item.children.length > 0) {
+          item.redirect = { name: item.children[0].name }
+        }
       }
       if (parent !== null) {
         item.meta = {
@@ -35,20 +42,15 @@ function filterRouters(menu: []): RouteRecordRaw[] {
           parentName: parent.name as string,
         }
       }
-      const realChildren = (item.children ?? []).filter(
-        (c: RouteRecordRaw) => c.meta?.customerRouter !== true,
-      )
+      const realChildren = (item.children ?? []).filter((c: RouteRecordRaw) => c.meta?.id !== undefined)
       const boolean =
-        item.meta?.customerRouter === true || // 自定义路由不会有子路由
-        ((item.children === undefined || realChildren.length > 0) &&
-          (item.meta?.id === undefined || ids.includes(item.meta?.id)))
-      if (boolean && parent !== null && index === 0) {
-        parent.redirect = { name: item.name }
-      }
+        (item.children === undefined || realChildren.length > 0) &&
+        (item.meta?.id === undefined || ids.includes(item.meta?.id))
       return boolean
     })
   }
-  return fn(allRoutes, null)
+  parentRoute.children!.unshift(...allRoutes)
+  return fn([parentRoute], null)
 }
 
 export default defineStore(
@@ -83,6 +85,7 @@ export default defineStore(
       if (data.value === null) return null
       const result = data.value.result
       routersRaw.value = markRaw(filterRouters(result.menu))
+      router.removeRoute('index')
       routersRaw.value.forEach((item) => {
         router.addRoute(item)
       })

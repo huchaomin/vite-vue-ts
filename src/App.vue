@@ -1,12 +1,11 @@
 <!--
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-22 14:22:27
- * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-25 00:23:27
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-26 14:35:21
  * @Description  :
 -->
 <script setup lang="ts">
-import test from '@/views/assetManagement/myClue/Index.vue'
 import { useEventBus, useAnimate } from '@vueuse/core'
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
@@ -14,16 +13,8 @@ const dialogStore = useDialogStore()
 
 const waiting = ref<HTMLElement | null>(document.getElementById('waiting'))
 const app = ref<HTMLElement | null>()
-const { play: waitingPlay, playState: waitingPlayState } = useAnimate(
-  waiting,
-  { opacity: 0 },
-  { duration: 300 },
-)
-const { play: appPlay, playState: appPlayState } = useAnimate(
-  app,
-  { opacity: 1 },
-  { duration: 800 },
-)
+const { play: waitingPlay, playState: waitingPlayState } = useAnimate(waiting, { opacity: 0 }, { duration: 300 })
+const { play: appPlay, playState: appPlayState } = useAnimate(app, { opacity: 1 }, { duration: 800 })
 
 watch(waitingPlayState, (val) => {
   if (val === 'finished') {
@@ -39,13 +30,6 @@ watch(appPlayState, (val) => {
 })
 const bus = useEventBus<string>('routeMounted')
 bus.on(waitingPlay)
-
-$dialog(
-  {
-    width: 1200,
-  },
-  test,
-)
 </script>
 <template>
   <VApp>
@@ -55,23 +39,15 @@ $dialog(
       :key="dialog[0]"
       v-bind="dialog[1].dialogPE"
       @update:model-value="(val) => dialogStore.update(val, dialog[0])"
-      @vue:mounted="
-        (vnode: VNode) => dialogStore.setDialogRef(dialog[0], vnode)
-      "
+      @vue:mounted="(vnode: VNode) => dialogStore.setDialogRef(dialog[0], vnode)"
     >
       <Component
         :is="dialog[1].component"
         v-bind="dialog[1].componentPE"
-        @vue:mounted="
-          (vnode: VNode) => dialogStore.setComponentRef(dialog[0], vnode)
-        "
+        @vue:mounted="(vnode: VNode) => dialogStore.setComponentRef(dialog[0], vnode)"
       ></Component>
     </CDialog>
-    <VOverlay
-      :model-value="commonStore.loading"
-      class="align-start justify-center b_filter"
-      attach="#app"
-    >
+    <VOverlay :model-value="commonStore.loading" class="align-start justify-center b_filter" attach="#app">
       <VProgressLinear
         color="primary"
         bg-color="transparent"

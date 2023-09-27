@@ -1,3 +1,10 @@
+<!--
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-08-09 13:42:11
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-26 17:44:39
+ * @Description  :
+-->
 <script setup lang="ts">
 import { type RouteRecordRaw } from 'vue-router'
 const route = useRoute()
@@ -19,10 +26,7 @@ export default {
 </script>
 <template>
   <template v-for="item in model" :key="item.name">
-    <VListGroup
-      v-if="item.children && item.children.length > 0"
-      :value="item.name"
-    >
+    <VListGroup v-if="item.children && item.children.length > 0" :value="item.name">
       <template #activator="{ props }">
         <VListItem v-bind="props" :title="item.meta?.title">
           <template v-if="item.meta?.icon" #prepend>
@@ -33,7 +37,7 @@ export default {
       <MenuNode :model="item.children" :level="level + 1"></MenuNode>
     </VListGroup>
     <VListItem
-      v-else
+      v-else-if="item.meta?.hideInMenu !== true"
       :to="{ name: item.name }"
       exact
       :active="route.name === item.name"
