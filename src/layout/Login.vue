@@ -6,7 +6,7 @@
  * @Description  :
 -->
 <script lang="ts" setup>
-import rules from '@/constant/rules'
+import rules from '@/config/rules'
 import { randomImage } from '@/api/sys'
 import { type VForm } from 'vuetify/components'
 import { type VxeGridPropTypes } from 'vxe-table'

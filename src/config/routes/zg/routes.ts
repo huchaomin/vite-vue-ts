@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-26 14:29:15
+ * @LastEditTime : 2023-09-27 11:13:17
  * @Description  :
  */
 import { type RouteRecordRaw } from 'vue-router'

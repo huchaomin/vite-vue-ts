@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-25 16:12:44
+ * @LastEditTime : 2023-09-27 11:33:25
  * @Description  :
  */
 import { type ProxyOptions, defineConfig } from 'vite'
@@ -27,17 +27,12 @@ import config from './build/config.ts'
 
 const isReport = process.env.report === 'true'
 const isInspect = process.env.inspect === 'true'
+const projectName = 'zg'
 
-const { appName, apiPrefix, proxyTarget } = config.zg
+const { appName, apiPrefix, proxyTarget } = config[projectName]
 
-function bypass(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-  options: ProxyOptions,
-): void {
-  const proxyUrl =
-    new URL(options.rewrite?.(req.url) ?? req.url, options.target as string)
-      .href || ''
+function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
+  const proxyUrl = new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || ''
   res.setHeader('X-Res-Proxyurl', proxyUrl) // 查看真实的请求地址
 }
 
@@ -47,6 +42,7 @@ export default defineConfig((...arg) => {
     define: {
       API_PREFIX: JSON.stringify(apiPrefix),
       APP_NAME: JSON.stringify(appName),
+      PROJECT_NAME: JSON.stringify(projectName),
     },
     resolve: {
       alias: {

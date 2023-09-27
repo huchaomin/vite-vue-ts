@@ -2,13 +2,18 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-26 18:08:35
+ * @LastEditTime : 2023-09-27 11:41:44
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
 import { type RouteRecordRaw } from 'vue-router'
-import allRoutes from '@/constant/routes'
 import router, { parentRoute } from '@/router'
+import routesConfig from '@/config/routes/listing'
+const app = PROJECT_NAME
+const { default: allRoutes } = (await routesConfig[`./${app}/routes.ts`]()) as {
+  default: RouteRecordRaw[]
+}
+console.log(allRoutes)
 
 function getRouterIdsFromBack(menu: []): string[] {
   const arr: string[] = []

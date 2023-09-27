@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-26 18:05:16
+ * @LastEditTime : 2023-09-27 11:42:24
  * @Description  :
  */
 import { createRouter, createWebHistory, START_LOCATION, type RouteRecordRaw } from 'vue-router'
@@ -39,7 +39,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.name === 'login') {
     next()
     return
@@ -50,20 +50,17 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    userStore
-      .getRoutersAndAuth()
-      .then(() => {
-        const { name, meta } = router.resolve({ path: to.path }) // 此时路由还没注册，to.name 为 undefined
-        if (from === START_LOCATION && meta.id === undefined && name !== 'notFound') {
-          next({ name: meta.parentName as string })
-        } else {
-          next({ name: name as string })
-        }
-      })
-      .catch((e) => {
-        console.log(e)
-        next(false)
-      })
+    const res = await userStore.getRoutersAndAuth()
+    if (res === null) {
+      next(false)
+    } else {
+      const { name, meta } = router.resolve({ path: to.path }) // 此时路由还没注册，to.name 为 undefined
+      if (from === START_LOCATION && meta.id === undefined && name !== 'notFound') {
+        next({ name: meta.parentName as string })
+      } else {
+        next({ name: name as string })
+      }
+    }
   } else {
     next({ name: 'login' })
   }

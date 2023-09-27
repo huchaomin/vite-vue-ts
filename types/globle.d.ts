@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-17 08:55:35
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-27 11:33:22
+ * @Description  :
+ */
 // 为什么加这个 https://juejin.cn/post/7224051399256096829
 //  https://juejin.cn/post/6898710177969602574
 export {} // 为了让这个声明文件变成模块声明文件，而不是一个全局声明文件
@@ -7,6 +14,7 @@ export {} // 为了让这个声明文件变成模块声明文件，而不是一�
 declare global {
   const API_PREFIX: string
   const APP_NAME: string
+  const PROJECT_NAME: string
   type RequiredPartialKeys<T, K extends keyof T> = {
     [P in K]-?: T[P]
   } & Pick<T, Exclude<keyof T, K>>

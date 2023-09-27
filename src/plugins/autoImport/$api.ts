@@ -1,8 +1,11 @@
-import {
-  type UseFetchReturn,
-  type UseFetchOptions,
-  createFetch,
-} from '@vueuse/core'
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-17 08:55:35
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-09-27 11:52:18
+ * @Description  :
+ */
+import { type UseFetchReturn, type UseFetchOptions, createFetch } from '@vueuse/core'
 import { setUrlPrefix } from '@/utils/url'
 import signMd5Utils from '@/utils/signMd5Utils.js'
 
@@ -10,11 +13,7 @@ let isExpiration = false // 登陆是否已经过期
 type DataType = Record<string, any> | undefined
 type MethodType = 'get' | 'post' | 'put' | 'delete'
 
-function handleUrlAndData(
-  url: string,
-  data: DataType = {},
-  method: MethodType,
-): string {
+function handleUrlAndData(url: string, data: DataType = {}, method: MethodType): string {
   let query = '?'
   Object.keys(data).forEach((key) => {
     const reg = new RegExp(`\\{${key}\\}`, 'g')
@@ -49,9 +48,19 @@ type ctxType =
   | Parameters<NonNullable<UseFetchOptions['afterFetch']>>[0]
   | Parameters<NonNullable<UseFetchOptions['onFetchError']>>[0]
 
+function toLogin(title): void {
+  const userStore = useUserStore()
+  if (!isExpiration) {
+    $notify.error('很抱歉，登录已过期，请重新登录', { title })
+  }
+  isExpiration = true
+  userStore.clearSession()
+}
+
 // 有的公司比较奇葩 200 的相应，data.code 为40*
 function errHandler(ctx: ctxType): void {
-  const userStore = useUserStore()
+  debugger
+
   const { data } = ctx // data 可能为null
   const title = '系统提示'
   switch (data?.code) {
@@ -62,14 +71,14 @@ function errHandler(ctx: ctxType): void {
       $notify.error('很抱歉，资源未找到!', { title })
       break
     case 401:
-      if (!isExpiration) {
-        $notify.error('很抱歉，登录已过期，请重新登录', { title })
-      }
-      isExpiration = true
-      userStore.clearSession()
+      toLogin(title)
       break
     default:
-      $notify.error(data?.message ?? '网络错误', { title })
+      if (data.status === 500 && data.message === 'Token失效，请重新登录') {
+        toLogin(title)
+      } else {
+        $notify.error(data?.message ?? '网络错误', { title })
+      }
       break
   }
 }
@@ -127,10 +136,7 @@ export default function fetchWrapper(
       // response.ok 为 true 求的状态码 200 到 299
       afterFetch(ctx) {
         const { data } = ctx
-        if (
-          (responseType === 'json' && Boolean(data?.success)) ||
-          (responseType === 'blob' && data?.size > 0)
-        ) {
+        if ((responseType === 'json' && Boolean(data?.success)) || (responseType === 'blob' && data?.size > 0)) {
           // 该项目要data.success，其他项目可能不需要
           if (loading) {
             $loading.hide()
