@@ -106,9 +106,7 @@ const data = [
 </script>
 
 <template>
-  <div
-    class="auth_wrapper d-flex align-center justify-end overflow-hidden pa-4 bg-white"
-  >
+  <div class="auth_wrapper d-flex align-center justify-end overflow-hidden pa-4 bg-white">
     <!-- <img class="login_bg" src="~/img/login_bg.svg" alt="login_bg" /> -->
     <img class="logo" src="~img/logo.svg" />
     <VCard class="pa-4" width="448">

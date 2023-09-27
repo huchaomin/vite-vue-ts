@@ -13,8 +13,16 @@ const dialogStore = useDialogStore()
 
 const waiting = ref<HTMLElement | null>(document.getElementById('waiting'))
 const app = ref<HTMLElement | null>()
-const { play: waitingPlay, playState: waitingPlayState } = useAnimate(waiting, { opacity: 0 }, { duration: 300 })
-const { play: appPlay, playState: appPlayState } = useAnimate(app, { opacity: 1 }, { duration: 800 })
+const { play: waitingPlay, playState: waitingPlayState } = useAnimate(
+  waiting,
+  { opacity: 0 },
+  { duration: 300 },
+)
+const { play: appPlay, playState: appPlayState } = useAnimate(
+  app,
+  { opacity: 1 },
+  { duration: 800 },
+)
 
 watch(waitingPlayState, (val) => {
   if (val === 'finished') {
@@ -47,7 +55,11 @@ bus.on(waitingPlay)
         @vue:mounted="(vnode: VNode) => dialogStore.setComponentRef(dialog[0], vnode)"
       ></Component>
     </CDialog>
-    <VOverlay :model-value="commonStore.loading" class="align-start justify-center b_filter" attach="#app">
+    <VOverlay
+      :model-value="commonStore.loading"
+      class="align-start justify-center b_filter"
+      attach="#app"
+    >
       <VProgressLinear
         color="primary"
         bg-color="transparent"

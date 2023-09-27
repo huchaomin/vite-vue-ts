@@ -32,7 +32,8 @@ const projectName = 'zg'
 const { appName, apiPrefix, proxyTarget } = config[projectName]
 
 function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
-  const proxyUrl = new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || ''
+  const proxyUrl =
+    new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || ''
   res.setHeader('X-Res-Proxyurl', proxyUrl) // 查看真实的请求地址
 }
 

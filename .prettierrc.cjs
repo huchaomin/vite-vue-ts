@@ -1,5 +1,12 @@
+/*
+ * @Author       : error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @Date         : 2023-09-27 17:30:46
+ * @LastEditors  : error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime : 2023-09-27 18:30:41
+ * @Description  :
+ */
 module.exports = {
-  printWidth: 120, //单行长度
+  printWidth: 100, //单行长度
   tabWidth: 2, //缩进长度
   useTabs: false, //使用空格代替tab缩进
   semi: false, //句末使用分号
