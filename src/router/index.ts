@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 10:56:48
+ * @LastEditTime : 2023-10-07 17:17:17
  * @Description  :
  */
 import { createRouter, createWebHistory, START_LOCATION, type RouteRecordRaw } from 'vue-router'
@@ -55,7 +55,7 @@ router.beforeEach(async (to, from, next) => {
       next(false)
     } else {
       const { name, meta } = router.resolve({ path: to.path }) // 此时路由还没注册，to.name 为 undefined
-      if (from === START_LOCATION && meta.id === undefined && name !== 'notFound') {
+      if (from === START_LOCATION && meta.hideInMenu === true && name !== 'notFound') {
         next({ name: meta.parentName as string })
       } else {
         next({ name: name as string })

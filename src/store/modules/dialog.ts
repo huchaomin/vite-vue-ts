@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-09-04 09:24:17
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-07 17:28:51
+ * @Description  :
+ */
 import { type UnwrapNestedRefs, type Raw } from 'vue'
 import type CDialog from '@/components/global/CDialog.vue'
 
@@ -19,8 +26,7 @@ interface MapValueType<T extends new () => ComponentPublicInstance> {
   >
   component: Raw<T>
   componentPE: UnwrapNestedRefs<
-    BasePropsEmitsType<T>['componentProps'] &
-      BasePropsEmitsType<T>['componentEmits']
+    BasePropsEmitsType<T>['componentProps'] & BasePropsEmitsType<T>['componentEmits']
   > | null
   componentRef: exposedRefType
   dialogRef: exposedRefType
@@ -30,16 +36,13 @@ export type addType<T extends new () => ComponentPublicInstance> = (
   dialogPE: Omit<BasePropsEmitsType<T>['dialogProps'], 'modelValue'> &
     BasePropsEmitsType<T>['dialogEmits'],
   component: T,
-  componentPE?: BasePropsEmitsType<T>['componentProps'] &
-    BasePropsEmitsType<T>['componentEmits'],
+  componentPE?: BasePropsEmitsType<T>['componentProps'] & BasePropsEmitsType<T>['componentEmits'],
 ) => {
   componentRef: MapValueType<T>['componentRef']
   dialogRef: MapValueType<T>['dialogRef']
 }
 
-export default defineStore('dialog', <
-  T extends new () => ComponentPublicInstance,
->() => {
+export default defineStore('dialog', <T extends new () => ComponentPublicInstance>() => {
   const collection = reactive<Map<string, MapValueType<T>>>(new Map())
 
   const add: addType<T> = (dialogPE, component, componentPE) => {
@@ -71,11 +74,11 @@ export default defineStore('dialog', <
   }
 
   function setComponentRef(id: string, vnode: VNode): void {
-    collection.get(id)!.componentRef = vnode.component?.exposed ?? null
+    collection.get(id)!.componentRef = vnode.component?.exposeProxy ?? null
   }
 
   function setDialogRef(id: string, vnode: VNode): void {
-    collection.get(id)!.dialogRef = vnode.component?.exposed ?? null
+    collection.get(id)!.dialogRef = vnode.component?.exposeProxy ?? null
   }
 
   return {

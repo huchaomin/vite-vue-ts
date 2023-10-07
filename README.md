@@ -17,8 +17,8 @@
 - vxe-table xe-utils 暂时不能按需加载
 - dayjs
 - 修改密码 校验
-- defineOptions
 - hideInMenu 树结构过滤 高亮 exact, 子路由(没有id了,只能用这个控制)
+- defineOptions
 
   ```ts
   defineOptions({
@@ -29,7 +29,6 @@
   })
   ```
 
-- vnode.component?.exposed 是不是准确的判断组件是否有exposed
 - useOffsetPagination
 - useToggle
 - useToNumber
@@ -39,7 +38,6 @@
 - computedInject 不能provide响应式的值吗
 - useFileDialog
 - useResizeObserver
-- @vnode-*hooks in templates are deprecated. Use the vue: prefix instead. For example, @vnode-mounted should be changed to @vue:mounted. @vnode-* hooks support will be removed in 3.4
 - 添加后台管理器笔记
 
 ## 安装eslint 和 parser
