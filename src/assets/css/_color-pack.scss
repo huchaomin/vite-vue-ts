@@ -1,0 +1,18 @@
+/*
+* @Author       : huchaomin peter@qingcongai.com
+* @Date         : 2023-10-07 09:34:33
+* @LastEditors  : huchaomin peter@qingcongai.com
+* @LastEditTime : 2023-10-07 09:51:58
+* @Description  : vuetify 的color-pack false 掉了，这里只要定义自己需要的就可以了
+*/
+
+/* stylelint-disable selector-class-pattern */
+.bg-white {
+  color: #000 !important;
+  background-color: #FFF !important;
+}
+
+.bg-transparent {
+  color: currentcolor !important;
+  background-color: transparent !important;
+}

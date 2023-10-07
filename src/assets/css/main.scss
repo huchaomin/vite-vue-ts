@@ -1,12 +1,13 @@
 /*
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
- * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 12:47:58
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-07 09:35:03
  * @Description  :
  */
 @use "sass:color";
 @use './variable' as *;
+@use './color-pack';
 
 
 /* 滚动条整体部分,该部分必须定义，否则下面的定义都不生效 */

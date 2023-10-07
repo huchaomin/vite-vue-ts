@@ -21,7 +21,7 @@
 - 路由name 由后端传过来
 - 生产环境和测试环境 菜单表id不一样, 用前端组件map对应
 - hideInMenu 树结构过滤 高亮 exact, 子路由(没有id了,只能用这个控制)
-- bg-,text-<https://vuetifyjs.com/en/features/theme/#custom-theme-colors>看看这里能不能满足我们自己需要的
+- 退出登陆后，路由又注释了一遍
 
   ```ts
   defineOptions({
@@ -34,7 +34,6 @@
 
 - vnode.component?.exposed 是不是准确的判断组件是否有exposed
 - pinia 替代方案
-- useAsyncState 怎么优雅地阻止代码运行
 - useOffsetPagination
 - useToggle
 - useToNumber
