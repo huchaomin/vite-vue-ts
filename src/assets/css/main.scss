@@ -2,11 +2,12 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 09:35:03
+ * @LastEditTime : 2023-10-07 18:04:51
  * @Description  :
  */
 @use "sass:color";
 @use './variable' as *;
+@use './mixin' as *;
 @use './color-pack';
 
 
@@ -62,8 +63,7 @@ body {
   }
 
   .v-card--variant-elevated{
-    background-color: rgb(255 255 255 / 85%);
-    backdrop-filter: blur(4px) saturate(180%);
+    @include bg-filter;
   }
 }
 

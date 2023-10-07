@@ -1,8 +1,8 @@
 /*
- * @Author       : error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @Date         : 2023-09-27 17:30:46
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-08-04 09:08:41
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 09:53:33
+ * @LastEditTime : 2023-10-07 17:44:33
  * @Description  :
  */
 /* stylelint-disable length-zero-no-unit */
@@ -34,7 +34,7 @@
     'comfortable': -2,
     'compact': -5,
   ),
-
+  $navigation-drawer-border-thin-width: 0,
   // select chips 间隔
   $input-chips-margin-top: 0px, // 不能省px
   $input-chips-margin-bottom: ('default': 0, 'comfortable': 0, 'compact': 0),

@@ -1,3 +1,10 @@
+<!--
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-09-01 09:32:24
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-07 18:10:05
+ * @Description  :
+-->
 <script setup lang="ts">
 import ModifyPwd from './modules/ModifyPwd.vue'
 const commonStore = useCommonStore()
@@ -24,7 +31,7 @@ function modifyPwd(): void {
 }
 </script>
 <template>
-  <VAppBar flat density="comfortable">
+  <VAppBar flat density="comfortable" class="pl-1">
     <template #prepend>
       <VAppBarNavIcon
         color="inherit"
@@ -32,12 +39,7 @@ function modifyPwd(): void {
       ></VAppBarNavIcon>
     </template>
     <template #append>
-      <VBtn
-        prepend-icon="mdi-account-circle-outline"
-        size="large"
-        height="100%"
-        color="inherit"
-      >
+      <VBtn prepend-icon="mdi-account-circle-outline" size="large" height="100%" color="inherit">
         {{ userStore.userInfo.realname }}
         <VMenu open-on-hover activator="parent">
           <VList>

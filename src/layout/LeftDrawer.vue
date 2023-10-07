@@ -1,3 +1,10 @@
+<!--
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-24 11:08:28
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-07 17:38:01
+ * @Description  :
+-->
 <script setup lang="ts">
 import { useLayout } from 'vuetify'
 import MenuNode from './modules/MenuNode.vue'

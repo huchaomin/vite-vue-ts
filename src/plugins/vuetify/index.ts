@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-24 09:32:25
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-07 18:09:24
+ * @Description  :
+ */
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify, type ThemeDefinition } from 'vuetify'
@@ -123,6 +130,12 @@ export default createVuetify({
     VSwitch: {
       // set v-switch default color to primary
       color: 'primary',
+    },
+    VNavigationDrawer: {
+      class: 'bg-filter',
+    },
+    VAppBar: {
+      class: 'bg-filter',
     },
   },
   icons: {
