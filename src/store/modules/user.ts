@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 10:44:11
+ * @LastEditTime : 2023-10-07 16:54:14
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
@@ -13,13 +13,18 @@ const app = PROJECT_NAME
 const { default: allRoutes } = (await routesConfig[`./${app}/routes.ts`]()) as {
   default: RouteRecordRaw[]
 }
+const { default: componentCorrespondence } = (await routesConfig[
+  `./${app}/correspondence.ts`
+]()) as {
+  default: string[]
+}
 
-function getRouterIdsFromBack(menu: []): string[] {
+function getRouterComponentsFromBack(menu: []): string[] {
   const arr: string[] = []
   const fn: (list: []) => void = (list) => {
     list.forEach((item: any) => {
-      if (item.id !== undefined) {
-        arr.push(item.id)
+      if (item.component !== undefined) {
+        arr.push(item.component)
       }
       if (Array.isArray(item.children)) {
         fn(item.children)
@@ -30,8 +35,16 @@ function getRouterIdsFromBack(menu: []): string[] {
   return arr
 }
 
+function cloneRouteRecordRaw(value: RouteRecordRaw): RouteRecordRaw {
+  return _.cloneDeepWith(value, (val) => {
+    if (typeof val.render === 'function') {
+      return val
+    }
+  })
+}
+
 function filterRouters(menu: []): RouteRecordRaw[] {
-  const ids = getRouterIdsFromBack(menu)
+  const componentKeys = getRouterComponentsFromBack(menu)
   const fn: (arr: RouteRecordRaw[], parent: RouteRecordRaw | null) => RouteRecordRaw[] = (
     arr,
     parent,
@@ -43,23 +56,31 @@ function filterRouters(menu: []): RouteRecordRaw[] {
           item.redirect = { name: item.children[0].name }
         }
       }
+      if (item.meta?.id !== undefined) {
+        item.component = () =>
+          componentCorrespondence[item.meta.id]().then((comp) => {
+            return {
+              ...comp.default,
+              name: item.name,
+            }
+          })
+      }
+      const boolean = componentKeys.includes(item.meta?.id) || item.meta?.disabled === false
       if (parent !== null) {
         item.meta = {
           ...(item.meta ?? {}),
           parentName: parent.name as string,
         }
+        parent.meta = {
+          ...(parent.meta ?? {}),
+          disabled: boolean ? false : parent.meta?.disabled ?? true,
+        }
       }
-      const realChildren = (item.children ?? []).filter(
-        (c: RouteRecordRaw) => c.meta?.id !== undefined,
-      )
-      const boolean =
-        (item.children === undefined || realChildren.length > 0) &&
-        (item.meta?.id === undefined || ids.includes(item.meta?.id))
       return boolean
     })
   }
-  const parent = _.cloneDeep(parentRoute)
-  parent.children!.unshift(..._.cloneDeep(allRoutes))
+  const parent = cloneRouteRecordRaw(parentRoute)
+  parent.children!.unshift(...cloneRouteRecordRaw(allRoutes))
   return fn([parent], null)
 }
 

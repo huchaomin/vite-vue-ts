@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 13:45:30
+ * @LastEditTime : 2023-10-07 17:01:31
  * @Description  :
 -->
 <script setup lang="ts">
@@ -21,11 +21,11 @@ function routeMounted(): void {
     <VMain>
       <div class="pa-4 overflow-y-auto" style="height: calc((100vh - var(--v-layout-top)))">
         <RouterView v-slot="{ Component }">
-          <KeepAlive>
-            <VFadeTransition mode="out-in">
+          <VFadeTransition mode="out-in">
+            <KeepAlive :include="['userManagement']">
               <Component :is="Component" @vue:mounted="routeMounted"></Component>
-            </VFadeTransition>
-          </KeepAlive>
+            </KeepAlive>
+          </VFadeTransition>
         </RouterView>
       </div>
     </VMain>
