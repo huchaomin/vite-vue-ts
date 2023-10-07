@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-27 11:42:24
+ * @LastEditTime : 2023-10-07 10:56:48
  * @Description  :
  */
 import { createRouter, createWebHistory, START_LOCATION, type RouteRecordRaw } from 'vue-router'
@@ -73,7 +73,7 @@ router.afterEach((to, from) => {
   }
   if (name === 'login') {
     // START_LOCATION 时 from.name 为 undefined
-    if (![null, undefined, 'notFound'].includes(from.name as string)) {
+    if (![undefined, 'notFound'].includes(from.name as string)) {
       to.query.redirect = from.name as string
     }
   }
