@@ -1,6 +1,7 @@
-import { uniqueId, isPlainObject } from 'lodash-es'
+import { uniqueId, isPlainObject, cloneDeep } from 'lodash-es'
 
 export default {
   uniqueId,
   isPlainObject,
+  cloneDeep,
 }

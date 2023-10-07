@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-27 11:41:44
+ * @LastEditTime : 2023-10-07 10:44:11
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
@@ -13,7 +13,6 @@ const app = PROJECT_NAME
 const { default: allRoutes } = (await routesConfig[`./${app}/routes.ts`]()) as {
   default: RouteRecordRaw[]
 }
-console.log(allRoutes)
 
 function getRouterIdsFromBack(menu: []): string[] {
   const arr: string[] = []
@@ -33,7 +32,10 @@ function getRouterIdsFromBack(menu: []): string[] {
 
 function filterRouters(menu: []): RouteRecordRaw[] {
   const ids = getRouterIdsFromBack(menu)
-  const fn: (arr: RouteRecordRaw[], parent: RouteRecordRaw | null) => RouteRecordRaw[] = (arr, parent) => {
+  const fn: (arr: RouteRecordRaw[], parent: RouteRecordRaw | null) => RouteRecordRaw[] = (
+    arr,
+    parent,
+  ) => {
     return arr.filter((item) => {
       if (item.children !== undefined) {
         item.children = fn(item.children, item)
@@ -47,15 +49,18 @@ function filterRouters(menu: []): RouteRecordRaw[] {
           parentName: parent.name as string,
         }
       }
-      const realChildren = (item.children ?? []).filter((c: RouteRecordRaw) => c.meta?.id !== undefined)
+      const realChildren = (item.children ?? []).filter(
+        (c: RouteRecordRaw) => c.meta?.id !== undefined,
+      )
       const boolean =
         (item.children === undefined || realChildren.length > 0) &&
         (item.meta?.id === undefined || ids.includes(item.meta?.id))
       return boolean
     })
   }
-  parentRoute.children!.unshift(...allRoutes)
-  return fn([parentRoute], null)
+  const parent = _.cloneDeep(parentRoute)
+  parent.children!.unshift(..._.cloneDeep(allRoutes))
+  return fn([parent], null)
 }
 
 export default defineStore(
@@ -90,7 +95,9 @@ export default defineStore(
       if (data.value === null) return null
       const result = data.value.result
       routersRaw.value = markRaw(filterRouters(result.menu))
-      router.removeRoute('index')
+      if (router.hasRoute('index')) {
+        router.removeRoute('index')
+      }
       routersRaw.value.forEach((item) => {
         router.addRoute(item)
       })
