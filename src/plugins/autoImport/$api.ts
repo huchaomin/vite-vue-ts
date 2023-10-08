@@ -1,8 +1,8 @@
 /*
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
- * @LastEditors  : error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime : 2023-09-27 21:16:13
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-08 10:38:36
  * @Description  :
  */
 import { type UseFetchReturn, type UseFetchOptions, createFetch } from '@vueuse/core'

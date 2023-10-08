@@ -134,11 +134,7 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
       ></VRadio>
     </template>
     <template #loading>
-      <VProgressLinear
-        color="primary"
-        indeterminate
-        height="2"
-      ></VProgressLinear>
+      <VProgressLinear color="primary" indeterminate height="2"></VProgressLinear>
     </template>
     <template #empty>
       <SvgIcon name="empty" style="font-size: 50px"></SvgIcon>

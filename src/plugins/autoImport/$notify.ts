@@ -21,12 +21,7 @@ type createMap = {
 
 const create: createFn = (
   text,
-  {
-    type = NotificationTypes.success,
-    title = '提示',
-    timeout = 3000,
-    ...options
-  } = {},
+  { type = NotificationTypes.success, title = '提示', timeout = 3000, ...options } = {},
 ) => {
   const notifyStore = useNotifyStore()
   notifyStore.add({

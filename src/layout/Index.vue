@@ -8,7 +8,6 @@
 <script setup lang="ts">
 import LeftDrawer from './LeftDrawer.vue'
 import TopHeader from './TopHeader.vue'
-import { useEventBus } from '@vueuse/core'
 const bus = useEventBus<string>('routeMounted')
 function routeMounted(): void {
   bus.emit('routeMounted')

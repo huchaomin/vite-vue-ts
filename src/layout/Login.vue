@@ -2,15 +2,14 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-25 15:29:34
+ * @LastEditTime : 2023-10-08 10:40:55
  * @Description  :
 -->
 <script lang="ts" setup>
-import rules from '@/config/rules'
 import { randomImage } from '@/api/sys'
+import rules from '@/config/rules'
 import { type VForm } from 'vuetify/components'
 import { type VxeGridPropTypes } from 'vxe-table'
-import { useEventBus } from '@vueuse/core'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -127,14 +126,14 @@ const data = [
           <VForm ref="form" @submit.prevent="handleSubmit">
             <VTextField
               v-model="formData.username"
-              :rules="rules.username"
+              :rules="rules.required"
               autofocus
               placeholder="请输入用户名"
               label="帐户名"
             ></VTextField>
             <VTextField
               v-model="formData.password"
-              :rules="rules.password"
+              :rules="rules.required"
               label="密码"
               placeholder="请输入密码"
               autocomplete

@@ -6,7 +6,6 @@
  * @Description  :
 -->
 <script setup lang="ts">
-import { useEventBus, useAnimate } from '@vueuse/core'
 const commonStore = useCommonStore()
 const notifyStore = useNotifyStore()
 const dialogStore = useDialogStore()

@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 18:09:24
+ * @LastEditTime : 2023-10-08 09:48:25
  * @Description  :
  */
 import 'vuetify/styles'
