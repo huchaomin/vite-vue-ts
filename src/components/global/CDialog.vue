@@ -1,8 +1,8 @@
 <!--
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
- * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 13:51:40
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-08 09:24:27
  * @Description  :
 -->
 <script setup lang="ts">
@@ -86,10 +86,7 @@ defineExpose({
       <VCardText>
         <slot></slot>
       </VCardText>
-      <div
-        v-if="showCancel || showConfirm"
-        class="v-card-actions justify-end px-6 py-4"
-      >
+      <div v-if="showCancel || showConfirm" class="v-card-actions justify-end px-6 pb-4">
         <VBtn v-if="showCancel" variant="tonal" @click="cancel">取消</VBtn>
         <VBtn v-if="showConfirm" @click="confirm">确认</VBtn>
       </div>
@@ -109,6 +106,7 @@ $padding-x: 8px;
   align-items: center;
   justify-content: space-between;
   padding: $padding-x 0 !important;
-  font-size: 1.43rem;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 </style>

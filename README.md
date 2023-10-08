@@ -6,7 +6,6 @@
 - vite-plugin-icons 研究icon的使用 iconify <https://juejin.cn/post/6998059092497399845>
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
-- 研究sass怎么用，
 - webfontloader vuetify 模板
 - login时设置 router query没有出现在url当中
 - 最近的tab签
@@ -18,6 +17,7 @@
 - dayjs
 - 修改密码 校验
 - hideInMenu 树结构过滤 高亮 exact, 子路由(没有id了,只能用这个控制)
+- 最近的tab签
 - defineOptions
 
   ```ts

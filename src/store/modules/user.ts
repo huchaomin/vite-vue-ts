@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 16:54:14
+ * @LastEditTime : 2023-10-08 09:33:46
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
@@ -65,7 +65,10 @@ function filterRouters(menu: []): RouteRecordRaw[] {
             }
           })
       }
-      const boolean = componentKeys.includes(item.meta?.id) || item.meta?.disabled === false
+      const boolean =
+        componentKeys.includes(item.meta?.id) ||
+        item.meta?.disabled === false ||
+        item.name === 'notFound'
       if (parent !== null) {
         item.meta = {
           ...(item.meta ?? {}),

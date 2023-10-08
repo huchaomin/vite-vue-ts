@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-01 09:32:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 18:10:05
+ * @LastEditTime : 2023-10-08 09:18:05
  * @Description  :
 -->
 <script setup lang="ts">
@@ -20,6 +20,7 @@ function modifyPwd(): void {
   const { componentRef, dialogRef } = $dialog(
     {
       title: '修改密码',
+      width: 400,
       hideAfterConfirm: false,
       onConfirm: async () => {
         await componentRef!.value.handleSubmit()
