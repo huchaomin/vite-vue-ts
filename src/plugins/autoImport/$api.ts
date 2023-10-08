@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 10:38:36
+ * @LastEditTime : 2023-10-08 14:36:35
  * @Description  :
  */
 import { type UseFetchReturn, type UseFetchOptions, createFetch } from '@vueuse/core'
@@ -42,6 +42,7 @@ export interface apiConfig {
   readonly isWhiteApi?: boolean // 是否是白名单接口（不需要登陆）
   readonly responseType?: string // 返回数据类型
   readonly headers?: Record<string, string> // 请求头
+  readonly msgOnSuccess?: boolean // 成功提示
 }
 
 type ctxType =
@@ -101,6 +102,7 @@ export default function fetchWrapper(
     loading = true,
     responseType = 'json',
     headers = {},
+    msgOnSuccess = false,
   } = config
   const processedUrl = handleUrlAndData(url, data, method) // data 也改变了
   const userStore = useUserStore()
@@ -141,6 +143,9 @@ export default function fetchWrapper(
           // 该项目要data.success，其他项目可能不需要
           if (loading) {
             $loading.hide()
+          }
+          if (msgOnSuccess) {
+            $notify(data.message)
           }
           return ctx
         }

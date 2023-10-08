@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 09:33:46
+ * @LastEditTime : 2023-10-08 14:39:39
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
@@ -110,7 +110,6 @@ export default defineStore(
     async function logoutStart(): Promise<null | undefined> {
       const { data } = await $api(logout)
       if (data.value === null) return null
-      $notify('退出登录成功！')
       await clearSession()
     }
 

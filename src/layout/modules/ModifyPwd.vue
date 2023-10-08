@@ -2,29 +2,33 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 11:06:35
+ * @LastEditTime : 2023-10-08 14:28:07
  * @Description  :
 -->
 <script setup lang="ts">
+import { type VForm } from 'vuetify/components'
 import { updatePassword } from '@/api/sys'
 import rules from '@/config/rules'
 const userStore = useUserStore()
+const form = ref<InstanceType<typeof VForm> | null>(null)
 const formData = reactive({
   oldpassword: '',
   password: '',
   confirmpassword: '',
 })
 function handleSubmit(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    $confirm('确定要修改密码吗？').then(async () => {
-      const { data } = await $api(updatePassword, {
-        username: userStore.userInfo.username,
-        ...formData,
-      })
-      if (data.value === null) {
-        reject()
-      } else {
-        resolve()
+  return new Promise((resolve) => {
+    form.value!.validate().then(({ valid }) => {
+      if (valid) {
+        $confirm('确定要修改密码吗？').then(async () => {
+          const { data } = await $api(updatePassword, {
+            username: userStore.userInfo.username,
+            ...formData,
+          })
+          if (data.value !== null) {
+            resolve()
+          }
+        })
       }
     })
   })

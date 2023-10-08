@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-01 09:32:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 09:18:05
+ * @LastEditTime : 2023-10-08 14:43:54
  * @Description  :
 -->
 <script setup lang="ts">
@@ -23,8 +23,9 @@ function modifyPwd(): void {
       width: 400,
       hideAfterConfirm: false,
       onConfirm: async () => {
-        await componentRef!.value.handleSubmit()
-        dialogRef!.value.hide()
+        await componentRef.value.handleSubmit()
+        dialogRef.value.hide()
+        await userStore.clearSession()
       },
     },
     ModifyPwd,

@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-04 09:24:17
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 17:28:51
+ * @LastEditTime : 2023-10-08 14:04:41
  * @Description  :
  */
 import { type UnwrapNestedRefs, type Raw } from 'vue'
@@ -15,8 +15,6 @@ interface BasePropsEmitsType<T extends new () => ComponentPublicInstance> {
   componentEmits: Partial<InstanceType<T>['$emit']>
 }
 
-type exposedRefType = NonNullable<VNode['component']>['exposed'] | null
-
 interface MapValueType<T extends new () => ComponentPublicInstance> {
   dialogPE: UnwrapNestedRefs<
     Omit<BasePropsEmitsType<T>['dialogProps'], 'modelValue'> &
@@ -28,8 +26,8 @@ interface MapValueType<T extends new () => ComponentPublicInstance> {
   componentPE: UnwrapNestedRefs<
     BasePropsEmitsType<T>['componentProps'] & BasePropsEmitsType<T>['componentEmits']
   > | null
-  componentRef: exposedRefType
-  dialogRef: exposedRefType
+  componentRef: Ref<InstanceType<T> | null>
+  dialogRef: Ref<InstanceType<typeof CDialog> | null>
 }
 
 export type addType<T extends new () => ComponentPublicInstance> = (
@@ -64,21 +62,14 @@ export default defineStore('dialog', <T extends new () => ComponentPublicInstanc
 
   function update(value: boolean, id: string): void {
     collection.get(id)!.dialogPE.modelValue = value
-    if (!value) {
-      collection.get(id)!.componentRef = null
-      collection.get(id)!.dialogRef = null
-      setTimeout(() => {
-        collection.delete(id)
-      }, 2000) // 等待动画结束
-    }
   }
 
-  function setComponentRef(id: string, vnode: VNode): void {
-    collection.get(id)!.componentRef = vnode.component?.exposeProxy ?? null
+  function setComponentRef(id: string, ref: Ref): void {
+    collection.get(id)!.componentRef = ref
   }
 
-  function setDialogRef(id: string, vnode: VNode): void {
-    collection.get(id)!.dialogRef = vnode.component?.exposeProxy ?? null
+  function setDialogRef(id: string, ref: Ref): void {
+    collection.get(id)!.dialogRef = ref
   }
 
   return {

@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 10:40:55
+ * @LastEditTime : 2023-10-08 14:41:35
  * @Description  :
 -->
 <script lang="ts" setup>
@@ -52,7 +52,6 @@ async function handleSubmit(): Promise<void> {
     formData.captcha = ''
     getCaptcha()
   } else {
-    $notify('登录成功！')
     const redirect = route.query.redirect as string
     const name = router.hasRoute(redirect) ? redirect : 'index'
     router.replace({ name })
@@ -155,7 +154,7 @@ const data = [
                   href="#"
                   class="d-flex align-stretch justify-end"
                   style="height: 44px"
-                  @click.prevent="() => getCaptcha()"
+                  @click.prevent="getCaptcha"
                 >
                   <img v-if="captchaUrl" :src="captchaUrl.result" />
                   <img v-else src="~img/code_error.png" />
