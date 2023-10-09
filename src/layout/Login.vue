@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 14:41:35
+ * @LastEditTime : 2023-10-09 16:20:10
  * @Description  :
 -->
 <script lang="ts" setup>
@@ -154,7 +154,7 @@ const data = [
                   href="#"
                   class="d-flex align-stretch justify-end"
                   style="height: 44px"
-                  @click.prevent="getCaptcha"
+                  @click.prevent="() => getCaptcha()"
                 >
                   <img v-if="captchaUrl" :src="captchaUrl.result" />
                   <img v-else src="~img/code_error.png" />

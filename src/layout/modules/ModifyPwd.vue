@@ -2,34 +2,60 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 15:10:46
+ * @LastEditTime : 2023-10-09 17:28:06
  * @Description  :
 -->
 <script setup lang="ts">
-import { type VForm } from 'vuetify/components'
 import { updatePassword } from '@/api/sys'
-import rules from '@/config/rules'
+
 const userStore = useUserStore()
-const form = ref<InstanceType<typeof VForm> | null>(null)
+const form = ref<InstanceType<CForm> | null>(null)
 const formData = reactive({
   oldpassword: '',
   password: '',
   confirmpassword: '',
 })
+
+const formItems = reactive([
+  {
+    model: 'oldpassword',
+    props: {
+      autofocus: true,
+      rules: 'required',
+      autocomplete: true,
+      type: 'password',
+      label: '旧密码',
+    },
+  },
+  {
+    model: 'password',
+    props: {
+      label: '新密码',
+      type: 'password',
+      rules: 'password',
+    },
+  },
+  {
+    model: 'confirmpassword',
+    props: {
+      label: '确认新密码',
+      type: 'password',
+      rules: ['required', sameAsPrev],
+    },
+  },
+])
 function handleSubmit(): Promise<void> {
   return new Promise((resolve) => {
-    form.value!.validate().then(({ valid }) => {
-      if (valid) {
-        $confirm('确定要修改密码吗？').then(async () => {
-          const { data } = await $api(updatePassword, {
-            username: userStore.userInfo.username,
-            ...formData,
-          })
-          if (data.value !== null) {
-            resolve()
-          }
+    form.value!.validate().then(() => {
+      $confirm('确定要修改密码吗？').then(async () => {
+        const { data } = await $api(updatePassword, {
+          username: userStore.userInfo.username,
+          ...formData,
         })
-      }
+        if (data.value !== null) {
+          resolve()
+        }
+      })
     })
   })
 }
@@ -45,26 +71,5 @@ defineExpose({
 })
 </script>
 <template>
-  <VForm ref="form">
-    <VTextField
-      v-model="formData.oldpassword"
-      autofocus
-      :rules="rules.required"
-      autocomplete
-      type="password"
-      label="旧密码"
-    ></VTextField>
-    <VTextField
-      v-model="formData.password"
-      label="新密码"
-      type="password"
-      :rules="rules.password"
-    ></VTextField>
-    <VTextField
-      v-model="formData.confirmpassword"
-      label="确认新密码"
-      type="password"
-      :rules="[...rules.required, sameAsPrev]"
-    ></VTextField>
-  </VForm>
+  <CForm ref="form" :form-data="formData" :items="formItems"></CForm>
 </template>

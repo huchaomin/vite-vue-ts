@@ -2,9 +2,13 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-27 11:33:22
+ * @LastEditTime : 2023-10-09 16:41:48
  * @Description  :
  */
+
+import type CForm from '@/components/global/CForm.vue'
+import type CDialog from '@/components/global/CDialog.vue'
+
 // 为什么加这个 https://juejin.cn/post/7224051399256096829
 //  https://juejin.cn/post/6898710177969602574
 export {} // 为了让这个声明文件变成模块声明文件，而不是一个全局声明文件
@@ -24,4 +28,6 @@ declare global {
   type AllowRefValue<T> = {
     [P in keyof T]: MaybeRef<T[P]>
   }
+  type CForm = typeof CForm
+  type CDialog = typeof CDialog
 }

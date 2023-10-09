@@ -6,9 +6,6 @@ declare module '*.vue' {
 }
 
 declare module '*/signMd5Utils.js' {
-  export function getSign(
-    url: string,
-    params: Record<string, any> | undefined,
-  ): string
+  export function getSign(url: string, params: Record<string, any> | undefined): string
   export function getDateTimeToString(): string
 }
