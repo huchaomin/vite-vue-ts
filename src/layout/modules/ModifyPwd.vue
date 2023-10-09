@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 14:28:07
+ * @LastEditTime : 2023-10-08 15:10:46
  * @Description  :
 -->
 <script setup lang="ts">
@@ -45,7 +45,7 @@ defineExpose({
 })
 </script>
 <template>
-  <VForm ref="form" @submit.prevent="handleSubmit">
+  <VForm ref="form">
     <VTextField
       v-model="formData.oldpassword"
       autofocus

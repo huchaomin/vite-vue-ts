@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-22 14:22:27
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 11:58:09
+ * @LastEditTime : 2023-10-09 10:02:12
  * @Description  :
 -->
 <script setup lang="ts">
@@ -45,13 +45,16 @@ bus.on(waitingPlay)
       v-for="dialog in dialogStore.collection"
       :key="dialog[0]"
       v-bind="dialog[1].dialogPE"
-      :ref="(ref) => dialogStore.setDialogRef(dialog[0], ref)"
+      :ref="(refValue) => dialogStore.setDialogRef(dialog[0], refValue)"
       @update:model-value="(val) => dialogStore.update(val, dialog[0])"
     >
       <Component
         :is="dialog[1].component"
         v-bind="dialog[1].componentPE"
-        :ref="(ref) => dialogStore.setComponentRef(dialog[0], ref)"
+        :ref="
+          (refValue: Element | ComponentPublicInstance | null) =>
+            dialogStore.setComponentRef(dialog[0], refValue)
+        "
       ></Component>
     </CDialog>
     <VOverlay

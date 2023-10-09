@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-14 13:58:40
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-09 09:38:07
+ * @Description  :
+ */
 const path = require('path')
 
 module.exports = {
@@ -16,11 +23,7 @@ module.exports = {
   overrides: [
     {
       env: { node: true },
-      files: [
-        '.eslintrc.{js,cjs}',
-        'stylelint.config.{js,cjs}',
-        '.prettierrc.cjs',
-      ],
+      files: ['.eslintrc.{js,cjs}', 'stylelint.config.{js,cjs}', '.prettierrc.cjs'],
       parserOptions: {
         sourceType: 'script',
       },
@@ -148,5 +151,6 @@ module.exports = {
         skipCompoundAssignments: true,
       },
     ],
+    '@typescript-eslint/no-unnecessary-type-assertion': 'off', // 允许不必要的类型断言
   },
 }

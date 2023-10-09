@@ -8,7 +8,6 @@
 - 添加i8n 好像有一个更好的vscode插件 分割包
 - @vueuse（自动引入） 分割包
 - webfontloader vuetify 模板
-- 最近的tab签
 - 自定义一个formatter, 远程formatter(能不能和渲染器一起使用), 字典
 - cmd ' 使用熟练
 - smart clicks 点击大括号
