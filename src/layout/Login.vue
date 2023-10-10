@@ -2,14 +2,13 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-06-24 17:50:14
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 16:06:51
+ * @LastEditTime : 2023-10-10 19:12:36
  * @Description  :
 -->
 <script lang="ts" setup>
 import { randomImage } from '@/api/sys'
 import rules from '@/config/rules'
 import { type VForm } from 'vuetify/components'
-import { type VxeGridPropTypes } from 'vxe-table'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -57,50 +56,6 @@ async function handleSubmit(): Promise<void> {
     router.replace({ name })
   }
 }
-
-const columns: VxeGridPropTypes.Columns = [
-  { type: 'seq' },
-  { type: 'radio' },
-  { type: 'checkbox' },
-  { field: 'name', title: 'Name', slots: { default: 'name' } },
-  { field: 'sex', title: 'Sex', showHeaderOverflow: true },
-  { field: 'address', title: 'Address', showOverflow: true },
-]
-const data = [
-  {
-    id: 10001,
-    name: 'Test1',
-    role: 'Develop',
-    sex: 'Man',
-    age: 28,
-    address: 'test abc',
-  },
-  {
-    id: 10002,
-    name: 'Test2',
-    role: 'Test',
-    sex: 'Women',
-    age: 22,
-    address:
-      'GuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhou',
-  },
-  {
-    id: 10003,
-    name: 'Test3',
-    role: 'PM',
-    sex: 'Man',
-    age: 32,
-    address: 'Shanghai',
-  },
-  {
-    id: 10004,
-    name: 'Test4',
-    role: 'Designer',
-    sex: 'Women',
-    age: 24,
-    address: 'Shanghai',
-  },
-]
 </script>
 
 <template>
@@ -167,11 +122,6 @@ const data = [
       </VCardText>
     </VCard>
   </div>
-  <CTable :columns="columns" :data="data">
-    <template #name="{ row }">
-      <span>自定义插槽模板 {{ row.name }}</span>
-    </template>
-  </CTable>
 </template>
 <style lang="scss" scoped>
 .auth_wrapper {
