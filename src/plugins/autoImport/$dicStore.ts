@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-24 11:56:00
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-09 20:10:37
+ * @Description  :
+ */
 import { dict } from '@/api/sys'
 
 interface DictionaryItem {
@@ -19,7 +26,14 @@ function get(code: string): PromiseLike<DictionaryItem[]> {
       codeTypesMap.delete(code)
       return Promise.resolve([])
     }
-    return Promise.resolve(result)
+    return Promise.resolve(
+      result.map((item: any) => {
+        return {
+          label: item.title,
+          value: item.value,
+        }
+      }),
+    )
   })
   codeTypesMap.set(code, promise)
   return promise

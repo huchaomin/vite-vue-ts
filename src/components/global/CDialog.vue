@@ -2,12 +2,12 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 09:24:27
+ * @LastEditTime : 2023-10-10 10:02:46
  * @Description  :
 -->
 <script setup lang="ts">
-import { type VCard } from 'vuetify/lib/components/VCard/index.mjs'
-declare type CardPropsType = VCard['$props']
+import { type VCard } from 'vuetify/components'
+declare type CardPropsType = InstanceType<typeof VCard>['$props']
 
 const props = withDefaults(
   defineProps<{

@@ -2,22 +2,19 @@
 * @Author       : huchaomin peter@qingcongai.com
 * @Date         : 2023-10-08 15:13:29
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 18:20:03
+ * @LastEditTime : 2023-10-10 10:02:14
 * @Description  :
 -->
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
-import { type VForm } from 'vuetify/components'
+import { type VForm, type VSelect, type VTextField } from 'vuetify/components'
 import rules, { type ValidationRule } from '@/config/rules'
 
+type SelectPropsType = InstanceType<typeof VSelect>['$props']
+type TextFieldPropsType = InstanceType<typeof VTextField>['$props']
+
 interface PropsType {
-  rules:
-    | string
-    | string[]
-    | ValidationRule
-    | ValidationRule[]
-    | Array<string | ValidationRule>
-    | undefined
+  rules?: string | string[] | ValidationRule | ValidationRule[] | Array<string | ValidationRule>
   [propName: string]: any
 }
 
@@ -27,10 +24,14 @@ interface ItemType {
   props?: PropsType // 组件属性
 }
 
+interface SlotType {
+  slot: string
+}
+
 const props = withDefaults(
   defineProps<{
     formData: any
-    items: ItemType[]
+    items: Array<ItemType | SlotType>
   }>(),
   {},
 )
@@ -50,11 +51,14 @@ function setItemRules(rs: NonNullable<PropsType['rules']>): ValidationRule[] {
 
 const computedItems = computed(() => {
   return props.items.map((item) => {
+    if ((item as SlotType).slot !== undefined) {
+      return item
+    }
     return {
       ...item,
       props: {
-        ...(item.props ?? {}),
-        rules: setItemRules(item.props?.rules ?? []),
+        ...((item as ItemType).props ?? {}),
+        rules: setItemRules((item as ItemType).props?.rules ?? []),
       },
     }
   })
@@ -77,16 +81,23 @@ defineExpose({
 </script>
 <template>
   <VForm ref="form">
-    <template v-for="(item, index) in computedItems">
-      <template v-if="typeof item.component === 'string' || item.component === undefined">
-        <VTextField :key="index" v-model="formData[item.model]" v-bind="item.props"></VTextField>
-      </template>
+    <template v-for="item in computedItems" :key="item.slot ?? item.model">
+      <slot v-if="(item as SlotType).slot" :name="(item as SlotType).slot"></slot>
+      <VSelect
+        v-else-if="(item as ItemType).component === 'VSelect'"
+        v-bind="(item as ItemType).props as SelectPropsType"
+        v-model="formData[(item as ItemType).model]"
+      ></VSelect>
+      <VTextField
+        v-else-if="(item as ItemType).component === undefined"
+        v-bind="(item as ItemType).props as TextFieldPropsType"
+        v-model="formData[(item as ItemType).model]"
+      ></VTextField>
       <Component
-        :is="item.component"
+        :is="(item as ItemType).component"
         v-else
-        :key="index"
-        v-model="formData[item.model]"
-        v-bind="item.props"
+        v-model="formData[(item as ItemType).model]"
+        v-bind="(item as ItemType).props"
       ></Component>
     </template>
   </VForm>
