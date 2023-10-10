@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-07-20 09:00:28
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-10 13:58:33
+ * @Description  :
+ */
 enum NotificationTypes {
   success = 'success',
   info = 'info',
@@ -21,7 +28,7 @@ type createMap = {
 
 const create: createFn = (
   text,
-  { type = NotificationTypes.success, title = '提示', timeout = 3000, ...options } = {},
+  { type = NotificationTypes.success, title = '提示', timeout = 2000, ...options } = {},
 ) => {
   const notifyStore = useNotifyStore()
   notifyStore.add({

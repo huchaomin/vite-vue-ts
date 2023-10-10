@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 09:48:25
+ * @LastEditTime : 2023-10-10 14:23:16
  * @Description  :
  */
 import 'vuetify/styles'
@@ -14,10 +14,10 @@ const customLightTheme: ThemeDefinition = {
   dark: false,
   colors: {
     primary: '#4F7DFF',
-    success: '#56CA00',
-    info: '#16B1FF',
-    warning: '#FFB400',
-    error: '#FF4C51',
+    // success: '#56CA00',
+    // info: '#16B1FF',
+    // warning: '#FFB400',
+    // error: '#FF4C51',
     background: '#F4F5FA',
     'on-background': '#3A3541', // .v-application 的 color
     'on-surface': '#3A3541', // 普通组件的color
@@ -133,9 +133,11 @@ export default createVuetify({
     },
     VNavigationDrawer: {
       class: 'bg-filter',
+      elevation: 6,
     },
     VAppBar: {
       class: 'bg-filter',
+      elevation: 6,
     },
   },
   icons: {

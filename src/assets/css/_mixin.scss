@@ -2,10 +2,10 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 18:05:09
+ * @LastEditTime : 2023-10-10 14:16:12
  * @Description  :
  */
 @mixin bg-filter{
-  background-color: rgb(255 255 255 / 85%) !important;
+  background-color: rgb(255 255 255 / 75%) !important;
   backdrop-filter: blur(4px) saturate(180%) !important;
 }

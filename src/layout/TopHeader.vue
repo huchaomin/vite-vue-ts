@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-01 09:32:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 16:08:49
+ * @LastEditTime : 2023-10-10 14:00:26
  * @Description  :
 -->
 <script setup lang="ts">
@@ -33,7 +33,7 @@ function modifyPwd(): void {
 }
 </script>
 <template>
-  <VAppBar flat density="comfortable" class="pl-1">
+  <VAppBar density="comfortable" class="pl-1">
     <template #prepend>
       <VAppBarNavIcon
         color="inherit"
