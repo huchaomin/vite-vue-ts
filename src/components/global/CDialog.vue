@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 10:02:46
+ * @LastEditTime : 2023-10-10 15:26:20
  * @Description  :
 -->
 <script setup lang="ts">
@@ -86,7 +86,7 @@ defineExpose({
       <VCardText>
         <slot></slot>
       </VCardText>
-      <div v-if="showCancel || showConfirm" class="v-card-actions justify-end px-6 pb-4">
+      <div v-if="showCancel || showConfirm" class="d-flex justify-end px-6 pb-4">
         <VBtn v-if="showCancel" variant="tonal" @click="cancel">取消</VBtn>
         <VBtn v-if="showConfirm" @click="confirm">确认</VBtn>
       </div>

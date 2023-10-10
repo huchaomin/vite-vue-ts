@@ -2,13 +2,21 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 10:10:59
+ * @LastEditTime : 2023-10-10 18:36:06
  * @Description  :
 -->
 <script setup lang="ts">
+import { userList } from '@/api/sys'
 const form = ref<InstanceType<CForm> | null>(null)
-const formData = reactive({
+const initialFormData: Record<string, any> = {
   username: '',
+  sex: null,
+  realname: '',
+  phone: '',
+  status: null,
+}
+const formData = reactive({
+  ...initialFormData,
 })
 const formItems = reactive([
   {
@@ -49,6 +57,37 @@ const formItems = reactive([
     slot: 'btn',
   },
 ])
+
+const tableData = ref([])
+const queryParams = ref({})
+const pageSize = ref(10)
+const pageNo = ref(1)
+const total = ref(0)
+const urls = {
+  list: userList,
+}
+
+async function query(): Promise<null | undefined> {
+  queryParams.value = {
+    ...formData,
+    pageNo: pageNo.value,
+    pageSize: pageSize.value,
+  }
+  const { data } = await $api(urls.list, queryParams.value)
+  if (data.value === null) return null
+  tableData.value = data.value.records
+  total.value = data.value.total
+}
+query()
+
+async function reset(): Promise<null | undefined> {
+  Object.keys(formData).forEach((key) => {
+    formData[key] = initialFormData[key]
+  })
+  pageSize.value = 10
+  pageNo.value = 1
+  return await query()
+}
 </script>
 <template>
   <div>
@@ -57,11 +96,18 @@ const formItems = reactive([
         <CForm ref="form" :form-data="formData" :items="formItems" class="c_grid">
           <template #btn>
             <div>
-              <VBtn class="mr-2" @click="confirm">查询</VBtn>
-              <VBtn variant="tonal" @click="cancel">重置</VBtn>
+              <VBtn @click="query">查询</VBtn>
+              <VBtn variant="tonal" @click="reset">重置</VBtn>
             </div>
           </template>
         </CForm>
+      </VCardText>
+    </VCard>
+    <VCard>
+      <VCardText class="pa-6">
+        <div>
+          <VBtn>新增</VBtn>
+        </div>
       </VCardText>
     </VCard>
   </div>

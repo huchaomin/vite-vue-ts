@@ -15,7 +15,8 @@
 - vxe-table xe-utils 暂时不能按需加载
 - dayjs
 - hideInMenu 树结构过滤 高亮 exact, 子路由(没有id了,只能用这个控制)
-- 最近的tab签
+- 最近的tab签 Slide groups
+- 缓存路由时，哪个页面进来要刷新
 - defineOptions
 
   ```ts

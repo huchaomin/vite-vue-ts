@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 14:05:48
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 14:39:27
+ * @LastEditTime : 2023-10-10 15:39:52
  * @Description  :
  */
 import { type apiConfig } from '@/plugins/autoImport/$api'
@@ -42,4 +42,8 @@ export const updatePassword: apiConfig = {
   url: `${prefix}/user/updatePassword`,
   method: 'put',
   msgOnSuccess: true,
+}
+
+export const userList: apiConfig = {
+  url: `${prefix}/user/list`,
 }

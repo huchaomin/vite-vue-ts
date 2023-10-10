@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 13:55:20
+ * @LastEditTime : 2023-10-10 14:57:17
  * @Description  :
  */
 @use "sass:color";
@@ -64,6 +64,14 @@ body {
 
   .v-card--variant-elevated{
     @include bg-filter;
+  }
+
+  .v-btn ~ .v-btn:not(.v-btn-toggle .v-btn){
+    margin-inline-start: 12px;
+  }
+
+  .v-card ~ .v-card{
+    margin-block-start: 16px;
   }
 }
 

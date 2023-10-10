@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 11:56:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 20:10:37
+ * @LastEditTime : 2023-10-10 16:02:53
  * @Description  :
  */
 import { dict } from '@/api/sys'
@@ -21,8 +21,8 @@ function get(code: string): PromiseLike<DictionaryItem[]> {
   const promise = $api(dict, {
     code,
   }).then((res) => {
-    const result = res.data.value?.result
-    if (result === undefined || result.length === 0) {
+    const result = res.data.value
+    if (result === null || result.length === 0) {
       codeTypesMap.delete(code)
       return Promise.resolve([])
     }

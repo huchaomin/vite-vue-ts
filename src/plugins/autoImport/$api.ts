@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 14:36:35
+ * @LastEditTime : 2023-10-10 18:44:39
  * @Description  :
  */
 import { type UseFetchReturn, type UseFetchOptions, createFetch } from '@vueuse/core'
@@ -13,9 +13,20 @@ let isExpiration = false // 登陆是否已经过期
 type DataType = Record<string, any> | undefined
 type MethodType = 'get' | 'post' | 'put' | 'delete'
 
-function handleUrlAndData(url: string, data: DataType = {}, method: MethodType): string {
+function handleUrlAndData(
+  url: string,
+  data: DataType = {},
+  method: MethodType,
+  filterEmptyParams: boolean,
+): string {
   let query = '?'
   Object.keys(data).forEach((key) => {
+    if (filterEmptyParams) {
+      if (['', null, undefined].includes(data[key])) {
+        delete data[key]
+        return
+      }
+    }
     const reg = new RegExp(`\\{${key}\\}`, 'g')
     if (reg.test(url)) {
       url = url.replace(reg, data[key]) // 这里就不需要编码了，这里不属于参数，请后端同学规范接口传参
@@ -43,6 +54,8 @@ export interface apiConfig {
   readonly responseType?: string // 返回数据类型
   readonly headers?: Record<string, string> // 请求头
   readonly msgOnSuccess?: boolean // 成功提示
+  readonly useDataResult?: boolean // 是否使用data.result
+  readonly filterEmptyParams?: boolean // 过滤空参数
 }
 
 type ctxType =
@@ -103,8 +116,10 @@ export default function fetchWrapper(
     responseType = 'json',
     headers = {},
     msgOnSuccess = false,
+    useDataResult = true,
+    filterEmptyParams = true,
   } = config
-  const processedUrl = handleUrlAndData(url, data, method) // data 也改变了
+  const processedUrl = handleUrlAndData(url, data, method, filterEmptyParams) // data 也改变了
   const userStore = useUserStore()
   const fetch = createFetch({
     options: {
@@ -147,7 +162,10 @@ export default function fetchWrapper(
           if (msgOnSuccess) {
             $notify(data.message)
           }
-          return ctx
+          return {
+            ...ctx,
+            data: useDataResult ? data.result ?? data : data,
+          }
         }
         throw new Error() // 这里抛出错误，会被 onFetchError 捕获
       },

@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-08 14:39:39
+ * @LastEditTime : 2023-10-10 16:28:19
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
@@ -16,7 +16,7 @@ const { default: allRoutes } = (await routesConfig[`./${app}/routes.ts`]()) as {
 const { default: componentCorrespondence } = (await routesConfig[
   `./${app}/correspondence.ts`
 ]()) as {
-  default: string[]
+  default: Record<string, () => Promise<{ default: Component }>>
 }
 
 function getRouterComponentsFromBack(menu: []): string[] {
@@ -35,7 +35,7 @@ function getRouterComponentsFromBack(menu: []): string[] {
   return arr
 }
 
-function cloneRouteRecordRaw(value: RouteRecordRaw): RouteRecordRaw {
+function cloneRouteRecordRaw<T extends RouteRecordRaw | RouteRecordRaw[]>(value: T): T {
   return _.cloneDeepWith(value, (val) => {
     if (typeof val.render === 'function') {
       return val
@@ -58,7 +58,7 @@ function filterRouters(menu: []): RouteRecordRaw[] {
       }
       if (item.meta?.id !== undefined) {
         item.component = () =>
-          componentCorrespondence[item.meta.id]().then((comp) => {
+          componentCorrespondence[item.meta?.id as string]().then((comp) => {
             return {
               ...comp.default,
               name: item.name,
@@ -66,7 +66,7 @@ function filterRouters(menu: []): RouteRecordRaw[] {
           })
       }
       const boolean =
-        componentKeys.includes(item.meta?.id) ||
+        componentKeys.includes(item.meta?.id as string) ||
         item.meta?.disabled === false ||
         item.name === 'notFound'
       if (parent !== null) {
@@ -102,8 +102,8 @@ export default defineStore(
     async function loginStart(loginData: any): Promise<null | undefined> {
       const { data } = await $api(login, loginData)
       if (data.value === null) return null
-      token.value = data.value.result.token
-      userInfo.value = data.value.result.userInfo
+      token.value = data.value.token
+      userInfo.value = data.value.userInfo
       return await getRoutersAndAuth()
     }
 
@@ -116,7 +116,7 @@ export default defineStore(
     async function getRoutersAndAuth(): Promise<null | undefined> {
       const { data } = await $api(user)
       if (data.value === null) return null
-      const result = data.value.result
+      const result = data.value
       routersRaw.value = markRaw(filterRouters(result.menu))
       if (router.hasRoute('index')) {
         router.removeRoute('index')
