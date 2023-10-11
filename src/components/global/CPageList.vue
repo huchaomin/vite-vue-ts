@@ -2,71 +2,41 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 14:44:51
+ * @LastEditTime : 2023-10-11 15:38:14
  * @Description  :
 -->
 <script setup lang="ts">
-import { userList } from '@/api/sys'
+import { type apiConfig } from '@/plugins/autoImport/$api'
+import { type ItemsType } from '@/components/global/CForm.vue'
+
+interface PageListConfigType {
+  urls: Record<string, apiConfig>
+  initialFormData: Record<string, any>
+  formItems: ItemsType
+  columns: TableColumns
+}
+
+const props = withDefaults(
+  defineProps<{
+    config: PageListConfigType
+  }>(),
+  {},
+)
 
 const form = ref<RefCForm>(null)
-const initialFormData: Record<string, any> = {
-  username: '',
-  sex: null,
-  realname: '',
-  phone: '',
-  status: null,
-}
 const formData = reactive({
-  ...initialFormData,
+  ...props.config.initialFormData,
 })
-const formItems = reactive([
-  {
-    model: 'username',
-    props: {
-      label: '账号',
-    },
-  },
-  {
-    component: 'VSelect',
-    model: 'sex',
-    props: {
-      label: '性别',
-      items: $dicStore('sex'),
-    },
-  },
-  {
-    model: 'realname',
-    props: {
-      label: '真实名字',
-    },
-  },
-  {
-    model: 'phone',
-    props: {
-      label: '手机号码',
-    },
-  },
-  {
-    component: 'VSelect',
-    model: 'status',
-    props: {
-      label: '用户状态',
-      items: $dicStore('user_status', ['1', '2']),
-    },
-  },
-  {
-    slot: 'btn',
-  },
-])
+
+const formItems = computed(() => {
+  return [...props.config.formItems, { slot: 'btn' }]
+})
 
 const tableData = ref([])
 const queryParams = ref({})
 const pageSize = ref(10)
 const pageNo = ref(1)
 const total = ref(0)
-const urls = {
-  list: userList,
-}
 
 async function query(): Promise<null | undefined> {
   queryParams.value = {
@@ -74,7 +44,7 @@ async function query(): Promise<null | undefined> {
     pageNo: pageNo.value,
     pageSize: pageSize.value,
   }
-  const { data } = await $api(urls.list, queryParams.value)
+  const { data } = await $api(props.config.urls.list, queryParams.value)
   if (data.value === null) return null
   tableData.value = data.value.records
   total.value = data.value.total
@@ -83,48 +53,12 @@ query()
 
 async function reset(): Promise<null | undefined> {
   Object.keys(formData).forEach((key) => {
-    formData[key] = initialFormData[key]
+    formData[key] = props.config.initialFormData[key]
   })
   pageSize.value = 10
   pageNo.value = 1
   return await query()
 }
-
-const columns: TableColumns = [
-  { type: 'seq' },
-  {
-    title: '用户账号',
-    field: 'username',
-  },
-  {
-    title: '用户姓名',
-    field: 'realname',
-  },
-  {
-    title: '性别',
-    field: 'sex_dictText',
-  },
-  {
-    title: '生日',
-    field: 'birthday',
-  },
-  {
-    title: '手机号码',
-    field: 'phone',
-  },
-  {
-    title: '部门',
-    field: 'orgCodeTxt',
-  },
-  {
-    title: '负责部门',
-    field: 'departIds_dictText',
-  },
-  {
-    title: '状态',
-    field: 'status_dictText',
-  },
-]
 
 function pageSizeChange(val: number): void {
   pageNo.value = 1
@@ -159,7 +93,7 @@ function currentPageChange(val: number): void {
         <VBtn>新增</VBtn>
       </div>
       <div class="flex-fill overflow-y-auto mb-4">
-        <CTable :columns="columns" :data="tableData" sync-parent-height></CTable>
+        <CTable :columns="config.columns" :data="tableData" sync-parent-height></CTable>
       </div>
       <CPagination
         :current-page="pageNo"

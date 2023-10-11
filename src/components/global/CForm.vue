@@ -2,7 +2,7 @@
 * @Author       : huchaomin peter@qingcongai.com
 * @Date         : 2023-10-08 15:13:29
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 10:02:14
+ * @LastEditTime : 2023-10-11 15:31:34
 * @Description  :
 -->
 <script setup lang="ts">
@@ -28,10 +28,12 @@ interface SlotType {
   slot: string
 }
 
+export type ItemsType = Array<ItemType | SlotType>
+
 const props = withDefaults(
   defineProps<{
     formData: any
-    items: Array<ItemType | SlotType>
+    items: ItemsType
   }>(),
   {},
 )
