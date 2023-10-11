@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 14:05:48
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 15:39:52
+ * @LastEditTime : 2023-10-11 16:02:25
  * @Description  :
  */
 import { type apiConfig } from '@/plugins/autoImport/$api'
@@ -46,4 +46,8 @@ export const updatePassword: apiConfig = {
 
 export const userList: apiConfig = {
   url: `${prefix}/user/list`,
+}
+
+export const roleList: apiConfig = {
+  url: `${prefix}/role/list`,
 }

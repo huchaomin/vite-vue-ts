@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 11:56:21
+ * @LastEditTime : 2023-10-11 16:25:39
  * @Description  :
  */
 @use "sass:color";
@@ -77,6 +77,6 @@ body {
 
 .c_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-gap: 0 24px;
 }

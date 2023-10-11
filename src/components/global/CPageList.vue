@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 15:38:14
+ * @LastEditTime : 2023-10-11 16:08:19
  * @Description  :
 -->
 <script setup lang="ts">
@@ -37,6 +37,10 @@ const queryParams = ref({})
 const pageSize = ref(10)
 const pageNo = ref(1)
 const total = ref(0)
+
+const columns = computed(() => {
+  return [...([{ type: 'seq' }] as TableColumns), ...props.config.columns]
+})
 
 async function query(): Promise<null | undefined> {
   queryParams.value = {
@@ -93,7 +97,7 @@ function currentPageChange(val: number): void {
         <VBtn>新增</VBtn>
       </div>
       <div class="flex-fill overflow-y-auto mb-4">
-        <CTable :columns="config.columns" :data="tableData" sync-parent-height></CTable>
+        <CTable :columns="columns" :data="tableData" sync-parent-height></CTable>
       </div>
       <CPagination
         :current-page="pageNo"

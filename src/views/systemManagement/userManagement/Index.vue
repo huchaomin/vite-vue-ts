@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 15:38:38
+ * @LastEditTime : 2023-10-11 16:10:16
  * @Description  :
 -->
 <script setup lang="ts">
@@ -56,7 +56,6 @@ const config = reactive({
     },
   ],
   columns: [
-    { type: 'seq' },
     {
       title: '用户账号',
       field: 'username',

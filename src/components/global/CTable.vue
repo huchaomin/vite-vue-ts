@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-20 10:01:45
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 14:45:16
+ * @LastEditTime : 2023-10-11 15:47:44
  * @Description  :
 -->
 <script setup lang="ts">
@@ -25,7 +25,7 @@ const props = withDefaults(
 const xTable = ref<VxeTableInstance<VxeTableDataRow> | null>(null)
 
 const processedCheckboxConfig = computed(() => {
-  const has = props.columns.some((column) => column.type === 'checkbox')
+  const has: boolean = props.columns.some((column) => column.type === 'checkbox')
   return has
     ? {
         highlight: true,
@@ -35,7 +35,7 @@ const processedCheckboxConfig = computed(() => {
     : {}
 })
 const processedRadioConfig = computed(() => {
-  const has = props.columns.some((column) => column.type === 'radio')
+  const has: boolean = props.columns.some((column) => column.type === 'radio')
   return has
     ? {
         highlight: true,
