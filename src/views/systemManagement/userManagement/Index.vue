@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 19:12:30
+ * @LastEditTime : 2023-10-11 10:36:51
  * @Description  :
 -->
 <script setup lang="ts">
@@ -93,79 +93,65 @@ async function reset(): Promise<null | undefined> {
 
 const columns: VxeGridPropTypes.Columns = [
   { type: 'seq' },
-  { type: 'radio' },
-  { type: 'checkbox' },
-  { field: 'name', title: 'Name', slots: { default: 'name' } },
-  { field: 'sex', title: 'Sex', showHeaderOverflow: true },
-  { field: 'address', title: 'Address', showOverflow: true },
-]
-const data = [
   {
-    id: 10001,
-    name: 'Test1',
-    role: 'Develop',
-    sex: 'Man',
-    age: 28,
-    address: 'test abc',
+    title: '用户账号',
+    field: 'username',
   },
   {
-    id: 10002,
-    name: 'Test2',
-    role: 'Test',
-    sex: 'Women',
-    age: 22,
-    address:
-      'GuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhouGuangzhou',
+    title: '用户姓名',
+    field: 'realname',
   },
   {
-    id: 10003,
-    name: 'Test3',
-    role: 'PM',
-    sex: 'Man',
-    age: 32,
-    address: 'Shanghai',
+    title: '性别',
+    field: 'sex_dictText',
   },
   {
-    id: 10004,
-    name: 'Test4',
-    role: 'Designer',
-    sex: 'Women',
-    age: 24,
-    address: 'Shanghai',
+    title: '生日',
+    field: 'birthday',
+  },
+  {
+    title: '手机号码',
+    field: 'phone',
+  },
+  {
+    title: '部门',
+    field: 'orgCodeTxt',
+  },
+  {
+    title: '负责部门',
+    field: 'departIds_dictText',
+  },
+  {
+    title: '状态',
+    field: 'status_dictText',
   },
 ]
 </script>
 <template>
-  <div>
-    <VCard>
-      <VCardText class="pa-6 pb-0">
-        <CForm
-          ref="form"
-          :form-data="formData"
-          :items="formItems"
-          class="c_grid"
-          @submit.prevent="query"
-        >
-          <template #btn>
-            <div>
-              <VBtn type="submit">查询</VBtn>
-              <VBtn variant="tonal" @click="reset">重置</VBtn>
-            </div>
-          </template>
-        </CForm>
-      </VCardText>
+  <div class="d-flex flex-column h-100">
+    <VCard class="pa-6 pb-0">
+      <CForm
+        ref="form"
+        :form-data="formData"
+        :items="formItems"
+        class="c_grid"
+        @submit.prevent="query"
+      >
+        <template #btn>
+          <div>
+            <VBtn type="submit">查询</VBtn>
+            <VBtn variant="tonal" @click="reset">重置</VBtn>
+          </div>
+        </template>
+      </CForm>
     </VCard>
-    <VCard>
-      <VCardText class="pa-6">
-        <div>
-          <VBtn>新增</VBtn>
-        </div>
-        <CTable :columns="columns" :data="data">
-          <template #name="{ row }">
-            <span>自定义插槽模板 {{ row.name }}</span>
-          </template>
-        </CTable>
-      </VCardText>
+    <VCard class="pa-6 d-flex flex-column flex-fill">
+      <div class="mb-4">
+        <VBtn>新增</VBtn>
+      </div>
+      <div class="flex-fill overflow-y-auto">
+        <CTable :columns="columns" :data="tableData" sync-parent-height></CTable>
+      </div>
     </VCard>
   </div>
 </template>

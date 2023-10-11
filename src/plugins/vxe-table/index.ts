@@ -1,3 +1,10 @@
+/*
+ * @Author       : huchaomin peter@qingcongai.com
+ * @Date         : 2023-08-25 14:35:00
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-11 10:57:18
+ * @Description  :
+ */
 import { type App } from 'vue'
 import { setup, Grid, Table, Tooltip } from 'vxe-table'
 import '@/assets/css/_vxe-table.scss'
@@ -9,6 +16,7 @@ setup({
   table: {
     // keepSource: false, // 保持原始数据
     // emptyText: '暂无数据',
+    size: 'medium', // medium、small、mini
     minHeight: 200,
     showOverflow: 'tooltip',
     showHeaderOverflow: 'tooltip',
@@ -77,7 +85,7 @@ setup({
     //   },
   },
   grid: {
-    //   size: null,
+    size: 'medium',
     //   zoomConfig: {
     //     escRestore: true
     //   },

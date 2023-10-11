@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-07 17:17:17
+ * @LastEditTime : 2023-10-11 10:24:18
  * @Description  :
  */
 import { createRouter, createWebHistory, START_LOCATION, type RouteRecordRaw } from 'vue-router'
@@ -52,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
     }
     const res = await userStore.getRoutersAndAuth()
     if (res === null) {
-      next(false)
+      next(false) // 网络错误
     } else {
       const { name, meta } = router.resolve({ path: to.path }) // 此时路由还没注册，to.name 为 undefined
       if (from === START_LOCATION && meta.hideInMenu === true && name !== 'notFound') {
