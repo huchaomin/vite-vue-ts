@@ -9,7 +9,7 @@
 import { updatePassword } from '@/api/sys'
 
 const userStore = useUserStore()
-const form = ref<InstanceType<CForm> | null>(null)
+const form = ref<RefCForm>(null)
 const formData = reactive({
   oldpassword: '',
   password: '',

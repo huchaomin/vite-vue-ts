@@ -1,21 +1,16 @@
 <!--
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-20 10:01:45
- * @LastEditors  : huchaomin iisa_peter@163.com
- * @LastEditTime : 2023-09-24 14:54:32
+ * @LastEditors  : huchaomin peter@qingcongai.com
+ * @LastEditTime : 2023-10-11 14:45:16
  * @Description  :
 -->
 <script setup lang="ts">
-import {
-  type VxeTablePropTypes,
-  type VxeGridPropTypes,
-  type VxeTableDataRow,
-  type VxeTableInstance,
-} from 'vxe-table'
+import { type VxeTablePropTypes, type VxeTableDataRow, type VxeTableInstance } from 'vxe-table'
 
 const props = withDefaults(
   defineProps<{
-    columns: VxeGridPropTypes.Columns
+    columns: TableColumns
     checkboxConfig?: VxeTablePropTypes.CheckboxConfig // 不能写在全局配置，全局配置只能传空对象
     radioConfig?: VxeTablePropTypes.RadioConfig
     syncParentHeight?: boolean // 是否和外层容器高度同步

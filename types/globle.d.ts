@@ -2,12 +2,12 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 16:41:48
+ * @LastEditTime : 2023-10-11 14:52:23
  * @Description  :
  */
 
 import type CForm from '@/components/global/CForm.vue'
-import type CDialog from '@/components/global/CDialog.vue'
+import { type VxeGridPropTypes } from 'vxe-table'
 
 // 为什么加这个 https://juejin.cn/post/7224051399256096829
 //  https://juejin.cn/post/6898710177969602574
@@ -28,6 +28,6 @@ declare global {
   type AllowRefValue<T> = {
     [P in keyof T]: MaybeRef<T[P]>
   }
-  type CForm = typeof CForm
-  type CDialog = typeof CDialog
+  type RefCForm = InstanceType<typeof CForm> | null
+  type TableColumns = VxeGridPropTypes.Columns
 }

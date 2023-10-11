@@ -2,13 +2,14 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-04 09:24:17
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 16:41:41
+ * @LastEditTime : 2023-10-11 14:52:09
  * @Description  :
  */
+import type CDialog from '@/components/global/CDialog.vue'
 
 interface BasePropsEmitsType<T extends new () => ComponentPublicInstance> {
-  dialogProps: AllowRefValue<InstanceType<CDialog>['$props']>
-  dialogEmits: Partial<InstanceType<CDialog>['$emit']>
+  dialogProps: AllowRefValue<InstanceType<typeof CDialog>['$props']>
+  dialogEmits: Partial<InstanceType<typeof CDialog>['$emit']>
   componentProps: AllowRefValue<InstanceType<T>['$props']>
   componentEmits: Partial<InstanceType<T>['$emit']>
 }
@@ -20,7 +21,7 @@ export type addFnType = <T extends new () => ComponentPublicInstance>(
   componentPE?: BasePropsEmitsType<T>['componentProps'] & BasePropsEmitsType<T>['componentEmits'],
 ) => {
   componentRef: Ref<InstanceType<T> | null>
-  dialogRef: Ref<InstanceType<CDialog> | null>
+  dialogRef: Ref<InstanceType<typeof CDialog> | null>
 }
 
 export default defineStore('dialog', () => {
