@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 10:53:18
+ * @LastEditTime : 2023-10-11 14:12:29
  * @Description  :
  */
 @use "sass:color";
@@ -13,6 +13,10 @@ $vxe-font-size: $font-size-root;
 $vxe-font-color: $font-color;
 $vxe-primary-color: $primary;
 $vxe-table-border-radius: $border-radius-root;
+$vxe-table-header-font-weight: 500;
+$vxe-table-header-background-color: #eaf2f9;
+$vxe-table-body-background-color: transparent;
+$vxe-table-footer-background-color: transparent;
 $vxe-table-row-checkbox-checked-background-color: color.adjust($vxe-primary-color, $lightness:32%);
 $vxe-table-row-radio-checked-background-color: color.adjust($vxe-primary-color, $lightness:32%);
 $vxe-table-row-hover-checkbox-checked-background-color: color.adjust($vxe-primary-color, $lightness:30%);

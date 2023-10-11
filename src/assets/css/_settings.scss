@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-04 09:08:41
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 13:44:40
+ * @LastEditTime : 2023-10-11 13:43:58
  * @Description  :
  */
 /* stylelint-disable length-zero-no-unit */
@@ -40,6 +40,7 @@
   $input-chips-margin-bottom: ('default': 0, 'comfortable': 0, 'compact': 0),
   $chip-border-radius: $border-radius,
   $toolbar-prepend-btn-margin-start: 0,
+  $pagination-item-margin: 0,
 
   $card-elevation: 6,
   $button-card-actions-margin: 12px,

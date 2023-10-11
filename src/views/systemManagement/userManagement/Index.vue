@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 10:36:51
+ * @LastEditTime : 2023-10-11 11:50:09
  * @Description  :
 -->
 <script setup lang="ts">
@@ -126,10 +126,20 @@ const columns: VxeGridPropTypes.Columns = [
     field: 'status_dictText',
   },
 ]
+
+function pageSizeChange(val: number): void {
+  pageNo.value = 1
+  pageSize.value = val
+  query()
+}
+function currentPageChange(val: number): void {
+  pageNo.value = val
+  query()
+}
 </script>
 <template>
   <div class="d-flex flex-column h-100">
-    <VCard class="pa-6 pb-0">
+    <VCard class="pa-6 pb-0 flex-0-0">
       <CForm
         ref="form"
         :form-data="formData"
@@ -149,9 +159,16 @@ const columns: VxeGridPropTypes.Columns = [
       <div class="mb-4">
         <VBtn>新增</VBtn>
       </div>
-      <div class="flex-fill overflow-y-auto">
+      <div class="flex-fill overflow-y-auto mb-4">
         <CTable :columns="columns" :data="tableData" sync-parent-height></CTable>
       </div>
+      <CPagination
+        :current-page="pageNo"
+        :page-size="pageSize"
+        :total="total"
+        @update:current-page="currentPageChange"
+        @update:page-size="pageSizeChange"
+      ></CPagination>
     </VCard>
   </div>
 </template>

@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 18:33:30
+ * @LastEditTime : 2023-10-11 11:57:44
  * @Description  :
  */
 import 'vuetify/styles'
@@ -138,6 +138,10 @@ export default createVuetify({
     VAppBar: {
       class: 'bg-filter',
       elevation: 6,
+    },
+    VPagination: {
+      density: 'comfortable',
+      activeColor: 'primary',
     },
   },
   icons: {
