@@ -2,11 +2,16 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-20 10:01:45
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 15:47:44
+ * @LastEditTime : 2023-10-12 16:26:07
  * @Description  :
 -->
 <script setup lang="ts">
-import { type VxeTablePropTypes, type VxeTableDataRow, type VxeTableInstance } from 'vxe-table'
+import {
+  type VxeTablePropTypes,
+  type VxeTableDataRow,
+  type VxeTableInstance,
+  type VxeColumnProps,
+} from 'vxe-table'
 
 const props = withDefaults(
   defineProps<{
@@ -60,6 +65,35 @@ const processedColumns = computed(() => {
     if (column.type === 'radio') {
       column.slots = {
         radio: 'radio',
+      }
+    }
+    if (column.cellRender !== undefined) {
+      // slot 和 render 同时存在的话slot优先级更高
+      const name = column.cellRender.name
+      const obj: Record<string, string> = {}
+      let isEdit = false
+      name!.split('-').forEach((item: string) => {
+        const arr = item.split(':')
+        obj[arr[0]] = arr[1]
+        isEdit = arr[0] === 'e'
+      })
+      const flagArr = ['h', 'c', 'e', 'f']
+      const realName = flagArr
+        .map((flag) => {
+          return obj[flag] ?? flag
+        })
+        .join('-')
+      if (isEdit) {
+        column.editRender = {
+          ...(column.cellRender as VxeColumnProps['editRender']),
+          name: realName,
+        }
+        delete column.cellRender
+      } else {
+        column.cellRender = {
+          ...column.cellRender,
+          name: realName,
+        }
       }
     }
     return column

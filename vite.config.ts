@@ -2,12 +2,13 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-09-27 11:33:25
+ * @LastEditTime : 2023-10-12 15:17:28
  * @Description  :
  */
 import { type ProxyOptions, defineConfig } from 'vite'
 import type * as http from 'node:http'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslint from 'vite-plugin-eslint'
 import stylelint from 'vite-plugin-stylelint'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -83,6 +84,7 @@ export default defineConfig((...arg) => {
         appendTo: 'src/router/index.ts', // 解决每第一次prebundle报错的问题 好像要在createApp前面加载
       }),
       vue(), // 将会把SFC的代码转换成js代码
+      vueJsx(), // 支持jsx
       vuetify({ styles: { configFile: 'src/assets/css/_settings.scss' } }),
       AutoImport({
         vueTemplate: true, // Auto import inside Vue template

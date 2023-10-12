@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 11:27:48
+ * @LastEditTime : 2023-10-12 16:28:10
  * @Description  :
 -->
 <script setup lang="ts">
@@ -78,6 +78,7 @@ function currentPageChange(val: number): void {
 
 defineExpose({
   query,
+  reset,
 })
 </script>
 <template>
@@ -103,7 +104,15 @@ defineExpose({
         <VBtn v-for="(btn, index) in config.btns" :key="index" v-bind="btn"></VBtn>
       </div>
       <div class="flex-fill overflow-y-auto mb-4">
-        <CTable :columns="columns" :data="tableData" sync-parent-height></CTable>
+        <CTable :columns="columns" :data="tableData" sync-parent-height>
+          <template
+            v-for="k in Object.keys($slots).filter((key) => key.startsWith('table-'))"
+            :key="k"
+            #[k.slice(6)]="slotScope"
+          >
+            <slot :name="k" v-bind="slotScope"></slot>
+          </template>
+        </CTable>
       </div>
       <CPagination
         :current-page="pageNo"

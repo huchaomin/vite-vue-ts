@@ -2,14 +2,15 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 13:54:24
+ * @LastEditTime : 2023-10-12 16:20:50
  * @Description  :
  */
 import { type App } from 'vue'
-import { setup, Grid, Table, Tooltip } from 'vxe-table'
+import { config, Grid, Table, Tooltip } from 'vxe-table'
 import '@/assets/css/_vxe-table.scss'
+import './renders/index'
 
-setup({
+config({
   zIndex: 9999, // 全局 zIndex 起始值，如果项目的的 z-index 样式值过大时就需要跟随设置更大，避免被遮挡
   // version: 0, // 版本号，对于某些带数据缓存的功能有用到，上升版本号可以用于重置数据
   // loadingText: '加载中...', // 全局loading提示内容，如果为null则不显示文本

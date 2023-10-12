@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 11:30:50
+ * @LastEditTime : 2023-10-12 16:28:29
  * @Description  :
 -->
 <script setup lang="ts">
@@ -20,7 +20,7 @@ function option(type: string): void {
       onConfirm: async () => {
         await componentRef.value!.handleSubmit()
         dialogRef.value!.hide()
-        pageListRef.value!.query()
+        pageListRef.value!.reset()
       },
     },
     AddForm,
@@ -69,11 +69,18 @@ const config = reactive({
     {
       title: '操作',
       field: 'action',
-      scopedSlots: { customRender: 'action' },
+      slots: { default: 'action' },
+      cellRender: {
+        name: 'c:default',
+      },
     },
   ] as TableColumns,
 })
 </script>
 <template>
-  <CPageList ref="pageListRef" :config="config"></CPageList>
+  <CPageList ref="pageListRef" :config="config">
+    <template #table-action>
+      <span>自定义插槽模板</span>
+    </template>
+  </CPageList>
 </template>
