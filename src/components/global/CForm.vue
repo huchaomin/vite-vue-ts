@@ -2,16 +2,17 @@
 * @Author       : huchaomin peter@qingcongai.com
 * @Date         : 2023-10-08 15:13:29
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 15:31:34
+ * @LastEditTime : 2023-10-12 10:44:33
 * @Description  :
 -->
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
-import { type VForm, type VSelect, type VTextField } from 'vuetify/components'
-import rules, { type ValidationRule } from '@/config/rules'
+import { type VForm, type VSelect, type VTextField, type VTextarea } from 'vuetify/components'
+import rules, { type ValidationRule, type CustomerValidationRule } from '@/config/rules'
 
 type SelectPropsType = InstanceType<typeof VSelect>['$props']
 type TextFieldPropsType = InstanceType<typeof VTextField>['$props']
+type TextareaPropsType = InstanceType<typeof VTextarea>['$props']
 
 interface PropsType {
   rules?: string | string[] | ValidationRule | ValidationRule[] | Array<string | ValidationRule>
@@ -43,8 +44,14 @@ function setItemRules(rs: NonNullable<PropsType['rules']>): ValidationRule[] {
   const arr = Array.isArray(rs) ? rs : [rs]
   return _.flatten(
     arr.map((r) => {
-      if (typeof r === 'string' && rules[r] !== undefined) {
-        return rules[r]
+      if (typeof r === 'string') {
+        if (rules[r] !== undefined) {
+          return rules[r] as ValidationRule[]
+        }
+        if (r.includes(':')) {
+          const [ruleName, ...ruleArg] = r.split(':')
+          return (rules[ruleName] as CustomerValidationRule)(...ruleArg)
+        }
       }
       return r
     }),
@@ -90,6 +97,11 @@ defineExpose({
         v-bind="(item as ItemType).props as SelectPropsType"
         v-model="formData[(item as ItemType).model]"
       ></VSelect>
+      <VTextarea
+        v-else-if="(item as ItemType).component === 'VTextarea'"
+        v-bind="(item as ItemType).props as TextareaPropsType"
+        v-model="formData[(item as ItemType).model]"
+      ></VTextarea>
       <VTextField
         v-else-if="(item as ItemType).component === undefined"
         v-bind="(item as ItemType).props as TextFieldPropsType"

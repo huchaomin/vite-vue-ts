@@ -2,11 +2,30 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 16:12:24
+ * @LastEditTime : 2023-10-12 11:30:50
  * @Description  :
 -->
 <script setup lang="ts">
 import { roleList } from '@/api/sys'
+import AddForm from './modules/AddForm.vue'
+
+const pageListRef = ref<RefCPageList>(null)
+
+function option(type: string): void {
+  const { componentRef, dialogRef } = $dialog(
+    {
+      title: type === 'add' ? '新增' : '编辑',
+      width: 400,
+      hideAfterConfirm: false,
+      onConfirm: async () => {
+        await componentRef.value!.handleSubmit()
+        dialogRef.value!.hide()
+        pageListRef.value!.query()
+      },
+    },
+    AddForm,
+  )
+}
 
 const config = reactive({
   urls: {
@@ -14,12 +33,23 @@ const config = reactive({
   },
   initialFormData: {
     roleName: '',
+    column: 'createTime',
+    order: 'desc',
   },
   formItems: [
     {
       model: 'roleName',
       props: {
         label: '角色名称',
+      },
+    },
+  ],
+  btns: [
+    {
+      text: '新建角色',
+      type: 'primary',
+      onClick: () => {
+        option('add')
       },
     },
   ],
@@ -45,5 +75,5 @@ const config = reactive({
 })
 </script>
 <template>
-  <CPageList :config="config"></CPageList>
+  <CPageList ref="pageListRef" :config="config"></CPageList>
 </template>

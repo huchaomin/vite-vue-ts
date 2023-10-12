@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 14:05:48
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 16:02:25
+ * @LastEditTime : 2023-10-12 10:55:00
  * @Description  :
  */
 import { type apiConfig } from '@/plugins/autoImport/$api'
@@ -50,4 +50,22 @@ export const userList: apiConfig = {
 
 export const roleList: apiConfig = {
   url: `${prefix}/role/list`,
+}
+
+export const roleDuplicateCheck: apiConfig = {
+  loading: false,
+  msgOnError: false,
+  url: `${prefix}/duplicate/check`,
+}
+
+export const roleAdd: apiConfig = {
+  url: `${prefix}/role/add`,
+  method: 'post',
+  msgOnSuccess: true,
+}
+
+export const roleUpdate: apiConfig = {
+  url: `${prefix}/role/edit`,
+  method: 'put',
+  msgOnSuccess: true,
 }

@@ -18,6 +18,8 @@
 - 最近的tab签 Slide groups
 - 缓存路由时，哪个页面进来要刷新
 - 用户管理还未完成
+- 全屏功能
+- login v-form
 - defineOptions
 
   ```ts

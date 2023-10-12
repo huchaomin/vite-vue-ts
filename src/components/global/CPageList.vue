@@ -2,17 +2,19 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 16:08:19
+ * @LastEditTime : 2023-10-12 11:27:48
  * @Description  :
 -->
 <script setup lang="ts">
 import { type apiConfig } from '@/plugins/autoImport/$api'
 import { type ItemsType } from '@/components/global/CForm.vue'
+import { type VBtn } from 'vuetify/components'
 
 interface PageListConfigType {
   urls: Record<string, apiConfig>
   initialFormData: Record<string, any>
   formItems: ItemsType
+  btns?: Array<InstanceType<typeof VBtn>['$props']>
   columns: TableColumns
 }
 
@@ -73,6 +75,10 @@ function currentPageChange(val: number): void {
   pageNo.value = val
   query()
 }
+
+defineExpose({
+  query,
+})
 </script>
 <template>
   <div class="d-flex flex-column h-100">
@@ -94,7 +100,7 @@ function currentPageChange(val: number): void {
     </VCard>
     <VCard class="pa-6 d-flex flex-column flex-fill">
       <div class="mb-4">
-        <VBtn>新增</VBtn>
+        <VBtn v-for="(btn, index) in config.btns" :key="index" v-bind="btn"></VBtn>
       </div>
       <div class="flex-fill overflow-y-auto mb-4">
         <CTable :columns="columns" :data="tableData" sync-parent-height></CTable>

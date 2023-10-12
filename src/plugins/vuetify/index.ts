@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 11:57:44
+ * @LastEditTime : 2023-10-12 10:43:40
  * @Description  :
  */
 import 'vuetify/styles'
@@ -126,6 +126,8 @@ export default createVuetify({
       variant: 'outlined',
       density: 'compact',
       color: 'primary',
+      autoGrow: true,
+      rows: '3',
     },
     VSwitch: {
       // set v-switch default color to primary

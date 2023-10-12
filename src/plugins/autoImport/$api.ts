@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 18:44:39
+ * @LastEditTime : 2023-10-12 11:20:20
  * @Description  :
  */
 import { type UseFetchReturn, type UseFetchOptions, createFetch } from '@vueuse/core'
@@ -54,6 +54,7 @@ export interface apiConfig {
   readonly responseType?: string // 返回数据类型
   readonly headers?: Record<string, string> // 请求头
   readonly msgOnSuccess?: boolean // 成功提示
+  readonly msgOnError?: boolean // 失败提示
   readonly useDataResult?: boolean // 是否使用data.result
   readonly filterEmptyParams?: boolean // 过滤空参数
 }
@@ -72,7 +73,7 @@ function toLogin(title: string): void {
 }
 
 // 有的公司比较奇葩 200 的相应，data.code 为40*
-function errHandler(ctx: ctxType): void {
+function errHandler(ctx: ctxType, msgOnError: boolean): void {
   const { data } = ctx // data 可能为null
   const title = '系统提示'
   switch (data?.code) {
@@ -88,7 +89,7 @@ function errHandler(ctx: ctxType): void {
     default:
       if (data?.status === 500 && data.message === 'Token失效，请重新登录') {
         toLogin(title)
-      } else {
+      } else if (msgOnError) {
         $notify.error(data?.message ?? '网络错误', { title })
       }
       break
@@ -115,6 +116,7 @@ export default function fetchWrapper(
     loading = true,
     responseType = 'json',
     headers = {},
+    msgOnError = true,
     msgOnSuccess = false,
     useDataResult = true,
     filterEmptyParams = true,
@@ -163,7 +165,6 @@ export default function fetchWrapper(
             $notify(data.message)
           }
           return {
-            ...ctx,
             data: useDataResult ? data.result ?? data : data,
           }
         }
@@ -173,8 +174,8 @@ export default function fetchWrapper(
         if (loading) {
           $loading.hide()
         }
-        errHandler(ctx)
-        return { data: null, response: ctx.response }
+        errHandler(ctx, msgOnError)
+        return { data: null, error: ctx.data }
       },
     },
     fetchOptions: {
