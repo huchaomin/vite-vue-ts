@@ -2,15 +2,16 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 11:15:10
+ * @LastEditTime : 2023-10-16 16:22:30
  * @Description  :
 -->
 <script setup lang="ts">
+import { type UnwrapNestedRefs } from 'vue'
 import { ChineseReg } from '@/config/regs'
 import { roleDuplicateCheck, roleAdd, roleUpdate } from '@/api/sys'
 const type = ref('add')
 const form = ref<RefCForm>(null)
-const formData = reactive({
+const formData: UnwrapNestedRefs<Record<string, string>> = reactive({
   roleName: '',
   roleCode: '',
   description: '',
@@ -85,7 +86,15 @@ function handleSubmit(): Promise<void> {
   })
 }
 
+function setFormData(row: CellRenderParams['row']): void {
+  Object.keys(formData).forEach((key) => {
+    formData[key] = row[key]
+  })
+  type.value = 'edit'
+}
+
 defineExpose({
+  setFormData,
   handleSubmit,
 })
 </script>

@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 11:30:38
+ * @LastEditTime : 2023-10-16 16:17:34
  * @Description  :
  */
 
@@ -10,6 +10,8 @@ import type CForm from '@/components/global/CForm.vue'
 import type CPageList from '@/components/global/CPageList.vue'
 
 import { type VxeGridPropTypes } from 'vxe-table'
+
+import { type CellRenderParamsType } from '@/plugins/vxe-table/renders/cell'
 
 // 为什么加这个 https://juejin.cn/post/7224051399256096829
 //  https://juejin.cn/post/6898710177969602574
@@ -33,4 +35,5 @@ declare global {
   type RefCForm = InstanceType<typeof CForm> | null
   type RefCPageList = InstanceType<typeof CPageList> | null
   type TableColumns = VxeGridPropTypes.Columns
+  type CellRenderParams = CellRenderParamsType
 }

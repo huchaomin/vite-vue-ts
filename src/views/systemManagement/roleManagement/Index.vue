@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 13:58:37
+ * @LastEditTime : 2023-10-16 16:23:43
  * @Description  :
 -->
 <script setup lang="ts">
@@ -11,7 +11,7 @@ import AddForm from './modules/AddForm.vue'
 
 const pageListRef = ref<RefCPageList>(null)
 
-function option(type: string): void {
+function option(type: string, row?: CellRenderParams['row']): void {
   const { componentRef, dialogRef } = $dialog(
     {
       title: type === 'add' ? '新增' : '编辑',
@@ -25,6 +25,11 @@ function option(type: string): void {
     },
     AddForm,
   )
+  if (type === 'edit') {
+    nextTick(() => {
+      componentRef.value!.setFormData(row)
+    })
+  }
 }
 
 const config = reactive({
@@ -69,20 +74,22 @@ const config = reactive({
     {
       title: '操作',
       field: 'action',
-      slots: { default: 'action' },
       cellRender: {
-        name: 'c:default',
+        name: 'c:btns',
+        children: [
+          {
+            text: '编辑',
+            onClick: ({ row }: CellRenderParams) => {
+              option('edit', row)
+            },
+          },
+        ],
       },
+      fixed: 'right',
     },
   ] as TableColumns,
 })
-
-const aa = ref('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
 </script>
 <template>
-  <CPageList ref="pageListRef" :config="config">
-    <template #table-action>
-      {{ aa }}
-    </template>
-  </CPageList>
+  <CPageList ref="pageListRef" :config="config"></CPageList>
 </template>

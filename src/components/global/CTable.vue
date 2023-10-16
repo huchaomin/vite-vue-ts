@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-20 10:01:45
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 13:56:24
+ * @LastEditTime : 2023-10-16 15:26:01
  * @Description  :
 -->
 <script setup lang="ts">
@@ -80,7 +80,7 @@ const processedColumns = computed(() => {
       const flagArr = ['h', 'c', 'e', 'f']
       const realName = flagArr
         .map((flag) => {
-          return obj[flag] ?? flag
+          return obj[flag] ?? 'default'
         })
         .join('-')
       if (isEdit) {

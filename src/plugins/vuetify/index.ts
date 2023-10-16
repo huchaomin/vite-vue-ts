@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 10:43:40
+ * @LastEditTime : 2023-10-16 15:49:15
  * @Description  :
  */
 import 'vuetify/styles'
@@ -102,8 +102,9 @@ export default createVuetify({
     },
     VBtn: {
       color: 'primary',
+      variant: 'flat',
       // style: 'text-transform: none;',
-      class: 'text-none elevation-0',
+      class: 'text-none',
     },
     VTextField: {
       variant: 'outlined',
