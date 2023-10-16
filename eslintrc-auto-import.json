@@ -306,6 +306,11 @@
     "watchTriggerable": "readonly",
     "watchWithFilter": "readonly",
     "whenever": "readonly",
-    "$rules": "readonly"
+    "$rules": "readonly",
+    "ExtractDefaultPropTypes": "readonly",
+    "ExtractPropTypes": "readonly",
+    "ExtractPublicPropTypes": "readonly",
+    "injectLocal": "readonly",
+    "provideLocal": "readonly"
   }
 }

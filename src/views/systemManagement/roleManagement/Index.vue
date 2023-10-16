@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 16:28:29
+ * @LastEditTime : 2023-10-16 13:58:37
  * @Description  :
 -->
 <script setup lang="ts">
@@ -76,11 +76,13 @@ const config = reactive({
     },
   ] as TableColumns,
 })
+
+const aa = ref('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
 </script>
 <template>
   <CPageList ref="pageListRef" :config="config">
     <template #table-action>
-      <span>自定义插槽模板</span>
+      {{ aa }}
     </template>
   </CPageList>
 </template>

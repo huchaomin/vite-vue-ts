@@ -13,17 +13,17 @@
     "preinstall": "only-allow pnpm"
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.51.2",
+    "@arco-design/web-vue": "^2.52.0",
     "@arco-themes/vue-qingcongkeji": "^0.0.2",
-    "@vueuse/core": "^10.4.1",
+    "@vueuse/core": "^10.5.0",
     "lodash-es": "^4.17.21",
     "md5": "^2.3.0",
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4",
-    "vuetify": "^3.3.16",
-    "vxe-table": "^4.5.10",
+    "vue-router": "^4.2.5",
+    "vuetify": "^3.3.21",
+    "vxe-table": "^4.5.12",
     "xe-utils": "^3.5.13"
   },
   "devDependencies": {

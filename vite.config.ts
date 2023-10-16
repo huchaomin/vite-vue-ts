@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 15:17:28
+ * @LastEditTime : 2023-10-12 17:11:26
  * @Description  :
  */
 import { type ProxyOptions, defineConfig } from 'vite'

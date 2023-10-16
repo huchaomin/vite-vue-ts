@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-04 09:24:17
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 14:52:09
+ * @LastEditTime : 2023-10-13 14:44:54
  * @Description  :
  */
 import type CDialog from '@/components/global/CDialog.vue'
@@ -44,16 +44,25 @@ export default defineStore('dialog', () => {
     return { componentRef, dialogRef }
   }
 
-  function update(value: boolean, id: string): void {
-    collection.get(id)!.dialogPE.modelValue = value
-  }
-
   function setComponentRef(id: string, refValue: Element | ComponentPublicInstance | null): void {
+    if (refValue === null) return
     collection.get(id)!.componentRef = refValue
   }
 
   function setDialogRef(id: string, refValue: Element | ComponentPublicInstance | null): void {
+    if (refValue === null) return
     collection.get(id)!.dialogRef = refValue
+  }
+
+  function update(value: boolean, id: string): void {
+    collection.get(id)!.dialogPE.modelValue = value
+    if (!value) {
+      setTimeout(() => {
+        setComponentRef(id, null)
+        setDialogRef(id, null)
+        collection.delete(id)
+      }, 2000)
+    }
   }
 
   return {

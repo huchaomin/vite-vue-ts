@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 16:20:50
+ * @LastEditTime : 2023-10-16 09:12:49
  * @Description  :
  */
 import { type App } from 'vue'
@@ -26,7 +26,11 @@ config({
     border: 'full',
     columnConfig: {
       minWidth: 100, // width 生效时该属性不生效
+      // maxWidth: 500, // 无效：该属性虽然在column中定义了，但是不会从该处继承 4.5.12
       resizable: true,
+    },
+    resizableConfig: {
+      minWidth: 100,
     },
     rowConfig: {
       isHover: true,

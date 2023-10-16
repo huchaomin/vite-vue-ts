@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-20 10:01:45
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 16:26:07
+ * @LastEditTime : 2023-10-16 13:56:24
  * @Description  :
 -->
 <script setup lang="ts">
@@ -124,6 +124,33 @@ const toggleCheckboxEvent: (row: VxeTableDataRow) => void = (row) => {
 const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
   xTable.value!.setRadioRow(row)
 }
+
+const debouncedRefreshColumn = useDebounceFn(() => {
+  xTable.value?.refreshColumn()
+}, 500)
+
+function updateColumnMinWidth(el: HTMLElement | null, slotScope: any): void {
+  const { $table, column } = slotScope
+  const { width, maxWidth, minWidth } = column
+  if (width !== undefined) return
+  const elWidth = (el?.offsetWidth ?? 0) + 24
+  const currentWidth = $table.getColumnWidth(column)
+  if (maxWidth === undefined) {
+    if (elWidth > currentWidth) {
+      column.minWidth = elWidth
+    }
+  } else {
+    if (elWidth > currentWidth && elWidth < maxWidth) {
+      column.minWidth = elWidth
+    } else if (maxWidth < currentWidth) {
+      column.minWidth = maxWidth
+    }
+  }
+  console.log(column.minWidth, currentWidth, minWidth)
+  if (column.minWidth > currentWidth && column.minWidth !== minWidth) {
+    debouncedRefreshColumn()
+  }
+}
 </script>
 <template>
   <VxeGrid
@@ -135,7 +162,9 @@ const setSelectRow: (row: VxeTableDataRow) => void = (row: VxeTableDataRow) => {
   >
     <!-- 越前，权重越高 -->
     <template v-for="k in Object.keys($slots)" :key="k" #[k]="slotScope">
-      <slot :name="k" v-bind="slotScope"></slot>
+      <span :ref="(el) => updateColumnMinWidth(el as HTMLElement | null, slotScope)">
+        <slot v-bind="slotScope" :name="k"></slot>
+      </span>
     </template>
     <template #checkbox_header="{ checked, indeterminate }">
       <VCheckbox
