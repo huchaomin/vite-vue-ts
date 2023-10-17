@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 15:49:15
+ * @LastEditTime : 2023-10-17 14:50:05
  * @Description  :
  */
 import 'vuetify/styles'
@@ -27,6 +27,7 @@ const customLightTheme: ThemeDefinition = {
     'shadow-key-umbra-opacity': 'rgba(var(--v-theme-on-surface), 0.08)',
     'shadow-key-penumbra-opacity': 'rgba(var(--v-theme-on-surface), 0.12)',
     'shadow-key-ambient-opacity': 'rgba(var(--v-theme-on-surface), 0.04)',
+    'disabled-opacity': '1',
   },
 }
 export default createVuetify({

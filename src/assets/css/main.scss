@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 16:25:39
+ * @LastEditTime : 2023-10-17 14:54:38
  * @Description  :
  */
 @use "sass:color";
@@ -53,6 +53,10 @@ body {
 
   .v-field--variant-outlined .v-label.v-field-label--floating{
     transform: translateY(-60%);
+  }
+
+  .v-field--disabled{
+    background-color: $disabled-bg-color;
   }
 
   /* stylelint-disable-next-line selector-class-pattern */

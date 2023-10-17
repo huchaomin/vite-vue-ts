@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 16:22:30
+ * @LastEditTime : 2023-10-17 14:33:08
  * @Description  :
 -->
 <script setup lang="ts">
@@ -39,31 +39,34 @@ function validateRoleCode(value: string): Promise<string | boolean> {
   })
 }
 
-const formItems = reactive([
-  {
-    model: 'roleName',
-    props: {
-      label: '角色名称',
-      rules: ['required', 'minLength:2', 'maxLength:30'],
-      autofocus: true,
+const formItems = computed(() => {
+  return [
+    {
+      model: 'roleName',
+      props: {
+        label: '角色名称',
+        rules: ['required', 'minLength:2', 'maxLength:30'],
+        autofocus: true,
+      },
     },
-  },
-  {
-    model: 'roleCode',
-    props: {
-      label: '角色编码',
-      rules: ['required', 'maxLength:64', validateRoleCode],
+    {
+      model: 'roleCode',
+      props: {
+        label: '角色编码',
+        rules: ['required', 'minLength:4', 'maxLength:64', validateRoleCode],
+        disabled: type.value === 'edit',
+      },
     },
-  },
-  {
-    model: 'description',
-    component: 'VTextarea',
-    props: {
-      label: '描述',
-      rules: ['maxLength:126'],
+    {
+      model: 'description',
+      component: 'VTextarea',
+      props: {
+        label: '描述',
+        rules: ['maxLength:126'],
+      },
     },
-  },
-])
+  ]
+})
 
 const config = computed(() => {
   if (type.value === 'add') {
