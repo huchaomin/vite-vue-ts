@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 14:33:08
+ * @LastEditTime : 2023-10-17 15:32:23
  * @Description  :
 -->
 <script setup lang="ts">
@@ -11,7 +11,7 @@ import { ChineseReg } from '@/config/regs'
 import { roleDuplicateCheck, roleAdd, roleUpdate } from '@/api/sys'
 const type = ref('add')
 const form = ref<RefCForm>(null)
-const formData: UnwrapNestedRefs<Record<string, string>> = reactive({
+const formData: UnwrapNestedRefs<Record<string, any>> = reactive({
   roleName: '',
   roleCode: '',
   description: '',

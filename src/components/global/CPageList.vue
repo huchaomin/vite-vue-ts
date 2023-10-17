@@ -2,18 +2,20 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 10:31:57
+ * @LastEditTime : 2023-10-17 16:18:33
  * @Description  :
 -->
 <script setup lang="ts">
 import { type apiConfig } from '@/plugins/autoImport/$api'
 import { type ItemsType } from '@/components/global/CForm.vue'
 import { type VBtn } from 'vuetify/components'
+import type PageListItemForm from '@/views/systemManagement/roleManagement/modules/PageListItemForm.vue' // 随笔引入一个组件的类型，有没有更好的方法？
 
 interface PageListConfigType {
   urls: Record<string, apiConfig>
   initialFormData: Record<string, any>
   formItems: ItemsType
+  pageListItemForm: typeof PageListItemForm
   btns?: Array<InstanceType<typeof VBtn>['$props']>
   columns: TableColumns
 }
@@ -39,6 +41,45 @@ const queryParams = ref({})
 const pageSize = ref(10)
 const pageNo = ref(1)
 const total = ref(0)
+
+function handle({
+  type,
+  title,
+  width = 400,
+  row,
+}: {
+  type: 'add' | 'edit'
+  title?: string
+  width?: number
+  row?: CellRenderParams['row']
+}): void {
+  const config = {
+    add: {
+      title: '新增',
+    },
+    edit: {
+      title: '编辑',
+    },
+  }
+  const { componentRef, dialogRef } = $dialog(
+    {
+      title: title ?? config[type].title,
+      width,
+      hideAfterConfirm: false,
+      onConfirm: async () => {
+        await componentRef.value!.handleSubmit()
+        dialogRef.value!.hide()
+        reset()
+      },
+    },
+    props.config.pageListItemForm,
+  )
+  if (type !== 'add') {
+    nextTick(() => {
+      componentRef.value!.setFormData(row)
+    })
+  }
+}
 
 async function handleDelete({ row }: CellRenderParams): Promise<void> {
   await $confirm('确认删除吗？')
@@ -113,6 +154,7 @@ function currentPageChange(val: number): void {
 }
 
 defineExpose({
+  handle,
   query,
   reset,
 })

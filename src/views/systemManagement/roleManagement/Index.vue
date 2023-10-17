@@ -2,35 +2,14 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 09:19:42
+ * @LastEditTime : 2023-10-17 15:59:55
  * @Description  :
 -->
 <script setup lang="ts">
 import { roleList, roleDelete } from '@/api/sys'
-import AddForm from './modules/AddForm.vue'
+import PageListItemForm from './modules/PageListItemForm.vue'
 
 const pageListRef = ref<RefCPageList>(null)
-
-function option(type: string, row?: CellRenderParams['row']): void {
-  const { componentRef, dialogRef } = $dialog(
-    {
-      title: type === 'add' ? '新增' : '编辑',
-      width: 400,
-      hideAfterConfirm: false,
-      onConfirm: async () => {
-        await componentRef.value!.handleSubmit()
-        dialogRef.value!.hide()
-        pageListRef.value!.reset()
-      },
-    },
-    AddForm,
-  )
-  if (type === 'edit') {
-    nextTick(() => {
-      componentRef.value!.setFormData(row)
-    })
-  }
-}
 
 const config = reactive({
   urls: {
@@ -50,12 +29,15 @@ const config = reactive({
       },
     },
   ],
+  pageListItemForm: markRaw(PageListItemForm),
   btns: [
     {
       text: '新建角色',
       type: 'primary',
       onClick: () => {
-        option('add')
+        pageListRef.value?.handle({
+          type: 'add',
+        })
       },
     },
   ],
@@ -82,7 +64,10 @@ const config = reactive({
           {
             text: '编辑',
             onClick: ({ row }: CellRenderParams) => {
-              option('edit', row)
+              pageListRef.value?.handle({
+                type: 'edit',
+                row,
+              })
             },
           },
         ],
