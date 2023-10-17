@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 10:26:36
+ * @LastEditTime : 2023-10-17 10:31:57
  * @Description  :
 -->
 <script setup lang="ts">
@@ -40,12 +40,12 @@ const pageSize = ref(10)
 const pageNo = ref(1)
 const total = ref(0)
 
-async function handleDelete({ row }: CellRenderParams): Promise<null | undefined> {
+async function handleDelete({ row }: CellRenderParams): Promise<void> {
   await $confirm('确认删除吗？')
   const { data } = await $api(props.config.urls.delete, {
     id: row.id,
   })
-  if (data.value === null) return null
+  if (data.value === null) return
   query()
 }
 

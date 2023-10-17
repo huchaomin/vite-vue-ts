@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-01 09:32:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 14:00:26
+ * @LastEditTime : 2023-10-17 14:00:02
  * @Description  :
 -->
 <script setup lang="ts">
@@ -10,10 +10,9 @@ import ModifyPwd from './modules/ModifyPwd.vue'
 const commonStore = useCommonStore()
 const userStore = useUserStore()
 
-function logout(): void {
-  $confirm('确定要退出登录吗？').then(() => {
-    userStore.logout()
-  })
+async function logout(): Promise<void> {
+  await $confirm('确定要退出登录吗？')
+  userStore.logout()
 }
 
 function modifyPwd(): void {

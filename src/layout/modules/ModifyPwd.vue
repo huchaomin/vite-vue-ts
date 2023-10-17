@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-07 13:54:24
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 17:28:06
+ * @LastEditTime : 2023-10-17 14:02:29
  * @Description  :
 -->
 <script setup lang="ts">
@@ -44,19 +44,12 @@ const formItems = reactive([
     },
   },
 ])
-function handleSubmit(): Promise<void> {
-  return new Promise((resolve) => {
-    form.value!.validate().then(() => {
-      $confirm('确定要修改密码吗？').then(async () => {
-        const { data } = await $api(updatePassword, {
-          username: userStore.userInfo.username,
-          ...formData,
-        })
-        if (data.value !== null) {
-          resolve()
-        }
-      })
-    })
+async function handleSubmit(): Promise<void> {
+  await form.value!.validate()
+  await $confirm('确定要修改密码吗？')
+  $api(updatePassword, {
+    username: userStore.userInfo.username,
+    ...formData,
   })
 }
 
