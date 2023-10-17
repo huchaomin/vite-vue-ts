@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 14:05:48
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 16:33:04
+ * @LastEditTime : 2023-10-17 17:06:49
  * @Description  :
  */
 import { type apiConfig } from '@/plugins/autoImport/$api'
@@ -52,7 +52,7 @@ export const roleList: apiConfig = {
   url: `${prefix}/role/list`,
 }
 
-export const roleDuplicateCheck: apiConfig = {
+export const duplicateCheck: apiConfig = {
   loading: false,
   msgOnError: false,
   url: `${prefix}/duplicate/check`,
@@ -73,5 +73,27 @@ export const roleUpdate: apiConfig = {
 export const roleDelete: apiConfig = {
   url: `${prefix}/role/delete`,
   method: 'delete',
+  msgOnSuccess: true,
+}
+
+export const dictList: apiConfig = {
+  url: `${prefix}/dict/list`,
+}
+
+export const dictDelete: apiConfig = {
+  url: `${prefix}/dict/delete`,
+  method: 'delete',
+  msgOnSuccess: true,
+}
+
+export const dictAdd: apiConfig = {
+  url: `${prefix}/dict/add`,
+  method: 'post',
+  msgOnSuccess: true,
+}
+
+export const dictUpdate: apiConfig = {
+  url: `${prefix}/dict/edit`,
+  method: 'put',
   msgOnSuccess: true,
 }

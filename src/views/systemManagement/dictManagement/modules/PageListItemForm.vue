@@ -1,31 +1,31 @@
 <!--
  * @Author       : huchaomin peter@qingcongai.com
- * @Date         : 2023-09-07 13:54:24
+ * @Date         : 2023-10-17 16:27:05
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 17:04:06
+ * @LastEditTime : 2023-10-17 17:07:18
  * @Description  :
 -->
 <script setup lang="ts">
 import { type UnwrapNestedRefs } from 'vue'
 import { ChineseReg } from '@/config/regs'
-import { duplicateCheck, roleAdd, roleUpdate } from '@/api/sys'
+import { duplicateCheck, dictAdd, dictUpdate } from '@/api/sys'
 const type = ref('add')
 const form = ref<RefCForm>(null)
 const formData: UnwrapNestedRefs<Record<string, any>> = reactive({
-  roleName: '',
-  roleCode: '',
+  dictName: '',
+  dictCode: '',
   description: '',
   id: '',
 })
 
-function validateRoleCode(value: string): Promise<string | boolean> {
+function validateDictCode(value: string): Promise<string | boolean> {
   return new Promise((resolve) => {
     if (ChineseReg.test(value)) {
       resolve('不能包含中文')
     } else {
       $api(duplicateCheck, {
-        tableName: 'sys_role',
-        fieldName: 'role_code',
+        tableName: 'sys_dict',
+        fieldName: 'dict_code',
         fieldVal: value,
         dataId: formData.id,
       }).then(({ data, error }) => {
@@ -42,19 +42,18 @@ function validateRoleCode(value: string): Promise<string | boolean> {
 const formItems = computed(() => {
   return [
     {
-      model: 'roleName',
+      model: 'dictName',
       props: {
-        label: '角色名称',
+        label: '字典名称',
         rules: ['required', 'minLength:2', 'maxLength:30'],
         autofocus: true,
       },
     },
     {
-      model: 'roleCode',
+      model: 'dictCode',
       props: {
-        label: '角色编码',
-        rules: ['required', 'minLength:4', 'maxLength:64', validateRoleCode],
-        disabled: type.value === 'edit',
+        label: '字典编码',
+        rules: ['required', 'minLength:4', 'maxLength:64', validateDictCode],
       },
     },
     {
@@ -62,7 +61,6 @@ const formItems = computed(() => {
       component: 'VTextarea',
       props: {
         label: '描述',
-        rules: ['maxLength:126'],
       },
     },
   ]
@@ -71,11 +69,11 @@ const formItems = computed(() => {
 const config = computed(() => {
   if (type.value === 'add') {
     return {
-      url: roleAdd,
+      url: dictAdd,
     }
   }
   return {
-    url: roleUpdate,
+    url: dictUpdate,
   }
 })
 
