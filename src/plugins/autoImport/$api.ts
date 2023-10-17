@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 08:55:35
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 11:20:20
+ * @LastEditTime : 2023-10-17 10:23:45
  * @Description  :
  */
 import { type UseFetchReturn, type UseFetchOptions, createFetch } from '@vueuse/core'
@@ -11,7 +11,7 @@ import signMd5Utils from '@/utils/signMd5Utils.js'
 
 let isExpiration = false // 登陆是否已经过期
 type DataType = Record<string, any> | undefined
-type MethodType = 'get' | 'post' | 'put' | 'delete'
+type MethodType = 'get' | 'post' | 'put' | 'delete' // Put是Get和Post的组合，Delete与Get类似
 
 function handleUrlAndData(
   url: string,
@@ -31,7 +31,7 @@ function handleUrlAndData(
     if (reg.test(url)) {
       url = url.replace(reg, data[key]) // 这里就不需要编码了，这里不属于参数，请后端同学规范接口传参
       delete data[key]
-    } else if (method === 'get') {
+    } else if (['get', 'delete'].includes(method)) {
       query += `${key}=${encodeURIComponent(data[key])}&`
     }
   })

@@ -2,11 +2,11 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 16:23:43
+ * @LastEditTime : 2023-10-17 09:19:42
  * @Description  :
 -->
 <script setup lang="ts">
-import { roleList } from '@/api/sys'
+import { roleList, roleDelete } from '@/api/sys'
 import AddForm from './modules/AddForm.vue'
 
 const pageListRef = ref<RefCPageList>(null)
@@ -35,6 +35,7 @@ function option(type: string, row?: CellRenderParams['row']): void {
 const config = reactive({
   urls: {
     list: roleList,
+    delete: roleDelete,
   },
   initialFormData: {
     roleName: '',
@@ -73,7 +74,8 @@ const config = reactive({
     },
     {
       title: '操作',
-      field: 'action',
+      field: 'c-action',
+      fixed: 'right',
       cellRender: {
         name: 'c:btns',
         children: [
@@ -85,7 +87,6 @@ const config = reactive({
           },
         ],
       },
-      fixed: 'right',
     },
   ] as TableColumns,
 })

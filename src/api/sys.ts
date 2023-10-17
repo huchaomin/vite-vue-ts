@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 14:05:48
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 10:55:00
+ * @LastEditTime : 2023-10-16 16:33:04
  * @Description  :
  */
 import { type apiConfig } from '@/plugins/autoImport/$api'
@@ -67,5 +67,11 @@ export const roleAdd: apiConfig = {
 export const roleUpdate: apiConfig = {
   url: `${prefix}/role/edit`,
   method: 'put',
+  msgOnSuccess: true,
+}
+
+export const roleDelete: apiConfig = {
+  url: `${prefix}/role/delete`,
+  method: 'delete',
   msgOnSuccess: true,
 }
