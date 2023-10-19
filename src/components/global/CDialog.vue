@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 15:26:20
+ * @LastEditTime : 2023-10-18 17:18:06
  * @Description  :
 -->
 <script setup lang="ts">
@@ -20,6 +20,7 @@ const props = withDefaults(
     showConfirm?: boolean
     hideAfterCancel?: boolean
     hideAfterConfirm?: boolean
+    noneCardTextPb?: boolean
   }>(),
   {
     prependIcon: undefined,
@@ -30,6 +31,7 @@ const props = withDefaults(
     showConfirm: true,
     hideAfterCancel: true,
     hideAfterConfirm: true,
+    noneCardTextPb: false,
   },
 )
 const emit = defineEmits<{
@@ -83,7 +85,7 @@ defineExpose({
           @click="cancel"
         ></VBtn>
       </template>
-      <VCardText>
+      <VCardText :class="noneCardTextPb ? 'pb-0' : 'pb-4'">
         <slot></slot>
       </VCardText>
       <div v-if="showCancel || showConfirm" class="d-flex justify-end px-6 pb-4">

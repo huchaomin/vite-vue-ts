@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 14:05:48
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 17:06:49
+ * @LastEditTime : 2023-10-18 18:01:04
  * @Description  :
  */
 import { type apiConfig } from '@/plugins/autoImport/$api'
@@ -95,5 +95,15 @@ export const dictAdd: apiConfig = {
 export const dictUpdate: apiConfig = {
   url: `${prefix}/dict/edit`,
   method: 'put',
+  msgOnSuccess: true,
+}
+
+export const dictItemList: apiConfig = {
+  url: `${prefix}/dictItem/list`,
+}
+
+export const dictItemDelete: apiConfig = {
+  url: `${prefix}/dictItem/delete`,
+  method: 'delete',
   msgOnSuccess: true,
 }

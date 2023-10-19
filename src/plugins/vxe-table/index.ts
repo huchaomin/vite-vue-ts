@@ -2,11 +2,11 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 09:12:49
+ * @LastEditTime : 2023-10-19 09:32:02
  * @Description  :
  */
 import { type App } from 'vue'
-import { config, Grid, Table, Tooltip } from 'vxe-table'
+import { config, Grid, Table, Tooltip, Edit } from 'vxe-table'
 import '@/assets/css/_vxe-table.scss'
 import './renders/index'
 
@@ -66,10 +66,12 @@ config({
     //   menuConfig: {
     //     visibleMethod () {}
     //   },
-    //   editConfig: {
-    //     mode: 'cell',
-    //     showAsterisk: true
-    //   },
+    editConfig: {
+      showIcon: false,
+      showStatus: true,
+      showUpdateStatus: true,
+      showInsertStatus: true,
+    },
     //   importConfig: {
     //     modes: ['insert', 'covering']
     //   },
@@ -145,6 +147,6 @@ config({
 
 export default {
   install: (app: App): void => {
-    app.use(Grid).use(Table).use(Tooltip)
+    app.use(Grid).use(Table).use(Tooltip).use(Edit)
   },
 }

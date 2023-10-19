@@ -21,6 +21,7 @@ function modifyPwd(): void {
       title: '修改密码',
       width: 400,
       hideAfterConfirm: false,
+      noneCardTextPb: true,
       onConfirm: async () => {
         await componentRef.value!.handleSubmit()
         dialogRef.value!.hide()

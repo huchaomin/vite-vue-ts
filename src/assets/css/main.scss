@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 14:54:38
+ * @LastEditTime : 2023-10-17 17:48:57
  * @Description  :
  */
 @use "sass:color";
@@ -66,9 +66,9 @@ body {
     opacity: 1;
   }
 
-  .v-card--variant-elevated{
-    @include bg-filter;
-  }
+  // .v-card--variant-elevated{
+  //   @include bg-filter;
+  // }
 
   .v-btn ~ .v-btn:not(.v-btn-toggle .v-btn){
     margin-inline-start: 12px;

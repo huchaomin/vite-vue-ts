@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-20 10:01:45
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-16 15:26:01
+ * @LastEditTime : 2023-10-19 09:33:57
  * @Description  :
 -->
 <script setup lang="ts">
@@ -75,7 +75,9 @@ const processedColumns = computed(() => {
       name!.split('-').forEach((item: string) => {
         const arr = item.split(':')
         obj[arr[0]] = arr[1]
-        isEdit = arr[0] === 'e'
+        if (arr[0] === 'e') {
+          isEdit = true
+        }
       })
       const flagArr = ['h', 'c', 'e', 'f']
       const realName = flagArr
@@ -86,7 +88,7 @@ const processedColumns = computed(() => {
       if (isEdit) {
         column.editRender = {
           ...(column.cellRender as VxeColumnProps['editRender']),
-          name: realName,
+          name: `e-${realName}`,
         }
         delete column.cellRender
       } else {

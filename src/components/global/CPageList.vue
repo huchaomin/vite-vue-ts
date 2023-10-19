@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 16:18:33
+ * @LastEditTime : 2023-10-18 17:16:20
  * @Description  :
 -->
 <script setup lang="ts">
@@ -66,6 +66,7 @@ function handle({
       title: title ?? config[type].title,
       width,
       hideAfterConfirm: false,
+      noneCardTextPb: true,
       onConfirm: async () => {
         await componentRef.value!.handleSubmit()
         dialogRef.value!.hide()

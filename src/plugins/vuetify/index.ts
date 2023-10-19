@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-24 09:32:25
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-17 14:50:05
+ * @LastEditTime : 2023-10-17 18:44:38
  * @Description  :
  */
 import 'vuetify/styles'
@@ -132,8 +132,10 @@ export default createVuetify({
       rows: '3',
     },
     VSwitch: {
-      // set v-switch default color to primary
       color: 'primary',
+      density: 'compact',
+      inset: true,
+      hideDetails: true,
     },
     VNavigationDrawer: {
       class: 'bg-filter',
