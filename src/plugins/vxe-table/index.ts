@@ -2,11 +2,11 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-08-25 14:35:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-19 09:32:02
+ * @LastEditTime : 2023-10-19 11:02:57
  * @Description  :
  */
 import { type App } from 'vue'
-import { config, Grid, Table, Tooltip, Edit } from 'vxe-table'
+import { config, Grid, Table, Tooltip, Edit, Validator } from 'vxe-table'
 import '@/assets/css/_vxe-table.scss'
 import './renders/index'
 
@@ -129,7 +129,7 @@ config({
     TABLE_SORT_DESC: 'vxe-icon-caret-down',
     TABLE_FILTER_NONE: 'vxe-icon-funnel',
     TABLE_FILTER_MATCH: 'vxe-icon-funnel',
-    TABLE_EDIT: 'vxe-icon-edit',
+    // TABLE_EDIT: 'vxe-icon-edit',
     TABLE_HELP: 'vxe-icon-question-circle-fill',
     TABLE_TREE_LOADED: 'vxe-icon-spinner roll',
     TABLE_TREE_OPEN: 'vxe-icon-caret-right rotate90',
@@ -147,6 +147,6 @@ config({
 
 export default {
   install: (app: App): void => {
-    app.use(Grid).use(Table).use(Tooltip).use(Edit)
+    app.use(Grid).use(Table).use(Tooltip).use(Edit).use(Validator)
   },
 }

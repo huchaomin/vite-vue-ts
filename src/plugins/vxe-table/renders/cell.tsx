@@ -2,12 +2,13 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-10-12 13:57:42
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-19 09:28:33
+ * @LastEditTime : 2023-10-19 11:19:44
  * @Description  :
  */
 import { type RendererOptions } from 'vxe-table'
 import { VBtn, VSwitch, VTextField } from 'vuetify/components'
 
+// renderDefault 和 renderCell类型其实是一样的
 type CellRenderType =
   | RendererOptions['renderDefault']
   | RendererOptions['renderCell']
@@ -15,8 +16,31 @@ type CellRenderType =
 
 export type CellRenderParamsType = Parameters<NonNullable<CellRenderType>>[1]
 
-// renderDefault 和 renderCell类型其实是一样的 TODO CellRenderType从写
-const renderMap: Record<string, CellRenderType> = {
+type RenderFnType = (
+  renderOpts: any,
+  params: CellRenderParamsType,
+) => ReturnType<NonNullable<CellRenderType>>
+
+function getExtraFormItemProps(
+  renderOpts: Parameters<RenderFnType>[0],
+  params: CellRenderParamsType,
+): Record<string, any> {
+  const { props = {}, useVModel = true } = renderOpts
+  const { row, column } = params
+  return {
+    hideDetails: true,
+    'onUpdate:modelValue': (val: any) => {
+      if (props['onUpdate:modelValue'] !== undefined) {
+        props['onUpdate:modelValue'](val, params)
+      }
+      if (useVModel as boolean) {
+        row[column.field] = val
+      }
+    },
+  }
+}
+
+const renderMap: Record<string, RenderFnType> = {
   default: (_, params) => {
     const { row, column } = params
     return row[column.field]
@@ -36,36 +60,21 @@ const renderMap: Record<string, CellRenderType> = {
       return <VBtn {...props}></VBtn>
     })
   },
-  switch: (renderOpts: any, params) => {
+  switch: (renderOpts, params) => {
     const { row, column } = params
-    const { props = {}, useVModel = true } = renderOpts
+    const { props = {} } = renderOpts
     const bind = {
       ...props,
-      'onUpdate:modelValue': (val: any) => {
-        // TODO 抽出来
-        if (props['onUpdate:modelValue'] !== undefined) {
-          props['onUpdate:modelValue'](val, params)
-        }
-        if (useVModel as boolean) {
-          row[column.field] = val
-        }
-      },
+      ...getExtraFormItemProps(renderOpts, params),
     }
     return <VSwitch {...bind} modelValue={row[column.field]}></VSwitch>
   },
-  textField: (renderOpts: any, params) => {
+  textField: (renderOpts, params) => {
     const { row, column } = params
-    const { props = {}, useVModel = true } = renderOpts
+    const { props = {} } = renderOpts
     const bind = {
       ...props,
-      'onUpdate:modelValue': (val: any) => {
-        if (props['onUpdate:modelValue'] !== undefined) {
-          props['onUpdate:modelValue'](val, params)
-        }
-        if (useVModel as boolean) {
-          row[column.field] = val
-        }
-      },
+      ...getExtraFormItemProps(renderOpts, params),
     }
     return <VTextField {...bind} modelValue={row[column.field]}></VTextField>
   },

@@ -21,6 +21,7 @@
 - 炫酷的背景动态效果
 - 全屏功能
 - login v-form
+- 完成字典配置
 - defineOptions
 
   ```ts

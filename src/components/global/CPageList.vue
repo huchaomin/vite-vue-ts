@@ -2,14 +2,14 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-09-26 14:29:00
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-18 17:16:20
+ * @LastEditTime : 2023-10-19 14:49:15
  * @Description  :
 -->
 <script setup lang="ts">
 import { type apiConfig } from '@/plugins/autoImport/$api'
 import { type ItemsType } from '@/components/global/CForm.vue'
 import { type VBtn } from 'vuetify/components'
-import type PageListItemForm from '@/views/systemManagement/roleManagement/modules/PageListItemForm.vue' // 随笔引入一个组件的类型，有没有更好的方法？
+import type PageListItemForm from '@/views/systemManagement/roleManagement/modules/PageListItemForm.vue' // TODO 随笔引入一个组件的类型，有没有更好的方法？
 
 interface PageListConfigType {
   urls: Record<string, apiConfig>
@@ -18,6 +18,7 @@ interface PageListConfigType {
   pageListItemForm: typeof PageListItemForm
   btns?: Array<InstanceType<typeof VBtn>['$props']>
   columns: TableColumns
+  tableProps?: Record<string, any> // 传递给CTable的props
 }
 
 const props = withDefaults(
@@ -183,7 +184,12 @@ defineExpose({
         <VBtn v-for="(btn, index) in config.btns" :key="index" v-bind="btn"></VBtn>
       </div>
       <div class="flex-fill overflow-y-auto mb-4">
-        <CTable :columns="columns" :data="tableData" sync-parent-height>
+        <CTable
+          :columns="columns"
+          :data="tableData"
+          v-bind="config.tableProps || {}"
+          sync-parent-height
+        >
           <template
             v-for="k in Object.keys($slots).filter((key) => key.startsWith('table-'))"
             :key="k"
