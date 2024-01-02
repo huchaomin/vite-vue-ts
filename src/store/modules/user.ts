@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-17 09:54:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-10 16:28:19
+ * @LastEditTime : 2023-10-25 19:15:44
  * @Description  :
  */
 import { user, login, logout } from '@/api/sys'
@@ -82,9 +82,9 @@ function filterRouters(menu: []): RouteRecordRaw[] {
       return boolean
     })
   }
-  const parent = cloneRouteRecordRaw(parentRoute)
-  parent.children!.unshift(...cloneRouteRecordRaw(allRoutes))
-  return fn([parent], null)
+  const p = cloneRouteRecordRaw(parentRoute)
+  p.children!.unshift(...cloneRouteRecordRaw(allRoutes))
+  return fn([p], null)
 }
 
 export default defineStore(
@@ -130,9 +130,6 @@ export default defineStore(
 
     async function clearSession(): Promise<void> {
       token.value = ''
-      userInfo.value = {}
-      auth.value = []
-      allAuth.value = []
       await router.push({ name: 'login' })
       routersRaw.value.forEach((item) => {
         router.removeRoute(item.name as string)
@@ -154,7 +151,7 @@ export default defineStore(
   },
   {
     persist: {
-      paths: ['token', 'userInfo'],
+      paths: ['token'],
     },
   },
 )

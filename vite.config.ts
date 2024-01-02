@@ -2,7 +2,7 @@
  * @Author       : huchaomin iisa_peter@163.com
  * @Date         : 2023-08-06 09:42:59
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-12 17:11:26
+ * @LastEditTime : 2023-10-30 14:22:42
  * @Description  :
  */
 import { type ProxyOptions, defineConfig } from 'vite'
@@ -21,7 +21,6 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import viteCompression from 'vite-plugin-compression'
 import VueDevTools from 'vite-plugin-vue-devtools'
-import { createHtmlPlugin } from 'vite-plugin-html'
 import Inspect from 'vite-plugin-inspect'
 import { manualChunks, chunkFileNames, assetFileNames } from './build/output.ts'
 import config from './build/config.ts'
@@ -34,7 +33,7 @@ const { appName, apiPrefix, proxyTarget } = config[projectName]
 
 function bypass(req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions): void {
   const proxyUrl =
-    new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href || ''
+    new URL(options.rewrite?.(req.url) ?? req.url, options.target as string).href ?? ''
   res.setHeader('X-Res-Proxyurl', proxyUrl) // 查看真实的请求地址
 }
 
@@ -117,11 +116,6 @@ export default defineConfig((...arg) => {
         iconDirs: [resolvePath(__dirname, 'src/assets/svg')],
         symbolId: 'icon-[dir]-[name]',
       }),
-      createHtmlPlugin({
-        minify: true, // 是否压缩 html
-        // entry: 'src/main.ts', // 入口文件（默认值，不能省）[不能用，打包时报错]
-        template: 'public/index.html', // 模板的路径
-      }),
       Inspect({
         build: isInspect,
         outputDir: '.cache/.vite-inspect',
@@ -138,16 +132,6 @@ export default defineConfig((...arg) => {
     ],
     build: {
       reportCompressedSize: false,
-      minify: 'terser', // 压缩的更小，但是速度会慢一点
-      terserOptions: {
-        compress: {
-          // https://terser.org/docs/options/#parse-options
-          drop_console: true,
-          keep_infinity: true, // 通过true以防止Infinity被压缩为1/0
-          keep_fargs: false, // 通过false以删除未使用的函数参数
-          toplevel: true, // 通过true以丢弃未引用的顶级变量名
-        },
-      },
       rollupOptions: {
         output: {
           manualChunks,

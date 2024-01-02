@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-09 09:38:07
+ * @LastEditTime : 2023-10-23 15:47:52
  * @Description  :
  */
 const path = require('path')
@@ -107,7 +107,8 @@ module.exports = {
       'error',
       {
         allowNumber: false, // 不允许数字作为判断条件
-        allowNullableString: true, // 允许string | null | undefined作为判断条件
+        allowString: false, // 不允许字符串作为判断条件
+        allowNullableObject: false,
       },
     ],
     'space-before-function-paren': [

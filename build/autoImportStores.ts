@@ -30,8 +30,6 @@ const customerImport = {}
 
 // 自动引入pinia的store
 piniaStoreKeys.forEach((key) => {
-  customerImport[`@/store/modules/${key}`] = [
-    ['default', `use${firstUpperCase(key)}Store`],
-  ]
+  customerImport[`@/store/modules/${key}`] = [['default', `use${firstUpperCase(key)}Store`]]
 })
 export default customerImport

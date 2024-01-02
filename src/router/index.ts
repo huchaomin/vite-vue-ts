@@ -2,7 +2,7 @@
  * @Author       : huchaomin peter@qingcongai.com
  * @Date         : 2023-07-14 13:58:40
  * @LastEditors  : huchaomin peter@qingcongai.com
- * @LastEditTime : 2023-10-11 10:24:18
+ * @LastEditTime : 2023-10-25 18:28:16
  * @Description  :
  */
 import { createRouter, createWebHistory, START_LOCATION, type RouteRecordRaw } from 'vue-router'
@@ -58,7 +58,7 @@ router.beforeEach(async (to, from, next) => {
       if (from === START_LOCATION && meta.hideInMenu === true && name !== 'notFound') {
         next({ name: meta.parentName as string })
       } else {
-        next({ name: name as string })
+        next({ name: name as string, query: to.query })
       }
     }
   } else {
